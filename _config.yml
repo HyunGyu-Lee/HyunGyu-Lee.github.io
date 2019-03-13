@@ -34,7 +34,7 @@ kramdown:
 #
 owner:
   name: IT Blog
-  avatar: leonids-logo.png
+  avatar: blog-logo.png
   job: "Software Developer"
   bio: "개발을 좋아하는 청년입니다."
   email:
