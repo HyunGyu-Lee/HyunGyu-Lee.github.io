@@ -705,3 +705,13 @@ a.read-more { padding: 5px 8px; }
 .reddit { background-color: #5f99cf; color: #fff; border-color: #5f99cf; }
 .reddit:visited { color: #fff; border-color: #5f99cf; }
 .reddit:hover { background-color: #fff; color: #5f99cf; border-color: #5f99cf; }
+
+.project_tltle { margin: 0; font-size: 22px; font-weight: bold; }
+
+.project_sub_title { font-size: 12px; font-weight: bold; }
+
+.project_cont { margin-top: 10px; margin-left: 10px; font-size: 14px; }
+
+.project_sub_cont { margin-top: 10px; margin-left: 25px; font-size: 14px; }
+
+.project_sub_cont_detail { margin-top: 5px; margin-left: 50px; font-size: 13px; font-weight: normal; }

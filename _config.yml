@@ -3,7 +3,7 @@
 # Site wide configuration
 ####################################
 #
-title: IT BLog
+title: All of developer
 email: dlgusrb0808@gmail.com
 description: A simple and awesome blog theme powered by jekyll.
 url: # the base hostname & protocol for your site
@@ -33,10 +33,10 @@ kramdown:
 ####################################
 #
 owner:
-  name: IT Blog
+  name: All of developer
   avatar: blog-logo.png
-  job: "Software Developer"
-  bio: "개발을 좋아하는 청년입니다."
+  job: "Software Engineer"
+  bio: "개발을 즐기고 소프트웨어로 세상을 이롭게 하고자 합니다."
   email:
   disqus-shortname:
   twitter: #username

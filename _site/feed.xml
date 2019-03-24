@@ -1,39 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>IT BLog</title>
+    <title>All of developer</title>
     <description>A simple and awesome blog theme powered by jekyll.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-03-13</pubDate>
-    <lastBuildDate>Wed, 13 Mar 2019 21:15:23 +0900</lastBuildDate>
+    <pubDate>2019-03-24</pubDate>
+    <lastBuildDate>Sun, 24 Mar 2019 17:37:14 +0900</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+        <title>Spring Boot 설정파일</title>
+        <description>&lt;p&gt;Spring Boot의 큰 장점 중 하나는 기존 Spring을 이용하면서 해야했던 설정들 (XML방신이던, Java방식이던)을 자동으로 진행해주는 것이라 생각합니다. (AutoConfiguration)&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;이를 통해 개발자는 설정파일 (application.property, yml 파일 등)에 간단한 설정정보들만 입력해주는 수준으로도 Spring의 다양한 기능들을 쉽게 이용할 수 있습니다.&lt;/p&gt;
 
-&lt;!--more--&gt;
+&lt;p&gt;이렇게 설정할 수 있는 설정의 종류는 굉장히 다양하며 예를들어 Datasource 설정의 경우에만도 아래와 같이 굉장히 많은 옵션들을 설정할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# DATASOURCE (DataSourceAutoConfiguration &amp;amp; DataSourceProperties)
+&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;spring.datasource.continue-on-error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;false # Whether to stop if an error occurs while initializing the database.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Data (DML) script resource references.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.data-username= # Username of the database to execute DML scripts (if different).&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.data-password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Password of the database to execute DML scripts (if different).
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.dbcp2.*= # Commons DBCP2 specific settings&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.driver-class-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Fully qualified name of the JDBC driver. Auto-detected based on the URL by default.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.generate-unique-name=false # Whether to generate a random datasource name.&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;spring.datasource.hikari.*=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Hikari specific settings
+&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;spring.datasource.initialization-mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;embedded # Initialize the datasource with available DDL and DML scripts.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.jmx-enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;false # Whether to enable JMX support (if provided by the underlying pool).&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.jndi-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# JNDI location of the datasource. Class, url, username &amp;amp; password are ignored when set.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.name= # Name of the datasource. Default to &quot;testdb&quot; when using an embedded database.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Login password of the database.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.platform=all # Platform to use in the DDL or DML scripts (such as schema-${platform}.sql or data-${platform}.sql).&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.schema&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Schema (DDL) script resource references.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.schema-username= # Username of the database to execute DDL scripts (if different).&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.schema-password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Password of the database to execute DDL scripts (if different).
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.separator=; # Statement separator in SQL initialization scripts.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.sql-script-encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# SQL scripts encoding.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.tomcat.*= # Tomcat datasource specific settings&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Fully qualified name of the connection pool implementation to use. By default, it is auto-detected from the classpath.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.url= # JDBC URL of the database.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Login username of the database.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.xa.data-source-class-name= # XA datasource fully qualified name.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.xa.properties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Properties to pass to the XA data source.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.spring.io&quot;&gt;Spring 공식 홈페이지&lt;/a&gt;에서 다양한 설정들을 가이드로 제공하고 있습니다.&lt;/p&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;위 가이드 설정파일에 주석으로도 적혀있고 당연한 얘기지만 위 설정파일의 전체내용을 복사하지 말라고 명시되어있습니다.&lt;/p&gt;
 
+&lt;p&gt;본인이 사용하는 기술에 대해 필요한 설정 위주로 찾아서 추가해주면 보다 더 좋은 설정을 진행할 수 있을 것 같습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-13</pubDate>
-        <link>http://localhost:4000/articles/2015-08/welcome-to-jekyll</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2015-08/welcome-to-jekyll</guid>
+        <pubDate>2019-03-24</pubDate>
+        <link>http://localhost:4000/articles/2019-01/spring-boot-configurations</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-01/spring-boot-configurations</guid>
+        
+        <category>Spring Boot</category>
+        
+        <category>Spring Framework</category>
+        
+        <category>Java</category>
         
         
-        <category>tutorial</category>
+        <category>Spring Framework</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Boot Build 시 MyBatis Type Alias 미적용 문제</title>
+        <description>&lt;p&gt;MyBatis를 이용하여 개발하면 주로 resultType에 적어줄 타입에 alias를 적용하여 사용한다.&lt;/p&gt;
+
+&lt;p&gt;보통 다음과 같이 SqlSessionFactoryBean을 정의할 때 setTypeAliasesPackage 메소드를 이용하여 정의한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTypeAliasesPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;packages for alias&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;헌데 위와같은 방식으로 alias를 적용한 후 IDE를 통해 실행시키면 문제없이 잘 실행되는데&lt;/p&gt;
+
+&lt;p&gt;배포를 위해 jar로 빌드한 후 실행하자  ClassNotFoundException 이 발생하며 alias된 타입들을 못찾는 문제가 발생했다.&lt;/p&gt;
+
+&lt;p&gt;​때문에 Mybatis에서 Alias 처리하는 부분을 분석해보니&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;resolveAlias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toLowerCase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ENGLISH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TYPE_ALIASES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;containsKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TYPE_ALIASES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Resources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;classForName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ClassNotFoundException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;TypeException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Could not resolve type alias '&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;'.  Cause: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;TYPE_ALIASES (HashMap&amp;lt;String, Class&amp;lt;?» ) 에 등록되어 있으면 해당 Class를 반환하고 그렇지 않으면 클래스로더를 통해 클래스를 로딩한도록 되어있는데, 오류 로그를 통해 확인되는 부분은 일단 IDE에서는 잘만 찾아지는 alias들이 TYPE_ALIASES에 등록이 안되어 있다는 점이었다.&lt;/p&gt;
+
+&lt;p&gt;때문에 이번엔 alias를 등록하는 부분을 살펴봤다..&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ResolverUtil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Test&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;packageName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getPackagePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;packageName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;children&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VFS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;child&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;children&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.class&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;addIfMatching&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ioe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Could not read package: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;packageName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ioe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;파라미터로 전달된 패키지 이하 디렉토리의 모든 리소스를 대상으로 확장자가 class인 파일 중 특정 조건에 부합하는 클래스들을 alias로 등록하도록 구현되어있다. (특정 조건은 지정된 슈퍼타입에 대해 isAssignableFrom로 체크, 지정되어있지 않으면 Object클래스가 슈퍼타입)&lt;/p&gt;
+
+&lt;p&gt;그리고, 리소스에 접근할 때 VFS라는 클래스를 통해 특정 경로의 리소스 목록을 얻어오도록 되어있다..&lt;/p&gt;
+
+&lt;p&gt;​VFS는 Virtual File System의 약자로 실제 파일 시스템 위, 응용 프로그램 계층에 추상화된 가상 파일시스템을 의미하는 용어인 것 같은데 위 소스코드 문맥상 Mybatis에서 파일 등 시스템 리소스에 접근할 때 이용하는 클래스 인 것 같았다. (조금 더 자세히 조사해볼 필요있음..)&lt;/p&gt;
+
+&lt;p&gt;​여튼 위 클래스에 대한 구현체가 아무런 지정을 하지 않으면 DefaultVFS라는 구현체가 사용되는데 IDE 위에서 구동될 때는 target 디렉토리 이하 classes 파일들에 문제없이 접근할 수 있으나 Spring Boot프로젝트 배포한 jar에서는 형태가 달라 classes에 접근이 안되어 alias들이 등록되지 않았던 것이다.&lt;/p&gt;
+
+&lt;p&gt;이렇게 원인을 찾은 후 검색을 해보니 역시나…….&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setVfs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SpringBootVFS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Spring Boot 전용 VFS 사용하도록 지정&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTypeAliasesPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;packages for alias&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;위처럼 Spring Boot 용 VFS 구현체를 지정해주는 아주 간단한 방법으로 해결할 수 있었다.&lt;/p&gt;
+</description>
+        <pubDate>2019-03-24</pubDate>
+        <link>http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</guid>
+        
+        <category>Spring Boot</category>
+        
+        <category>MyBatis</category>
+        
+        <category>VFS</category>
+        
+        
+        <category>Spring Framework</category>
         
       </item>
     
@@ -137,7 +251,7 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>2019-03-13</pubDate>
+        <pubDate>2019-03-24</pubDate>
         <link>http://localhost:4000/articles/2013-08/code-highlighting-post</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2013-08/code-highlighting-post</guid>
         
@@ -156,7 +270,7 @@
 
 &lt;p&gt;Some &lt;a href=&quot;http://renyuanz.github.io&quot;&gt;link&lt;/a&gt; can also be shown.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-13</pubDate>
+        <pubDate>2019-03-24</pubDate>
         <link>http://localhost:4000/articles/2013-08/sample-link-post</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2013-08/sample-link-post</guid>
         
@@ -216,7 +330,7 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>2019-03-13</pubDate>
+        <pubDate>2019-03-24</pubDate>
         <link>http://localhost:4000/articles/2013-05/readability-feature-post</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2013-05/readability-feature-post</guid>
         
@@ -270,7 +384,7 @@
 
 &lt;p&gt;Aliquip enim artisan dolor post-ironic. Pug tote bag Marfa, deserunt pour-over Portland wolf eu odio intelligentsia american apparel ugh ea. Sunt viral et, 3 wolf moon gastropub pug id. Id fashion axe est typewriter, mlkshk Portland art party aute brunch. Sint pork belly Cosby sweater, deep v mumblecore kitsch american apparel. Try-hard direct trade tumblr sint skateboard. Adipisicing bitters excepteur biodiesel, pickled gastropub aute veniam.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-13</pubDate>
+        <pubDate>2019-03-24</pubDate>
         <link>http://localhost:4000/articles/2012-05/readability-post</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2012-05/readability-post</guid>
         
@@ -403,7 +517,7 @@
 
 &lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;Watch out!&lt;/strong&gt; You can also add notices by appending &lt;code class=&quot;highlighter-rouge&quot;&gt;{: .notice}&lt;/code&gt; to a paragraph.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-13</pubDate>
+        <pubDate>2019-03-24</pubDate>
         <link>http://localhost:4000/articles/2011-03/sample-post</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2011-03/sample-post</guid>
         
