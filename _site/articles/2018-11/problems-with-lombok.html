@@ -8,35 +8,35 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Try click on the link icon.">
+  <meta name="description" content="Lombok 버전 : 1.16.22스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지...">
   <meta name="keywords" content="Web, Back-End, and SpringFramework">
-  <meta name="author" content="Sample Link Post | All of developer">
+  <meta name="author" content="Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결 | All of developer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f5">
 
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Sample Link Post | All of developer">
-  <meta name="twitter:description" content="Try click on the link icon.">
+  <meta name="twitter:title" content="Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결 | All of developer">
+  <meta name="twitter:description" content="Lombok 버전 : 1.16.22스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지...">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/articles/2013-08/sample-link-post">
-  <meta property="og:title" content="Sample Link Post | All of developer">
-  <meta property="og:description" content="Try click on the link icon.">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-11/problems-with-lombok">
+  <meta property="og:title" content="Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결 | All of developer">
+  <meta property="og:description" content="Lombok 버전 : 1.16.22스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지...">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
-  <title>Sample Link Post | All of developer</title>
+  <title>Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결 | All of developer</title>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/articles/2013-08/sample-link-post">
+  <link rel="canonical" href="http://localhost:4000/articles/2018-11/problems-with-lombok">
   <link rel="alternate" type="application/rss+xml" title="All of developer" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -142,10 +142,10 @@
 
 <div id="post">
   <header class="post-header">
-    <h1 title="Sample Link Post">Sample Link Post</h1>
+    <h1 title="Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결">Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결</h1>
     <span class="post-meta">
       <span class="post-date">
-        12 AUG 2013
+        18 NOV 2018
       </span>
       •
       <span class="read-time" title="Estimated read time">
@@ -160,13 +160,20 @@
   </header>
 
   <article class="post-content">
-    <p>This theme supports <strong>link posts</strong>, made famous by John Gruber. To use, just add <code class="highlighter-rouge">link: http://url-you-want-linked</code> to the post’s YAML front matter and you’re done.</p>
+    <p>Lombok 버전 : 1.16.22</p>
 
-<blockquote>
-  <p>And this is how a quote looks.</p>
-</blockquote>
+<p>스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.</p>
 
-<p>Some <a href="http://renyuanz.github.io">link</a> can also be shown.</p>
+<p>구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지금은 fix된듯 하다.</p>
+
+<p><a href="https://github.com/rzwitserloot/lombok/issues/1703">Github에 등록된 Lombok 이슈 확인</a></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@NoArgsConstructor</span>
+<span class="nd">@Data</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeDomain</span> <span class="o">{</span>
+    <span class="o">....</span>
+<span class="o">}</span></code></pre></figure>
+
 
   </article>
 </div>
@@ -175,19 +182,19 @@
   <h6>Share on: </h6>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2013-08/sample-link-post" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-11/problems-with-lombok" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2013-08/sample-link-post" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-11/problems-with-lombok" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2013-08/sample-link-post" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-11/problems-with-lombok" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
     <li>
-      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2013-08/sample-link-post" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-11/problems-with-lombok" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
     </li>
     <li>
-      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2013-08/sample-link-post" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-11/problems-with-lombok" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
     </li>
   </ul>
 </div><!-- end share-buttons -->
