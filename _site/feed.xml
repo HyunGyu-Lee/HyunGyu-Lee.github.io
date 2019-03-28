@@ -5,8 +5,8 @@
     <description>A simple and awesome blog theme powered by jekyll.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-03-25</pubDate>
-    <lastBuildDate>Mon, 25 Mar 2019 23:30:46 +0900</lastBuildDate>
+    <pubDate>2019-03-28</pubDate>
+    <lastBuildDate>Thu, 28 Mar 2019 22:00:29 +0900</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -51,7 +51,7 @@
 
 &lt;p&gt;본인이 사용하는 기술에 대해 필요한 설정 위주로 찾아서 추가해주면 보다 더 좋은 설정을 진행할 수 있을 것 같습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-25</pubDate>
+        <pubDate>2019-03-28</pubDate>
         <link>http://localhost:4000/articles/2019-01/spring-boot-configurations</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-01/spring-boot-configurations</guid>
         
@@ -136,7 +136,7 @@
 
 &lt;p&gt;위처럼 Spring Boot 용 VFS 구현체를 지정해주는 아주 간단한 방법으로 해결할 수 있었다.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-25</pubDate>
+        <pubDate>2019-03-28</pubDate>
         <link>http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</guid>
         
@@ -168,7 +168,7 @@
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
-        <pubDate>2019-03-25</pubDate>
+        <pubDate>2019-03-28</pubDate>
         <link>http://localhost:4000/articles/2018-11/problems-with-lombok</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/problems-with-lombok</guid>
         
@@ -199,7 +199,7 @@
 &lt;img src=&quot;http://localhost:4000/img/post-images/2018-11-06-install-object-aid-plugin/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>2019-03-25</pubDate>
+        <pubDate>2019-03-28</pubDate>
         <link>http://localhost:4000/articles/2018-11/install-object-aid-plugin</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/install-object-aid-plugin</guid>
         
@@ -209,6 +209,47 @@
         
         
         <category>Java</category>
+        
+      </item>
+    
+      <item>
+        <title>리눅스 여러 파일 내용 하나로 합치기</title>
+        <description>&lt;p&gt;리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;파일명패턴] | xargs &lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;결과파일명]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;동작 방법을 살펴보면&lt;/p&gt;
+
+&lt;p&gt;ls [파일명패턴] 을 통해 먼저 대상 파일들을 선택합니다.
+ls 명령은 디렉토리에 존재하는 요소(파일, 디렉토리)들의 정보(파일명, 권한, 수정시간 등) 목록을 표준출력으로 출력하는 명령어로, 아무 옵션없이 실행하면 파일명들만 출력하게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;ls 명령을 통해 출력된 파일명 목록을 &lt;code class=&quot;highlighter-rouge&quot;&gt;|&lt;/code&gt;(파이프)를 통해 뒤에 나오는 명령어로 전달합니다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;|&lt;/code&gt;(파이프)는 이전 명령어의 실행 결과를 다음 명령어의 입력으로 사용할 때 활용됩니다.&lt;/p&gt;
+
+&lt;p&gt;다음은 xargs cat 입니다.
+xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용할 수 있도록 해줍니다.&lt;/p&gt;
+
+&lt;p&gt;즉 앞의 ls 명령어 실행결과가 xargs 다음명령어인 cat의 인자로 사용되는 것이지요.
+만약 ls 명령어의 실행결과가 file1 file2 file3 이렇다면 아래 명령어처럼 수행되는 것입니다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;file1 file2 file3&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;cat은 인자로 전달된 파일들의 내용을 표준출력으로 출력하는 명령어입니다.
+이 명령어의 결과를 &amp;gt; (출력 리다이렉션) 으로 결과파일로 써줌으로써 각 파일들의 내용이 합쳐진 하나의 결과파일이 생성되게 됩니다.
+파이프, 출력 리다이렉션 등 리눅스 명령어의 강력함을 다시한번 느끼게 되는 계기가 되었습니다.&lt;/p&gt;
+</description>
+        <pubDate>2019-03-28</pubDate>
+        <link>http://localhost:4000/articles/2018-11/merge-file-in-linux</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-11/merge-file-in-linux</guid>
+        
+        <category>Unix/Linux</category>
+        
+        <category>bash</category>
+        
+        
+        <category>Unix/Linux</category>
         
       </item>
     
@@ -312,7 +353,7 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>2019-03-25</pubDate>
+        <pubDate>2019-03-28</pubDate>
         <link>http://localhost:4000/articles/2013-08/code-highlighting-post</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2013-08/code-highlighting-post</guid>
         
@@ -331,7 +372,7 @@
 
 &lt;p&gt;Some &lt;a href=&quot;http://renyuanz.github.io&quot;&gt;link&lt;/a&gt; can also be shown.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-25</pubDate>
+        <pubDate>2019-03-28</pubDate>
         <link>http://localhost:4000/articles/2013-08/sample-link-post</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2013-08/sample-link-post</guid>
         
@@ -391,7 +432,7 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>2019-03-25</pubDate>
+        <pubDate>2019-03-28</pubDate>
         <link>http://localhost:4000/articles/2013-05/readability-feature-post</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2013-05/readability-feature-post</guid>
         
@@ -445,7 +486,7 @@
 
 &lt;p&gt;Aliquip enim artisan dolor post-ironic. Pug tote bag Marfa, deserunt pour-over Portland wolf eu odio intelligentsia american apparel ugh ea. Sunt viral et, 3 wolf moon gastropub pug id. Id fashion axe est typewriter, mlkshk Portland art party aute brunch. Sint pork belly Cosby sweater, deep v mumblecore kitsch american apparel. Try-hard direct trade tumblr sint skateboard. Adipisicing bitters excepteur biodiesel, pickled gastropub aute veniam.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-25</pubDate>
+        <pubDate>2019-03-28</pubDate>
         <link>http://localhost:4000/articles/2012-05/readability-post</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2012-05/readability-post</guid>
         
@@ -578,7 +619,7 @@
 
 &lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;Watch out!&lt;/strong&gt; You can also add notices by appending &lt;code class=&quot;highlighter-rouge&quot;&gt;{: .notice}&lt;/code&gt; to a paragraph.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-25</pubDate>
+        <pubDate>2019-03-28</pubDate>
         <link>http://localhost:4000/articles/2011-03/sample-post</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2011-03/sample-post</guid>
         
