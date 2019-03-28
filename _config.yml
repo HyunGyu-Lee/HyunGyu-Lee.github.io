@@ -3,9 +3,9 @@
 # Site wide configuration
 ####################################
 #
-title: All of developer
+title: Gyu's IT
 email: dlgusrb0808@gmail.com
-description: A simple and awesome blog theme powered by jekyll.
+description: A Blog sharing knowledge and technology.
 url: # the base hostname & protocol for your site
 keywords: ["Web", "Back-End", "SpringFramework"]
 
@@ -36,7 +36,7 @@ owner:
   name: All of developer
   avatar: blog-logo.png
   job: "Software Engineer"
-  bio: "개발을 즐기고 소프트웨어로 세상을 이롭게 하고자 합니다."
+  bio: "개발을 즐기고<br>소프트웨어로 세상을 이롭게 하고자 합니다."
   email:
   disqus-shortname:
   twitter: #username
