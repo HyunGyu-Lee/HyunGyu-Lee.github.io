@@ -638,7 +638,7 @@ ul.tag-cloud li a.post-tag { border-radius: 0.2em; }
 
 .image-credit { float: right; font-weight: bold; font-style: italic; color: #09ABF6; font-size: 13px; padding-right: 20px; }
 
-section.post { margin-bottom: 80px; }
+section.post { margin-bottom: 80px; font-size: 14px; }
 
 .back-home a { font-size: 13px; font-weight: bold; color: #09ABF6; border: 1px solid rgba(115, 115, 115, 0.87); border-radius: 0.4em; padding: 0.5em 1em; }
 
@@ -653,7 +653,7 @@ section.post { margin-bottom: 80px; }
 
 a.read-more { padding: 5px 8px; }
 
-#post { padding-bottom: 50px; }
+#post { padding-bottom: 50px; font-size: 14px; }
 #post .post-header { margin: 0 auto 50px; }
 
 #post h1 { margin: 0.5em 0 1em; }
@@ -705,6 +705,26 @@ a.read-more { padding: 5px 8px; }
 .reddit { background-color: #5f99cf; color: #fff; border-color: #5f99cf; }
 .reddit:visited { color: #fff; border-color: #5f99cf; }
 .reddit:hover { background-color: #fff; color: #5f99cf; border-color: #5f99cf; }
+
+.more-posts { border: 1px solid #E5E5E5; padding: 10px 10px 5px; margin: 10px 0; clear: both; display: block; }
+
+.more-posts table { table-layout: fixed; border-collapse: collapse; width: 100% !important; margin-top: 10px !important; display: table; border-spacing: 2px; border-color: grey; }
+
+.more-category { border-bottom: 1px solid #E5E5E5 !important; }
+
+.more-category > h4 { line-height: 170%; color: #737373 !important; font-size: 13px; margin: 0; padding: 2px 0 6px !important; display: inline-block; }
+
+.more-category .more-button { float: right; color: #909090; font-size: 12px !important; vertical-align: center; border-collapse: collapse; padding: 4px 4px 0 0; }
+
+.more-posts-title { text-align: left; font-size: 13px !important; font-weight: normal; word-break: break-all; overflow: hidden; line-height: 1.5; padding: 0 0 4px !important; display: table-cell; vertical-align: inherit; border-collapse: collapse; }
+
+.more-posts-title a { color: #909090; }
+
+.more-posts-title u { color: #505050; font-weight: bold; }
+
+.more-posts-title a:hover { color: #34373e; }
+
+.more-posts-date { text-align: right; width: 80px; font-size: 13px; padding: 0 0 4px !important; color: #909090 !important; display: table-cell; vertical-align: inherit; border-collapse: collapse; }
 
 .project_tltle { margin: 0; font-size: 22px; font-weight: bold; }
 

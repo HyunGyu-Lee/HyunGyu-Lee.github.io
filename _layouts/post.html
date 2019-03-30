@@ -40,8 +40,39 @@ layout: default
   </article>
 </div>
 
+<div class="more-posts">
+  <div class="more-category">
+    <h4>'{{ page.categories }}' 카테고리의 다른 글</h4>
+    <a href="/categories#{{ page.categories }}" class="more-button">더보기</a>
+  </div>
+  <table>
+    <tbody>
+      {% assign count = 0 %}
+      {% assign maxPostCount = 5 %}
+      {% for post in site.posts %}
+        {% if post.categories == page.categories %}
+          {% assign count = count | plus: 1 %}
+          {% if count <= maxPostCount %}
+            <tr>
+              <th class="more-posts-title">
+                {% if post.id == page.id %}
+                  <u>{{ post.title }}</u>
+                {% endif %}
+                {% if post.id != page.id %}
+                  <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+                {% endif %}
+              </th>
+              <td class="more-posts-date">{{ post.date | date: '%Y. %m. %d' }}</td>
+            </tr>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
 <div class="share-buttons">
-  <h6>Share on: </h6>
+  <h6>공유하기: </h6>
   <ul>
     <li>
       <a href="https://twitter.com/intent/tweet?text={{ site.url }}{{ page.url }}" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>

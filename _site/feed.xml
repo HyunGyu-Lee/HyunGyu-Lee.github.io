@@ -5,8 +5,8 @@
     <description>A Blog sharing knowledge and technology.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-03-28</pubDate>
-    <lastBuildDate>Thu, 28 Mar 2019 22:52:17 +0900</lastBuildDate>
+    <pubDate>2019-03-31</pubDate>
+    <lastBuildDate>Sun, 31 Mar 2019 01:32:22 +0900</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -51,7 +51,7 @@
 
 &lt;p&gt;본인이 사용하는 기술에 대해 필요한 설정 위주로 찾아서 추가해주면 보다 더 좋은 설정을 진행할 수 있을 것 같습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-28</pubDate>
+        <pubDate>2019-03-31</pubDate>
         <link>http://localhost:4000/articles/2019-01/spring-boot-configurations</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-01/spring-boot-configurations</guid>
         
@@ -136,7 +136,7 @@
 
 &lt;p&gt;위처럼 Spring Boot 용 VFS 구현체를 지정해주는 아주 간단한 방법으로 해결할 수 있었다.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-28</pubDate>
+        <pubDate>2019-03-31</pubDate>
         <link>http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</guid>
         
@@ -168,7 +168,7 @@
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
-        <pubDate>2019-03-28</pubDate>
+        <pubDate>2019-03-31</pubDate>
         <link>http://localhost:4000/articles/2018-11/problems-with-lombok</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/problems-with-lombok</guid>
         
@@ -199,7 +199,7 @@
 &lt;img src=&quot;http://localhost:4000/img/post-images/2018-11-06-install-object-aid-plugin/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>2019-03-28</pubDate>
+        <pubDate>2019-03-31</pubDate>
         <link>http://localhost:4000/articles/2018-11/install-object-aid-plugin</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/install-object-aid-plugin</guid>
         
@@ -240,7 +240,7 @@ xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용�
 이 명령어의 결과를 &amp;gt; (출력 리다이렉션) 으로 결과파일로 써줌으로써 각 파일들의 내용이 합쳐진 하나의 결과파일이 생성되게 됩니다.
 파이프, 출력 리다이렉션 등 리눅스 명령어의 강력함을 다시한번 느끼게 되는 계기가 되었습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-28</pubDate>
+        <pubDate>2019-03-31</pubDate>
         <link>http://localhost:4000/articles/2018-11/merge-file-in-linux</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/merge-file-in-linux</guid>
         
@@ -250,6 +250,407 @@ xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용�
         
         
         <category>Unix/Linux</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring ORM (Hibernate) 설정</title>
+        <description>&lt;p&gt;보통 스프링 프레임워크로 웹 프로젝트 설정 시 Web MVC 관련 설정과 Service레이어 이하 애플리케이션 관련 설정을 분리하여 설정합니다.&lt;br /&gt;
+이 포스트는 Spring 프레임워크 환경에서 JPA를 사용하기 위한 애플리케이션 관련 필수 설정을 다룹니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
+       &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;
+       &lt;span class=&quot;na&quot;&gt;xmlns:context=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/context&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:tx=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/tx&quot;&lt;/span&gt;
+       &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 1. 어노테이션(@Transactional) 기반 트랜잭션 매니저 활성화 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:annotation-driven/&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 2. 애플리케이션에서 사용되는 컴포넌트 스캔 패키지 설정 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;context:component-scan&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;base-package=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;my.webservice.biz&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;context:exclude-filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;annotation&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;expression=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.stereotype.Controller&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/context:component-scan&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 3. 데이터소스(커넥션풀) 설정 - Hikari커넥션 풀 이용 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hikariConfig&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.zaxxer.hikari.HikariConfig&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poolName&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;springHikariCP&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;connectionTestQuery&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SELECT 1&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSourceClassName&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${hibernate.dataSourceClassName}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;maximumPoolSize&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${hibernate.hikari.maximumPoolSize}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;idleTimeout&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${hibernate.hikari.idleTimeout}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSourceProperties&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;props&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;${dataSource.url}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;${dataSource.username}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;${dataSource.password}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/props&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.zaxxer.hikari.HikariDataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;destroy-method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;close&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;constructor-arg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hikariConfig&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 4. 트랜잭션매니저 설정 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transactionManager&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.orm.jpa.JpaTransactionManager&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 5. JPA 예외 추상화 AOP 설정 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 6. 엔티티매니저팩토리 설정 --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;entityManagerFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;packagesToScan&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;package.for.entity&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- @Entity 탐색 시작 위치 --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;jpaVendorAdapter&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 하이버네이트 구현체 사용 --&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;jpaProperties&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 하이버네이트 상세 설정 --&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;props&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.dialect&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;org.hibernate.dialect.H2Dialect&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 방언 --&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.show_sql&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;                   &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- SQL 보기 --&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.format_sql&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;                 &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- SQL 정렬해서 보기 --&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.use_sql_comments&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;           &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- SQL 코멘트 보기 --&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.id.new_generator_mappings&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 새 버전의 ID 생성 옵션 --&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.hbm2ddl.auto&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;create&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;             &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- DDL 자동 생성 --&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/props&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h5 id=&quot;1-어노테이션transactional-기반-트랜잭션-매니저-활성화&quot;&gt;1. 어노테이션(@Transactional) 기반 트랜잭션 매니저 활성화&lt;/h5&gt;
+&lt;p&gt;스프링 프레임워크에서 제공하는 어노테이션 기반 트랜잭션 매니저를 활성화합니다. @Transactional이 붙은 클래스, 메소드에 트랜잭션을 적용해줍니다.&lt;/p&gt;
+
+&lt;h5 id=&quot;2-애플리케이션에서-사용되는-컴포넌트-스캔-패키지-설정&quot;&gt;2. 애플리케이션에서 사용되는 컴포넌트 스캔 패키지 설정&lt;/h5&gt;
+&lt;p&gt;보통 @Controller는 Web MVC영역 설정으로 잡히도록 하기 때문에 @Controller를 제외하고 스캔하도록 설정&lt;/p&gt;
+
+&lt;h5 id=&quot;3-데이터소스커넥션풀-설정---hikari커넥션-풀-이용&quot;&gt;3. 데이터소스(커넥션풀) 설정 - Hikari커넥션 풀 이용&lt;/h5&gt;
+&lt;p&gt;커넥션 풀 설정입니다. 이 포스트에서는 HikariCP를 이용했으며 다른 커넥션풀을 이용해도 무방합니다.&lt;/p&gt;
+
+&lt;h5 id=&quot;4-트랜잭션-매니저-설정&quot;&gt;4. 트랜잭션 매니저 설정&lt;/h5&gt;
+&lt;p&gt;그동안 MyBatis 등 프레임워크을 사용할 땐 DataSourceTransactionManager를 많이 사용해왔는데, JPA를 이용할 때엔 JpaTransactionManager를 설정해줘야한다고 합니다.&lt;br /&gt;
+JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하기 때문에 JPA가 아닌 타 프레임워크(MyBatis, JdbcTemplate 등) 과도 사용이 가능합니다.&lt;/p&gt;
+
+&lt;h5 id=&quot;5-jpa-예외-추상화-aop-설정&quot;&gt;5. JPA 예외 추상화 AOP 설정&lt;/h5&gt;
+&lt;p&gt;JPA에서 발생한 예외 (JPA예외)를 스프링에서 추상화한 예외로 변환하는 역할을 하는 AOP를 적용합니다.&lt;/p&gt;
+
+&lt;h5 id=&quot;6-엔티티매니저팩토리-설정&quot;&gt;6. 엔티티매니저팩토리 설정&lt;/h5&gt;
+&lt;p&gt;엔티티매니저팩토리 설정은 직관적으로 이해할 수 있습니다. &lt;br /&gt;
+다만 Java SE 환경에서는 META-INF/persistence.xml 파일을 자동인식하여 엔티티매니저팩토리를 설정했지만  스프링 프레임워크에서는 이와같이 스프링다운 방식대로 엔티티매니저팩토리를 하나의 빈으로 설정하여 persistence.xml없이 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>2019-03-31</pubDate>
+        <link>http://localhost:4000/articles/2018-10/spring-orm-hibernate-settings</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-10/spring-orm-hibernate-settings</guid>
+        
+        <category>JPA</category>
+        
+        <category>Hibernate</category>
+        
+        <category>Spring ORM</category>
+        
+        
+        <category>JPA</category>
+        
+      </item>
+    
+      <item>
+        <title>JSON 샘플 데이터 제공 사이트 소개</title>
+        <description>&lt;p&gt;개발하다보면 JSON 샘플 데이터가 필요한 경우가 자주 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://jsonplaceholder.typicode.com&quot;&gt;JSONPlaceholder&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;위 사이트에서는 게시글, 댓글, 사진 등 다양한 컨셉의 샘플 데이터를 제공하며 사진의 경우 image 주소까지 제공하여 편리하게 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;사용방법은-다음과-같이-아주-간단합니다&quot;&gt;사용방법은 다음과 같이 아주 간단합니다.&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'https://jsonplaceholder.typicode.com/comments'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;콘솔에 comments(댓글) API로 제공되는 500개의 샘플 데이터가 출력되는 것을 확인할 수 있습니다.&lt;br /&gt;
+백엔드가 구축되어있지 않은 상태에서 프론트엔드 개발 시 유용하게 사용할 수 있을 것 같습니다.&lt;/p&gt;
+</description>
+        <pubDate>2019-03-31</pubDate>
+        <link>http://localhost:4000/articles/2018-10/json-sample-online</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-10/json-sample-online</guid>
+        
+        <category>FrontEnd</category>
+        
+        <category>JSON</category>
+        
+        
+        <category>etc.</category>
+        
+      </item>
+    
+      <item>
+        <title>VSCode로 Vue개발 시 팁</title>
+        <description>&lt;p&gt;싱글 파일 컴포넌트를 작성하기 위해 새로은 .vue 파일을 생성한 후&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vue&quot; data-lang=&quot;vue&quot;&gt;scaffold&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;라고 입력한 후 엔터를 치면&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vue&quot; data-lang=&quot;vue&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;위와 같은 코드를 자동완성해준다.&lt;/p&gt;
+</description>
+        <pubDate>2019-03-31</pubDate>
+        <link>http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode</guid>
+        
+        <category>Vue</category>
+        
+        <category>scaffold</category>
+        
+        
+        <category>Vue</category>
+        
+      </item>
+    
+      <item>
+        <title>JPA 객체 연관관계 설정</title>
+        <description>&lt;h3 id=&quot;manytoone&quot;&gt;@ManyToOne&lt;/h3&gt;
+&lt;p&gt;다대일(N:1) 관계 매핑 정보다.&lt;/p&gt;
+
+&lt;h6 id=&quot;-주요속성&quot;&gt;* 주요속성&lt;/h6&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;속성명&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;의미&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;optional&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;false로 설정 시 연관된 엔티티가 항상 있어야한다 (기본값 : true)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fetch&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;글로벌 Fetch 전략을 설정한다&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cascade&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;영속성 전이 기능을 사용한다&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;targetEntity&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;연관된 엔티티의 타입 정보를 설정한다. (거의 사용안함)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;joincolumn&quot;&gt;@JoinColumn&lt;/h3&gt;
+&lt;p&gt;외래 키를 매핑할 때 사용한다.&lt;/p&gt;
+
+&lt;h6 id=&quot;-주요속성-1&quot;&gt;* 주요속성&lt;/h6&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;속성명&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;의미&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;name&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;매핑할 외래키 이름 (기본값 : 필드명 + _ + 참조하는 테이블의 기본 키 컬럼명)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;referencedColumnName&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;외래 키가 참조하는 대상 테이블의 컬럼명 (기본값 : 참조하는 테이블의 기본 키 컬럼명)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;foreignKey&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;테이블을 생성할 때만 사용하는 속성으로 외래 키 제약조건을 직접 지정할 수 있다&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;단방향 관계를 매핑을 할 때 다대일(@ManyToOne) 또는 일대일(@OneToOne) 중 어떤 것을 사용할 지는 반대편 관계에 달려있다.&lt;br /&gt;
+반대 편이 일대다(@OneToMany)면 다대일(@ManyToOne), 반대편이 일대일(@OneToOne)이면 일대일(@OneToOne)&lt;/p&gt;
+
+&lt;h3 id=&quot;엔티티-양방향-매핑-규칙&quot;&gt;엔티티 양방향 매핑 규칙&lt;/h3&gt;
+&lt;p&gt;사실 테이블에서는 하나의 외래키를 통해 두 테이블의 연관관계를 관리한다.&lt;br /&gt;
+하지만 객체는 단방향 관계 2개를 사용하여 두 객체간 연관관계를 관리한다.&lt;br /&gt;
+JPA서는 연관관계의 주인을 정함으로써 이 문제를 해결한다.&lt;/p&gt;
+
+&lt;p&gt;테이블의 외래키를 관리하는 엔티티를 연관관계의 주인이라 하고 외래키를 보유한 테이블이 연관관계의 주인이 되어야한다.&lt;/p&gt;
+
+&lt;p&gt;주인이 아닌 엔티티는 mappedBy 속성을 이용해 주인을 지정해야한다.&lt;/p&gt;
+
+&lt;p&gt;연관관계의 주인만이 외래 키에 영향을 줄 수 있다. 때문에 주인이 아닌 엔티티를 통해 add등을 수행해도 INSERT 되지 않는다.&lt;/p&gt;
+
+&lt;p&gt;오직 연관관계의 주인만이 연관관계 설정에 영향을 줄 수 있다.&lt;/p&gt;
+
+&lt;p&gt;하지만 순수 객체의 상태에서는 이야기가 다르다.&lt;/p&gt;
+
+&lt;p&gt;주인이 아닌 측에서 외래키에 영향을 줄 수 없다고 관계를 맺어두지 않으면 DB에는 잘 들어갈 지라도 객체상태에서는 사용이 불가능한 경우가 있다.&lt;/p&gt;
+
+&lt;p&gt;때문에 양방향 관계가 설정된 엔티티들을 사용할땐 양 쪽 둘다 연관관계를 맺어주자.&lt;/p&gt;
+
+&lt;p&gt;Team (팀) / Member (회원)&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Team&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;team&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTeamName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;T1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;entityManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setMemberName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;M1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTeam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;// 회원 -&amp;gt; 팀 연관관계 설정&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;entityManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;위 코드에서는 회원 -&amp;gt; 팀으로의 방향으로만 연관관계를 설정했다.&lt;/p&gt;
+
+&lt;p&gt;하지만&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Team&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;team&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTeamName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;T1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;entityManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setMemberName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;M1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTeam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 회원 -&amp;gt; 팀 연관관계 설정&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMembers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 팀 -&amp;gt; 회원 연관관계 설정 (실제 JPA 수행로직엔 영향 주지않음)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;entityManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;persist&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;위와 같이 양방향 연관관계를 모두 맺어주어 순수 객체 상태에서도 안전하게 사용가능한 상태로 만들어 주는것이 좋다.&lt;/p&gt;
+
+&lt;p&gt;그리고 보통 위 처럼 양 쪽 다 신경쓰는 경우 실수로 지정하지 않는 경우가 발생할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;때문에 연관관계 주인 측에서 완벽하게 맺어주도록 지정하는 것이 좋다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setTeam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Team&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;team&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;// 회원 -&amp;gt; 팀&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMembers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 팀 -&amp;gt; 회원&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;위 처럼 연관관계 편의 메소드를 작성하여 실수를 방지할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;하지만 위 코드에도 치명적인 문제가 있다.&lt;br /&gt;
+team의 members는 연관관계의 주인이 아니기 때문에 새 팀이 설정될 때 영속성 컨텍스트가 flush되지 않으면 team의 members 리스트 안에 자신이 남아 있는 문제가 발생한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setTeam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Team&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 현재 소속팀이 있으면 해당 팀의 회원목록에서 자신을 제거&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;team&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMembers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;team&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;// 회원 -&amp;gt; 팀&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMembers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 팀 -&amp;gt; 회원&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;위 처럼 로직을 추가하여 보다 견고하게 양방향 연관관계를 관리하도록 할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;정리하면&quot;&gt;정리하면…&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;단방향 매핑을 통해 테이블 - 객체의 연관관계 매핑은 완료된다.&lt;/li&gt;
+  &lt;li&gt;단방향 매핑을 양방향 매핑으로 만들면 역방향 객체 그래프 탐색 기능이 추가된다.&lt;/li&gt;
+  &lt;li&gt;양방향 연관관계를 매핑하려면 객체에서 양쪽 방향을 모두 관리해야한다.&lt;/li&gt;
+  &lt;li&gt;기본적으로 단방향 매핑을 사용하고 객체 그래프 탐색 기능이 필요할 때 양방향을 사용하도록 코드를 추가해도 무방하다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>2019-03-31</pubDate>
+        <link>http://localhost:4000/articles/2018-10/jpa-object-relations-setting</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-10/jpa-object-relations-setting</guid>
+        
+        <category>JPA</category>
+        
+        <category>ORM</category>
+        
+        <category>Hibernate</category>
+        
+        <category>객체연관관계매핑</category>
+        
+        
+        <category>JPA</category>
+        
+      </item>
+    
+      <item>
+        <title>객체 연관관계 VS 테이블 연관관계</title>
+        <description>&lt;p&gt;ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.&lt;br /&gt;
+즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;연관관계-핵심-키워드&quot;&gt;연관관계 핵심 키워드&lt;/h3&gt;
+&lt;h5 id=&quot;방향&quot;&gt;방향&lt;/h5&gt;
+&lt;p&gt;단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&amp;gt; 팀 또는 팀 -&amp;gt; 회원&lt;br /&gt;
+이런 식으로 한 쪽으로만 참조하는 것을 단방향 관계라 하고 회원 -&amp;gt; 팀 -&amp;gt; 회원 상호 참조하는 것을 양방향이라 한다.&lt;br /&gt;
+방향은 객체에만 존재하며 테이블간 관계는 항상 양방향이다.&lt;/p&gt;
+
+&lt;h5 id=&quot;다중성&quot;&gt;다중성&lt;/h5&gt;
+&lt;p&gt;[일대다(1:N), 다대일(N:1), 일대일(1:1), 다대다(N:M)]이 있다. 예를들어 팀과 회원의 관계에서&lt;br /&gt;
+한 팀에 여러 회원이 있을수있으니 팀과 회원은 일대다 관계로 볼 수 있다. 반대로 여려 명의 회원이 한 팀에 속하니 회원과 팀은 다대일이다.&lt;br /&gt;
+즉 [팀 1 : N 회원]으로 표현할수있다.&lt;/p&gt;
+
+&lt;h5 id=&quot;연관관계의-주인&quot;&gt;연관관계의 주인&lt;/h5&gt;
+&lt;p&gt;객체를 양방향 연관관계로 만들면 연관관계의 주인을 정해야한다.&lt;br /&gt;
+객체 연관관계 VS 테이블 연관관계&lt;br /&gt;
+객체 연관관계는 참조(주소)로 연관관계를 맺는다. &lt;br /&gt;
+테이블 연관관계는 외래 키로 연관관계를 맺는다.&lt;/p&gt;
+
+&lt;p&gt;객체는 연관된 데이터를 조회할 때 참조를 사용 (object.getRefer()…)한다.&lt;br /&gt;
+테이블은 연관된 데이터를 조회할 때 JOIN을 사용한다.&lt;/p&gt;
+
+&lt;p&gt;참조를 사용하는 객체의 연관관계는 단방향이다. &lt;br /&gt;
+외래키를 사용하는 테이블의 연관관계는 양방향이다. (A JOIN B 반대로 B JOIN A 도 가능) &lt;br /&gt;
+객체를 양방향 참조로 만들려면 단방향 연관관계를 2개 만들어야한다.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>2019-03-31</pubDate>
+        <link>http://localhost:4000/articles/2018-10/object-relations-table-relations</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-10/object-relations-table-relations</guid>
+        
+        <category>JPA</category>
+        
+        <category>ORM</category>
+        
+        <category>연관관계</category>
+        
+        
+        <category>JPA</category>
         
       </item>
     

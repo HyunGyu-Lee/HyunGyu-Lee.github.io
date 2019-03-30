@@ -472,6 +472,775 @@ xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용�
 
 </section>
 
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        30 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/spring-orm-hibernate-settings" class="post-title" title="Spring ORM (Hibernate) 설정">Spring ORM (Hibernate) 설정</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        <p>보통 스프링 프레임워크로 웹 프로젝트 설정 시 Web MVC 관련 설정과 Service레이어 이하 애플리케이션 관련 설정을 분리하여 설정합니다.<br />
+이 포스트는 Spring 프레임워크 환경에서 JPA를 사용하기 위한 애플리케이션 관련 필수 설정을 다룹니다.</p>
+
+<hr />
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span>
+       <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+       <span class="na">xmlns:context=</span><span class="s">"http://www.springframework.org/schema/context"</span> <span class="na">xmlns:tx=</span><span class="s">"http://www.springframework.org/schema/tx"</span>
+       <span class="na">xsi:schemaLocation=</span><span class="s">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- 1. 어노테이션(@Transactional) 기반 트랜잭션 매니저 활성화 --&gt;</span>
+    <span class="nt">&lt;tx:annotation-driven/&gt;</span>
+
+    <span class="c">&lt;!-- 2. 애플리케이션에서 사용되는 컴포넌트 스캔 패키지 설정 --&gt;</span>
+    <span class="nt">&lt;context:component-scan</span> <span class="na">base-package=</span><span class="s">"my.webservice.biz"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;context:exclude-filter</span> <span class="na">type=</span><span class="s">"annotation"</span> <span class="na">expression=</span><span class="s">"org.springframework.stereotype.Controller"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/context:component-scan&gt;</span>
+
+    <span class="c">&lt;!-- 3. 데이터소스(커넥션풀) 설정 - Hikari커넥션 풀 이용 --&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"hikariConfig"</span> <span class="na">class=</span><span class="s">"com.zaxxer.hikari.HikariConfig"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"poolName"</span> <span class="na">value=</span><span class="s">"springHikariCP"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"connectionTestQuery"</span> <span class="na">value=</span><span class="s">"SELECT 1"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"dataSourceClassName"</span> <span class="na">value=</span><span class="s">"${hibernate.dataSourceClassName}"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"maximumPoolSize"</span> <span class="na">value=</span><span class="s">"${hibernate.hikari.maximumPoolSize}"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"idleTimeout"</span> <span class="na">value=</span><span class="s">"${hibernate.hikari.idleTimeout}"</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"dataSourceProperties"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;props&gt;</span>
+                <span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"url"</span><span class="nt">&gt;</span>${dataSource.url}<span class="nt">&lt;/prop&gt;</span>
+                <span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"user"</span><span class="nt">&gt;</span>${dataSource.username}<span class="nt">&lt;/prop&gt;</span>
+                <span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"password"</span><span class="nt">&gt;</span>${dataSource.password}<span class="nt">&lt;/prop&gt;</span>
+            <span class="nt">&lt;/props&gt;</span>
+        <span class="nt">&lt;/property&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"dataSource"</span> <span class="na">class=</span><span class="s">"com.zaxxer.hikari.HikariDataSource"</span> <span class="na">destroy-method=</span><span class="s">"close"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;constructor-arg</span> <span class="na">ref=</span><span class="s">"hikariConfig"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+
+    <span class="c">&lt;!-- 4. 트랜잭션매니저 설정 --&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"transactionManager"</span> <span class="na">class=</span><span class="s">"org.springframework.orm.jpa.JpaTransactionManager"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"dataSource"</span> <span class="na">ref=</span><span class="s">"dataSource"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+
+    <span class="c">&lt;!-- 5. JPA 예외 추상화 AOP 설정 --&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- 6. 엔티티매니저팩토리 설정 --&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"entityManagerFactory"</span> <span class="na">class=</span><span class="s">"org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"dataSource"</span> <span class="na">ref=</span><span class="s">"dataSource"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"packagesToScan"</span> <span class="na">value=</span><span class="s">"package.for.entity"</span><span class="nt">/&gt;</span> <span class="c">&lt;!-- @Entity 탐색 시작 위치 --&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"jpaVendorAdapter"</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- 하이버네이트 구현체 사용 --&gt;</span>
+            <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/property&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"jpaProperties"</span><span class="nt">&gt;</span> <span class="c">&lt;!-- 하이버네이트 상세 설정 --&gt;</span>
+            <span class="nt">&lt;props&gt;</span>
+                <span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.dialect"</span><span class="nt">&gt;</span>org.hibernate.dialect.H2Dialect<span class="nt">&lt;/prop&gt;</span> <span class="c">&lt;!-- 방언 --&gt;</span>
+                <span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.show_sql"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/prop&gt;</span>                   <span class="c">&lt;!-- SQL 보기 --&gt;</span>
+                <span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.format_sql"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/prop&gt;</span>                 <span class="c">&lt;!-- SQL 정렬해서 보기 --&gt;</span>
+                <span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.use_sql_comments"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/prop&gt;</span>           <span class="c">&lt;!-- SQL 코멘트 보기 --&gt;</span>
+                <span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.id.new_generator_mappings"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/prop&gt;</span>  <span class="c">&lt;!-- 새 버전의 ID 생성 옵션 --&gt;</span>
+                <span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">"hibernate.hbm2ddl.auto"</span><span class="nt">&gt;</span>create<span class="nt">&lt;/prop&gt;</span>             <span class="c">&lt;!-- DDL 자동 생성 --&gt;</span>
+            <span class="nt">&lt;/props&gt;</span>
+        <span class="nt">&lt;/property&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+
+<span class="nt">&lt;/beans&gt;</span></code></pre></figure>
+
+<h5 id="1-어노테이션transactional-기반-트랜잭션-매니저-활성화">1. 어노테이션(@Transactional) 기반 트랜잭션 매니저 활성화</h5>
+<p>스프링 프레임워크에서 제공하는 어노테이션 기반 트랜잭션 매니저를 활성화합니다. @Transactional이 붙은 클래스, 메소드에 트랜잭션을 적용해줍니다.</p>
+
+<h5 id="2-애플리케이션에서-사용되는-컴포넌트-스캔-패키지-설정">2. 애플리케이션에서 사용되는 컴포넌트 스캔 패키지 설정</h5>
+<p>보통 @Controller는 Web MVC영역 설정으로 잡히도록 하기 때문에 @Controller를 제외하고 스캔하도록 설정</p>
+
+<h5 id="3-데이터소스커넥션풀-설정---hikari커넥션-풀-이용">3. 데이터소스(커넥션풀) 설정 - Hikari커넥션 풀 이용</h5>
+<p>커넥션 풀 설정입니다. 이 포스트에서는 HikariCP를 이용했으며 다른 커넥션풀을 이용해도 무방합니다.</p>
+
+<h5 id="4-트랜잭션-매니저-설정">4. 트랜잭션 매니저 설정</h5>
+<p>그동안 MyBatis 등 프레임워크을 사용할 땐 DataSourceTransactionManager를 많이 사용해왔는데, JPA를 이용할 때엔 JpaTransactionManager를 설정해줘야한다고 합니다.<br />
+JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하기 때문에 JPA가 아닌 타 프레임워크(MyBatis, JdbcTemplate 등) 과도 사용이 가능합니다.</p>
+
+<h5 id="5-jpa-예외-추상화-aop-설정">5. JPA 예외 추상화 AOP 설정</h5>
+<p>JPA에서 발생한 예외 (JPA예외)를 스프링에서 추상화한 예외로 변환하는 역할을 하는 AOP를 적용합니다.</p>
+
+<h5 id="6-엔티티매니저팩토리-설정">6. 엔티티매니저팩토리 설정</h5>
+<p>엔티티매니저팩토리 설정은 직관적으로 이해할 수 있습니다. <br />
+다만 Java SE 환경에서는 META-INF/persistence.xml 파일을 자동인식하여 엔티티매니저팩토리를 설정했지만  스프링 프레임워크에서는 이와같이 스프링다운 방식대로 엔티티매니저팩토리를 하나의 빈으로 설정하여 persistence.xml없이 사용할 수 있습니다.</p>
+
+<hr />
+<blockquote>
+  <p>자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.</p>
+</blockquote>
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        29 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#etc.">etc.</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/json-sample-online" class="post-title" title="JSON 샘플 데이터 제공 사이트 소개">JSON 샘플 데이터 제공 사이트 소개</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        <p>개발하다보면 JSON 샘플 데이터가 필요한 경우가 자주 있습니다.</p>
+
+<blockquote>
+  <p><a href="https://jsonplaceholder.typicode.com">JSONPlaceholder</a></p>
+</blockquote>
+
+<p>위 사이트에서는 게시글, 댓글, 사진 등 다양한 컨셉의 샘플 데이터를 제공하며 사진의 경우 image 주소까지 제공하여 편리하게 사용할 수 있습니다.</p>
+
+<h2 id="사용방법은-다음과-같이-아주-간단합니다">사용방법은 다음과 같이 아주 간단합니다.</h2>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">fetch</span><span class="p">(</span><span class="s1">'https://jsonplaceholder.typicode.com/comments'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">json</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">));</span></code></pre></figure>
+
+<p>콘솔에 comments(댓글) API로 제공되는 500개의 샘플 데이터가 출력되는 것을 확인할 수 있습니다.<br />
+백엔드가 구축되어있지 않은 상태에서 프론트엔드 개발 시 유용하게 사용할 수 있을 것 같습니다.</p>
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        26 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Vue">Vue</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode" class="post-title" title="VSCode로 Vue개발 시 팁">VSCode로 Vue개발 시 팁</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        <p>싱글 파일 컴포넌트를 작성하기 위해 새로은 .vue 파일을 생성한 후</p>
+
+<figure class="highlight"><pre><code class="language-vue" data-lang="vue">scaffold</code></pre></figure>
+
+<p>라고 입력한 후 엔터를 치면</p>
+
+<figure class="highlight"><pre><code class="language-vue" data-lang="vue"><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span><span class="nt">&gt;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+
+<span class="p">}</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">style</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;/</span><span class="k">style</span><span class="nt">&gt;</span></code></pre></figure>
+
+<p>위와 같은 코드를 자동완성해준다.</p>
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        23 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/jpa-object-relations-setting" class="post-title" title="JPA 객체 연관관계 설정">JPA 객체 연관관계 설정</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        <h3 id="manytoone">@ManyToOne</h3>
+<p>다대일(N:1) 관계 매핑 정보다.</p>
+
+<h6 id="-주요속성">* 주요속성</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>속성명</th>
+      <th style="text-align: center">의미</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">optional</code></td>
+      <td style="text-align: center">false로 설정 시 연관된 엔티티가 항상 있어야한다 (기본값 : true)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">fetch</code></td>
+      <td style="text-align: center">글로벌 Fetch 전략을 설정한다</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">cascade</code></td>
+      <td style="text-align: center">영속성 전이 기능을 사용한다</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">targetEntity</code></td>
+      <td style="text-align: center">연관된 엔티티의 타입 정보를 설정한다. (거의 사용안함)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="joincolumn">@JoinColumn</h3>
+<p>외래 키를 매핑할 때 사용한다.</p>
+
+<h6 id="-주요속성-1">* 주요속성</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>속성명</th>
+      <th style="text-align: center">의미</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">name</code></td>
+      <td style="text-align: center">매핑할 외래키 이름 (기본값 : 필드명 + _ + 참조하는 테이블의 기본 키 컬럼명)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">referencedColumnName</code></td>
+      <td style="text-align: center">외래 키가 참조하는 대상 테이블의 컬럼명 (기본값 : 참조하는 테이블의 기본 키 컬럼명)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">foreignKey</code></td>
+      <td style="text-align: center">테이블을 생성할 때만 사용하는 속성으로 외래 키 제약조건을 직접 지정할 수 있다</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>단방향 관계를 매핑을 할 때 다대일(@ManyToOne) 또는 일대일(@OneToOne) 중 어떤 것을 사용할 지는 반대편 관계에 달려있다.<br />
+반대 편이 일대다(@OneToMany)면 다대일(@ManyToOne), 반대편이 일대일(@OneToOne)이면 일대일(@OneToOne)</p>
+
+<h3 id="엔티티-양방향-매핑-규칙">엔티티 양방향 매핑 규칙</h3>
+<p>사실 테이블에서는 하나의 외래키를 통해 두 테이블의 연관관계를 관리한다.<br />
+하지만 객체는 단방향 관계 2개를 사용하여 두 객체간 연관관계를 관리한다.<br />
+JPA서는 연관관계의 주인을 정함으로써 이 문제를 해결한다.</p>
+
+<p>테이블의 외래키를 관리하는 엔티티를 연관관계의 주인이라 하고 외래키를 보유한 테이블이 연관관계의 주인이 되어야한다.</p>
+
+<p>주인이 아닌 엔티티는 mappedBy 속성을 이용해 주인을 지정해야한다.</p>
+
+<p>연관관계의 주인만이 외래 키에 영향을 줄 수 있다. 때문에 주인이 아닌 엔티티를 통해 add등을 수행해도 INSERT 되지 않는다.</p>
+
+<p>오직 연관관계의 주인만이 연관관계 설정에 영향을 줄 수 있다.</p>
+
+<p>하지만 순수 객체의 상태에서는 이야기가 다르다.</p>
+
+<p>주인이 아닌 측에서 외래키에 영향을 줄 수 없다고 관계를 맺어두지 않으면 DB에는 잘 들어갈 지라도 객체상태에서는 사용이 불가능한 경우가 있다.</p>
+
+<p>때문에 양방향 관계가 설정된 엔티티들을 사용할땐 양 쪽 둘다 연관관계를 맺어주자.</p>
+
+<p>Team (팀) / Member (회원)</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Team</span> <span class="n">team</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Team</span><span class="o">();</span>
+<span class="n">team</span><span class="o">.</span><span class="na">setTeamName</span><span class="o">(</span><span class="s">"T1"</span><span class="o">);</span>
+
+<span class="n">entityManager</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">team</span><span class="o">);</span>
+
+<span class="n">Member</span> <span class="n">m</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Member</span><span class="o">();</span>
+<span class="n">m</span><span class="o">.</span><span class="na">setMemberName</span><span class="o">(</span><span class="s">"M1"</span><span class="o">);</span>
+<span class="n">m</span><span class="o">.</span><span class="na">setTeam</span><span class="o">(</span><span class="n">team</span><span class="o">);</span>	<span class="c1">// 회원 -&gt; 팀 연관관계 설정</span>
+
+<span class="n">entityManager</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">m</span><span class="o">);</span></code></pre></figure>
+
+<p>위 코드에서는 회원 -&gt; 팀으로의 방향으로만 연관관계를 설정했다.</p>
+
+<p>하지만</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Team</span> <span class="n">team</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Team</span><span class="o">();</span>
+<span class="n">team</span><span class="o">.</span><span class="na">setTeamName</span><span class="o">(</span><span class="s">"T1"</span><span class="o">);</span>
+
+<span class="n">entityManager</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">team</span><span class="o">);</span>
+
+<span class="n">Member</span> <span class="n">m</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Member</span><span class="o">();</span>
+<span class="n">m</span><span class="o">.</span><span class="na">setMemberName</span><span class="o">(</span><span class="s">"M1"</span><span class="o">);</span>
+<span class="n">m</span><span class="o">.</span><span class="na">setTeam</span><span class="o">(</span><span class="n">team</span><span class="o">);</span>          <span class="c1">// 회원 -&gt; 팀 연관관계 설정</span>
+<span class="n">team</span><span class="o">.</span><span class="na">getMembers</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">m</span><span class="o">);</span> <span class="c1">// 팀 -&gt; 회원 연관관계 설정 (실제 JPA 수행로직엔 영향 주지않음)</span>
+
+<span class="n">entityManager</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">m</span><span class="o">);</span></code></pre></figure>
+
+<p>위와 같이 양방향 연관관계를 모두 맺어주어 순수 객체 상태에서도 안전하게 사용가능한 상태로 만들어 주는것이 좋다.</p>
+
+<p>그리고 보통 위 처럼 양 쪽 다 신경쓰는 경우 실수로 지정하지 않는 경우가 발생할 수 있다.</p>
+
+<p>때문에 연관관계 주인 측에서 완벽하게 맺어주도록 지정하는 것이 좋다.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Member</span> <span class="kd">class</span>
+
+<span class="nc">public</span> <span class="kt">void</span> <span class="nf">setTeam</span><span class="o">(</span><span class="n">Team</span> <span class="n">team</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">team</span> <span class="o">=</span> <span class="n">team</span><span class="o">;</span>            <span class="c1">// 회원 -&gt; 팀</span>
+    <span class="n">team</span><span class="o">.</span><span class="na">getMembers</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> <span class="c1">// 팀 -&gt; 회원</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>위 처럼 연관관계 편의 메소드를 작성하여 실수를 방지할 수 있다.</p>
+
+<p>하지만 위 코드에도 치명적인 문제가 있다.<br />
+team의 members는 연관관계의 주인이 아니기 때문에 새 팀이 설정될 때 영속성 컨텍스트가 flush되지 않으면 team의 members 리스트 안에 자신이 남아 있는 문제가 발생한다.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTeam</span><span class="o">(</span><span class="n">Team</span> <span class="n">team</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 현재 소속팀이 있으면 해당 팀의 회원목록에서 자신을 제거</span>
+    <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">team</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">team</span><span class="o">.</span><span class="na">getMembers</span><span class="o">().</span><span class="na">remove</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">this</span><span class="o">.</span><span class="na">team</span> <span class="o">=</span> <span class="n">team</span><span class="o">;</span>            <span class="c1">// 회원 -&gt; 팀</span>
+    <span class="n">team</span><span class="o">.</span><span class="na">getMembers</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="k">this</span><span class="o">);</span> <span class="c1">// 팀 -&gt; 회원</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>위 처럼 로직을 추가하여 보다 견고하게 양방향 연관관계를 관리하도록 할 수 있다.</p>
+
+<h3 id="정리하면">정리하면…</h3>
+<ol>
+  <li>단방향 매핑을 통해 테이블 - 객체의 연관관계 매핑은 완료된다.</li>
+  <li>단방향 매핑을 양방향 매핑으로 만들면 역방향 객체 그래프 탐색 기능이 추가된다.</li>
+  <li>양방향 연관관계를 매핑하려면 객체에서 양쪽 방향을 모두 관리해야한다.</li>
+  <li>기본적으로 단방향 매핑을 사용하고 객체 그래프 탐색 기능이 필요할 때 양방향을 사용하도록 코드를 추가해도 무방하다.</li>
+</ol>
+
+<hr />
+<blockquote>
+  <p>자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.</p>
+</blockquote>
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        17 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/object-relations-table-relations" class="post-title" title="객체 연관관계 VS 테이블 연관관계">객체 연관관계 VS 테이블 연관관계</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        <p>ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.<br />
+즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.</p>
+
+<h3 id="연관관계-핵심-키워드">연관관계 핵심 키워드</h3>
+<h5 id="방향">방향</h5>
+<p>단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&gt; 팀 또는 팀 -&gt; 회원<br />
+이런 식으로 한 쪽으로만 참조하는 것을 단방향 관계라 하고 회원 -&gt; 팀 -&gt; 회원 상호 참조하는 것을 양방향이라 한다.<br />
+방향은 객체에만 존재하며 테이블간 관계는 항상 양방향이다.</p>
+
+<h5 id="다중성">다중성</h5>
+<p>[일대다(1:N), 다대일(N:1), 일대일(1:1), 다대다(N:M)]이 있다. 예를들어 팀과 회원의 관계에서<br />
+한 팀에 여러 회원이 있을수있으니 팀과 회원은 일대다 관계로 볼 수 있다. 반대로 여려 명의 회원이 한 팀에 속하니 회원과 팀은 다대일이다.<br />
+즉 [팀 1 : N 회원]으로 표현할수있다.</p>
+
+<h5 id="연관관계의-주인">연관관계의 주인</h5>
+<p>객체를 양방향 연관관계로 만들면 연관관계의 주인을 정해야한다.<br />
+객체 연관관계 VS 테이블 연관관계<br />
+객체 연관관계는 참조(주소)로 연관관계를 맺는다. <br />
+테이블 연관관계는 외래 키로 연관관계를 맺는다.</p>
+
+<p>객체는 연관된 데이터를 조회할 때 참조를 사용 (object.getRefer()…)한다.<br />
+테이블은 연관된 데이터를 조회할 때 JOIN을 사용한다.</p>
+
+<p>참조를 사용하는 객체의 연관관계는 단방향이다. <br />
+외래키를 사용하는 테이블의 연관관계는 양방향이다. (A JOIN B 반대로 B JOIN A 도 가능) <br />
+객체를 양방향 참조로 만들려면 단방향 연관관계를 2개 만들어야한다.</p>
+
+<hr />
+<blockquote>
+  <p>자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.</p>
+</blockquote>
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        17 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/entity-table-mapping" class="post-title" title="엔티티(Entity) 테이블(Table) 매핑">엔티티(Entity) 테이블(Table) 매핑</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        <h3 id="엔티티-매핑">엔티티 매핑</h3>
+<p>@Entity : JPA가 관리하는 엔티티임을 알림<br />
+@Table name : 테이블명 <br />
+       uniqueConstraints : 유니크 제약조건 <br />
+                       @UniqueConstraint(columnNames 유니크 제약 컬럼명, name 제약명) <br />
+@Column -&gt; 일반 컬럼 매핑 <br />
+@Enumerate -&gt; Enum 타입 매핑<br />
+@Temporal -&gt; Date 타입 매핑, default값으로 hibernate의 @UpdateTimestamp를 지정하면 시간이 자동으로 설정된다. <br />
+@Lob -&gt; CLOB, BLOB 타입 매핑</p>
+
+<h3 id="기본키-매핑">기본키 매핑</h3>
+<p>Oracle은 시퀀스오브젝트, MySQL은 AUTO_INCREMENT 등 DB마다 기본키 할당 방식은 다르다.<br />
+JPA는 다음과 같은 방법들로 이 문제를 해결한다.</p>
+
+<h4 id="1-직접-할당">1) 직접 할당</h4>
+<p>기본 키를 애플리케이션에서 직접 할당한다. 즉 엔티티매니저를 통해 엔티티가 persist 되기 전에 설정하는 것을 의미한다.</p>
+
+<h4 id="2-자동-생성">2) 자동 생성</h4>
+<p>대리 키 사용 방식, @Id + @GeneratedValue 사용</p>
+
+<h6 id="2-1-identity">2-1) IDENTITY</h6>
+<p>기본 키 생성을 데이터베이스에 위임한다. MySQL, PostgreSQL, SQL Server, DB2에서 사용이 가능하다.<br />
+@GeneratedValue의 strategy를 GenerationType.IDENTITY로 설정한다.</p>
+
+<h6 id="2-2-sequence">2-2) SEQUENCE</h6>
+<p>데이터베이스 시퀀스를 사용해 기본키를 할당한다. PostgreSQL, Oracle, DB2, H2 데이터베이스에서 사용이 가능하다. <br />
+@GeneratedValue의 strategy를 GenerationType.SEQUENCE로 설정한다.</p>
+
+<h6 id="2-3-table">2-3) TABLE</h6>
+<p>키 생성 테이블을 이용한다. <br />
+@GeneratedValue의 strategy를 GenerationType.TABLE로 설정한다. <br />
+주로 사전에 시퀀스를 관리할 테이블을 만들어 둔후 엔티티에 @TableGenerator 를 이용해 시퀀스 관리 테이블을 매핑해주는 식으로 진행한다. <br />
+@TableGenerator (name : generator명, table : 시퀀스 관리 테이블, pkColumnValue : 시퀀스명, allocationSize : 한번에 증가하는 시퀀스 크기) <br />
+이렇게 진행하면 pkColumnValue에 설정한 시퀀스명이 시퀀스 관리 테이블에 값으로 추가되고, @GeneratedValue의 generator에서 사용이 가능하다.</p>
+
+<h6 id="2-4-auto">2-4) AUTO</h6>
+<p>데이터베이스 방언 (DIALECT)에 따라 자동 선택 되도록 하는 것으로, 데이터베이스 벤더에 의존적이지 않은 장점이있다.<br />
+스키마 자동 생성 설정을 해둔 경우 전략에 따라 시퀀스, 테이블을 자동으로 생성하며 그렇지 않은 경우 미리 만들어두어야한다.</p>
+
+<p>IDENTITY나 SEQUENCE의 경우 데이터베이스에 의존하지만 TABLE의 경우 테이블을 이용하는 방식으로 모든 데이터베이스에서 사용 가능하다.</p>
+
+<p>직접 할당은 @Id만 사용하여 할 수 있고 자동 생성은 @GeneratedValue를 추가하여 원하는 키 생성방식을 선택하면 된다.</p>
+
+<p>참고로 키 생성 전략을 사용하려면 persistence.xml에 hibernate.id.new_generator_mappings속성이 true로 설정되어있어야한다.</p>
+
+<h3 id="권장하는-식별자-선택-전략">권장하는 식별자 선택 전략</h3>
+<p>데이터베이스 기본 키는 다음 3가지 조건을 모두 만족해야한다.</p>
+
+<h5 id="1-null값은-허용되지-않는다">1. null값은 허용되지 않는다.</h5>
+<h5 id="2-유일해야한다">2. 유일해야한다.</h5>
+<h5 id="3-변해선-안-된다">3. 변해선 안 된다.</h5>
+
+<p>테이블의 기본 키를 선택하는 전략은 크게 2가지가 있다.</p>
+
+<ul>
+  <li>자연 키 (natural key) : 비즈니스에 의미가 있는 키 (주민등록번호, 이메일, 전화번호 등)</li>
+  <li>대리 키 (surrogate key) : 비즈니스와 관련 없는 임의로 만들어진 키, 대체 키라고도 함 (시퀀스, auto_increment 등)</li>
+</ul>
+
+<p>자연 키보다는 대리 키를 권장한다.<br />
+예를 들어 전화번호가 기본 키인 경우 전화번호가 없을 수도 있고 변할 수도 있다.<br />
+주민등록번호의 경우 변하지 않고 null일 수도 없지만 정책의 변화 등 비즈니스의 변화에 영향을 받을 수 있다.</p>
+
+<p>때문에 비즈니스와 관련이 없는, 비즈니스의 변화에 영향을 받지 않는 대리 키 사용을 권장한다.</p>
+
+<hr />
+<blockquote>
+  <p>자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.</p>
+</blockquote>
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        14 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Vue">Vue</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/solution-for-vue-crlf-error" class="post-title" title="Expected linebreaks to be &#39;LF&#39; but found &#39;CRLF&#39; 오류 관련">Expected linebreaks to be 'LF' but found 'CRLF' 오류 관련</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        <p>빌드 시 개행문자 관련 경고가 발생했다.</p>
+
+<p>.eslintrc.js 파일의 rules에 ‘linebreak-style’을 0으로 하는 설정을 추가하는 것으로 해결했다.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="err">#</span> <span class="p">.</span><span class="nx">eslintrc</span><span class="p">.</span><span class="nx">js</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">....</span>
+    <span class="na">rules</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'linebreak-style'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="p">....</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        12 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Vue">Vue</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/create-vue-project-with-vue-cli" class="post-title" title="Vue-CLI를 이용한 Vue프로젝트 생성">Vue-CLI를 이용한 Vue프로젝트 생성</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        <p>먼저 Vue-CLI 를 이용하기 위해서는 Node.js과 NPM이 설치되어있어야 한다.<br />
+설치가 안된 경우 <a href="/articles/2018-10/install-nodejs-and-npm">Node.js 및 NPM 설치</a> 을 참고하여 설치할 수 있다. <br />
+NPM을 이용하여 Vue-CLI 설치 (3.0.x) <br />
+NPM이 설치되어있으면 아래 명령어로 Vue-CLI 를 매우 간단하게 설치할 수 있다.</p>
+
+<h4 id="vue-cli-설치">Vue-CLI 설치</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm i <span class="nt">-g</span> @vue/cli</code></pre></figure>
+
+<h4 id="버전-확인을-통해-정상설치-확인">버전 확인을 통해 정상설치 확인</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vue <span class="nt">--version</span></code></pre></figure>
+
+<p>-g 옵션은 글로벌 패키지로 설치한다는 옵션으로 해당 PC 개발환경의 모든 프로젝트에서 사용이 가능하도록 하는 것이다.</p>
+
+<h4 id="vue-cli를-이용하여-프로젝트-생성">Vue-CLI를 이용하여 프로젝트 생성</h4>
+<p>먼저 CMD창에서 프로젝트를 생성할 경로로 이동한다.<br />
+만약 C:\work 디렉토리 밑에 생성하고 싶다면 cd C:\work 로 해당 경로로 이동하면 된다.</p>
+
+<p>해당 경로에서 다음 명령어를 입력한다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vue create <span class="o">[</span>생성할 프로젝트 명]</code></pre></figure>
+
+<p>위 명령어를 입력하면 default 설정을 따를지 물어보는데 이는 생성 이후에도 변경 가능한 부분이므로 default를 선택한다.<br />
+한창 생성이 진행되고 Successfully created project… 메시지가 보이면 생성이 완료된 것이다.</p>
+
+<p>디렉토리를 확인해보면 지정한 프로젝트명으로 디렉토리가 생성되있다.</p>
+
+<p>이제 NPM에 내장된 웹팩 개발 서버를 통해 간단히 실행해보자</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> <span class="o">[</span>프로젝트 디렉토리명]
+npm run serve</code></pre></figure>
+
+<p>위 명령어를 입력하면 개발서버가 구동되며 http://localhost:8080에 접속하면 generate된 프로젝트를 확인해볼수 있다.</p>
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        12 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Vue">Vue</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/install-nodejs-and-npm" class="post-title" title="Node.js 및 NPM 설치">Node.js 및 NPM 설치</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        <p>Node.js는 Javascript로 서버사이드 개발을 가능하게 해주는 Javascript 런타임으로 공식사이트에서는 다음과 같이 소개하고 있다.</p>
+
+<blockquote>
+  <p>Node.js®는 Chrome V8 JavaScript 엔진으로 빌드된 JavaScript 런타임입니다. Node.js는 이벤트 기반, Non 블로킹 I/O 모델을 사용해 가볍고 효율적입니다. Node.js의 패키지 생태계인 npm은 세계에서 가장 큰 오픈 소스 라이브러리 생태계이기도 합니다.</p>
+</blockquote>
+
+<p>NPM은 Node Package Manager 혹은 Node Package Modules의 약자로 Node.js 기반의 모듈을 모아둔 집합 저장소이다.</p>
+
+<h4 id="nodejs--npm-설치-윈도우-기준">Node.js / NPM 설치 (윈도우 기준)</h4>
+<ol>
+  <li>https://nodejs.org/en/download/ 접속</li>
+  <li>LTS 탭에서 Windows Installer로 다운로드</li>
+  <li>다운받은 msi 파일 실행</li>
+</ol>
+
+<p>별도로 환경변수로 PATH를 잡아주거나 할 필요없이 msi 파일을 통해 한번에 설치가 가능하다.<br />
+설치 확인을 위해 CMD창에서 다음 명령어를 실행해본다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 설치된 Node.js 버전 확인</span>
+node <span class="nt">-v</span>
+
+<span class="c"># 설치된 NPM 버전 확인</span>
+npm <span class="nt">-v</span></code></pre></figure>
+
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
 
         <footer>
   &copy; 2019 All of developer. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a> made with <i class="fa fa-heart heart-icon"></i>

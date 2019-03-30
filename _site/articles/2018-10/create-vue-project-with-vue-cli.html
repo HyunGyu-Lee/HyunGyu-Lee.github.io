@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="먼저 Vue-CLI 를 이용하기 위해서는 Node.js과 NPM이 설치되어있어야 한다.설치가 안된 경우 Node.js 및 NPM 설치 을 참고하여 설치할 수 있다. NPM을 이용하여 Vue-CLI 설치 (3.0.x) NPM이 설치되어있으면 아래 명령어로 Vue-CLI 를 매우 간단...">
+  <meta name="keywords" content="Web, Back-End, and SpringFramework">
+  <meta name="author" content="Vue-CLI를 이용한 Vue프로젝트 생성 | Gyu&#39;s IT">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Vue-CLI를 이용한 Vue프로젝트 생성 | Gyu&#39;s IT">
+  <meta name="twitter:description" content="먼저 Vue-CLI 를 이용하기 위해서는 Node.js과 NPM이 설치되어있어야 한다.설치가 안된 경우 Node.js 및 NPM 설치 을 참고하여 설치할 수 있다. NPM을 이용하여 Vue-CLI 설치 (3.0.x) NPM이 설치되어있으면 아래 명령어로 Vue-CLI 를 매우 간단...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-10/create-vue-project-with-vue-cli">
+  <meta property="og:title" content="Vue-CLI를 이용한 Vue프로젝트 생성 | Gyu&#39;s IT">
+  <meta property="og:description" content="먼저 Vue-CLI 를 이용하기 위해서는 Node.js과 NPM이 설치되어있어야 한다.설치가 안된 경우 Node.js 및 NPM 설치 을 참고하여 설치할 수 있다. NPM을 이용하여 Vue-CLI 설치 (3.0.x) NPM이 설치되어있으면 아래 명령어로 Vue-CLI 를 매우 간단...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>Vue-CLI를 이용한 Vue프로젝트 생성 | Gyu's IT</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2018-10/create-vue-project-with-vue-cli">
+  <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/blog-logo.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">All of developer</a>
+  <span class="author_job">Software Engineer</span>
+  <span class="author_bio mbm">개발을 즐기고<br>소프트웨어로 세상을 이롭게 하고자 합니다.</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+        
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+         
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="Vue-CLI를 이용한 Vue프로젝트 생성">Vue-CLI를 이용한 Vue프로젝트 생성</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        12 OCT 2018
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    1 min read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>먼저 Vue-CLI 를 이용하기 위해서는 Node.js과 NPM이 설치되어있어야 한다.<br />
+설치가 안된 경우 <a href="/articles/2018-10/install-nodejs-and-npm">Node.js 및 NPM 설치</a> 을 참고하여 설치할 수 있다. <br />
+NPM을 이용하여 Vue-CLI 설치 (3.0.x) <br />
+NPM이 설치되어있으면 아래 명령어로 Vue-CLI 를 매우 간단하게 설치할 수 있다.</p>
+
+<h4 id="vue-cli-설치">Vue-CLI 설치</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">npm i <span class="nt">-g</span> @vue/cli</code></pre></figure>
+
+<h4 id="버전-확인을-통해-정상설치-확인">버전 확인을 통해 정상설치 확인</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vue <span class="nt">--version</span></code></pre></figure>
+
+<p>-g 옵션은 글로벌 패키지로 설치한다는 옵션으로 해당 PC 개발환경의 모든 프로젝트에서 사용이 가능하도록 하는 것이다.</p>
+
+<h4 id="vue-cli를-이용하여-프로젝트-생성">Vue-CLI를 이용하여 프로젝트 생성</h4>
+<p>먼저 CMD창에서 프로젝트를 생성할 경로로 이동한다.<br />
+만약 C:\work 디렉토리 밑에 생성하고 싶다면 cd C:\work 로 해당 경로로 이동하면 된다.</p>
+
+<p>해당 경로에서 다음 명령어를 입력한다.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vue create <span class="o">[</span>생성할 프로젝트 명]</code></pre></figure>
+
+<p>위 명령어를 입력하면 default 설정을 따를지 물어보는데 이는 생성 이후에도 변경 가능한 부분이므로 default를 선택한다.<br />
+한창 생성이 진행되고 Successfully created project… 메시지가 보이면 생성이 완료된 것이다.</p>
+
+<p>디렉토리를 확인해보면 지정한 프로젝트명으로 디렉토리가 생성되있다.</p>
+
+<p>이제 NPM에 내장된 웹팩 개발 서버를 통해 간단히 실행해보자</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> <span class="o">[</span>프로젝트 디렉토리명]
+npm run serve</code></pre></figure>
+
+<p>위 명령어를 입력하면 개발서버가 구동되며 http://localhost:8080에 접속하면 generate된 프로젝트를 확인해볼수 있다.</p>
+
+  </article>
+</div>
+
+<div class="more-posts">
+  <div class="more-category">
+    <h4>'Vue' 카테고리의 다른 글</h4>
+    <a href="/categories#Vue" class="more-button">더보기</a>
+  </div>
+  <table>
+    <tbody>
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode">VSCode로 Vue개발 시 팁</a>
+                
+              </th>
+              <td class="more-posts-date">2018. 10. 26</td>
+            </tr>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2018-10/solution-for-vue-crlf-error">Expected linebreaks to be 'LF' but found 'CRLF' 오류 관련</a>
+                
+              </th>
+              <td class="more-posts-date">2018. 10. 14</td>
+            </tr>
+          
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                  <u>Vue-CLI를 이용한 Vue프로젝트 생성</u>
+                
+                
+              </th>
+              <td class="more-posts-date">2018. 10. 12</td>
+            </tr>
+          
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2018-10/install-nodejs-and-npm">Node.js 및 NPM 설치</a>
+                
+              </th>
+              <td class="more-posts-date">2018. 10. 12</td>
+            </tr>
+          
+        
+      
+    </tbody>
+  </table>
+</div>
+
+<div class="share-buttons">
+  <h6>공유하기: </h6>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-10/create-vue-project-with-vue-cli" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-10/create-vue-project-with-vue-cli" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-10/create-vue-project-with-vue-cli" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+    <li>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-10/create-vue-project-with-vue-cli" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-10/create-vue-project-with-vue-cli" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+    </li>
+  </ul>
+</div><!-- end share-buttons -->
+
+
+
+        <footer>
+  &copy; 2019 All of developer. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a> made with <i class="fa fa-heart heart-icon"></i>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>
