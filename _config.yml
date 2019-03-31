@@ -27,6 +27,9 @@ kramdown:
   toc_levels: 1..6
   enable_coderay: false
 
+paginate: 5
+paginate_path: "/page:num/"
+
 #
 ###################################
 # Site Owner configuration

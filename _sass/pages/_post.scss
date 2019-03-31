@@ -17,6 +17,24 @@
     position: initial;
     top: 0;
   }
+
+  .pagination {
+    display: inline-block;
+
+    a {
+      color: black;
+      float: left;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+
+    a.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    a:hover:not(.active) {background-color: #ddd;}
+  }
 }
 
 .image-credit {
@@ -54,6 +72,14 @@ section.post {
 	color: $primary;
 	font-size: 14px;
 	margin-left: 10px;
+	&:hover,
+	&:focus {
+		color: lighten($primary, 14%);
+	}
+}
+
+.go-post {
+	cursor: pointer;
 	&:hover,
 	&:focus {
 		color: lighten($primary, 14%);
