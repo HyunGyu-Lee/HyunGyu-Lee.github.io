@@ -8,35 +8,35 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Lombok 버전 : 1.16.22스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지...">
+  <meta name="description" content="  HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.기본적으로 웹 서...">
   <meta name="keywords" content="Web, Back-End, and SpringFramework">
-  <meta name="author" content="Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결 | Gyu&#39;s IT">
+  <meta name="author" content="HTTP 쿠키(Cookie) 란? | Gyu&#39;s IT">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f5">
 
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결 | Gyu&#39;s IT">
-  <meta name="twitter:description" content="Lombok 버전 : 1.16.22스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지...">
+  <meta name="twitter:title" content="HTTP 쿠키(Cookie) 란? | Gyu&#39;s IT">
+  <meta name="twitter:description" content="  HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.기본적으로 웹 서...">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/articles/2018-11/problems-with-lombok">
-  <meta property="og:title" content="Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결 | Gyu&#39;s IT">
-  <meta property="og:description" content="Lombok 버전 : 1.16.22스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지...">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-08/desc-of-http-cookie">
+  <meta property="og:title" content="HTTP 쿠키(Cookie) 란? | Gyu&#39;s IT">
+  <meta property="og:description" content="  HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.기본적으로 웹 서...">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
-  <title>Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결 | Gyu's IT</title>
+  <title>HTTP 쿠키(Cookie) 란? | Gyu's IT</title>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/articles/2018-11/problems-with-lombok">
+  <link rel="canonical" href="http://localhost:4000/articles/2018-08/desc-of-http-cookie">
   <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -142,10 +142,10 @@
 
 <div id="post">
   <header class="post-header">
-    <h1 title="Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결">Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결</h1>
+    <h1 title="HTTP 쿠키(Cookie) 란?">HTTP 쿠키(Cookie) 란?</h1>
     <span class="post-meta">
       <span class="post-date">
-        18 NOV 2018
+        26 AUG 2018
       </span>
       •
       <span class="read-time" title="Estimated read time">
@@ -160,19 +160,32 @@
   </header>
 
   <article class="post-content">
-    <p>Lombok 버전 : 1.16.22</p>
+    <blockquote>
+  <p>HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.
+쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.</p>
+</blockquote>
 
-<p>스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.</p>
+<p>기본적으로 웹 서버는 다음과 같은 형태로 브라우저에 쿠키를 저장하라고 알릴 수 있다.</p>
 
-<p>구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지금은 fix된듯 하다.</p>
+<figure class="highlight"><pre><code class="language-http" data-lang="http"><span class="err">Set-Cookie: &lt;CookieName&gt;=&lt;CookieValue&gt;
 
-<p><a href="https://github.com/rzwitserloot/lombok/issues/1703">Github에 등록된 Lombok 이슈 확인</a></p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@NoArgsConstructor</span>
-<span class="nd">@Data</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeDomain</span> <span class="o">{</span>
-    <span class="o">....</span>
-<span class="o">}</span></code></pre></figure>
+</span><span class="k">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-type</span><span class="p">:</span> <span class="s">text/html</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">test=testvalue</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">mycookie=good</span>
+
+[page content]</code></pre></figure>
+
+<p>위 HTTP 응답을 받은 브라우저는 다음 해당 서버에 요청할 때 다음과 같이 보낼 것이다.</p>
+
+<figure class="highlight"><pre><code class="language-http" data-lang="http"><span class="nf">GET</span> <span class="nn">/sample_page.html</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">www.example.org</span>
+<span class="na">Cookie</span><span class="p">:</span> <span class="s">test=testvalue; mycookie=good</span></code></pre></figure>
+
+<p>쿠키에 대한 유효기간은 서버에서 쿠기 송신 시 설정할 수 있고, 설정이 안된 경우는 브라우저를 닫는 순간 사라진다.</p>
+
+<figure class="highlight"><pre><code class="language-http" data-lang="http"><span class="err">Set-Cookie: test=testvalue; Expires=Wed, 21 Oct 2018 07:28:00 GMT;</span></code></pre></figure>
 
 
   </article>
@@ -180,8 +193,8 @@
 
 <div class="more-posts">
   <div class="more-category">
-    <h4>'Java' 카테고리의 다른 글</h4>
-    <a href="/categories#Java" class="more-button">더보기</a>
+    <h4>'IT기본' 카테고리의 다른 글</h4>
+    <a href="/categories#IT기본" class="more-button">더보기</a>
   </div>
   <table>
     <tbody>
@@ -193,34 +206,6 @@
         
       
         
-          
-          
-            <tr>
-              <th class="more-posts-title">
-                
-                  <u>Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결</u>
-                
-                
-              </th>
-              <td class="more-posts-date">2018. 11. 18</td>
-            </tr>
-          
-        
-      
-        
-          
-          
-            <tr>
-              <th class="more-posts-title">
-                
-                
-                  <a href="http://localhost:4000/articles/2018-11/install-object-aid-plugin">이클립스 클래스 다이어그램 플러그인 ObjectAid 설치</a>
-                
-              </th>
-              <td class="more-posts-date">2018. 11. 06</td>
-            </tr>
-          
-        
       
         
       
@@ -246,21 +231,6 @@
       
         
       
-        
-      
-        
-          
-          
-            <tr>
-              <th class="more-posts-title">
-                
-                
-                  <a href="http://localhost:4000/articles/2018-10/difference-of-equality-and-identity">Java 동등성과 동일성의 차이</a>
-                
-              </th>
-              <td class="more-posts-date">2018. 10. 10</td>
-            </tr>
-          
         
       
         
@@ -287,13 +257,17 @@
             <tr>
               <th class="more-posts-title">
                 
+                  <u>HTTP 쿠키(Cookie) 란?</u>
                 
-                  <a href="http://localhost:4000/articles/2018-08/java-stream-api">Java Stream API 소개</a>
                 
               </th>
-              <td class="more-posts-date">2018. 08. 15</td>
+              <td class="more-posts-date">2018. 08. 26</td>
             </tr>
           
+        
+      
+        
+      
         
       
     </tbody>
@@ -304,19 +278,19 @@
   <h6>공유하기: </h6>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-11/problems-with-lombok" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-11/problems-with-lombok" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-11/problems-with-lombok" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
     <li>
-      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-11/problems-with-lombok" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
     </li>
     <li>
-      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-11/problems-with-lombok" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
     </li>
   </ul>
 </div><!-- end share-buttons -->

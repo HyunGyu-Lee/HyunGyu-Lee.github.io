@@ -8,35 +8,35 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.ls [파일명패턴] | xargs cat &gt; [결과파일명]위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.동작 방법을 살펴보면ls [파일명패턴] 을 통해 먼저 대...">
+  <meta name="description" content="tar 명령어는 굉장히 많은 옵션을 사용할 수 있다.이 포스트에서는 주로 사용하는 패턴인 tar 압축 / 압축해제, tar.gz 압축 / 압축해제 명령어를 기술한다.  tar 압축 / 해제# [압축할 디렉토리]를 [압축파일명.tar]로 압축tar -cvf [압축파일명.tar] [압...">
   <meta name="keywords" content="Web, Back-End, and SpringFramework">
-  <meta name="author" content="리눅스 여러 파일 내용 하나로 합치기 | Gyu&#39;s IT">
+  <meta name="author" content="리눅스 tar, gz를 이용한 압축 | Gyu&#39;s IT">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f5">
 
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="리눅스 여러 파일 내용 하나로 합치기 | Gyu&#39;s IT">
-  <meta name="twitter:description" content="리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.ls [파일명패턴] | xargs cat &amp;gt; [결과파일명]위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.동작 방법을 살펴보면ls [파일명패턴] 을 통해 먼저 대...">
+  <meta name="twitter:title" content="리눅스 tar, gz를 이용한 압축 | Gyu&#39;s IT">
+  <meta name="twitter:description" content="tar 명령어는 굉장히 많은 옵션을 사용할 수 있다.이 포스트에서는 주로 사용하는 패턴인 tar 압축 / 압축해제, tar.gz 압축 / 압축해제 명령어를 기술한다.  tar 압축 / 해제# [압축할 디렉토리]를 [압축파일명.tar]로 압축tar -cvf [압축파일명.tar] [압...">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/articles/2018-11/merge-file-in-linux">
-  <meta property="og:title" content="리눅스 여러 파일 내용 하나로 합치기 | Gyu&#39;s IT">
-  <meta property="og:description" content="리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.ls [파일명패턴] | xargs cat &amp;gt; [결과파일명]위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.동작 방법을 살펴보면ls [파일명패턴] 을 통해 먼저 대...">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-09/linux-tar-command">
+  <meta property="og:title" content="리눅스 tar, gz를 이용한 압축 | Gyu&#39;s IT">
+  <meta property="og:description" content="tar 명령어는 굉장히 많은 옵션을 사용할 수 있다.이 포스트에서는 주로 사용하는 패턴인 tar 압축 / 압축해제, tar.gz 압축 / 압축해제 명령어를 기술한다.  tar 압축 / 해제# [압축할 디렉토리]를 [압축파일명.tar]로 압축tar -cvf [압축파일명.tar] [압...">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
-  <title>리눅스 여러 파일 내용 하나로 합치기 | Gyu's IT</title>
+  <title>리눅스 tar, gz를 이용한 압축 | Gyu's IT</title>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/articles/2018-11/merge-file-in-linux">
+  <link rel="canonical" href="http://localhost:4000/articles/2018-09/linux-tar-command">
   <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -142,10 +142,10 @@
 
 <div id="post">
   <header class="post-header">
-    <h1 title="리눅스 여러 파일 내용 하나로 합치기">리눅스 여러 파일 내용 하나로 합치기</h1>
+    <h1 title="리눅스 tar, gz를 이용한 압축">리눅스 tar, gz를 이용한 압축</h1>
     <span class="post-meta">
       <span class="post-date">
-        2 NOV 2018
+        1 SEP 2018
       </span>
       •
       <span class="read-time" title="Estimated read time">
@@ -160,31 +160,67 @@
   </header>
 
   <article class="post-content">
-    <p>리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.</p>
+    <p>tar 명령어는 굉장히 많은 옵션을 사용할 수 있다.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">ls</span> <span class="o">[</span>파일명패턴] | xargs <span class="nb">cat</span> <span class="o">&gt;</span> <span class="o">[</span>결과파일명]</code></pre></figure>
+<p>이 포스트에서는 주로 사용하는 패턴인 tar 압축 / 압축해제, tar.gz 압축 / 압축해제 명령어를 기술한다.</p>
 
-<p>위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.</p>
+<ol>
+  <li>tar 압축 / 해제</li>
+</ol>
 
-<p>동작 방법을 살펴보면</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># [압축할 디렉토리]를 [압축파일명.tar]로 압축</span>
+<span class="nb">tar</span> <span class="nt">-cvf</span> <span class="o">[</span>압축파일명.tar] <span class="o">[</span>압축할 디렉토리]
 
-<p>ls [파일명패턴] 을 통해 먼저 대상 파일들을 선택합니다.
-ls 명령은 디렉토리에 존재하는 요소(파일, 디렉토리)들의 정보(파일명, 권한, 수정시간 등) 목록을 표준출력으로 출력하는 명령어로, 아무 옵션없이 실행하면 파일명들만 출력하게 됩니다.</p>
+<span class="c"># [압축파일명.tar]파일 압축해제</span>
+<span class="nb">tar</span> <span class="nt">-xvf</span> <span class="o">[</span>압축파일명.tar]</code></pre></figure>
 
-<p>ls 명령을 통해 출력된 파일명 목록을 <code class="highlighter-rouge">|</code>(파이프)를 통해 뒤에 나오는 명령어로 전달합니다.
-<code class="highlighter-rouge">|</code>(파이프)는 이전 명령어의 실행 결과를 다음 명령어의 입력으로 사용할 때 활용됩니다.</p>
+<ol>
+  <li>tar.gz 압축 / 해제</li>
+</ol>
 
-<p>다음은 xargs cat 입니다.
-xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용할 수 있도록 해줍니다.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># [압축할 디렉토리]를 [압축파일명.tar.gz]로 압축</span>
+<span class="nb">tar</span> <span class="nt">-zcvf</span> <span class="o">[</span>압축파일명.tar.gz] <span class="o">[</span>압축할 디렉토리]
 
-<p>즉 앞의 ls 명령어 실행결과가 xargs 다음명령어인 cat의 인자로 사용되는 것이지요.
-만약 ls 명령어의 실행결과가 file1 file2 file3 이렇다면 아래 명령어처럼 수행되는 것입니다.</p>
+<span class="c"># [압축파일명.tar.gz]파일 압축해제</span>
+<span class="nb">tar</span> <span class="nt">-zxvf</span> <span class="o">[</span>압축파일명.tar.gz]</code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cat </span>file1 file2 file3</code></pre></figure>
+<p>굉장히 간단하다.</p>
 
-<p>cat은 인자로 전달된 파일들의 내용을 표준출력으로 출력하는 명령어입니다.
-이 명령어의 결과를 &gt; (출력 리다이렉션) 으로 결과파일로 써줌으로써 각 파일들의 내용이 합쳐진 하나의 결과파일이 생성되게 됩니다.
-파이프, 출력 리다이렉션 등 리눅스 명령어의 강력함을 다시한번 느끼게 되는 계기가 되었습니다.</p>
+<p>(c)vf / (x)vf =&gt; 압축 / 압축해제
+(z)cvf / (z)xvf =&gt; gzip 옵션 활성</p>
+
+<p>간략하게나마 옵션들의 의미를 설명하면 다음과 같다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>옵션</th>
+      <th style="text-align: center">의미</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">-c</code></td>
+      <td style="text-align: center">tar 압축</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-v</code></td>
+      <td style="text-align: center">파일을 묶거나 풀 때 대상 파일 목록을 화면에 출력</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-f</code></td>
+      <td style="text-align: center">파일명 지정</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-x</code></td>
+      <td style="text-align: center">tar 압축해제</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-z</code></td>
+      <td style="text-align: center">gzip 옵션 활성</td>
+    </tr>
+  </tbody>
+</table>
 
   </article>
 </div>
@@ -213,8 +249,8 @@ xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용�
             <tr>
               <th class="more-posts-title">
                 
-                  <u>리눅스 여러 파일 내용 하나로 합치기</u>
                 
+                  <a href="http://localhost:4000/articles/2018-11/merge-file-in-linux">리눅스 여러 파일 내용 하나로 합치기</a>
                 
               </th>
               <td class="more-posts-date">2018. 11. 02</td>
@@ -264,8 +300,8 @@ xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용�
             <tr>
               <th class="more-posts-title">
                 
+                  <u>리눅스 tar, gz를 이용한 압축</u>
                 
-                  <a href="http://localhost:4000/articles/2018-09/linux-tar-command">리눅스 tar, gz를 이용한 압축</a>
                 
               </th>
               <td class="more-posts-date">2018. 09. 01</td>
@@ -302,19 +338,19 @@ xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용�
   <h6>공유하기: </h6>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-11/merge-file-in-linux" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-09/linux-tar-command" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-11/merge-file-in-linux" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-09/linux-tar-command" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-11/merge-file-in-linux" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-09/linux-tar-command" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
     <li>
-      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-11/merge-file-in-linux" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-09/linux-tar-command" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
     </li>
     <li>
-      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-11/merge-file-in-linux" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-09/linux-tar-command" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
     </li>
   </ul>
 </div><!-- end share-buttons -->

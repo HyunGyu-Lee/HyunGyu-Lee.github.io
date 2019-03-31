@@ -8,35 +8,35 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="엔티티 매핑@Entity : JPA가 관리하는 엔티티임을 알림@Table name : 테이블명        uniqueConstraints : 유니크 제약조건                        @UniqueConstraint(columnNames 유니크 제약 컬럼명, nam...">
+  <meta name="description" content="JPA란JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다.ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미한다.즉 JPA는 자바의 객체와 관계형 데이터베이스를 매핑하는 표준 기...">
   <meta name="keywords" content="Web, Back-End, and SpringFramework">
-  <meta name="author" content="엔티티(Entity) 테이블(Table) 매핑 | Gyu&#39;s IT">
+  <meta name="author" content="JPA / ORM 이란? | Gyu&#39;s IT">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f5">
 
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="엔티티(Entity) 테이블(Table) 매핑 | Gyu&#39;s IT">
-  <meta name="twitter:description" content="엔티티 매핑@Entity : JPA가 관리하는 엔티티임을 알림@Table name : 테이블명        uniqueConstraints : 유니크 제약조건                        @UniqueConstraint(columnNames 유니크 제약 컬럼명, nam...">
+  <meta name="twitter:title" content="JPA / ORM 이란? | Gyu&#39;s IT">
+  <meta name="twitter:description" content="JPA란JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다.ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미한다.즉 JPA는 자바의 객체와 관계형 데이터베이스를 매핑하는 표준 기...">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/articles/2018-10/entity-table-mapping">
-  <meta property="og:title" content="엔티티(Entity) 테이블(Table) 매핑 | Gyu&#39;s IT">
-  <meta property="og:description" content="엔티티 매핑@Entity : JPA가 관리하는 엔티티임을 알림@Table name : 테이블명        uniqueConstraints : 유니크 제약조건                        @UniqueConstraint(columnNames 유니크 제약 컬럼명, nam...">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-10/what-is-jpa-orm">
+  <meta property="og:title" content="JPA / ORM 이란? | Gyu&#39;s IT">
+  <meta property="og:description" content="JPA란JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다.ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미한다.즉 JPA는 자바의 객체와 관계형 데이터베이스를 매핑하는 표준 기...">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
-  <title>엔티티(Entity) 테이블(Table) 매핑 | Gyu's IT</title>
+  <title>JPA / ORM 이란? | Gyu's IT</title>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/articles/2018-10/entity-table-mapping">
+  <link rel="canonical" href="http://localhost:4000/articles/2018-10/what-is-jpa-orm">
   <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -142,16 +142,16 @@
 
 <div id="post">
   <header class="post-header">
-    <h1 title="엔티티(Entity) 테이블(Table) 매핑">엔티티(Entity) 테이블(Table) 매핑</h1>
+    <h1 title="JPA / ORM 이란?">JPA / ORM 이란?</h1>
     <span class="post-meta">
       <span class="post-date">
-        17 OCT 2018
+        7 OCT 2018
       </span>
       •
       <span class="read-time" title="Estimated read time">
   
   
-    2 mins read
+    1 min read
   
 </span>
 
@@ -160,70 +160,53 @@
   </header>
 
   <article class="post-content">
-    <h3 id="엔티티-매핑">엔티티 매핑</h3>
-<p>@Entity : JPA가 관리하는 엔티티임을 알림<br />
-@Table name : 테이블명 <br />
-       uniqueConstraints : 유니크 제약조건 <br />
-                       @UniqueConstraint(columnNames 유니크 제약 컬럼명, name 제약명) <br />
-@Column -&gt; 일반 컬럼 매핑 <br />
-@Enumerate -&gt; Enum 타입 매핑<br />
-@Temporal -&gt; Date 타입 매핑, default값으로 hibernate의 @UpdateTimestamp를 지정하면 시간이 자동으로 설정된다. <br />
-@Lob -&gt; CLOB, BLOB 타입 매핑</p>
+    <h4 id="jpa란">JPA란</h4>
+<p>JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다.<br />
+ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미한다.</p>
 
-<h3 id="기본키-매핑">기본키 매핑</h3>
-<p>Oracle은 시퀀스오브젝트, MySQL은 AUTO_INCREMENT 등 DB마다 기본키 할당 방식은 다르다.<br />
-JPA는 다음과 같은 방법들로 이 문제를 해결한다.</p>
+<p>즉 JPA는 자바의 객체와 관계형 데이터베이스를 매핑하는 표준 기술이다.</p>
 
-<h4 id="1-직접-할당">1) 직접 할당</h4>
-<p>기본 키를 애플리케이션에서 직접 할당한다. 즉 엔티티매니저를 통해 엔티티가 persist 되기 전에 설정하는 것을 의미한다.</p>
+<p>ORM 프레임워크는 객체 / 관계형 데이터베이스 패러다임의 불일치를 개발자 대신 해결해준다.</p>
 
-<h4 id="2-자동-생성">2) 자동 생성</h4>
-<p>대리 키 사용 방식, @Id + @GeneratedValue 사용</p>
+<p>ORM 프레임워크 상에서는 개발자가 어떤 객체를 저장할 때 직접 INSERT문을 작성할 필요가 없다.</p>
 
-<h6 id="2-1-identity">2-1) IDENTITY</h6>
-<p>기본 키 생성을 데이터베이스에 위임한다. MySQL, PostgreSQL, SQL Server, DB2에서 사용이 가능하다.<br />
-@GeneratedValue의 strategy를 GenerationType.IDENTITY로 설정한다.</p>
+<p>객체를 자바 컬렉션에 저장하듯이 ORM 프레임워크에 저장하면  프레임워크가 대신 적절한 INSERT문을 생성하여 데이터베이스에 저장해준다.</p>
 
-<h6 id="2-2-sequence">2-2) SEQUENCE</h6>
-<p>데이터베이스 시퀀스를 사용해 기본키를 할당한다. PostgreSQL, Oracle, DB2, H2 데이터베이스에서 사용이 가능하다. <br />
-@GeneratedValue의 strategy를 GenerationType.SEQUENCE로 설정한다.</p>
+<p>단순히 SQL만 생성해주는 수준에서부터 패러다임 불일치 문제를 전부 해결해주는 수준까지 다양한 ORM 프레임워크가 있으며</p>
 
-<h6 id="2-3-table">2-3) TABLE</h6>
-<p>키 생성 테이블을 이용한다. <br />
-@GeneratedValue의 strategy를 GenerationType.TABLE로 설정한다. <br />
-주로 사전에 시퀀스를 관리할 테이블을 만들어 둔후 엔티티에 @TableGenerator 를 이용해 시퀀스 관리 테이블을 매핑해주는 식으로 진행한다. <br />
-@TableGenerator (name : generator명, table : 시퀀스 관리 테이블, pkColumnValue : 시퀀스명, allocationSize : 한번에 증가하는 시퀀스 크기) <br />
-이렇게 진행하면 pkColumnValue에 설정한 시퀀스명이 시퀀스 관리 테이블에 값으로 추가되고, @GeneratedValue의 generator에서 사용이 가능하다.</p>
+<p>성숙한 ORM 프레임워크로 대표적으로 Hibernate가 있다.</p>
 
-<h6 id="2-4-auto">2-4) AUTO</h6>
-<p>데이터베이스 방언 (DIALECT)에 따라 자동 선택 되도록 하는 것으로, 데이터베이스 벤더에 의존적이지 않은 장점이있다.<br />
-스키마 자동 생성 설정을 해둔 경우 전략에 따라 시퀀스, 테이블을 자동으로 생성하며 그렇지 않은 경우 미리 만들어두어야한다.</p>
+<p>다시 JPA를 이야기해보면 JPA는 ORM 기술 표준이라고 얘기했다.</p>
 
-<p>IDENTITY나 SEQUENCE의 경우 데이터베이스에 의존하지만 TABLE의 경우 테이블을 이용하는 방식으로 모든 데이터베이스에서 사용 가능하다.</p>
+<p>즉 자바에서 ORM 기술을 이용하기 위한 표준 API 명세, 인터페이스의 집합이라 할 수 있다.</p>
 
-<p>직접 할당은 @Id만 사용하여 할 수 있고 자동 생성은 @GeneratedValue를 추가하여 원하는 키 생성방식을 선택하면 된다.</p>
+<p>그리고 Hibernate, EclipseLink, DataNucleus 등은 이 JPA를 구현한 구현체들이다.</p>
 
-<p>참고로 키 생성 전략을 사용하려면 persistence.xml에 hibernate.id.new_generator_mappings속성이 true로 설정되어있어야한다.</p>
+<h4 id="jpa의-특징">JPA의 특징</h4>
 
-<h3 id="권장하는-식별자-선택-전략">권장하는 식별자 선택 전략</h3>
-<p>데이터베이스 기본 키는 다음 3가지 조건을 모두 만족해야한다.</p>
-
-<h5 id="1-null값은-허용되지-않는다">1. null값은 허용되지 않는다.</h5>
-<h5 id="2-유일해야한다">2. 유일해야한다.</h5>
-<h5 id="3-변해선-안-된다">3. 변해선 안 된다.</h5>
-
-<p>테이블의 기본 키를 선택하는 전략은 크게 2가지가 있다.</p>
-
-<ul>
-  <li>자연 키 (natural key) : 비즈니스에 의미가 있는 키 (주민등록번호, 이메일, 전화번호 등)</li>
-  <li>대리 키 (surrogate key) : 비즈니스와 관련 없는 임의로 만들어진 키, 대체 키라고도 함 (시퀀스, auto_increment 등)</li>
-</ul>
-
-<p>자연 키보다는 대리 키를 권장한다.<br />
-예를 들어 전화번호가 기본 키인 경우 전화번호가 없을 수도 있고 변할 수도 있다.<br />
-주민등록번호의 경우 변하지 않고 null일 수도 없지만 정책의 변화 등 비즈니스의 변화에 영향을 받을 수 있다.</p>
-
-<p>때문에 비즈니스와 관련이 없는, 비즈니스의 변화에 영향을 받지 않는 대리 키 사용을 권장한다.</p>
+<ol>
+  <li>
+    <p>생산성
+<code class="highlighter-rouge">-</code> 기본적으로 객체를 관계형데이터베이스에 저장 / 조회 등을 하는데 필요한 SQL을 개발자 대신 해줌으로써 지루하고 반복적인 CRUD용 SQL문을 개발자가 작성하지 않아도 된다.</p>
+  </li>
+  <li>
+    <p>유지보수
+<code class="highlighter-rouge">-</code> SQL문을 직접 작성하지 않음으로써 객체의 변화 ( 속성 추가 등) 이 있을때 모든 SQL 을 직접 수정할 필요가 없다. 단지 해당 엔티티에 속성을 수정하면 된다.</p>
+  </li>
+  <li>
+    <p>패러다임의 불일치 해결
+<code class="highlighter-rouge">-</code> 상속, 연관관계, 객체 그래프 탐색, 비교 등 관계형 데이터베이스와의 패러다임 불일치로 어려워지는 문제들을 해결해준다.</p>
+  </li>
+  <li>
+    <p>데이터 접근 추상화와 벤더 독립성
+<code class="highlighter-rouge">-</code> 관계형 데이터베이스는 Oracle, MySQL등 그 벤더에 따라 같은 기능이더라도 작성해야할 SQL 문이 다른 경우가 많다.<br />
+ JPA에서는 SQL을 직접작성하지 않으므로 개발자는 이러한 문제는 신경쓰지 않아도 되며 DB 벤더에 의존하지 않는 애플리케이션을 작성할 수 있다.</p>
+  </li>
+  <li>
+    <p>표준
+<code class="highlighter-rouge">-</code> JPA라는 표준을 구현한 ORM 프레임워크들을 사용하기 때문에 표준을 구현한 다른 프레임워크로 손쉽게 변경할 수 있다.</p>
+  </li>
+</ol>
 
 <hr />
 <blockquote>
@@ -308,8 +291,8 @@ JPA는 다음과 같은 방법들로 이 문제를 해결한다.</p>
             <tr>
               <th class="more-posts-title">
                 
-                  <u>엔티티(Entity) 테이블(Table) 매핑</u>
                 
+                  <a href="http://localhost:4000/articles/2018-10/entity-table-mapping">엔티티(Entity) 테이블(Table) 매핑</a>
                 
               </th>
               <td class="more-posts-date">2018. 10. 17</td>
@@ -393,19 +376,19 @@ JPA는 다음과 같은 방법들로 이 문제를 해결한다.</p>
   <h6>공유하기: </h6>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-10/entity-table-mapping" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-10/what-is-jpa-orm" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-10/entity-table-mapping" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-10/what-is-jpa-orm" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-10/entity-table-mapping" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-10/what-is-jpa-orm" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
     <li>
-      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-10/entity-table-mapping" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-10/what-is-jpa-orm" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
     </li>
     <li>
-      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-10/entity-table-mapping" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-10/what-is-jpa-orm" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
     </li>
   </ul>
 </div><!-- end share-buttons -->
