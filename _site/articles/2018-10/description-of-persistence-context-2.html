@@ -8,35 +8,35 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.연관관계 핵심 키워드방향단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&gt; 팀 또는 팀 -&gt; 회원이런 ...">
+  <meta name="description" content="플러시는 영속성 컨텍스트의 변경 내용을 데이터베이스에 반영한다.플러시가 호출되면  변경감지가 동작해서 영속성 컨텍스트 내 모든 엔티티들을 대상으로 스냅샷과 비교해 변경사항을 찾고, 수정된 엔티티들은 UPDATE문을 생성하여 SQL저장소에 등록한다.  SQL저장소의 쿼리를 데이터베이...">
   <meta name="keywords" content="Web, Back-End, and SpringFramework">
-  <meta name="author" content="객체 연관관계 VS 테이블 연관관계 | Gyu&#39;s IT">
+  <meta name="author" content="영속성 컨텍스트 (Persistence Context) 란 (2) | Gyu&#39;s IT">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f5">
 
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="객체 연관관계 VS 테이블 연관관계 | Gyu&#39;s IT">
-  <meta name="twitter:description" content="ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.연관관계 핵심 키워드방향단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&amp;gt; 팀 또는 팀 -&amp;gt; 회원이런 ...">
+  <meta name="twitter:title" content="영속성 컨텍스트 (Persistence Context) 란 (2) | Gyu&#39;s IT">
+  <meta name="twitter:description" content="플러시는 영속성 컨텍스트의 변경 내용을 데이터베이스에 반영한다.플러시가 호출되면  변경감지가 동작해서 영속성 컨텍스트 내 모든 엔티티들을 대상으로 스냅샷과 비교해 변경사항을 찾고, 수정된 엔티티들은 UPDATE문을 생성하여 SQL저장소에 등록한다.  SQL저장소의 쿼리를 데이터베이...">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/articles/2018-10/object-relations-table-relations">
-  <meta property="og:title" content="객체 연관관계 VS 테이블 연관관계 | Gyu&#39;s IT">
-  <meta property="og:description" content="ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.연관관계 핵심 키워드방향단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&amp;gt; 팀 또는 팀 -&amp;gt; 회원이런 ...">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-10/description-of-persistence-context-2">
+  <meta property="og:title" content="영속성 컨텍스트 (Persistence Context) 란 (2) | Gyu&#39;s IT">
+  <meta property="og:description" content="플러시는 영속성 컨텍스트의 변경 내용을 데이터베이스에 반영한다.플러시가 호출되면  변경감지가 동작해서 영속성 컨텍스트 내 모든 엔티티들을 대상으로 스냅샷과 비교해 변경사항을 찾고, 수정된 엔티티들은 UPDATE문을 생성하여 SQL저장소에 등록한다.  SQL저장소의 쿼리를 데이터베이...">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
-  <title>객체 연관관계 VS 테이블 연관관계 | Gyu's IT</title>
+  <title>영속성 컨텍스트 (Persistence Context) 란 (2) | Gyu's IT</title>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/articles/2018-10/object-relations-table-relations">
+  <link rel="canonical" href="http://localhost:4000/articles/2018-10/description-of-persistence-context-2">
   <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -142,10 +142,10 @@
 
 <div id="post">
   <header class="post-header">
-    <h1 title="객체 연관관계 VS 테이블 연관관계">객체 연관관계 VS 테이블 연관관계</h1>
+    <h1 title="영속성 컨텍스트 (Persistence Context) 란 (2)">영속성 컨텍스트 (Persistence Context) 란 (2)</h1>
     <span class="post-meta">
       <span class="post-date">
-        17 OCT 2018
+        10 OCT 2018
       </span>
       •
       <span class="read-time" title="Estimated read time">
@@ -160,32 +160,40 @@
   </header>
 
   <article class="post-content">
-    <p>ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.<br />
-즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.</p>
+    <p>플러시는 영속성 컨텍스트의 변경 내용을 데이터베이스에 반영한다.</p>
 
-<h3 id="연관관계-핵심-키워드">연관관계 핵심 키워드</h3>
-<h5 id="방향">방향</h5>
-<p>단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&gt; 팀 또는 팀 -&gt; 회원<br />
-이런 식으로 한 쪽으로만 참조하는 것을 단방향 관계라 하고 회원 -&gt; 팀 -&gt; 회원 상호 참조하는 것을 양방향이라 한다.<br />
-방향은 객체에만 존재하며 테이블간 관계는 항상 양방향이다.</p>
+<p>플러시가 호출되면</p>
 
-<h5 id="다중성">다중성</h5>
-<p>[일대다(1:N), 다대일(N:1), 일대일(1:1), 다대다(N:M)]이 있다. 예를들어 팀과 회원의 관계에서<br />
-한 팀에 여러 회원이 있을수있으니 팀과 회원은 일대다 관계로 볼 수 있다. 반대로 여려 명의 회원이 한 팀에 속하니 회원과 팀은 다대일이다.<br />
-즉 [팀 1 : N 회원]으로 표현할수있다.</p>
+<ol>
+  <li>변경감지가 동작해서 영속성 컨텍스트 내 모든 엔티티들을 대상으로 스냅샷과 비교해 변경사항을 찾고, 수정된 엔티티들은 UPDATE문을 생성하여 SQL저장소에 등록한다.</li>
+  <li>SQL저장소의 쿼리를 데이터베이스에 전송한다. (등록, 수정, 삭제 쿼리)</li>
+</ol>
 
-<h5 id="연관관계의-주인">연관관계의 주인</h5>
-<p>객체를 양방향 연관관계로 만들면 연관관계의 주인을 정해야한다.<br />
-객체 연관관계 VS 테이블 연관관계<br />
-객체 연관관계는 참조(주소)로 연관관계를 맺는다. <br />
-테이블 연관관계는 외래 키로 연관관계를 맺는다.</p>
+<p>영속성 컨텍스트를 플러시하는 방법은 3가지가 있다.</p>
 
-<p>객체는 연관된 데이터를 조회할 때 참조를 사용 (object.getRefer()…)한다.<br />
-테이블은 연관된 데이터를 조회할 때 JOIN을 사용한다.</p>
+<ol>
+  <li>
+    <p>직접 호출 <br />
+엔티티매니저의 flush 메소드를 호출하는 것으로 테스트, 다른 프레임워크와 JPA를 함께 사용할 때를 제외하곤 거의 사용하지 않는다.</p>
+  </li>
+  <li>
+    <p>트랜잭션 커밋 시 <br />
+데이터베이스에 어떤 변경도 없이 트랜잭션만 커밋해서는 아무것도 바뀌는게 없다. <br />
+때문에 항상 데이터베이스 커밋 전엔 영속성 컨텍스트의 내용을 flush하여 변경 내용을 데이터베이스에 반영해야한다. <br />
+JPA는 트랜잭션 커밋할 때 자동으로 flush메소드를 호출하도록 설계되어있다.</p>
+  </li>
+  <li>
+    <p>JPQL 쿼리 실행 시<br />
+JPQL은 SQL로 변환되어 데이터베이스에서 조회하는 기능으로 persist되었어도 데이터베이스에 반영이 안되있으면 조회되지 않는다. <br />
+때문에 JPA는 JPQL이 실행되기전 영속성 컨텍스트를 flush하여 이런 문제를 예방한다.</p>
+  </li>
+</ol>
 
-<p>참조를 사용하는 객체의 연관관계는 단방향이다. <br />
-외래키를 사용하는 테이블의 연관관계는 양방향이다. (A JOIN B 반대로 B JOIN A 도 가능) <br />
-객체를 양방향 참조로 만들려면 단방향 연관관계를 2개 만들어야한다.</p>
+<p>FlushModeType을 통해 엔티티매니저의 플러시모드를 변경할 수 있다.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// FlushModeType.AUTO   : default로 커밋 또는 JPQL 실행 시 flush 호출</span>
+<span class="c1">// FlushModeType.COMMIT : 커밋할 때만 flush 호출</span>
+<span class="n">em</span><span class="o">.</span><span class="na">setFlushMode</span><span class="o">(</span><span class="n">FlushModeType</span><span class="o">.</span><span class="na">COMMIT</span><span class="o">);</span></code></pre></figure>
 
 <hr />
 <blockquote>
@@ -255,8 +263,8 @@
             <tr>
               <th class="more-posts-title">
                 
-                  <u>객체 연관관계 VS 테이블 연관관계</u>
                 
+                  <a href="http://localhost:4000/articles/2018-10/object-relations-table-relations">객체 연관관계 VS 테이블 연관관계</a>
                 
               </th>
               <td class="more-posts-date">2018. 10. 17</td>
@@ -335,19 +343,19 @@
   <h6>공유하기: </h6>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-10/object-relations-table-relations" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-10/description-of-persistence-context-2" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-10/object-relations-table-relations" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-10/description-of-persistence-context-2" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-10/object-relations-table-relations" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-10/description-of-persistence-context-2" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
     <li>
-      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-10/object-relations-table-relations" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-10/description-of-persistence-context-2" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
     </li>
     <li>
-      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-10/object-relations-table-relations" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-10/description-of-persistence-context-2" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
     </li>
   </ul>
 </div><!-- end share-buttons -->

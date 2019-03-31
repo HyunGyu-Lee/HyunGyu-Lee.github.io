@@ -8,35 +8,35 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.연관관계 핵심 키워드방향단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&gt; 팀 또는 팀 -&gt; 회원이런 ...">
+  <meta name="description" content="이클립스에서 QueryDSL로 생성한 Q도메인들을 인식하지 못하여 원인을 파악해보니pom.xml 의 플러그인 설정에 다음과 같은 오류가 나고 있었다.&lt;plugin&gt;		&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;		&...">
   <meta name="keywords" content="Web, Back-End, and SpringFramework">
-  <meta name="author" content="객체 연관관계 VS 테이블 연관관계 | Gyu&#39;s IT">
+  <meta name="author" content="QueryDSL 관련 pom.xml 오류 | Gyu&#39;s IT">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f5">
 
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="객체 연관관계 VS 테이블 연관관계 | Gyu&#39;s IT">
-  <meta name="twitter:description" content="ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.연관관계 핵심 키워드방향단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&amp;gt; 팀 또는 팀 -&amp;gt; 회원이런 ...">
+  <meta name="twitter:title" content="QueryDSL 관련 pom.xml 오류 | Gyu&#39;s IT">
+  <meta name="twitter:description" content="이클립스에서 QueryDSL로 생성한 Q도메인들을 인식하지 못하여 원인을 파악해보니pom.xml 의 플러그인 설정에 다음과 같은 오류가 나고 있었다.&amp;lt;plugin&amp;gt;		&amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;		&amp;...">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/articles/2018-10/object-relations-table-relations">
-  <meta property="og:title" content="객체 연관관계 VS 테이블 연관관계 | Gyu&#39;s IT">
-  <meta property="og:description" content="ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.연관관계 핵심 키워드방향단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&amp;gt; 팀 또는 팀 -&amp;gt; 회원이런 ...">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-10/query-dsl-error-on-pom">
+  <meta property="og:title" content="QueryDSL 관련 pom.xml 오류 | Gyu&#39;s IT">
+  <meta property="og:description" content="이클립스에서 QueryDSL로 생성한 Q도메인들을 인식하지 못하여 원인을 파악해보니pom.xml 의 플러그인 설정에 다음과 같은 오류가 나고 있었다.&amp;lt;plugin&amp;gt;		&amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;		&amp;...">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
-  <title>객체 연관관계 VS 테이블 연관관계 | Gyu's IT</title>
+  <title>QueryDSL 관련 pom.xml 오류 | Gyu's IT</title>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/articles/2018-10/object-relations-table-relations">
+  <link rel="canonical" href="http://localhost:4000/articles/2018-10/query-dsl-error-on-pom">
   <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -142,10 +142,10 @@
 
 <div id="post">
   <header class="post-header">
-    <h1 title="객체 연관관계 VS 테이블 연관관계">객체 연관관계 VS 테이블 연관관계</h1>
+    <h1 title="QueryDSL 관련 pom.xml 오류">QueryDSL 관련 pom.xml 오류</h1>
     <span class="post-meta">
       <span class="post-date">
-        17 OCT 2018
+        12 OCT 2018
       </span>
       •
       <span class="read-time" title="Estimated read time">
@@ -160,37 +160,35 @@
   </header>
 
   <article class="post-content">
-    <p>ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.<br />
-즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.</p>
+    <p>이클립스에서 QueryDSL로 생성한 Q도메인들을 인식하지 못하여 원인을 파악해보니
+pom.xml 의 플러그인 설정에 다음과 같은 오류가 나고 있었다.</p>
 
-<h3 id="연관관계-핵심-키워드">연관관계 핵심 키워드</h3>
-<h5 id="방향">방향</h5>
-<p>단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&gt; 팀 또는 팀 -&gt; 회원<br />
-이런 식으로 한 쪽으로만 참조하는 것을 단방향 관계라 하고 회원 -&gt; 팀 -&gt; 회원 상호 참조하는 것을 양방향이라 한다.<br />
-방향은 객체에만 존재하며 테이블간 관계는 항상 양방향이다.</p>
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;plugin&gt;</span>
+		<span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+		<span class="nt">&lt;artifactId&gt;</span>maven-dependency-plugin<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;version&gt;</span>2.4<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;executions&gt;</span>
+				<span class="nt">&lt;execution&gt;</span>
+						<span class="nt">&lt;id&gt;</span>copy-dependencies<span class="nt">&lt;/id&gt;</span>
+						<span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+						<span class="nt">&lt;goals&gt;</span>
+								<span class="nt">&lt;goal&gt;</span>copy-dependencies<span class="nt">&lt;/goal&gt;</span>
+						<span class="nt">&lt;/goals&gt;</span>
+				<span class="nt">&lt;/execution&gt;</span>
+		<span class="nt">&lt;/executions&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span></code></pre></figure>
 
-<h5 id="다중성">다중성</h5>
-<p>[일대다(1:N), 다대일(N:1), 일대일(1:1), 다대다(N:M)]이 있다. 예를들어 팀과 회원의 관계에서<br />
-한 팀에 여러 회원이 있을수있으니 팀과 회원은 일대다 관계로 볼 수 있다. 반대로 여려 명의 회원이 한 팀에 속하니 회원과 팀은 다대일이다.<br />
-즉 [팀 1 : N 회원]으로 표현할수있다.</p>
+<p>You need to run build with JDK or have tools.jar on the classpath.If this occures during eclipse build make sure you run eclipse under JDK as well ……<br />
+구글링해보니 여러 해결방법이 보이는데 난 이클립스의 설정파일에 JVM경로를 명시해주는 것으로 해결했다.</p>
 
-<h5 id="연관관계의-주인">연관관계의 주인</h5>
-<p>객체를 양방향 연관관계로 만들면 연관관계의 주인을 정해야한다.<br />
-객체 연관관계 VS 테이블 연관관계<br />
-객체 연관관계는 참조(주소)로 연관관계를 맺는다. <br />
-테이블 연관관계는 외래 키로 연관관계를 맺는다.</p>
+<p>이클립스 설치경로에 eclipse.ini 파일에 아래 2줄을 추가했다. 주의할 점은 -vmargs 설정 전에 해줘야한다.</p>
 
-<p>객체는 연관된 데이터를 조회할 때 참조를 사용 (object.getRefer()…)한다.<br />
-테이블은 연관된 데이터를 조회할 때 JOIN을 사용한다.</p>
+<p>-g 옵션은 글로벌 패키지로 설치한다는 옵션으로 해당 PC 개발환경의 모든 프로젝트에서 사용이 가능하도록 하는 것이다.</p>
 
-<p>참조를 사용하는 객체의 연관관계는 단방향이다. <br />
-외래키를 사용하는 테이블의 연관관계는 양방향이다. (A JOIN B 반대로 B JOIN A 도 가능) <br />
-객체를 양방향 참조로 만들려면 단방향 연관관계를 2개 만들어야한다.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nt">-vm</span>
+C:/Program Files/Java/jdk1.8.0_171/bin/javaw.exe</code></pre></figure>
 
-<hr />
-<blockquote>
-  <p>자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.</p>
-</blockquote>
+<p>경로는 본인의 Java 설치 경로에 맞게 지정하면 되며 설정 후 이클립스를 다시 시작한 후 프로젝트에서 Maven &gt; Update Project를 수행하니 오류가 없어지고 Q도메인이 인식됐다.</p>
 
   </article>
 </div>
@@ -255,8 +253,8 @@
             <tr>
               <th class="more-posts-title">
                 
-                  <u>객체 연관관계 VS 테이블 연관관계</u>
                 
+                  <a href="http://localhost:4000/articles/2018-10/object-relations-table-relations">객체 연관관계 VS 테이블 연관관계</a>
                 
               </th>
               <td class="more-posts-date">2018. 10. 17</td>
@@ -291,8 +289,8 @@
             <tr>
               <th class="more-posts-title">
                 
+                  <u>QueryDSL 관련 pom.xml 오류</u>
                 
-                  <a href="http://localhost:4000/articles/2018-10/query-dsl-error-on-pom">QueryDSL 관련 pom.xml 오류</a>
                 
               </th>
               <td class="more-posts-date">2018. 10. 12</td>
@@ -335,19 +333,19 @@
   <h6>공유하기: </h6>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-10/object-relations-table-relations" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-10/query-dsl-error-on-pom" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-10/object-relations-table-relations" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-10/query-dsl-error-on-pom" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-10/object-relations-table-relations" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-10/query-dsl-error-on-pom" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
     <li>
-      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-10/object-relations-table-relations" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-10/query-dsl-error-on-pom" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
     </li>
     <li>
-      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-10/object-relations-table-relations" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-10/query-dsl-error-on-pom" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
     </li>
   </ul>
 </div><!-- end share-buttons -->
