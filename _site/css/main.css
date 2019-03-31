@@ -613,7 +613,7 @@ ul.tag-cloud li a.post-tag { border-radius: 0.2em; }
 
 .tag-list .tag-group { margin-bottom: 2em; }
 .tag-list .tag-group .tag-group-title { color: #F5A623; text-transform: capitalize; }
-.tag-list .tag-group .tag-item { padding-left: 1em; margin-bottom: .5em; }
+.tag-list .tag-group .tag-item { padding-left: 1em; margin-bottom: .5em; font-size: 13px; }
 .tag-list .tag-group .tag-item a { color: rgba(0, 0, 0, 0.87); }
 .tag-list .tag-group .tag-item a:hover, .tag-list .tag-group .tag-item a:focus { color: rgba(61, 61, 61, 0.87); }
 

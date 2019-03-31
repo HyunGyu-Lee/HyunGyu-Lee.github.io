@@ -38,7 +38,7 @@ owner:
   job: "Software Engineer"
   bio: "개발을 즐기고<br>소프트웨어로 세상을 이롭게 하고자 합니다."
   email:
-  disqus-shortname:
+  disqus-shortname: gyus-lab
   twitter: #username
   facebook: #username
   google:
@@ -48,7 +48,7 @@ owner:
     ad-client:
     ad-slot:
   bing-verify:
-  github: #username
+  github: Hyungyu-Lee
   gitlab: #username
   stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
   linkedin: #username

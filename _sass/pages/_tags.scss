@@ -3,7 +3,6 @@ ul.tag-cloud {
   margin: 0;
   overflow: hidden;
   list-style: none;
-
   li {
     display: inline-block;
     margin-right: .5em;
@@ -24,6 +23,7 @@ ul.tag-cloud {
     .tag-item {
       padding-left: 1em;
       margin-bottom: .5em;
+      font-size: 13px;
       a {
         color: $text-color;
         &:hover,
