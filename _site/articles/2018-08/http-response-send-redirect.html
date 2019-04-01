@@ -8,35 +8,35 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="  HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.기본적으로 웹 서...">
+  <meta name="description" content="간단한 웹서버를 제작중인데, 기본적으로 요청한 URI에 해당하는 파일을 내려주는 기능을 하지만 미약하게나마 WAS의 역할을 할 수 있게끔 혼종스러운 느낌으로 간단하게 만들던 중…어플리케이션단에서 redirect응답을 주면 어떻게해야하나? 라는 고민이 생겼다.">
   <meta name="keywords" content="Web, Back-End, and SpringFramework">
-  <meta name="author" content="HTTP 쿠키(Cookie) 란? | Gyu&#39;s IT">
+  <meta name="author" content="HTTP Redirection 응답 보내기 | Gyu&#39;s IT">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f5">
 
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="HTTP 쿠키(Cookie) 란? | Gyu&#39;s IT">
-  <meta name="twitter:description" content="  HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.기본적으로 웹 서...">
+  <meta name="twitter:title" content="HTTP Redirection 응답 보내기 | Gyu&#39;s IT">
+  <meta name="twitter:description" content="간단한 웹서버를 제작중인데, 기본적으로 요청한 URI에 해당하는 파일을 내려주는 기능을 하지만 미약하게나마 WAS의 역할을 할 수 있게끔 혼종스러운 느낌으로 간단하게 만들던 중…어플리케이션단에서 redirect응답을 주면 어떻게해야하나? 라는 고민이 생겼다.">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/articles/2018-08/desc-of-http-cookie">
-  <meta property="og:title" content="HTTP 쿠키(Cookie) 란? | Gyu&#39;s IT">
-  <meta property="og:description" content="  HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.기본적으로 웹 서...">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-08/http-response-send-redirect">
+  <meta property="og:title" content="HTTP Redirection 응답 보내기 | Gyu&#39;s IT">
+  <meta property="og:description" content="간단한 웹서버를 제작중인데, 기본적으로 요청한 URI에 해당하는 파일을 내려주는 기능을 하지만 미약하게나마 WAS의 역할을 할 수 있게끔 혼종스러운 느낌으로 간단하게 만들던 중…어플리케이션단에서 redirect응답을 주면 어떻게해야하나? 라는 고민이 생겼다.">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
-  <title>HTTP 쿠키(Cookie) 란? | Gyu's IT</title>
+  <title>HTTP Redirection 응답 보내기 | Gyu's IT</title>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/articles/2018-08/desc-of-http-cookie">
+  <link rel="canonical" href="http://localhost:4000/articles/2018-08/http-response-send-redirect">
   <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -142,10 +142,10 @@
 
 <div id="post">
   <header class="post-header">
-    <h1 title="HTTP 쿠키(Cookie) 란?">HTTP 쿠키(Cookie) 란?</h1>
+    <h1 title="HTTP Redirection 응답 보내기">HTTP Redirection 응답 보내기</h1>
     <span class="post-meta">
       <span class="post-date">
-        26 AUG 2018
+        12 AUG 2018
       </span>
       •
       <span class="read-time" title="Estimated read time">
@@ -160,34 +160,22 @@
   </header>
 
   <article class="post-content">
-    <blockquote>
-  <p>HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.
-쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.</p>
-</blockquote>
+    <p>간단한 웹서버를 제작중인데, 기본적으로 요청한 URI에 해당하는 파일을 내려주는 기능을 하지만 미약하게나마 WAS의 역할을 할 수 있게끔 혼종스러운 느낌으로 간단하게 만들던 중…</p>
 
-<p>기본적으로 웹 서버는 다음과 같은 형태로 브라우저에 쿠키를 저장하라고 알릴 수 있다.
-<!--more--></p>
+<p>어플리케이션단에서 redirect응답을 주면 어떻게해야하나? 라는 고민이 생겼다.<br />
+<!--more-->
+스프링mvc에서 개발할 땐 viewName앞에 “redirect:”를 붙히면 되고, Servlet에서는 HttpServletRequest의 redirect메소드를 호출하면 되는데.. 그보다 더 로우레벨에서는 어떻게 동작하지..?</p>
 
-<figure class="highlight"><pre><code class="language-http" data-lang="http"><span class="err">Set-Cookie: &lt;CookieName&gt;=&lt;CookieValue&gt;
+<p>한 번도 위 기능들이 어떻게 동작하는지 생각해보지 않아 구글링해 본 결과 간단했다.</p>
 
+<p>응답코드를 302로 지정한 후 헤더에 “Location: REDIRECT_URL” 을 추가해주면 된다.</p>
 
-</span><span class="k">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-type</span><span class="p">:</span> <span class="s">text/html</span>
-<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">test=testvalue</span>
-<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">mycookie=good</span>
+<p>[예시 HTTP Response]</p>
 
-[page content]</code></pre></figure>
+<figure class="highlight"><pre><code class="language-http" data-lang="http"><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Message for 302</span>
+<span class="na">Location</span><span class="p">:</span> <span class="s">/main</span></code></pre></figure>
 
-<p>위 HTTP 응답을 받은 브라우저는 다음 해당 서버에 요청할 때 다음과 같이 보낼 것이다.</p>
-
-<figure class="highlight"><pre><code class="language-http" data-lang="http"><span class="nf">GET</span> <span class="nn">/sample_page.html</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">www.example.org</span>
-<span class="na">Cookie</span><span class="p">:</span> <span class="s">test=testvalue; mycookie=good</span></code></pre></figure>
-
-<p>쿠키에 대한 유효기간은 서버에서 쿠기 송신 시 설정할 수 있고, 설정이 안된 경우는 브라우저를 닫는 순간 사라진다.</p>
-
-<figure class="highlight"><pre><code class="language-http" data-lang="http"><span class="err">Set-Cookie: test=testvalue; Expires=Wed, 21 Oct 2018 07:28:00 GMT;</span></code></pre></figure>
-
+<p>위 HTTP 응답을 받은 브라우저는 알아서 REDIRECT_URL로 요청을 날린다.</p>
 
   </article>
 </div>
@@ -258,8 +246,8 @@
             <tr>
               <th class="more-posts-title">
                 
-                  <u>HTTP 쿠키(Cookie) 란?</u>
                 
+                  <a href="http://localhost:4000/articles/2018-08/desc-of-http-cookie">HTTP 쿠키(Cookie) 란?</a>
                 
               </th>
               <td class="more-posts-date">2018. 08. 26</td>
@@ -277,8 +265,8 @@
             <tr>
               <th class="more-posts-title">
                 
+                  <u>HTTP Redirection 응답 보내기</u>
                 
-                  <a href="http://localhost:4000/articles/2018-08/http-response-send-redirect">HTTP Redirection 응답 보내기</a>
                 
               </th>
               <td class="more-posts-date">2018. 08. 12</td>
@@ -300,19 +288,19 @@
   <h6>공유하기: </h6>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-08/http-response-send-redirect" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-08/http-response-send-redirect" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-08/http-response-send-redirect" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
     <li>
-      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-08/http-response-send-redirect" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
     </li>
     <li>
-      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-08/http-response-send-redirect" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
     </li>
   </ul>
 </div><!-- end share-buttons -->

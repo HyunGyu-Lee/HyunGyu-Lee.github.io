@@ -8,35 +8,35 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Node.js는 Javascript로 서버사이드 개발을 가능하게 해주는 Javascript 런타임으로 공식사이트에서는 다음과 같이 소개하고 있다.  Node.js®는 Chrome V8 JavaScript 엔진으로 빌드된 JavaScript 런타임입니다. Node.js는 이벤트 기반...">
+  <meta name="description" content="apt-cache search mysql-server위 명령어를 통해 설치 가능한 버전을 확인한 후apt-get install mysql-server-[version]">
   <meta name="keywords" content="Web, Back-End, and SpringFramework">
-  <meta name="author" content="Node.js 및 NPM 설치 | Gyu&#39;s IT">
+  <meta name="author" content="리눅스 MySQL 설치 | Gyu&#39;s IT">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f5">
 
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Node.js 및 NPM 설치 | Gyu&#39;s IT">
-  <meta name="twitter:description" content="Node.js는 Javascript로 서버사이드 개발을 가능하게 해주는 Javascript 런타임으로 공식사이트에서는 다음과 같이 소개하고 있다.  Node.js®는 Chrome V8 JavaScript 엔진으로 빌드된 JavaScript 런타임입니다. Node.js는 이벤트 기반...">
+  <meta name="twitter:title" content="리눅스 MySQL 설치 | Gyu&#39;s IT">
+  <meta name="twitter:description" content="apt-cache search mysql-server위 명령어를 통해 설치 가능한 버전을 확인한 후apt-get install mysql-server-[version]">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/articles/2018-10/install-nodejs-and-npm">
-  <meta property="og:title" content="Node.js 및 NPM 설치 | Gyu&#39;s IT">
-  <meta property="og:description" content="Node.js는 Javascript로 서버사이드 개발을 가능하게 해주는 Javascript 런타임으로 공식사이트에서는 다음과 같이 소개하고 있다.  Node.js®는 Chrome V8 JavaScript 엔진으로 빌드된 JavaScript 런타임입니다. Node.js는 이벤트 기반...">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-07/install-mysql-on-linux">
+  <meta property="og:title" content="리눅스 MySQL 설치 | Gyu&#39;s IT">
+  <meta property="og:description" content="apt-cache search mysql-server위 명령어를 통해 설치 가능한 버전을 확인한 후apt-get install mysql-server-[version]">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
-  <title>Node.js 및 NPM 설치 | Gyu's IT</title>
+  <title>리눅스 MySQL 설치 | Gyu's IT</title>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/articles/2018-10/install-nodejs-and-npm">
+  <link rel="canonical" href="http://localhost:4000/articles/2018-07/install-mysql-on-linux">
   <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -142,10 +142,10 @@
 
 <div id="post">
   <header class="post-header">
-    <h1 title="Node.js 및 NPM 설치">Node.js 및 NPM 설치</h1>
+    <h1 title="리눅스 MySQL 설치">리눅스 MySQL 설치</h1>
     <span class="post-meta">
       <span class="post-date">
-        12 OCT 2018
+        17 JUL 2018
       </span>
       •
       <span class="read-time" title="Estimated read time">
@@ -160,38 +160,36 @@
   </header>
 
   <article class="post-content">
-    <p>Node.js는 Javascript로 서버사이드 개발을 가능하게 해주는 Javascript 런타임으로 공식사이트에서는 다음과 같이 소개하고 있다.</p>
+    
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">apt-cache search mysql-server</code></pre></figure>
 
-<blockquote>
-  <p>Node.js®는 Chrome V8 JavaScript 엔진으로 빌드된 JavaScript 런타임입니다. Node.js는 이벤트 기반, Non 블로킹 I/O 모델을 사용해 가볍고 효율적입니다. Node.js의 패키지 생태계인 npm은 세계에서 가장 큰 오픈 소스 라이브러리 생태계이기도 합니다.</p>
-</blockquote>
+<p>위 명령어를 통해 설치 가능한 버전을 확인한 후</p>
 
-<p>NPM은 Node Package Manager 혹은 Node Package Modules의 약자로 Node.js 기반의 모듈을 모아둔 집합 저장소이다.
-<!--more--></p>
-<h4 id="nodejs--npm-설치-윈도우-기준">Node.js / NPM 설치 (윈도우 기준)</h4>
-<ol>
-  <li>https://nodejs.org/en/download/ 접속</li>
-  <li>LTS 탭에서 Windows Installer로 다운로드</li>
-  <li>다운받은 msi 파일 실행</li>
-</ol>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install mysql-server-[version]</code></pre></figure>
 
-<p>별도로 환경변수로 PATH를 잡아주거나 할 필요없이 msi 파일을 통해 한번에 설치가 가능하다.<br />
-설치 확인을 위해 CMD창에서 다음 명령어를 실행해본다.</p>
+<!--more-->
+<p>위 명령어를  실행하면 바로 MySQL이 설치된다.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 설치된 Node.js 버전 확인</span>
-node <span class="nt">-v</span>
+<p>설치가 완료되면 MySQL서버는 실행되어있는 상태이며 기본적으로 3306 포트를 사용한다.</p>
 
-<span class="c"># 설치된 NPM 버전 확인</span>
-npm <span class="nt">-v</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">netstat <span class="nt">-anp</span> | <span class="nb">grep </span>3306
 
+<span class="nt">---------------------------------------------------------------------------------------------</span>
+tcp        0      0 127.0.0.1:3306          0.0.0.0:<span class="k">*</span>               LISTEN      <span class="o">[</span>PID]/mysqld</code></pre></figure>
+
+<p>위와 같이 3306포트가 LISTEN상태인 것을 확인할 수 있으며</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mysql <span class="nt">-u</span> root <span class="nt">-p</span></code></pre></figure>
+
+<p>를 입력한 후, 설치 시 설정한 root계정의 암호를 입력하면 mysql 서버에 정상적으로 접속된다.</p>
 
   </article>
 </div>
 
 <div class="more-posts">
   <div class="more-category">
-    <h4>'Vue' 카테고리의 다른 글</h4>
-    <a href="/categories#Vue" class="more-button">더보기</a>
+    <h4>'Unix/Linux' 카테고리의 다른 글</h4>
+    <a href="/categories#Unix/Linux" class="more-button">더보기</a>
   </div>
   <table>
     <tbody>
@@ -207,73 +205,16 @@ npm <span class="nt">-v</span></code></pre></figure>
         
       
         
-      
-        
-      
-        
-      
-        
           
           
             <tr>
               <th class="more-posts-title">
                 
                 
-                  <a href="http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode">VSCode로 Vue개발 시 팁</a>
+                  <a href="http://localhost:4000/articles/2018-11/merge-file-in-linux">리눅스 여러 파일 내용 하나로 합치기</a>
                 
               </th>
-              <td class="more-posts-date">2018. 10. 26</td>
-            </tr>
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-          
-          
-            <tr>
-              <th class="more-posts-title">
-                
-                
-                  <a href="http://localhost:4000/articles/2018-10/solution-for-vue-crlf-error">Expected linebreaks to be 'LF' but found 'CRLF' 오류 관련</a>
-                
-              </th>
-              <td class="more-posts-date">2018. 10. 14</td>
-            </tr>
-          
-        
-      
-        
-          
-          
-            <tr>
-              <th class="more-posts-title">
-                
-                
-                  <a href="http://localhost:4000/articles/2018-10/create-vue-project-with-vue-cli">Vue-CLI를 이용한 Vue프로젝트 생성</a>
-                
-              </th>
-              <td class="more-posts-date">2018. 10. 12</td>
-            </tr>
-          
-        
-      
-        
-          
-          
-            <tr>
-              <th class="more-posts-title">
-                
-                  <u>Node.js 및 NPM 설치</u>
-                
-                
-              </th>
-              <td class="more-posts-date">2018. 10. 12</td>
+              <td class="more-posts-date">2018. 11. 02</td>
             </tr>
           
         
@@ -312,6 +253,76 @@ npm <span class="nt">-v</span></code></pre></figure>
       
         
       
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2018-09/linux-tar-command">리눅스 tar, gz를 이용한 압축</a>
+                
+              </th>
+              <td class="more-posts-date">2018. 09. 01</td>
+            </tr>
+          
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2018-09/linux-scheduling-with-crontab">리눅스 스케쥴러 crontab 사용</a>
+                
+              </th>
+              <td class="more-posts-date">2018. 09. 01</td>
+            </tr>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                  <u>리눅스 MySQL 설치</u>
+                
+                
+              </th>
+              <td class="more-posts-date">2018. 07. 17</td>
+            </tr>
+          
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2018-07/install-git-on-linux">리눅스 Git 설치 및 원격 Repository clone</a>
+                
+              </th>
+              <td class="more-posts-date">2018. 07. 16</td>
+            </tr>
+          
         
       
     </tbody>
@@ -322,19 +333,19 @@ npm <span class="nt">-v</span></code></pre></figure>
   <h6>공유하기: </h6>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-10/install-nodejs-and-npm" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-07/install-mysql-on-linux" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-10/install-nodejs-and-npm" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-07/install-mysql-on-linux" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-10/install-nodejs-and-npm" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-07/install-mysql-on-linux" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
     <li>
-      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-10/install-nodejs-and-npm" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-07/install-mysql-on-linux" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
     </li>
     <li>
-      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-10/install-nodejs-and-npm" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-07/install-mysql-on-linux" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
     </li>
   </ul>
 </div><!-- end share-buttons -->
