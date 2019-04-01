@@ -10,7 +10,7 @@ comments: true
 
 동등성은 서로 다른 인스턴스이지만 가지고 있는 값이 같음을 의미하며 equals 메소드로 비교한다.  
 자바에서 equals를 따로 구현하지 않은 경우 Object클래스의 equals메도스가 호출되며, Object메소드의 equals는 아래 코드처럼 동일성을 비교한다.
-
+<!--more-->
 {% highlight java %}
 public boolean equals(Object obj) {
     return (this == obj);

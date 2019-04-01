@@ -5,8 +5,8 @@
     <description>A Blog sharing knowledge and technology.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-03-31</pubDate>
-    <lastBuildDate>Sun, 31 Mar 2019 19:14:54 +0900</lastBuildDate>
+    <pubDate>2019-04-01</pubDate>
+    <lastBuildDate>Mon, 01 Apr 2019 13:36:25 +0900</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -16,6 +16,8 @@
 &lt;p&gt;이를 통해 개발자는 설정파일 (application.property, yml 파일 등)에 간단한 설정정보들만 입력해주는 수준으로도 Spring의 다양한 기능들을 쉽게 이용할 수 있습니다.&lt;/p&gt;
 
 &lt;p&gt;이렇게 설정할 수 있는 설정의 종류는 굉장히 다양하며 예를들어 Datasource 설정의 경우에만도 아래와 같이 굉장히 많은 옵션들을 설정할 수 있습니다.&lt;/p&gt;
+
+&lt;!--more--&gt;
 
 &lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# DATASOURCE (DataSourceAutoConfiguration &amp;amp; DataSourceProperties)
 &lt;/span&gt;&lt;span class=&quot;py&quot;&gt;spring.datasource.continue-on-error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;false # Whether to stop if an error occurs while initializing the database.&lt;/span&gt;
@@ -51,7 +53,7 @@
 
 &lt;p&gt;본인이 사용하는 기술에 대해 필요한 설정 위주로 찾아서 추가해주면 보다 더 좋은 설정을 진행할 수 있을 것 같습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-31</pubDate>
+        <pubDate>2019-04-01</pubDate>
         <link>http://localhost:4000/articles/2019-01/spring-boot-configurations</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-01/spring-boot-configurations</guid>
         
@@ -75,6 +77,7 @@
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTypeAliasesPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;packages for alias&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
+&lt;!--more--&gt;
 &lt;p&gt;헌데 위와같은 방식으로 alias를 적용한 후 IDE를 통해 실행시키면 문제없이 잘 실행되는데&lt;/p&gt;
 
 &lt;p&gt;배포를 위해 jar로 빌드한 후 실행하자  ClassNotFoundException 이 발생하며 alias된 타입들을 못찾는 문제가 발생했다.&lt;/p&gt;
@@ -136,7 +139,7 @@
 
 &lt;p&gt;위처럼 Spring Boot 용 VFS 구현체를 지정해주는 아주 간단한 방법으로 해결할 수 있었다.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-31</pubDate>
+        <pubDate>2019-04-01</pubDate>
         <link>http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</guid>
         
@@ -168,7 +171,7 @@
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
-        <pubDate>2019-03-31</pubDate>
+        <pubDate>2019-04-01</pubDate>
         <link>http://localhost:4000/articles/2018-11/problems-with-lombok</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/problems-with-lombok</guid>
         
@@ -186,6 +189,7 @@
     &lt;p&gt;Help &amp;gt; Install New Software로 Install 팝업창 진입&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;Add 버튼 클릭하여 Name : ObjectAid UML Explorer, Location :  &lt;a href=&quot;https://github.com/rzwitserloot/lombok/issues/1703&quot;&gt;http://www.objectaid.com/update/current&lt;/a&gt; 입력
+&lt;!--more--&gt;
 &lt;img src=&quot;http://localhost:4000/img/post-images/2018-11-06-install-object-aid-plugin/1.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Pending이 완료되면 체크 박스 선택 후 Next 버튼으로 설치하면 설치 완료&lt;/p&gt;
@@ -199,7 +203,7 @@
 &lt;img src=&quot;http://localhost:4000/img/post-images/2018-11-06-install-object-aid-plugin/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>2019-03-31</pubDate>
+        <pubDate>2019-04-01</pubDate>
         <link>http://localhost:4000/articles/2018-11/install-object-aid-plugin</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/install-object-aid-plugin</guid>
         
@@ -218,9 +222,9 @@
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;파일명패턴] | xargs &lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;결과파일명]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;동작 방법을 살펴보면&lt;/p&gt;
+&lt;p&gt;위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.
+&lt;!--more--&gt;
+동작 방법을 살펴보면&lt;/p&gt;
 
 &lt;p&gt;ls [파일명패턴] 을 통해 먼저 대상 파일들을 선택합니다.
 ls 명령은 디렉토리에 존재하는 요소(파일, 디렉토리)들의 정보(파일명, 권한, 수정시간 등) 목록을 표준출력으로 출력하는 명령어로, 아무 옵션없이 실행하면 파일명들만 출력하게 됩니다.&lt;/p&gt;
@@ -240,7 +244,7 @@ xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용�
 이 명령어의 결과를 &amp;gt; (출력 리다이렉션) 으로 결과파일로 써줌으로써 각 파일들의 내용이 합쳐진 하나의 결과파일이 생성되게 됩니다.
 파이프, 출력 리다이렉션 등 리눅스 명령어의 강력함을 다시한번 느끼게 되는 계기가 되었습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-31</pubDate>
+        <pubDate>2019-04-01</pubDate>
         <link>http://localhost:4000/articles/2018-11/merge-file-in-linux</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/merge-file-in-linux</guid>
         
@@ -256,9 +260,9 @@ xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용�
       <item>
         <title>Spring ORM (Hibernate) 설정</title>
         <description>&lt;p&gt;보통 스프링 프레임워크로 웹 프로젝트 설정 시 Web MVC 관련 설정과 Service레이어 이하 애플리케이션 관련 설정을 분리하여 설정합니다.&lt;br /&gt;
-이 포스트는 Spring 프레임워크 환경에서 JPA를 사용하기 위한 애플리케이션 관련 필수 설정을 다룹니다.&lt;/p&gt;
-
-&lt;hr /&gt;
+이 포스트는 Spring 프레임워크 환경에서 JPA를 사용하기 위한 애플리케이션 관련 필수 설정을 다룹니다.
+&lt;!--more--&gt;
+—&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
@@ -348,7 +352,7 @@ JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하
   &lt;p&gt;자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
-        <pubDate>2019-03-31</pubDate>
+        <pubDate>2019-04-01</pubDate>
         <link>http://localhost:4000/articles/2018-10/spring-orm-hibernate-settings</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-10/spring-orm-hibernate-settings</guid>
         
@@ -371,9 +375,10 @@ JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하
   &lt;p&gt;&lt;a href=&quot;https://jsonplaceholder.typicode.com&quot;&gt;JSONPlaceholder&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;위 사이트에서는 게시글, 댓글, 사진 등 다양한 컨셉의 샘플 데이터를 제공하며 사진의 경우 image 주소까지 제공하여 편리하게 사용할 수 있습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;사용방법은-다음과-같이-아주-간단합니다&quot;&gt;사용방법은 다음과 같이 아주 간단합니다.&lt;/h2&gt;
+&lt;p&gt;위 사이트에서는 게시글, 댓글, 사진 등 다양한 컨셉의 샘플 데이터를 제공하며 사진의 경우 image 주소까지 제공하여 편리하게 사용할 수 있습니다.
+&lt;!--more--&gt;
+사용방법은 다음과 같이 아주 간단합니다.
+—&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'https://jsonplaceholder.typicode.com/comments'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
@@ -382,7 +387,7 @@ JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하
 &lt;p&gt;콘솔에 comments(댓글) API로 제공되는 500개의 샘플 데이터가 출력되는 것을 확인할 수 있습니다.&lt;br /&gt;
 백엔드가 구축되어있지 않은 상태에서 프론트엔드 개발 시 유용하게 사용할 수 있을 것 같습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-31</pubDate>
+        <pubDate>2019-04-01</pubDate>
         <link>http://localhost:4000/articles/2018-10/json-sample-online</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-10/json-sample-online</guid>
         
@@ -401,7 +406,8 @@ JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vue&quot; data-lang=&quot;vue&quot;&gt;scaffold&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;라고 입력한 후 엔터를 치면&lt;/p&gt;
+&lt;p&gt;라고 입력한 후 엔터를 치면
+&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vue&quot; data-lang=&quot;vue&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 
@@ -419,7 +425,7 @@ JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하
 
 &lt;p&gt;위와 같은 코드를 자동완성해준다.&lt;/p&gt;
 </description>
-        <pubDate>2019-03-31</pubDate>
+        <pubDate>2019-04-01</pubDate>
         <link>http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode</guid>
         
@@ -439,33 +445,13 @@ JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하
 
 &lt;h6 id=&quot;-주요속성&quot;&gt;* 주요속성&lt;/h6&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;속성명&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;의미&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;optional&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;false로 설정 시 연관된 엔티티가 항상 있어야한다 (기본값 : true)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fetch&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;글로벌 Fetch 전략을 설정한다&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cascade&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;영속성 전이 기능을 사용한다&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;targetEntity&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;연관된 엔티티의 타입 정보를 설정한다. (거의 사용안함)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
+&lt;p&gt;| 속성명 | 의미 |
+|—|:—:|
+| &lt;code class=&quot;highlighter-rouge&quot;&gt;optional&lt;/code&gt; | false로 설정 시 연관된 엔티티가 항상 있어야한다 (기본값 : true) |
+| &lt;code class=&quot;highlighter-rouge&quot;&gt;fetch&lt;/code&gt; | 글로벌 Fetch 전략을 설정한다 |
+| &lt;code class=&quot;highlighter-rouge&quot;&gt;cascade&lt;/code&gt; | 영속성 전이 기능을 사용한다 |
+| &lt;code class=&quot;highlighter-rouge&quot;&gt;targetEntity&lt;/code&gt; | 연관된 엔티티의 타입 정보를 설정한다. (거의 사용안함) |
+&lt;!--more--&gt;&lt;/p&gt;
 &lt;h3 id=&quot;joincolumn&quot;&gt;@JoinColumn&lt;/h3&gt;
 &lt;p&gt;외래 키를 매핑할 때 사용한다.&lt;/p&gt;
 
@@ -588,7 +574,7 @@ team의 members는 연관관계의 주인이 아니기 때문에 새 팀이 설�
   &lt;p&gt;자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
-        <pubDate>2019-03-31</pubDate>
+        <pubDate>2019-04-01</pubDate>
         <link>http://localhost:4000/articles/2018-10/jpa-object-relations-setting</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-10/jpa-object-relations-setting</guid>
         
@@ -608,8 +594,8 @@ team의 members는 연관관계의 주인이 아니기 때문에 새 팀이 설�
       <item>
         <title>객체 연관관계 VS 테이블 연관관계</title>
         <description>&lt;p&gt;ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.&lt;br /&gt;
-즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.&lt;/p&gt;
-
+즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.&lt;br /&gt;
+&lt;!--more--&gt;&lt;/p&gt;
 &lt;h3 id=&quot;연관관계-핵심-키워드&quot;&gt;연관관계 핵심 키워드&lt;/h3&gt;
 &lt;h5 id=&quot;방향&quot;&gt;방향&lt;/h5&gt;
 &lt;p&gt;단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&amp;gt; 팀 또는 팀 -&amp;gt; 회원&lt;br /&gt;
@@ -639,7 +625,7 @@ team의 members는 연관관계의 주인이 아니기 때문에 새 팀이 설�
   &lt;p&gt;자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
-        <pubDate>2019-03-31</pubDate>
+        <pubDate>2019-04-01</pubDate>
         <link>http://localhost:4000/articles/2018-10/object-relations-table-relations</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-10/object-relations-table-relations</guid>
         

@@ -8,7 +8,7 @@ comments: true
 ---
 보통 스프링 프레임워크로 웹 프로젝트 설정 시 Web MVC 관련 설정과 Service레이어 이하 애플리케이션 관련 설정을 분리하여 설정합니다.  
 이 포스트는 Spring 프레임워크 환경에서 JPA를 사용하기 위한 애플리케이션 관련 필수 설정을 다룹니다.
-
+<!--more-->
 ---
 {% highlight xml %}
 <?xml version="1.0" encoding="UTF-8"?>

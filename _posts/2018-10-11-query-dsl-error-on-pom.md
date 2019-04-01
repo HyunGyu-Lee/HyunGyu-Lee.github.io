@@ -6,9 +6,8 @@ categories: [JPA]
 tags: [JPA,QueryDSL]
 comments: true
 ---
-이클립스에서 QueryDSL로 생성한 Q도메인들을 인식하지 못하여 원인을 파악해보니
-pom.xml 의 플러그인 설정에 다음과 같은 오류가 나고 있었다.
-
+이클립스에서 QueryDSL로 생성한 Q도메인들을 인식하지 못하여 원인을 파악해보니 pom.xml 의 플러그인 설정에 다음과 같은 오류가 나고 있었다.
+<!--more-->
 {% highlight xml %}
 <plugin>
 		<groupId>org.apache.maven.plugins</groupId>

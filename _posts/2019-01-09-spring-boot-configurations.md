@@ -12,6 +12,8 @@ Spring Boot의 큰 장점 중 하나는 기존 Spring을 이용하면서 해야�
 
 이렇게 설정할 수 있는 설정의 종류는 굉장히 다양하며 예를들어 Datasource 설정의 경우에만도 아래와 같이 굉장히 많은 옵션들을 설정할 수 있습니다.
 
+<!--more-->
+
 ```properties
 # DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
 spring.datasource.continue-on-error=false # Whether to stop if an error occurs while initializing the database.

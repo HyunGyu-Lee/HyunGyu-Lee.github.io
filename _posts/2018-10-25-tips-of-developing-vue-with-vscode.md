@@ -13,7 +13,7 @@ scaffold
 {% endhighlight %}
 
 라고 입력한 후 엔터를 치면
-
+<!--more-->
 {% highlight vue %}
 <template>
 

@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.ls [파일명패턴] | xargs cat &gt; [결과파일명]위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.동작 방법을 살펴보면ls [파일명패턴] 을 통해 먼저 대...">
+  <meta name="description" content="리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.ls [파일명패턴] | xargs cat &gt; [결과파일명]위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.">
   <meta name="keywords" content="Web, Back-End, and SpringFramework">
   <meta name="author" content="리눅스 여러 파일 내용 하나로 합치기 | Gyu&#39;s IT">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="리눅스 여러 파일 내용 하나로 합치기 | Gyu&#39;s IT">
-  <meta name="twitter:description" content="리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.ls [파일명패턴] | xargs cat &amp;gt; [결과파일명]위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.동작 방법을 살펴보면ls [파일명패턴] 을 통해 먼저 대...">
+  <meta name="twitter:description" content="리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.ls [파일명패턴] | xargs cat &amp;gt; [결과파일명]위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
@@ -26,7 +26,7 @@
   <meta property="og:type" content="blog">
   <meta property="og:url" content="http://localhost:4000/articles/2018-11/merge-file-in-linux">
   <meta property="og:title" content="리눅스 여러 파일 내용 하나로 합치기 | Gyu&#39;s IT">
-  <meta property="og:description" content="리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.ls [파일명패턴] | xargs cat &amp;gt; [결과파일명]위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.동작 방법을 살펴보면ls [파일명패턴] 을 통해 먼저 대...">
+  <meta property="og:description" content="리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.ls [파일명패턴] | xargs cat &amp;gt; [결과파일명]위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
@@ -164,9 +164,9 @@
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">ls</span> <span class="o">[</span>파일명패턴] | xargs <span class="nb">cat</span> <span class="o">&gt;</span> <span class="o">[</span>결과파일명]</code></pre></figure>
 
-<p>위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.</p>
-
-<p>동작 방법을 살펴보면</p>
+<p>위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.
+<!--more-->
+동작 방법을 살펴보면</p>
 
 <p>ls [파일명패턴] 을 통해 먼저 대상 파일들을 선택합니다.
 ls 명령은 디렉토리에 존재하는 요소(파일, 디렉토리)들의 정보(파일명, 권한, 수정시간 등) 목록을 표준출력으로 출력하는 명령어로, 아무 옵션없이 실행하면 파일명들만 출력하게 됩니다.</p>

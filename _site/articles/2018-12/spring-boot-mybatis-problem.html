@@ -167,6 +167,7 @@
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">SqlSessionFactoryBean</span> <span class="n">sessionFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SqlSessionFactoryBean</span><span class="o">();</span>
 <span class="n">sessionFactory</span><span class="o">.</span><span class="na">setTypeAliasesPackage</span><span class="o">(</span><span class="s">"packages for alias"</span><span class="o">);</span></code></pre></figure>
 
+<!--more-->
 <p>헌데 위와같은 방식으로 alias를 적용한 후 IDE를 통해 실행시키면 문제없이 잘 실행되는데</p>
 
 <p>배포를 위해 jar로 빌드한 후 실행하자  ClassNotFoundException 이 발생하며 alias된 타입들을 못찾는 문제가 발생했다.</p>

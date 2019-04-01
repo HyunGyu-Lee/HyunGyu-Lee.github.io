@@ -11,7 +11,7 @@ Node.js는 Javascript로 서버사이드 개발을 가능하게 해주는 Javasc
 >Node.js®는 Chrome V8 JavaScript 엔진으로 빌드된 JavaScript 런타임입니다. Node.js는 이벤트 기반, Non 블로킹 I/O 모델을 사용해 가볍고 효율적입니다. Node.js의 패키지 생태계인 npm은 세계에서 가장 큰 오픈 소스 라이브러리 생태계이기도 합니다.
 
 NPM은 Node Package Manager 혹은 Node Package Modules의 약자로 Node.js 기반의 모듈을 모아둔 집합 저장소이다.
-
+<!--more-->
 #### Node.js / NPM 설치 (윈도우 기준)
 1. https://nodejs.org/en/download/ 접속  
 2. LTS 탭에서 Windows Installer로 다운로드

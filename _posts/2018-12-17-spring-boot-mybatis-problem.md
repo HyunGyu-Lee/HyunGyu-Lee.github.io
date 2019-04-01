@@ -14,7 +14,7 @@ MyBatis를 이용하여 개발하면 주로 resultType에 적어줄 타입에 al
 SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 sessionFactory.setTypeAliasesPackage("packages for alias");
 {% endhighlight %}
-
+<!--more-->
 헌데 위와같은 방식으로 alias를 적용한 후 IDE를 통해 실행시키면 문제없이 잘 실행되는데
 
 배포를 위해 jar로 빌드한 후 실행하자  ClassNotFoundException 이 발생하며 alias된 타입들을 못찾는 문제가 발생했다.

@@ -7,7 +7,7 @@ tags: [JPA,Hibernate]
 comments: true
 ---
 간단한 애플리케이션을 작성하여 기본적인 JPA CRUD를 수행해본다.  
-
+<!--more-->
 {% highlight java %}
 public static void main(String[] args) {
     // EntityManagerFactory 생성

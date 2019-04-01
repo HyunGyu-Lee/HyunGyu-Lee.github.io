@@ -11,7 +11,7 @@ comments: true
 >[JSONPlaceholder](https://jsonplaceholder.typicode.com)
 
 위 사이트에서는 게시글, 댓글, 사진 등 다양한 컨셉의 샘플 데이터를 제공하며 사진의 경우 image 주소까지 제공하여 편리하게 사용할 수 있습니다.
-
+<!--more-->
 사용방법은 다음과 같이 아주 간단합니다.
 ---
 {% highlight javascript %}

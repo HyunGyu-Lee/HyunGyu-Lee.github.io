@@ -9,6 +9,7 @@ comments: true
 1. Help > Install New Software로 Install 팝업창 진입
 
 2. Add 버튼 클릭하여 Name : ObjectAid UML Explorer, Location :  [http://www.objectaid.com/update/current](https://github.com/rzwitserloot/lombok/issues/1703) 입력
+<!--more-->
 ![Image1]({{ "/img/post-images/2018-11-06-install-object-aid-plugin/1.png" | absolute_url }})
 3. Pending이 완료되면 체크 박스 선택 후 Next 버튼으로 설치하면 설치 완료
 

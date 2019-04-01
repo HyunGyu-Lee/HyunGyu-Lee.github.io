@@ -15,7 +15,7 @@ comments: true
 @Enumerate -> Enum 타입 매핑  
 @Temporal -> Date 타입 매핑, default값으로 hibernate의 @UpdateTimestamp를 지정하면 시간이 자동으로 설정된다.   
 @Lob -> CLOB, BLOB 타입 매핑   
-
+<!--more-->
 ### 기본키 매핑
 Oracle은 시퀀스오브젝트, MySQL은 AUTO_INCREMENT 등 DB마다 기본키 할당 방식은 다르다.  
 JPA는 다음과 같은 방법들로 이 문제를 해결한다.

@@ -17,7 +17,7 @@ comments: true
 | `fetch` | 글로벌 Fetch 전략을 설정한다 |
 | `cascade` | 영속성 전이 기능을 사용한다 |
 | `targetEntity` | 연관된 엔티티의 타입 정보를 설정한다. (거의 사용안함) |
-
+<!--more-->
 ### @JoinColumn
 외래 키를 매핑할 때 사용한다.
 

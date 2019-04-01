@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="EntityManagerFactory (엔티티매니저팩토리)일반적으로 데이터베이스를 하나만 사용하는 애플리케이션은 EntityManagerFactory를 하나만 생성한다.META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 코드로 생성할 수 있다.Ent...">
+  <meta name="description" content="EntityManagerFactory (엔티티매니저팩토리)일반적으로 데이터베이스를 하나만 사용하는 애플리케이션은 EntityManagerFactory를 하나만 생성한다.META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 코드로 생성할 수 있다.">
   <meta name="keywords" content="Web, Back-End, and SpringFramework">
   <meta name="author" content="EntityManagerFactory와 EntityManager | Gyu&#39;s IT">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="EntityManagerFactory와 EntityManager | Gyu&#39;s IT">
-  <meta name="twitter:description" content="EntityManagerFactory (엔티티매니저팩토리)일반적으로 데이터베이스를 하나만 사용하는 애플리케이션은 EntityManagerFactory를 하나만 생성한다.META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 코드로 생성할 수 있다.Ent...">
+  <meta name="twitter:description" content="EntityManagerFactory (엔티티매니저팩토리)일반적으로 데이터베이스를 하나만 사용하는 애플리케이션은 EntityManagerFactory를 하나만 생성한다.META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 코드로 생성할 수 있다.">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
@@ -26,7 +26,7 @@
   <meta property="og:type" content="blog">
   <meta property="og:url" content="http://localhost:4000/articles/2018-10/entity-manager-factory-and-entity-manager">
   <meta property="og:title" content="EntityManagerFactory와 EntityManager | Gyu&#39;s IT">
-  <meta property="og:description" content="EntityManagerFactory (엔티티매니저팩토리)일반적으로 데이터베이스를 하나만 사용하는 애플리케이션은 EntityManagerFactory를 하나만 생성한다.META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 코드로 생성할 수 있다.Ent...">
+  <meta property="og:description" content="EntityManagerFactory (엔티티매니저팩토리)일반적으로 데이터베이스를 하나만 사용하는 애플리케이션은 EntityManagerFactory를 하나만 생성한다.META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 코드로 생성할 수 있다.">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
@@ -162,7 +162,8 @@
   <article class="post-content">
     <h5 id="entitymanagerfactory-엔티티매니저팩토리">EntityManagerFactory (엔티티매니저팩토리)</h5>
 <p>일반적으로 데이터베이스를 하나만 사용하는 애플리케이션은 EntityManagerFactory를 하나만 생성한다.<br />
-META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 코드로 생성할 수 있다.</p>
+META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 코드로 생성할 수 있다.
+<!--more--></p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">EntityManagerFactory</span> <span class="n">emf</span> <span class="o">=</span> <span class="n">Persistence</span><span class="o">.</span><span class="na">createEntityManagerFactory</span><span class="o">(</span><span class="err">설정한이름</span><span class="o">);</span></code></pre></figure>
 

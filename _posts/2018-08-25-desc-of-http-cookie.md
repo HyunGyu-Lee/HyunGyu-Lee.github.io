@@ -10,7 +10,7 @@ comments: true
 쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.
 
 기본적으로 웹 서버는 다음과 같은 형태로 브라우저에 쿠키를 저장하라고 알릴 수 있다.
-
+<!--more-->
 {% highlight http %}
 Set-Cookie: <CookieName>=<CookieValue>
 

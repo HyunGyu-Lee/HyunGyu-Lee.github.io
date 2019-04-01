@@ -11,7 +11,7 @@ JPA 구현체로 Hibernate를 사용하기 위해 필요한 핵심 라이브러�
 - hibernate-core : 하이버네이트 라이브러리
 - hibernate-entitymanager : 하이버네이트가 JPA 구현체로 동작하도록 JPA  표준을 구현한 라이브러리
 - hibernate-jpa-2.1-api : JPA 2.1 표준을 모아둔 라이브러리
-
+<!--more-->
 먼저 pom.xml에 다음과 같이 추가한다.
 
 {% highlight xml %}

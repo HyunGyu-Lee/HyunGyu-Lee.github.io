@@ -9,7 +9,7 @@ comments: true
 ##### EntityManagerFactory (엔티티매니저팩토리)
 일반적으로 데이터베이스를 하나만 사용하는 애플리케이션은 EntityManagerFactory를 하나만 생성한다.  
 META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 코드로 생성할 수 있다.
-
+<!--more-->
 {% highlight java %}
 EntityManagerFactory emf = Persistence.createEntityManagerFactory(설정한이름);
 {% endhighlight %}

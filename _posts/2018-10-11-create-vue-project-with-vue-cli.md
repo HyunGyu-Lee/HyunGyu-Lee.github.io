@@ -10,7 +10,7 @@ comments: true
 설치가 안된 경우 [Node.js 및 NPM 설치](/articles/2018-10/install-nodejs-and-npm) 을 참고하여 설치할 수 있다.   
 NPM을 이용하여 Vue-CLI 설치 (3.0.x)   
 NPM이 설치되어있으면 아래 명령어로 Vue-CLI 를 매우 간단하게 설치할 수 있다.  
-
+<!--more-->
 
 #### Vue-CLI 설치
 {% highlight bash %}
