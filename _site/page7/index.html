@@ -71,11 +71,11 @@
       <li class="nav-item">
         <a href="http://localhost:4000/archive/">Archive</a>
       </li>
-          
+            
       <li class="nav-item">
         <a href="http://localhost:4000/categories/">Categories</a>
       </li>
-            
+          
       <li class="nav-item">
         <a href="http://localhost:4000/resume/">Resume</a>
       </li>
@@ -83,7 +83,7 @@
       <li class="nav-item">
         <a href="http://localhost:4000/tags/">Tags</a>
       </li>
-                     
+                           
     </ul>
   </nav>
   <script type="text/javascript">
@@ -222,6 +222,144 @@ git config <span class="nt">--global</span> color.ui <span class="s2">"auto"</sp
 
 </section>
 
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        14 JUL 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#etc.">etc.</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-07/settings-for-new-eclipse" class="post-title" title="새 이클립스 설치 후 진행해야할 설정 목록">새 이클립스 설치 후 진행해야할 설정 목록</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2018-07/settings-for-new-eclipse">
+      <p>
+        <h5 id="1-자동-validation-off">1. 자동 Validation Off</h5>
+<ol>
+  <li>Window &gt; Preferences 메뉴에서 Validation 탭 설정 중 Build 시 HTML, JSP, XML 등에 대한 Validation 체크 해제</li>
+  <li>필요 시 수동 Validation을 위해 Manual은 체크상태 유지</li>
+</ol>
+
+<h5 id="2-스펠링-체크-해제">2. 스펠링 체크 해제</h5>
+<ol>
+  <li>General &gt; Editors &gt; Text Editors &gt; Spelling 탭에서 Enable spell checking 체크 해제</li>
+</ol>
+
+<h5 id="3-indentation-tab--space-변경">3. Indentation Tab &gt; Space 변경</h5>
+<ol>
+  <li>General &gt; Editors &gt; Text Editors 탭에서 Insert spaces for tabs 체크</li>
+  <li>Java &gt; Code Style &gt; Formatter 탭에서 New 버튼을 클릭하여 새 프로필 등록 후 Indentation 항목의 Tab policy를 Spaces Only로 변경</li>
+  <li>Javascript &gt; Code Style &gt; Formatter 탭 또한 2번 과정 동일하게 적용</li>
+  <li>Web &gt; CSS Files &gt; Editor 탭에서 Indent using spaces 선택 및 Indentation size 4로 변경</li>
+  <li>Web &gt; HTML Files &gt; Editor, XML &gt; XML Files &gt; Editor 탭에 대해 4번 과정 동일하게 적용</li>
+</ol>
+
+<h5 id="4-검색-대화상자-단순화">4. 검색 대화상자 단순화</h5>
+<ol>
+  <li>Ctrl + H 누르면 나오는 검색상자의 Customize 버튼을 클릭, 사용할 탭만 체크한 후 나머지 제외</li>
+</ol>
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        14 JUL 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#etc.">etc.</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-07/setting-for-maven-local-repository" class="post-title" title="이클립스 Maven Local Repository 변경방법">이클립스 Maven Local Repository 변경방법</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2018-07/setting-for-maven-local-repository">
+      <p>
+        <p>maven 설치 디렉토리 (maven home) 내 settings.xml 또는 새로운 settings.xml을 작성한 후 <localRepository> 태그 사이에 repository로 이용할 경로를 기술한다.</localRepository></p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;localRepository&gt;</span>C:\app\platform\repository\.m2\customRepository<span class="nt">&lt;/localRepository&gt;</span></code></pre></figure>
+
+<p>이 후 이클립스에서 Window &gt; Preferences 창의 Maven탭에서 Global 또는 User Settings를 위에서 작성한 settings.xml을 지정해준후</p>
+
+<p>프로젝트 우클릭 &gt; Maven &gt; Update Project 수행 시 설정에 따라 새 repository가 구축된다.</p>
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        14 JUL 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Spring Framework">Spring Framework</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-07/apache-configuration-on-spring" class="post-title" title="Spring Framework 환경에서 Apache Commons Configuration 사용">Spring Framework 환경에서 Apache Commons Configuration 사용</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2018-07/apache-configuration-on-spring">
+      <p>
+        <p>Spring Framework 환경에서 Apache Commons의 Configuration 라이브러리를 사용하는 방법을 정리합니다.</p>
+
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
 
 <!-- Pagination links -->
 <div class="pagination-wrap">
@@ -253,6 +391,18 @@ git config <span class="nt">--global</span> color.ui <span class="s2">"auto"</sp
     
       
         <a href="#" class="active">7</a>
+      
+    
+      
+        <a href="/page8/">8</a>
+      
+    
+      
+        <a href="/page9/">9</a>
+      
+    
+      
+        <a href="/page10/">10</a>
       
     
   </div>

@@ -714,7 +714,7 @@ a.read-more { padding: 5px 8px; }
 .reddit:visited { color: #fff; border-color: #5f99cf; }
 .reddit:hover { background-color: #fff; color: #5f99cf; border-color: #5f99cf; }
 
-.more-posts { border: 1px solid #E5E5E5; padding: 10px 10px 5px; margin: 10px 0; clear: both; display: block; }
+.more-posts { border: 1px solid #E5E5E5; padding: 10px 15px 10px; margin: 10px 0; clear: both; display: block; }
 
 .more-posts table { table-layout: fixed; border-collapse: collapse; width: 100% !important; margin-top: 10px !important; display: table; border-spacing: 2px; border-color: grey; }
 
