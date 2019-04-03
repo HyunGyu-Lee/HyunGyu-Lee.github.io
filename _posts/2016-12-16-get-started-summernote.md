@@ -2,8 +2,8 @@
 layout: post
 title:  "웹 기반 WYSIWYG 에디터 Summernote 사용하기"
 date:   2016-12-19 19:34:31
-categories: [Spring Framework]
-tags: [Java,Spring Framework,Path Variable]
+categories: [jQuery]
+tags: [javascript,jQuery,Summernote]
 comments: true
 ---
 WYSIWYG 에디터 Summernote 사용방법을 정리합니다.
