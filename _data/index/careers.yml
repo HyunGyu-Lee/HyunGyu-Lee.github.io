@@ -1,10 +1,10 @@
 # careers section data
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
-- name: ㈜데이타솔루션
-  link: http://www.datasolution.kr/
-  date: 2017년 03월 ~ 2019년 04월
-  job: Software Engineer
 - name: NHN
   link: https://www.nhn.com/ko/index.nhn
   date: 2017년 04월 ~ 현재
+  job: Software Engineer
+- name: ㈜데이타솔루션
+  link: http://www.datasolution.kr/
+  date: 2017년 03월 ~ 2019년 04월
   job: Software Engineer
