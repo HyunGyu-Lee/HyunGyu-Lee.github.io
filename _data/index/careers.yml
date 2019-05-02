@@ -2,9 +2,9 @@
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
 - name: NHN
   link: https://www.nhn.com/ko/index.nhn
-  date: 2019년 04월 ~ 현재
+  date: Apr 2019 - <i class="fa fa-clock-o" aria-hidden="true" title="Until Now"></i>
   job: Software Engineer
-- name: ㈜데이타솔루션
+- name: 데이타솔루션
   link: http://www.datasolution.kr/
-  date: 2017년 03월 ~ 2019년 04월
+  date: Mar 2017 - Apr 2019
   job: Software Engineer
