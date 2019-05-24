@@ -29,8 +29,8 @@ Elasticsearch -> Kibana: 시각화
 
 
 ## Logstash
-공식 홈페이지 : https://www.elastic.co/kr/products/logstash
-설치 : https://www.elastic.co/kr/downloads/logstash
+* 공식 홈페이지 : https://www.elastic.co/kr/products/logstash
+* 설치 : https://www.elastic.co/kr/downloads/logstash
 
 ##### 디렉토리 구성
 ![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/1.png" | absolute_url }})
@@ -115,8 +115,8 @@ output {
 ```
 
 ## Elasticsearch 
-공식 홈페이지 : https://www.elastic.co/kr/products/elasticsearch
-설치 : https://www.elastic.co/kr/downloads/elasticsearch
+* 공식 홈페이지 : https://www.elastic.co/kr/products/elasticsearch
+* 설치 : https://www.elastic.co/kr/downloads/elasticsearch
 
 ##### 디렉토리 구성
 ![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/4.png" | absolute_url }})
@@ -130,8 +130,8 @@ elasticsearch
 이후 http://localhost:9200 로 접속해봤을 때 페이지가 정상적으로 뜨는지 확인
 
 ## Kibana
-공식 홈페이지 : https://www.elastic.co/kr/products/kibana
-설치 : https://www.elastic.co/kr/downloads/kibana
+* 공식 홈페이지 : https://www.elastic.co/kr/products/kibana
+* 설치 : https://www.elastic.co/kr/downloads/kibana
 
 ##### 디렉토리 구성
 ![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/5.png" | absolute_url }})
@@ -153,7 +153,7 @@ kibana
 ![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/8.png" | absolute_url }})
 
 ## 참고
-[Elastic Stack 공식 홈페이지](https://www.elastic.co/kr/products/)
-[Elastic Stack과 Lambda를 활용한 데이터 모니터링 시스템 구축](https://d2.naver.com/helloworld/9878588)
-[Spring + Logstash + Elasticsearch + Kibana 기본 셋팅](https://dev-t-blog.tistory.com/30)
-[ELK Stack 개념정리](https://heowc.tistory.com/49)
+* [Elastic Stack 공식 홈페이지](https://www.elastic.co/kr/products/)
+* [Elastic Stack과 Lambda를 활용한 데이터 모니터링 시스템 구축](https://d2.naver.com/helloworld/9878588)
+* [Spring + Logstash + Elasticsearch + Kibana 기본 셋팅](https://dev-t-blog.tistory.com/30)
+* [ELK Stack 개념정리](https://heowc.tistory.com/49)
