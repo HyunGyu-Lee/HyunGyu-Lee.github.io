@@ -6,8 +6,9 @@ categories: [Spring Framework]
 tags: [Spring Boot,Spring Framework,Java]
 comments: true
 ---
-## 개요
-어플리케이션 수행 중 발생하는 예외(Exception)를 모니터링 할 수 있는 기능
+어플리케이션 수행 중 발생하는 예외(Exception)를 모니터링 할 수 있는 시스템을 위해 ELK를 로컬환경에 구성한다.
+
+<!--more-->
 
 ## 구성
 ##### ELK
