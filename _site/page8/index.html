@@ -136,6 +136,86 @@
       <div class="post-listing">
         
 <section class="post">
+  <hr>
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        14 JUL 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#etc.">etc.</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-07/setting-for-maven-local-repository" class="post-title" title="이클립스 Maven Local Repository 변경방법">이클립스 Maven Local Repository 변경방법</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2018-07/setting-for-maven-local-repository">
+      <p>
+        <p>maven 설치 디렉토리 (maven home) 내 settings.xml 또는 새로운 settings.xml을 작성한 후 <localRepository> 태그 사이에 repository로 이용할 경로를 기술한다.</localRepository></p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;localRepository&gt;</span>C:\app\platform\repository\.m2\customRepository<span class="nt">&lt;/localRepository&gt;</span></code></pre></figure>
+
+<p>이 후 이클립스에서 Window &gt; Preferences 창의 Maven탭에서 Global 또는 User Settings를 위에서 작성한 settings.xml을 지정해준후</p>
+
+<p>프로젝트 우클릭 &gt; Maven &gt; Update Project 수행 시 설정에 따라 새 repository가 구축된다.</p>
+
+      </p>
+    </div>
+    
+
+        
+</section>
+
+<section class="post">
+  <hr>
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        14 JUL 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Spring Framework">Spring Framework</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-07/apache-configuration-on-spring" class="post-title" title="Spring Framework 환경에서 Apache Commons Configuration 사용">Spring Framework 환경에서 Apache Commons Configuration 사용</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2018-07/apache-configuration-on-spring">
+      <p>
+        <p>Spring Framework 환경에서 Apache Commons의 Configuration 라이브러리를 사용하는 방법을 정리합니다.</p>
+
+
+      </p>
+    </div>
+    
+
+        
+</section>
+
+<section class="post">
+  <hr>
   <header class="post-header">
     <p class="post-meta">
       <span class="post-date">
@@ -178,11 +258,11 @@
     </div>
     
 
-    
-
+        
 </section>
 
 <section class="post">
+  <hr>
   <header class="post-header">
     <p class="post-meta">
       <span class="post-date">
@@ -224,11 +304,11 @@ mkdir class</code></pre></figure>
     </div>
     
 
-    
-
+        
 </section>
 
 <section class="post">
+  <hr>
   <header class="post-header">
     <p class="post-meta">
       <span class="post-date">
@@ -261,93 +341,7 @@ mkdir class</code></pre></figure>
     </div>
     
 
-    
-
-</section>
-
-<section class="post">
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        13 JAN 2017
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#Spring Framework">Spring Framework</a>
         
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2017-01/spring-interceptor" class="post-title" title="스프링 인터셉터(interceptor) 활용">스프링 인터셉터(interceptor) 활용</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2017-01/spring-interceptor">
-      <p>
-        <p>인터셉터의 preHandle, postHandle 메소드에 보면 <code class="highlighter-rouge">Object형 handler</code>라는 이름의 인자가 있다.</p>
-
-<p>이 인자는 <code class="highlighter-rouge">RequestMapping</code>으로 매핑된 하나의 메소드로 스프링 프레임워크에 의해 <code class="highlighter-rouge">org.springframework.web.method.HandlerMethod</code>라는 클래스로 바인드 되어 전달되는 인자다.</p>
-
-
-      </p>
-    </div>
-    
-
-    
-
-</section>
-
-<section class="post">
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        22 DEC 2016
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#Spring Framework">Spring Framework</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2016-12/mybatis-escaping" class="post-title" title="MyBatis 사용 시 부등호 등 이스케이프(escape) 처리">MyBatis 사용 시 부등호 등 이스케이프(escape) 처리</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2016-12/mybatis-escaping">
-      <p>
-        <p>XML에서 쿼리를 작성할 때 &lt;, &gt;와 같은 비교 연산자를 사용하면</p>
-
-<blockquote>
-  <p>The content of elements must consist of well-formed character data or markup.</p>
-</blockquote>
-
-<p>이런 오류메세지가 나타날 수 있다. <br />
-MyBatis에선 XML파일을 통해 쿼리를 작성하는 기능을 지원하는 때 이때 위와같은 문제가 발생할 수 있다.<br />
-XML에서 &lt;, &gt; 를 비교연산자로 판단하지 않고 <code class="highlighter-rouge">&lt;select&gt;</code> 등 태그의 시작과 끝으로 인식되어 생기는 일이다.<br />
-해결하기 위해서는 비교연산 사용하는 부분에을 &lt;![CDATA[ ]]&gt; 로 감싸주면 된다.</p>
-
-
-      </p>
-    </div>
-    
-
-    
-
 </section>
 
 

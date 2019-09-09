@@ -136,6 +136,92 @@
       <div class="post-listing">
         
 <section class="post">
+  <hr>
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        13 JAN 2017
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Spring Framework">Spring Framework</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2017-01/spring-interceptor" class="post-title" title="스프링 인터셉터(interceptor) 활용">스프링 인터셉터(interceptor) 활용</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2017-01/spring-interceptor">
+      <p>
+        <p>인터셉터의 preHandle, postHandle 메소드에 보면 <code class="highlighter-rouge">Object형 handler</code>라는 이름의 인자가 있다.</p>
+
+<p>이 인자는 <code class="highlighter-rouge">RequestMapping</code>으로 매핑된 하나의 메소드로 스프링 프레임워크에 의해 <code class="highlighter-rouge">org.springframework.web.method.HandlerMethod</code>라는 클래스로 바인드 되어 전달되는 인자다.</p>
+
+
+      </p>
+    </div>
+    
+
+        
+</section>
+
+<section class="post">
+  <hr>
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        22 DEC 2016
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Spring Framework">Spring Framework</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2016-12/mybatis-escaping" class="post-title" title="MyBatis 사용 시 부등호 등 이스케이프(escape) 처리">MyBatis 사용 시 부등호 등 이스케이프(escape) 처리</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2016-12/mybatis-escaping">
+      <p>
+        <p>XML에서 쿼리를 작성할 때 &lt;, &gt;와 같은 비교 연산자를 사용하면</p>
+
+<blockquote>
+  <p>The content of elements must consist of well-formed character data or markup.</p>
+</blockquote>
+
+<p>이런 오류메세지가 나타날 수 있다. <br />
+MyBatis에선 XML파일을 통해 쿼리를 작성하는 기능을 지원하는 때 이때 위와같은 문제가 발생할 수 있다.<br />
+XML에서 &lt;, &gt; 를 비교연산자로 판단하지 않고 <code class="highlighter-rouge">&lt;select&gt;</code> 등 태그의 시작과 끝으로 인식되어 생기는 일이다.<br />
+해결하기 위해서는 비교연산 사용하는 부분에을 &lt;![CDATA[ ]]&gt; 로 감싸주면 된다.</p>
+
+
+      </p>
+    </div>
+    
+
+        
+</section>
+
+<section class="post">
+  <hr>
   <header class="post-header">
     <p class="post-meta">
       <span class="post-date">
@@ -174,11 +260,11 @@
     </div>
     
 
-    
-
+        
 </section>
 
 <section class="post">
+  <hr>
   <header class="post-header">
     <p class="post-meta">
       <span class="post-date">
@@ -211,11 +297,11 @@
     </div>
     
 
-    
-
+        
 </section>
 
 <section class="post">
+  <hr>
   <header class="post-header">
     <p class="post-meta">
       <span class="post-date">
@@ -256,88 +342,7 @@
     </div>
     
 
-    
-
-</section>
-
-<section class="post">
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        5 DEC 2016
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#jQuery">jQuery</a>
         
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2016-12/jQuery-image-preview" class="post-title" title="jQuery를 이용한 input file 이미지 선택 시 미리보기">jQuery를 이용한 input file 이미지 선택 시 미리보기</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2016-12/jQuery-image-preview">
-      <p>
-        
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- 미리보기 영역으로 사용할 img 태그 --&gt;</span>
-<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">""</span> <span class="na">id=</span><span class="s">"preview"</span><span class="nt">/&gt;</span>
-
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">id=</span><span class="s">"imgSelector"</span><span class="nt">/&gt;</span></code></pre></figure>
-
-
-      </p>
-    </div>
-    
-
-    
-
-</section>
-
-<section class="post">
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        23 NOV 2016
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#Java">Java</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2016-11/java-dynamic-proxy" class="post-title" title="Java Dynamic Proxy">Java Dynamic Proxy</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2016-11/java-dynamic-proxy">
-      <p>
-        <h5 id="dynamic-proxy란">Dynamic Proxy란</h5>
-<p>메소드 인터셉팅을 통해 부수적인 코드를 삽입할 수 있는 기술, Spring AOP에서도 사용한다.<br />
-원래객체에 부수적인코드가 합쳐진 새로운 객체가 프록시 객체가 된다.</p>
-
-
-      </p>
-    </div>
-    
-
-    
-
 </section>
 
 
