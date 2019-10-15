@@ -8,35 +8,35 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="플러시는 영속성 컨텍스트의 변경 내용을 데이터베이스에 반영한다.플러시가 호출되면  변경감지가 동작해서 영속성 컨텍스트 내 모든 엔티티들을 대상으로 스냅샷과 비교해 변경사항을 찾고, 수정된 엔티티들은 UPDATE문을 생성하여 SQL저장소에 등록한다.  SQL저장소의 쿼리를 데이터베이...">
+  <meta name="description" content="JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.그동안 JPA 를 사용하면서 사용하는 쿼리 기술이 어느 기술인지도 잘 모르고 사용해온 나 자신을 위해.. 이 글에서 정리해보고자 합니다.각 기술에 대한 자세한...">
   <meta name="keywords" content="Web, Back-End, and SpringFramework">
-  <meta name="author" content="영속성 컨텍스트 (Persistence Context) 란 (2) | Gyu&#39;s IT">
+  <meta name="author" content="JPA의 쿼리 기술 종류 | Gyu&#39;s IT">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f5">
 
   <!-- Twitter Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="영속성 컨텍스트 (Persistence Context) 란 (2) | Gyu&#39;s IT">
-  <meta name="twitter:description" content="플러시는 영속성 컨텍스트의 변경 내용을 데이터베이스에 반영한다.플러시가 호출되면  변경감지가 동작해서 영속성 컨텍스트 내 모든 엔티티들을 대상으로 스냅샷과 비교해 변경사항을 찾고, 수정된 엔티티들은 UPDATE문을 생성하여 SQL저장소에 등록한다.  SQL저장소의 쿼리를 데이터베이...">
+  <meta name="twitter:title" content="JPA의 쿼리 기술 종류 | Gyu&#39;s IT">
+  <meta name="twitter:description" content="JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.그동안 JPA 를 사용하면서 사용하는 쿼리 기술이 어느 기술인지도 잘 모르고 사용해온 나 자신을 위해.. 이 글에서 정리해보고자 합니다.각 기술에 대한 자세한...">
   
     <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
   
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/articles/2018-10/description-of-persistence-context-2">
-  <meta property="og:title" content="영속성 컨텍스트 (Persistence Context) 란 (2) | Gyu&#39;s IT">
-  <meta property="og:description" content="플러시는 영속성 컨텍스트의 변경 내용을 데이터베이스에 반영한다.플러시가 호출되면  변경감지가 동작해서 영속성 컨텍스트 내 모든 엔티티들을 대상으로 스냅샷과 비교해 변경사항을 찾고, 수정된 엔티티들은 UPDATE문을 생성하여 SQL저장소에 등록한다.  SQL저장소의 쿼리를 데이터베이...">
+  <meta property="og:url" content="http://localhost:4000/articles/2019-10/jpa-query-tech">
+  <meta property="og:title" content="JPA의 쿼리 기술 종류 | Gyu&#39;s IT">
+  <meta property="og:description" content="JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.그동안 JPA 를 사용하면서 사용하는 쿼리 기술이 어느 기술인지도 잘 모르고 사용해온 나 자신을 위해.. 이 글에서 정리해보고자 합니다.각 기술에 대한 자세한...">
   
     <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
   
-  <title>영속성 컨텍스트 (Persistence Context) 란 (2) | Gyu's IT</title>
+  <title>JPA의 쿼리 기술 종류 | Gyu's IT</title>
 
   <!-- CSS files -->
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/articles/2018-10/description-of-persistence-context-2">
+  <link rel="canonical" href="http://localhost:4000/articles/2019-10/jpa-query-tech">
   <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -142,10 +142,10 @@
 
 <div id="post">
   <header class="post-header">
-    <h1 title="영속성 컨텍스트 (Persistence Context) 란 (2)">영속성 컨텍스트 (Persistence Context) 란 (2)</h1>
+    <h1 title="JPA의 쿼리 기술 종류">JPA의 쿼리 기술 종류</h1>
     <span class="post-meta">
       <span class="post-date">
-        10 OCT 2018
+        15 OCT 2019
       </span>
       •
       <span class="read-time" title="Estimated read time">
@@ -160,42 +160,32 @@
   </header>
 
   <article class="post-content">
-    <p>플러시는 영속성 컨텍스트의 변경 내용을 데이터베이스에 반영한다.</p>
+    <p>JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.</p>
 
-<p>플러시가 호출되면</p>
+<p>그동안 JPA 를 사용하면서 사용하는 쿼리 기술이 어느 기술인지도 잘 모르고 사용해온 나 자신을 위해.. 이 글에서 정리해보고자 합니다.</p>
 
-<ol>
-  <li>변경감지가 동작해서 영속성 컨텍스트 내 모든 엔티티들을 대상으로 스냅샷과 비교해 변경사항을 찾고, 수정된 엔티티들은 UPDATE문을 생성하여 SQL저장소에 등록한다.</li>
-  <li>
-    <p>SQL저장소의 쿼리를 데이터베이스에 전송한다. (등록, 수정, 삭제 쿼리)<br />
+<p>각 기술에 대한 자세한 설명보다는 각 기술이 어떤 것인지와 특징 등에 중점을 두고 정리하겠습니다.</p>
+
 <!--more-->
-영속성 컨텍스트를 플러시하는 방법은 3가지가 있다.</p>
-  </li>
-  <li>
-    <p>직접 호출 <br />
-엔티티매니저의 flush 메소드를 호출하는 것으로 테스트, 다른 프레임워크와 JPA를 함께 사용할 때를 제외하곤 거의 사용하지 않는다.</p>
-  </li>
-  <li>
-    <p>트랜잭션 커밋 시 <br />
-데이터베이스에 어떤 변경도 없이 트랜잭션만 커밋해서는 아무것도 바뀌는게 없다. <br />
-때문에 항상 데이터베이스 커밋 전엔 영속성 컨텍스트의 내용을 flush하여 변경 내용을 데이터베이스에 반영해야한다. <br />
-JPA는 트랜잭션 커밋할 때 자동으로 flush메소드를 호출하도록 설계되어있다.</p>
-  </li>
-  <li>JPQL 쿼리 실행 시<br />
-JPQL은 SQL로 변환되어 데이터베이스에서 조회하는 기능으로 persist되었어도 데이터베이스에 반영이 안되있으면 조회되지 않는다. <br />
-때문에 JPA는 JPQL이 실행되기전 영속성 컨텍스트를 flush하여 이런 문제를 예방한다.</li>
-</ol>
 
-<p>FlushModeType을 통해 엔티티매니저의 플러시모드를 변경할 수 있다.</p>
+<h2 id="cygwin-이란">Cygwin 이란</h2>
+<ul>
+  <li>공식 홈페이지 : https://cygwin.com/</li>
+  <li>설치 : https://cygwin.com/install.html</li>
+</ul>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="c1">// FlushModeType.AUTO   : default로 커밋 또는 JPQL 실행 시 flush 호출</span>
-<span class="c1">// FlushModeType.COMMIT : 커밋할 때만 flush 호출</span>
-<span class="n">em</span><span class="o">.</span><span class="na">setFlushMode</span><span class="o">(</span><span class="n">FlushModeType</span><span class="o">.</span><span class="na">COMMIT</span><span class="o">);</span></code></pre></figure>
+<p>POSIX 기반 소프트웨어를 Windows에서 구동 및 개발이 가능하도록 환경을 제공해주는 역할을 합니다.
+가상머신 등을 통해 유닉스용 어셈블리 코드를 에뮬레이션 하여 진짜 유닉스/리눅스 등의 운영체제를 사용하는건 아니고, <code class="highlighter-rouge">Cygwin1.dll</code>이라는 런타임 라이브러리를 통해 Windows에 동적으로 링크하여
+실제 유닉스처럼 동작하도록 해줍니다.</p>
 
-<hr />
-<blockquote>
-  <p>자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.</p>
-</blockquote>
+<h5 id="설치">설치</h5>
+<p><a href="https://cygwin.com/install.html">설치페이지</a>에 접속하여 32/64 bit에 맞는 setup파일을 받아 쉽게 설치할 수 있습니다.</p>
+
+<h4 id="사용">사용</h4>
+<p>Cygwin을 실행하여 <code class="highlighter-rouge">pwd</code>를 실행해보면 /home/{자신의 userName} 이 출력됩니다.
+이는 실제 경로는 아니며 Cygwin 설치경로 이하의 경로입니다. 즉 Cygwin 터미널은 자신의 설치경로가 root인데요.
+우리가 원래 사용하고 있던 Windows의 C:, D: 등을 접속하려면 <code class="highlighter-rouge">/cygdrive/{Drive 볼륨명}</code> 경로로 이동하면 됩니다.
+다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.</p>
 
   </article>
 </div>
@@ -216,8 +206,8 @@ JPQL은 SQL로 변환되어 데이터베이스에서 조회하는 기능으로 p
             <tr>
               <th class="more-posts-title">
                 
+                  <u>JPA의 쿼리 기술 종류</u>
                 
-                  <a href="http://localhost:4000/articles/2019-10/jpa-query-tech">JPA의 쿼리 기술 종류</a>
                 
               </th>
               <td class="more-posts-date">2019. 10. 15</td>
@@ -345,8 +335,8 @@ JPQL은 SQL로 변환되어 데이터베이스에서 조회하는 기능으로 p
             <tr>
               <th class="more-posts-title">
                 
-                  <u>영속성 컨텍스트 (Persistence Context) 란 (2)</u>
                 
+                  <a href="http://localhost:4000/articles/2018-10/description-of-persistence-context-2">영속성 컨텍스트 (Persistence Context) 란 (2)</a>
                 
               </th>
               <td class="more-posts-date">2018. 10. 10</td>
@@ -455,19 +445,19 @@ JPQL은 SQL로 변환되어 데이터베이스에서 조회하는 기능으로 p
   <h6>공유하기: </h6>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-10/description-of-persistence-context-2" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2019-10/jpa-query-tech" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-10/description-of-persistence-context-2" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2019-10/jpa-query-tech" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-10/description-of-persistence-context-2" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2019-10/jpa-query-tech" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
     <li>
-      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-10/description-of-persistence-context-2" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2019-10/jpa-query-tech" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
     </li>
     <li>
-      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-10/description-of-persistence-context-2" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2019-10/jpa-query-tech" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
     </li>
   </ul>
 </div><!-- end share-buttons -->

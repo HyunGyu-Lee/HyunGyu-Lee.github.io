@@ -140,6 +140,55 @@
   <header class="post-header">
     <p class="post-meta">
       <span class="post-date">
+        18 NOV 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Java">Java</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-11/problems-with-lombok" class="post-title" title="Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결">Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2018-11/problems-with-lombok">
+      <p>
+        <p>Lombok 버전 : 1.16.22</p>
+
+<p>스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.</p>
+
+<p>구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지금은 fix된듯 하다.</p>
+
+<p><a href="https://github.com/rzwitserloot/lombok/issues/1703">Github에 등록된 Lombok 이슈 확인</a></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@NoArgsConstructor</span>
+<span class="nd">@Data</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeDomain</span> <span class="o">{</span>
+    <span class="o">....</span>
+<span class="o">}</span></code></pre></figure>
+
+
+      </p>
+    </div>
+    
+
+        
+</section>
+
+<section class="post">
+  <hr>
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
         6 NOV 2018
       </span>
       
@@ -292,47 +341,6 @@
 </blockquote>
 
 <p>위 사이트에서는 게시글, 댓글, 사진 등 다양한 컨셉의 샘플 데이터를 제공하며 사진의 경우 image 주소까지 제공하여 편리하게 사용할 수 있습니다.</p>
-
-
-      </p>
-    </div>
-    
-
-        
-</section>
-
-<section class="post">
-  <hr>
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        26 OCT 2018
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#Vue">Vue</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode" class="post-title" title="VSCode로 Vue개발 시 팁">VSCode로 Vue개발 시 팁</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode">
-      <p>
-        <p>싱글 파일 컴포넌트를 작성하기 위해 새로은 .vue 파일을 생성한 후</p>
-
-<figure class="highlight"><pre><code class="language-vue" data-lang="vue">scaffold</code></pre></figure>
-
-<p>라고 입력한 후 엔터를 치면</p>
 
 
       </p>

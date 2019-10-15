@@ -5,9 +5,51 @@
     <description>A Blog sharing knowledge and technology.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-09-09</pubDate>
-    <lastBuildDate>Mon, 09 Sep 2019 22:45:53 +0900</lastBuildDate>
+    <pubDate>2019-10-16</pubDate>
+    <lastBuildDate>Wed, 16 Oct 2019 00:17:30 +0900</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>JPA의 쿼리 기술 종류</title>
+        <description>&lt;p&gt;JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.&lt;/p&gt;
+
+&lt;p&gt;그동안 JPA 를 사용하면서 사용하는 쿼리 기술이 어느 기술인지도 잘 모르고 사용해온 나 자신을 위해.. 이 글에서 정리해보고자 합니다.&lt;/p&gt;
+
+&lt;p&gt;각 기술에 대한 자세한 설명보다는 각 기술이 어떤 것인지와 특징 등에 중점을 두고 정리하겠습니다.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;cygwin-이란&quot;&gt;Cygwin 이란&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;공식 홈페이지 : https://cygwin.com/&lt;/li&gt;
+  &lt;li&gt;설치 : https://cygwin.com/install.html&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;POSIX 기반 소프트웨어를 Windows에서 구동 및 개발이 가능하도록 환경을 제공해주는 역할을 합니다.
+가상머신 등을 통해 유닉스용 어셈블리 코드를 에뮬레이션 하여 진짜 유닉스/리눅스 등의 운영체제를 사용하는건 아니고, &lt;code class=&quot;highlighter-rouge&quot;&gt;Cygwin1.dll&lt;/code&gt;이라는 런타임 라이브러리를 통해 Windows에 동적으로 링크하여
+실제 유닉스처럼 동작하도록 해줍니다.&lt;/p&gt;
+
+&lt;h5 id=&quot;설치&quot;&gt;설치&lt;/h5&gt;
+&lt;p&gt;&lt;a href=&quot;https://cygwin.com/install.html&quot;&gt;설치페이지&lt;/a&gt;에 접속하여 32/64 bit에 맞는 setup파일을 받아 쉽게 설치할 수 있습니다.&lt;/p&gt;
+
+&lt;h4 id=&quot;사용&quot;&gt;사용&lt;/h4&gt;
+&lt;p&gt;Cygwin을 실행하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;pwd&lt;/code&gt;를 실행해보면 /home/{자신의 userName} 이 출력됩니다.
+이는 실제 경로는 아니며 Cygwin 설치경로 이하의 경로입니다. 즉 Cygwin 터미널은 자신의 설치경로가 root인데요.
+우리가 원래 사용하고 있던 Windows의 C:, D: 등을 접속하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;/cygdrive/{Drive 볼륨명}&lt;/code&gt; 경로로 이동하면 됩니다.
+다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.&lt;/p&gt;
+</description>
+        <pubDate>2019-10-16</pubDate>
+        <link>http://localhost:4000/articles/2019-10/jpa-query-tech</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/jpa-query-tech</guid>
+        
+        <category>JPA</category>
+        
+        <category>QueryDSL</category>
+        
+        
+        <category>JPA</category>
+        
+      </item>
     
       <item>
         <title>Windows에서 Linux 명령어 사용환경 구성하기</title>
@@ -36,7 +78,7 @@
 우리가 원래 사용하고 있던 Windows의 C:, D: 등을 접속하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;/cygdrive/{Drive 볼륨명}&lt;/code&gt; 경로로 이동하면 됩니다.
 다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-09-09</pubDate>
+        <pubDate>2019-10-16</pubDate>
         <link>http://localhost:4000/articles/2019-09/use-linux-command-on-windows</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-09/use-linux-command-on-windows</guid>
         
@@ -205,7 +247,7 @@ kibana
   &lt;li&gt;&lt;a href=&quot;https://heowc.tistory.com/49&quot;&gt;ELK Stack 개념정리&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2019-09-09</pubDate>
+        <pubDate>2019-10-16</pubDate>
         <link>http://localhost:4000/articles/2019-05/example-of-elk</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-05/example-of-elk</guid>
         
@@ -264,7 +306,7 @@ kibana
 
 &lt;p&gt;본인이 사용하는 기술에 대해 필요한 설정 위주로 찾아서 추가해주면 보다 더 좋은 설정을 진행할 수 있을 것 같습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-09-09</pubDate>
+        <pubDate>2019-10-16</pubDate>
         <link>http://localhost:4000/articles/2019-01/spring-boot-configurations</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-01/spring-boot-configurations</guid>
         
@@ -350,7 +392,7 @@ kibana
 
 &lt;p&gt;위처럼 Spring Boot 용 VFS 구현체를 지정해주는 아주 간단한 방법으로 해결할 수 있었다.&lt;/p&gt;
 </description>
-        <pubDate>2019-09-09</pubDate>
+        <pubDate>2019-10-16</pubDate>
         <link>http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</guid>
         
@@ -382,7 +424,7 @@ kibana
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
-        <pubDate>2019-09-09</pubDate>
+        <pubDate>2019-10-16</pubDate>
         <link>http://localhost:4000/articles/2018-11/problems-with-lombok</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/problems-with-lombok</guid>
         
@@ -414,7 +456,7 @@ kibana
 &lt;img src=&quot;http://localhost:4000/img/post-images/2018-11-06-install-object-aid-plugin/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>2019-09-09</pubDate>
+        <pubDate>2019-10-16</pubDate>
         <link>http://localhost:4000/articles/2018-11/install-object-aid-plugin</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/install-object-aid-plugin</guid>
         
@@ -455,7 +497,7 @@ xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용�
 이 명령어의 결과를 &amp;gt; (출력 리다이렉션) 으로 결과파일로 써줌으로써 각 파일들의 내용이 합쳐진 하나의 결과파일이 생성되게 됩니다.
 파이프, 출력 리다이렉션 등 리눅스 명령어의 강력함을 다시한번 느끼게 되는 계기가 되었습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-09-09</pubDate>
+        <pubDate>2019-10-16</pubDate>
         <link>http://localhost:4000/articles/2018-11/merge-file-in-linux</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/merge-file-in-linux</guid>
         
@@ -563,7 +605,7 @@ JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하
   &lt;p&gt;자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
-        <pubDate>2019-09-09</pubDate>
+        <pubDate>2019-10-16</pubDate>
         <link>http://localhost:4000/articles/2018-10/spring-orm-hibernate-settings</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-10/spring-orm-hibernate-settings</guid>
         
@@ -598,7 +640,7 @@ JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하
 &lt;p&gt;콘솔에 comments(댓글) API로 제공되는 500개의 샘플 데이터가 출력되는 것을 확인할 수 있습니다.&lt;br /&gt;
 백엔드가 구축되어있지 않은 상태에서 프론트엔드 개발 시 유용하게 사용할 수 있을 것 같습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-09-09</pubDate>
+        <pubDate>2019-10-16</pubDate>
         <link>http://localhost:4000/articles/2018-10/json-sample-online</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-10/json-sample-online</guid>
         
@@ -608,44 +650,6 @@ JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하
         
         
         <category>etc.</category>
-        
-      </item>
-    
-      <item>
-        <title>VSCode로 Vue개발 시 팁</title>
-        <description>&lt;p&gt;싱글 파일 컴포넌트를 작성하기 위해 새로은 .vue 파일을 생성한 후&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vue&quot; data-lang=&quot;vue&quot;&gt;scaffold&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;라고 입력한 후 엔터를 치면
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vue&quot; data-lang=&quot;vue&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;위와 같은 코드를 자동완성해준다.&lt;/p&gt;
-</description>
-        <pubDate>2019-09-09</pubDate>
-        <link>http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode</guid>
-        
-        <category>Vue</category>
-        
-        <category>scaffold</category>
-        
-        
-        <category>Vue</category>
         
       </item>
     
