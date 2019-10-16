@@ -4,6 +4,7 @@ layout: default
 
 {% for post in paginator.posts %}
 <section class="post">
+  <hr>
   <header class="post-header">
     <p class="post-meta">
       <span class="post-date">
@@ -56,8 +57,7 @@ layout: default
       <span class="image-credit">Photo Credit: <a href="{{ post.image.creditlink }}">{{ post.image.credit }}</a></span>
       {% endif %}
     </div><!-- /.image-wrap -->
-    {% endif %}
-
+    {% endif %}    
 </section>
 {% endfor %}
 
