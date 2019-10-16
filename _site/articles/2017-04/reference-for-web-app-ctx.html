@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Spring Framework 환경에서 개발하는 도중 WebApplicationContext를 코드상에서 활용해야하는 상황이 생겼다.보통 Spring Bean의 경우 ApplicationContext 인터페이스를 통해 주입받아 쉽게 사용할 수 있는데,나는 이런 기능이 지원되지 않는...">
+  <meta name="keywords" content="Web, Back-End, and SpringFramework">
+  <meta name="author" content="Spring Framework WebApplicationContext 수동으로 참조하는 방법 | Gyu&#39;s IT">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Spring Framework WebApplicationContext 수동으로 참조하는 방법 | Gyu&#39;s IT">
+  <meta name="twitter:description" content="Spring Framework 환경에서 개발하는 도중 WebApplicationContext를 코드상에서 활용해야하는 상황이 생겼다.보통 Spring Bean의 경우 ApplicationContext 인터페이스를 통해 주입받아 쉽게 사용할 수 있는데,나는 이런 기능이 지원되지 않는...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2017-04/reference-for-web-app-ctx">
+  <meta property="og:title" content="Spring Framework WebApplicationContext 수동으로 참조하는 방법 | Gyu&#39;s IT">
+  <meta property="og:description" content="Spring Framework 환경에서 개발하는 도중 WebApplicationContext를 코드상에서 활용해야하는 상황이 생겼다.보통 Spring Bean의 경우 ApplicationContext 인터페이스를 통해 주입받아 쉽게 사용할 수 있는데,나는 이런 기능이 지원되지 않는...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>Spring Framework WebApplicationContext 수동으로 참조하는 방법 | Gyu's IT</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2017-04/reference-for-web-app-ctx">
+  <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/blog-logo.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">All of developer</a>
+  <span class="author_job">Software Engineer</span>
+  <span class="author_bio mbm">개발을 즐기고<br>소프트웨어로 세상을 이롭게 하고자 합니다.</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+        
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+                           
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://github.com/Hyungyu-Lee" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="Spring Framework WebApplicationContext 수동으로 참조하는 방법">Spring Framework WebApplicationContext 수동으로 참조하는 방법</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        22 APR 2017
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    1 min read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>Spring Framework 환경에서 개발하는 도중 WebApplicationContext를 코드상에서 활용해야하는 상황이 생겼다.<br />
+보통 Spring Bean의 경우 <code class="highlighter-rouge">ApplicationContext</code> 인터페이스를 통해 주입받아 쉽게 사용할 수 있는데,<br />
+나는 이런 기능이 지원되지 않는 상황에서 WebApplicationContext를 사용해야하는 상황이 생겼고, ServletContext를 통해 획득하는 방법을 정리한다.</p>
+
+<h6 id="1-root-applicationcontext">1. Root ApplicationContext</h6>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">WebApplicationContextUtils</span><span class="o">.</span><span class="na">getWebApplicationContext</span><span class="o">(</span><span class="err">서블릿컨텍스트객체</span><span class="o">);</span></code></pre></figure>
+
+<h6 id="2-dispatcherservlet에-설정한-applicationcontext">2. DispatcherServlet에 설정한 ApplicationContext</h6>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">WebApplicationContextUtils</span><span class="o">.</span><span class="na">getWebApplicationContext</span><span class="o">(</span><span class="err">서블릿컨텍스트객체</span><span class="o">,</span> <span class="n">FrameworkServlet</span><span class="o">.</span><span class="na">SERVLET_CONTEXT_PREFIX</span> <span class="o">+</span> <span class="s">"설정한 서블릿 이름"</span><span class="o">);</span></code></pre></figure>
+
+
+  </article>
+</div>
+
+<div class="more-posts">
+  <div class="more-category">
+    <h4>'Spring Framework' 카테고리의 다른 글</h4>
+    <a href="/categories#Spring Framework" class="more-button">더보기</a>
+  </div>
+  <table>
+    <tbody>
+      
+      
+      
+        
+      
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2019-05/example-of-elk">ELK를 활용한 로그 중앙집중 처리</a>
+                
+              </th>
+              <td class="more-posts-date">2019. 05. 24</td>
+            </tr>
+          
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2019-01/spring-boot-configurations">Spring Boot 설정파일</a>
+                
+              </th>
+              <td class="more-posts-date">2019. 01. 09</td>
+            </tr>
+          
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem">Spring Boot Build 시 MyBatis Type Alias 미적용 문제</a>
+                
+              </th>
+              <td class="more-posts-date">2018. 12. 18</td>
+            </tr>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2018-07/apache-configuration-on-spring">Spring Framework 환경에서 Apache Commons Configuration 사용</a>
+                
+              </th>
+              <td class="more-posts-date">2018. 07. 14</td>
+            </tr>
+          
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                  <u>Spring Framework WebApplicationContext 수동으로 참조하는 방법</u>
+                
+                
+              </th>
+              <td class="more-posts-date">2017. 04. 22</td>
+            </tr>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2017-01/spring-interceptor">스프링 인터셉터(interceptor) 활용</a>
+                
+              </th>
+              <td class="more-posts-date">2017. 01. 13</td>
+            </tr>
+          
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2016-12/mybatis-escaping">MyBatis 사용 시 부등호 등 이스케이프(escape) 처리</a>
+                
+              </th>
+              <td class="more-posts-date">2016. 12. 22</td>
+            </tr>
+          
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2016-12/spring-path-variable-issue">Spring Path variable 사용 시 확장자 문제</a>
+                
+              </th>
+              <td class="more-posts-date">2016. 12. 20</td>
+            </tr>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2016-11/about-spring-aop">Spring AOP 적용 관련 이야기</a>
+                
+              </th>
+              <td class="more-posts-date">2016. 11. 21</td>
+            </tr>
+          
+        
+      
+    </tbody>
+  </table>
+</div>
+
+<div class="share-buttons">
+  <h6>공유하기: </h6>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2017-04/reference-for-web-app-ctx" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2017-04/reference-for-web-app-ctx" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2017-04/reference-for-web-app-ctx" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+    <li>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2017-04/reference-for-web-app-ctx" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2017-04/reference-for-web-app-ctx" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+    </li>
+  </ul>
+</div><!-- end share-buttons -->
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'gyus-lab';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+        <footer>
+  &copy; 2019 All of developer. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a> made with <i class="fa fa-heart heart-icon"></i>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-125964203-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-9001641802424066",
+          enable_page_level_ads: true
+     });
+</script>
+
+</body>
+</html>

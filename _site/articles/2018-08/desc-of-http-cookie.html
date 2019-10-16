@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="  HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.기본적으로 웹 서...">
+  <meta name="keywords" content="Web, Back-End, and SpringFramework">
+  <meta name="author" content="HTTP 쿠키(Cookie) 란? | Gyu&#39;s IT">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="HTTP 쿠키(Cookie) 란? | Gyu&#39;s IT">
+  <meta name="twitter:description" content="  HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.기본적으로 웹 서...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-08/desc-of-http-cookie">
+  <meta property="og:title" content="HTTP 쿠키(Cookie) 란? | Gyu&#39;s IT">
+  <meta property="og:description" content="  HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.기본적으로 웹 서...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>HTTP 쿠키(Cookie) 란? | Gyu's IT</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2018-08/desc-of-http-cookie">
+  <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/">
+    <img src="http://localhost:4000/img/blog-logo.png" alt="" class="avatar">
+  </a>
+  
+  <a href="http://localhost:4000/" class="author_name">All of developer</a>
+  <span class="author_job">Software Engineer</span>
+  <span class="author_bio mbm">개발을 즐기고<br>소프트웨어로 세상을 이롭게 하고자 합니다.</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+        
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+                           
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li><a href="http://github.com/Hyungyu-Lee" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="HTTP 쿠키(Cookie) 란?">HTTP 쿠키(Cookie) 란?</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        26 AUG 2018
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    1 min read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p>HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.
+쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.</p>
+</blockquote>
+
+<p>기본적으로 웹 서버는 다음과 같은 형태로 브라우저에 쿠키를 저장하라고 알릴 수 있다.
+<!--more--></p>
+
+<figure class="highlight"><pre><code class="language-http" data-lang="http"><span class="err">Set-Cookie: &lt;CookieName&gt;=&lt;CookieValue&gt;
+
+
+</span><span class="k">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-type</span><span class="p">:</span> <span class="s">text/html</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">test=testvalue</span>
+<span class="na">Set-Cookie</span><span class="p">:</span> <span class="s">mycookie=good</span>
+
+[page content]</code></pre></figure>
+
+<p>위 HTTP 응답을 받은 브라우저는 다음 해당 서버에 요청할 때 다음과 같이 보낼 것이다.</p>
+
+<figure class="highlight"><pre><code class="language-http" data-lang="http"><span class="nf">GET</span> <span class="nn">/sample_page.html</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">www.example.org</span>
+<span class="na">Cookie</span><span class="p">:</span> <span class="s">test=testvalue; mycookie=good</span></code></pre></figure>
+
+<p>쿠키에 대한 유효기간은 서버에서 쿠기 송신 시 설정할 수 있고, 설정이 안된 경우는 브라우저를 닫는 순간 사라진다.</p>
+
+<figure class="highlight"><pre><code class="language-http" data-lang="http"><span class="err">Set-Cookie: test=testvalue; Expires=Wed, 21 Oct 2018 07:28:00 GMT;</span></code></pre></figure>
+
+
+  </article>
+</div>
+
+<div class="more-posts">
+  <div class="more-category">
+    <h4>'IT기본' 카테고리의 다른 글</h4>
+    <a href="/categories#IT기본" class="more-button">더보기</a>
+  </div>
+  <table>
+    <tbody>
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                  <u>HTTP 쿠키(Cookie) 란?</u>
+                
+                
+              </th>
+              <td class="more-posts-date">2018. 08. 26</td>
+            </tr>
+          
+        
+      
+        
+      
+        
+      
+        
+          
+          
+            <tr>
+              <th class="more-posts-title">
+                
+                
+                  <a href="http://localhost:4000/articles/2018-08/http-response-send-redirect">HTTP Redirection 응답 보내기</a>
+                
+              </th>
+              <td class="more-posts-date">2018. 08. 12</td>
+            </tr>
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </tbody>
+  </table>
+</div>
+
+<div class="share-buttons">
+  <h6>공유하기: </h6>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+    <li>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-08/desc-of-http-cookie" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+    </li>
+  </ul>
+</div><!-- end share-buttons -->
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'gyus-lab';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+        <footer>
+  &copy; 2019 All of developer. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a> made with <i class="fa fa-heart heart-icon"></i>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-125964203-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-9001641802424066",
+          enable_page_level_ads: true
+     });
+</script>
+
+</body>
+</html>
