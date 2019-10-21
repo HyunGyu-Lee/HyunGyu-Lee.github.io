@@ -1,7 +1,7 @@
 - name: SKT  융합 콜센터 인프라 운영
   company: SK Telecome
   startDate : 2019년 01월
-  endDate : 현재
+  endDate : 2019년 03월
   summary : 융합 콜센터 인프라 TA System 운영
   os : Windows, Linux
   softwareTechnology : Java, Maven, Spring, Mybatis, MariaDB, Hadoop, ElasticSearch, Lucene, JSP, jQuery, Svn
