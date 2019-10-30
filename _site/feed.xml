@@ -5,9 +5,192 @@
     <description>A Blog sharing knowledge and technology.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-10-16</pubDate>
-    <lastBuildDate>Wed, 16 Oct 2019 21:41:57 +0900</lastBuildDate>
+    <pubDate>2019-10-30</pubDate>
+    <lastBuildDate>Wed, 30 Oct 2019 14:44:23 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Spring AOP 동작 방식, 원리</title>
+        <description>&lt;p&gt;스프링은 기본적으로 프록시 기반 AOP 를 제공한다.
+스프링에서는 Java Dynamic Proxy를 사용하거나 Cglib을 사용하여 프록시 기반 AOP를 구현했다.&lt;/p&gt;
+
+&lt;p&gt;이 글에서는 어떻게 Spring 에서 AOP를 사용할 수 있는 방식의 차이와 프레임워크가 AOP를 지원하기 위해 어떤 처리를 해주는지 개인적으로 분석한 내용을 정리한다.
+&lt;!--more--&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;AopProxy 라는 Delegator 인터페이스로 표현되며 Dynamic Proxy 기반은 JdkDynamicAopProxy 클래스, Cglib 기반은 CglibAopProxy 클래스이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Dynamic Proxy 기반과 Cglib 차이는 어떻게 프록시 객체를 생성하는지 방식 차이이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Dynamic Proxy 는 프록시 객체 생성을 위해 인터페이스를 필수로 구현해야하며, Cglib 은 인터페이스를 구현하지 않은 일반 클래스에 런타임 시 코드 조작으로 프록시 객체를 생성해준다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;DefaultAopProxyFactory 클래스의 createAopProxy 메소드를 통해 AopProxy 의 실 구현체가 생성된다.&lt;/p&gt;
+
+    &lt;p&gt;4.1. AOP 적용 대상이 인터페이스거나 인터페이스를 구현(implement)하고 있으면 JdkDynamicAopProxy 가 생성된다.&lt;/p&gt;
+
+    &lt;p&gt;4.2. 위 경우가 아니면 ObjenesisCglibAopProxy 기반 실 객체가 생성된다.&lt;/p&gt;
+
+    &lt;p&gt;4.3. Objenesis 는 과거 Cglib 의 몇 가지 단점을 해결해주는 라이브러리&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Transaction 대상의 경우 기본이 Cglib 으로 생성하게 설정되어있다.&lt;/p&gt;
+
+    &lt;p&gt;5.1. 성능상 Cglib 이 이점이 많고, 예외발생 확률도 적다고 한다.&lt;/p&gt;
+
+    &lt;p&gt;5.2. Cglib 이 가지고 있던 몇 가지 문제점들을 Objenesis 라이브러리를 통해 해결했다. (생성자 중복 호출, default 생성자 필요 문제 등)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;기본 Spring AOP 이외에 스프링에서 사용할 수 있는 방법으로는 AspectJ 가 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Spring AOP 가 제공하는 프록시 기반 방식은 런타임 위빙 (RTW) 이라는 방식으로 프로그램 구동중에 위빙이 일어난다. 반면 AspectJ 는 컴파일 단계 또는 로드타임에 코드를 삽입하여(위빙) RTW 보다 성능면에서 우세하다. (CTW : 컴파일 타임 위빙, LTW : 로드 타임 위빙). 또한 AspectJ 는 기본 Spring AOP 보다 보다 다양한 포인트컷을 지원한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;일반적인 경우 Spring AOP 에서 지원하는 방식으로 요구사항들이 충분히 해결되는 경우가 많고, 성능 또한 @AspectJ 갯수에 따라 달라지는데 일반적인 경우에서는 크게 체감하기 힘들다는 평이 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;AspectJ 를 사용하기 위해서는 AJC 등 별도의 컴파일러 설정 등 추가 설정이 필요한데, Spring AOP 는 그렇지 않다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>2019-10-30</pubDate>
+        <link>http://localhost:4000/articles/2019-10/how-spring-aop-works</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/how-spring-aop-works</guid>
+        
+        <category>Java</category>
+        
+        <category>Spring Framework</category>
+        
+        <category>AOP</category>
+        
+        
+        <category>Spring Framework</category>
+        
+      </item>
+    
+      <item>
+        <title>개인적인 IT 서적 추천</title>
+        <description>&lt;p&gt;읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h4 id=&quot;도서-목록&quot;&gt;도서 목록&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/18249021?scode=018&quot;&gt;객체지향의 사실과 오해&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 조영호&lt;/li&gt;
+      &lt;li&gt;소개 : 『객체지향의 사실과 오해』는 객체지향이란 무엇인가라는 원론적면서도 다소 위험한 질문에 답하기 위해 쓰여진 책이다. 안타깝게도 많은 사람들이 객체지향의 본질을 오해하고 있다. 가장 널리 퍼져있는 오해는 클래스가 객체지향 프로그래밍의 중심이라는 것이다. 객체지향으로 향하는 첫 걸음은 클래스가 아니라 객체를 바라보는 것에서부터 시작한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/29241448&quot;&gt;클린 코더&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 로버트 C. 마틴&lt;/li&gt;
+      &lt;li&gt;소개 : 세계적으로 유명한 프로그래머 ‘밥 아저씨’ 로버트 마틴이 쓴 책으로, 프로 개발자가 되는 길을 알려준다. 수십 년의 경험을 바탕으로 장인 정신, 실천 기법, 도구뿐만 아니라 프로가 가져야 할 마음가짐과 태도를 알려준다. 빡빡한 일정으로 인한 압박을 견디고 비이성적인 사람들과 대화하고 진창에 빠져 오도가도 못하는 상황을 피하는 법 등 다양한 지혜가 책에 담겨 있다. 위대한 소프트웨어를 만드는 장인 정신을 보여주고 프로만이 가지는 자부심과 충만감을 얻게 해 준다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/11681152&quot;&gt;클린 코드&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 로버트 C. 마틴&lt;/li&gt;
+      &lt;li&gt;소개 : 애자일 소프트웨어의 혁명적인 패러다임을 제시하는 책이다. 저자 로버트 마틴은 오브젝트 멘토(Object Mentor)의 동료들과 힘을 모아 ‘개발하며’ 클린 코드를 만드는 최상의 애자일 기법을 정제하여『Clean Code 클린 코드』에 담았다. 아주 많은 코드를 읽고 그 코드의 무엇이 옳은지, 그른지 생각하며 전문가로서 자신이 지니는 가치를 돌아보기 위해 꾸준히 노력한다면, 이 책을 통해 여러분의 프로그래밍 실력은 한층 더 높아질 것이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/65551284&quot;&gt;이펙티브 자바&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 조슈아 블로치&lt;/li&gt;
+      &lt;li&gt;소개 : 효율적이고 잘 설계된 자바 프로그램을 작성할 수 있는 실전적인 지침을 제공하는 책이다. 이 책의 각 장은 여러 개의 ‘항목’으로 구성되어 있으며, 각 항목은 자바 플랫폼을 파헤치는 조언과 실전적인 코드 예를 제공하면서 간결하고 독립적인 설명을 하는 형태로 되어 있다.
+각 항목에 대한 설명을 통해서 해야 할 것과 하지 말아야 할 것, 그리고 왜 그래야 하는지를 명확하게 알 수 있다. 이 책에는 필수 불가결한 프로그래머의 산 경험이 78개의 항목으로 녹아있어 우리가 매일 접하는 자바 프로그래밍의 과제들에 대해 실전적인 최적의 솔루션을 제공한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/27750871?scode=033&quot;&gt;DDD Start!&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 최범균&lt;/li&gt;
+      &lt;li&gt;소개 : 이 책은 DDD(도메인 주도 설계)를 처음 접하는 개발자를 위한 책이다. DDD를 실제 업무에 적용할 수 있도록 기본적인 이론을 설명하고 이를 구현한 코드를 바탕으로 입문자가 헤매지 않고 DDD를 학습할 수 있도록 했다. 애그리거트, 엔티티, 리포지토리 등 DDD의 핵심 패턴을 이용해서 도메인 모델을 구현하는 방법을 설명한다. 도메인 모델의 트랜잭션 충돌을 처리하는 기법(선점 잠금, 비선점 잠금)을 살펴보고, 도메인 이벤트를 이용해서 도메인 영역 간의 의존을 낮추는 방법과 명령 모델과 조회 모델을 나누는 기법에 대해서도 배운다. 스프링과 JPA를 이용해서 실제 동작하는 코드를 함께 제공하고 있으므로 DDD를 학습하고 싶은 개발자에게 좋은 길잡이가 될 것이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/322365&quot;&gt;소프트웨어 장인 정신&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : Pete McBreen&lt;/li&gt;
+      &lt;li&gt;소개 : 이 책은 소프트웨어 개발자 여러분에게 소프트웨어를 어떻게 개발하느냐는 중요하지 않다고 말한다. 소프트웨어 개발의 진정한 가치는 숙련된 개발자가 고품질의 코드를 개발하여 고객이 필요로 하는 것을 전달하는 것에 있다고 말한다. 즉 ‘그 자체를 위한 기술’로부터 고객에게 가치를 전달하는 것에 토대를 둔 기술로 방향을 바꾸는 것이 이제 피할 수 없는 명제임을 보여준다.
+소프트웨어 장인정신은 소프트웨어 엔지니어링에 함축된 “제조한다”는 뜻을 벗어나 소프트웨어 개발을 하는 바로 그 사람에게 보다 주의를 기울이게 하기 때문에 중요하다. 장인정신은 그것과 함께 숙련된 개발 실습자가 그들의 장인적 기술을 마스터하려고 한다는 것, 노동의 결실에 대한 자부심, 그리고 책임정신을 내포한다.
+기술의 완성을 위하여 프로그래머들을 육성하는 방법, 작은 개발 팀들에서의 창조적인 협업을 발전시키는 방법, 그리고 고객과의 커뮤니케이션을 향상시키는 방법들을 소개한다. 그리고 궁극적인 결과로서의 숙련된 개발자는 안정된 애플리케이션을 만들고, 확장하고, 개선시킬 수 있는 사람이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>2019-10-30</pubDate>
+        <link>http://localhost:4000/articles/2019-10/spring-aop-buildup</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/spring-aop-buildup</guid>
+        
+        <category>Book</category>
+        
+        
+        <category>Book</category>
+        
+      </item>
+    
+      <item>
+        <title>개인적인 IT 서적 추천</title>
+        <description>&lt;p&gt;읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h4 id=&quot;도서-목록&quot;&gt;도서 목록&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/18249021?scode=018&quot;&gt;객체지향의 사실과 오해&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 조영호&lt;/li&gt;
+      &lt;li&gt;소개 : 『객체지향의 사실과 오해』는 객체지향이란 무엇인가라는 원론적면서도 다소 위험한 질문에 답하기 위해 쓰여진 책이다. 안타깝게도 많은 사람들이 객체지향의 본질을 오해하고 있다. 가장 널리 퍼져있는 오해는 클래스가 객체지향 프로그래밍의 중심이라는 것이다. 객체지향으로 향하는 첫 걸음은 클래스가 아니라 객체를 바라보는 것에서부터 시작한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/29241448&quot;&gt;클린 코더&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 로버트 C. 마틴&lt;/li&gt;
+      &lt;li&gt;소개 : 세계적으로 유명한 프로그래머 ‘밥 아저씨’ 로버트 마틴이 쓴 책으로, 프로 개발자가 되는 길을 알려준다. 수십 년의 경험을 바탕으로 장인 정신, 실천 기법, 도구뿐만 아니라 프로가 가져야 할 마음가짐과 태도를 알려준다. 빡빡한 일정으로 인한 압박을 견디고 비이성적인 사람들과 대화하고 진창에 빠져 오도가도 못하는 상황을 피하는 법 등 다양한 지혜가 책에 담겨 있다. 위대한 소프트웨어를 만드는 장인 정신을 보여주고 프로만이 가지는 자부심과 충만감을 얻게 해 준다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/11681152&quot;&gt;클린 코드&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 로버트 C. 마틴&lt;/li&gt;
+      &lt;li&gt;소개 : 애자일 소프트웨어의 혁명적인 패러다임을 제시하는 책이다. 저자 로버트 마틴은 오브젝트 멘토(Object Mentor)의 동료들과 힘을 모아 ‘개발하며’ 클린 코드를 만드는 최상의 애자일 기법을 정제하여『Clean Code 클린 코드』에 담았다. 아주 많은 코드를 읽고 그 코드의 무엇이 옳은지, 그른지 생각하며 전문가로서 자신이 지니는 가치를 돌아보기 위해 꾸준히 노력한다면, 이 책을 통해 여러분의 프로그래밍 실력은 한층 더 높아질 것이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/65551284&quot;&gt;이펙티브 자바&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 조슈아 블로치&lt;/li&gt;
+      &lt;li&gt;소개 : 효율적이고 잘 설계된 자바 프로그램을 작성할 수 있는 실전적인 지침을 제공하는 책이다. 이 책의 각 장은 여러 개의 ‘항목’으로 구성되어 있으며, 각 항목은 자바 플랫폼을 파헤치는 조언과 실전적인 코드 예를 제공하면서 간결하고 독립적인 설명을 하는 형태로 되어 있다.
+각 항목에 대한 설명을 통해서 해야 할 것과 하지 말아야 할 것, 그리고 왜 그래야 하는지를 명확하게 알 수 있다. 이 책에는 필수 불가결한 프로그래머의 산 경험이 78개의 항목으로 녹아있어 우리가 매일 접하는 자바 프로그래밍의 과제들에 대해 실전적인 최적의 솔루션을 제공한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/27750871?scode=033&quot;&gt;DDD Start!&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 최범균&lt;/li&gt;
+      &lt;li&gt;소개 : 이 책은 DDD(도메인 주도 설계)를 처음 접하는 개발자를 위한 책이다. DDD를 실제 업무에 적용할 수 있도록 기본적인 이론을 설명하고 이를 구현한 코드를 바탕으로 입문자가 헤매지 않고 DDD를 학습할 수 있도록 했다. 애그리거트, 엔티티, 리포지토리 등 DDD의 핵심 패턴을 이용해서 도메인 모델을 구현하는 방법을 설명한다. 도메인 모델의 트랜잭션 충돌을 처리하는 기법(선점 잠금, 비선점 잠금)을 살펴보고, 도메인 이벤트를 이용해서 도메인 영역 간의 의존을 낮추는 방법과 명령 모델과 조회 모델을 나누는 기법에 대해서도 배운다. 스프링과 JPA를 이용해서 실제 동작하는 코드를 함께 제공하고 있으므로 DDD를 학습하고 싶은 개발자에게 좋은 길잡이가 될 것이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/322365&quot;&gt;소프트웨어 장인 정신&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : Pete McBreen&lt;/li&gt;
+      &lt;li&gt;소개 : 이 책은 소프트웨어 개발자 여러분에게 소프트웨어를 어떻게 개발하느냐는 중요하지 않다고 말한다. 소프트웨어 개발의 진정한 가치는 숙련된 개발자가 고품질의 코드를 개발하여 고객이 필요로 하는 것을 전달하는 것에 있다고 말한다. 즉 ‘그 자체를 위한 기술’로부터 고객에게 가치를 전달하는 것에 토대를 둔 기술로 방향을 바꾸는 것이 이제 피할 수 없는 명제임을 보여준다.
+소프트웨어 장인정신은 소프트웨어 엔지니어링에 함축된 “제조한다”는 뜻을 벗어나 소프트웨어 개발을 하는 바로 그 사람에게 보다 주의를 기울이게 하기 때문에 중요하다. 장인정신은 그것과 함께 숙련된 개발 실습자가 그들의 장인적 기술을 마스터하려고 한다는 것, 노동의 결실에 대한 자부심, 그리고 책임정신을 내포한다.
+기술의 완성을 위하여 프로그래머들을 육성하는 방법, 작은 개발 팀들에서의 창조적인 협업을 발전시키는 방법, 그리고 고객과의 커뮤니케이션을 향상시키는 방법들을 소개한다. 그리고 궁극적인 결과로서의 숙련된 개발자는 안정된 애플리케이션을 만들고, 확장하고, 개선시킬 수 있는 사람이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>2019-10-30</pubDate>
+        <link>http://localhost:4000/articles/2019-10/my-book-list</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/my-book-list</guid>
+        
+        <category>Book</category>
+        
+        
+        <category>Book</category>
+        
+      </item>
     
       <item>
         <title>JPA의 쿼리 기술 종류</title>
@@ -33,7 +216,7 @@
 
 &lt;h2 id=&quot;메소드-네임-쿼리&quot;&gt;메소드 네임 쿼리&lt;/h2&gt;
 </description>
-        <pubDate>2019-10-16</pubDate>
+        <pubDate>2019-10-30</pubDate>
         <link>http://localhost:4000/articles/2019-10/jpa-query-tech</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-10/jpa-query-tech</guid>
         
@@ -73,7 +256,7 @@
 우리가 원래 사용하고 있던 Windows의 C:, D: 등을 접속하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;/cygdrive/{Drive 볼륨명}&lt;/code&gt; 경로로 이동하면 됩니다.
 다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-10-16</pubDate>
+        <pubDate>2019-10-30</pubDate>
         <link>http://localhost:4000/articles/2019-09/use-linux-command-on-windows</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-09/use-linux-command-on-windows</guid>
         
@@ -242,7 +425,7 @@ kibana
   &lt;li&gt;&lt;a href=&quot;https://heowc.tistory.com/49&quot;&gt;ELK Stack 개념정리&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2019-10-16</pubDate>
+        <pubDate>2019-10-30</pubDate>
         <link>http://localhost:4000/articles/2019-05/example-of-elk</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-05/example-of-elk</guid>
         
@@ -301,7 +484,7 @@ kibana
 
 &lt;p&gt;본인이 사용하는 기술에 대해 필요한 설정 위주로 찾아서 추가해주면 보다 더 좋은 설정을 진행할 수 있을 것 같습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-10-16</pubDate>
+        <pubDate>2019-10-30</pubDate>
         <link>http://localhost:4000/articles/2019-01/spring-boot-configurations</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-01/spring-boot-configurations</guid>
         
@@ -387,7 +570,7 @@ kibana
 
 &lt;p&gt;위처럼 Spring Boot 용 VFS 구현체를 지정해주는 아주 간단한 방법으로 해결할 수 있었다.&lt;/p&gt;
 </description>
-        <pubDate>2019-10-16</pubDate>
+        <pubDate>2019-10-30</pubDate>
         <link>http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</guid>
         
@@ -419,7 +602,7 @@ kibana
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
-        <pubDate>2019-10-16</pubDate>
+        <pubDate>2019-10-30</pubDate>
         <link>http://localhost:4000/articles/2018-11/problems-with-lombok</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/problems-with-lombok</guid>
         
@@ -451,7 +634,7 @@ kibana
 &lt;img src=&quot;http://localhost:4000/img/post-images/2018-11-06-install-object-aid-plugin/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>2019-10-16</pubDate>
+        <pubDate>2019-10-30</pubDate>
         <link>http://localhost:4000/articles/2018-11/install-object-aid-plugin</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/install-object-aid-plugin</guid>
         
@@ -461,190 +644,6 @@ kibana
         
         
         <category>Java</category>
-        
-      </item>
-    
-      <item>
-        <title>리눅스 여러 파일 내용 하나로 합치기</title>
-        <description>&lt;p&gt;리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;파일명패턴] | xargs &lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;결과파일명]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.
-&lt;!--more--&gt;
-동작 방법을 살펴보면&lt;/p&gt;
-
-&lt;p&gt;ls [파일명패턴] 을 통해 먼저 대상 파일들을 선택합니다.
-ls 명령은 디렉토리에 존재하는 요소(파일, 디렉토리)들의 정보(파일명, 권한, 수정시간 등) 목록을 표준출력으로 출력하는 명령어로, 아무 옵션없이 실행하면 파일명들만 출력하게 됩니다.&lt;/p&gt;
-
-&lt;p&gt;ls 명령을 통해 출력된 파일명 목록을 &lt;code class=&quot;highlighter-rouge&quot;&gt;|&lt;/code&gt;(파이프)를 통해 뒤에 나오는 명령어로 전달합니다.
-&lt;code class=&quot;highlighter-rouge&quot;&gt;|&lt;/code&gt;(파이프)는 이전 명령어의 실행 결과를 다음 명령어의 입력으로 사용할 때 활용됩니다.&lt;/p&gt;
-
-&lt;p&gt;다음은 xargs cat 입니다.
-xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용할 수 있도록 해줍니다.&lt;/p&gt;
-
-&lt;p&gt;즉 앞의 ls 명령어 실행결과가 xargs 다음명령어인 cat의 인자로 사용되는 것이지요.
-만약 ls 명령어의 실행결과가 file1 file2 file3 이렇다면 아래 명령어처럼 수행되는 것입니다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;file1 file2 file3&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;cat은 인자로 전달된 파일들의 내용을 표준출력으로 출력하는 명령어입니다.
-이 명령어의 결과를 &amp;gt; (출력 리다이렉션) 으로 결과파일로 써줌으로써 각 파일들의 내용이 합쳐진 하나의 결과파일이 생성되게 됩니다.
-파이프, 출력 리다이렉션 등 리눅스 명령어의 강력함을 다시한번 느끼게 되는 계기가 되었습니다.&lt;/p&gt;
-</description>
-        <pubDate>2019-10-16</pubDate>
-        <link>http://localhost:4000/articles/2018-11/merge-file-in-linux</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2018-11/merge-file-in-linux</guid>
-        
-        <category>Unix/Linux</category>
-        
-        <category>bash</category>
-        
-        
-        <category>Unix/Linux</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring ORM (Hibernate) 설정</title>
-        <description>&lt;p&gt;보통 스프링 프레임워크로 웹 프로젝트 설정 시 Web MVC 관련 설정과 Service레이어 이하 애플리케이션 관련 설정을 분리하여 설정합니다.&lt;br /&gt;
-이 포스트는 Spring 프레임워크 환경에서 JPA를 사용하기 위한 애플리케이션 관련 필수 설정을 다룹니다.
-&lt;!--more--&gt;
-—&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xmlns:context=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/context&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:tx=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/tx&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 1. 어노테이션(@Transactional) 기반 트랜잭션 매니저 활성화 --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;tx:annotation-driven/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 2. 애플리케이션에서 사용되는 컴포넌트 스캔 패키지 설정 --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;context:component-scan&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;base-package=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;my.webservice.biz&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;context:exclude-filter&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;annotation&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;expression=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.stereotype.Controller&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/context:component-scan&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 3. 데이터소스(커넥션풀) 설정 - Hikari커넥션 풀 이용 --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hikariConfig&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.zaxxer.hikari.HikariConfig&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;poolName&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;springHikariCP&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;connectionTestQuery&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SELECT 1&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSourceClassName&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${hibernate.dataSourceClassName}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;maximumPoolSize&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${hibernate.hikari.maximumPoolSize}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;idleTimeout&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${hibernate.hikari.idleTimeout}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSourceProperties&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;props&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;${dataSource.url}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;${dataSource.username}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;${dataSource.password}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/props&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.zaxxer.hikari.HikariDataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;destroy-method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;close&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;constructor-arg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hikariConfig&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 4. 트랜잭션매니저 설정 --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;transactionManager&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.orm.jpa.JpaTransactionManager&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 5. JPA 예외 추상화 AOP 설정 --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 6. 엔티티매니저팩토리 설정 --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;entityManagerFactory&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dataSource&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;packagesToScan&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;package.for.entity&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- @Entity 탐색 시작 위치 --&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;jpaVendorAdapter&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 하이버네이트 구현체 사용 --&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;jpaProperties&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 하이버네이트 상세 설정 --&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;props&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.dialect&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;org.hibernate.dialect.H2Dialect&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 방언 --&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.show_sql&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;                   &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- SQL 보기 --&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.format_sql&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;                 &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- SQL 정렬해서 보기 --&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.use_sql_comments&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;           &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- SQL 코멘트 보기 --&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.id.new_generator_mappings&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 새 버전의 ID 생성 옵션 --&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;nt&quot;&gt;&amp;lt;prop&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hibernate.hbm2ddl.auto&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;create&lt;span class=&quot;nt&quot;&gt;&amp;lt;/prop&amp;gt;&lt;/span&gt;             &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- DDL 자동 생성 --&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/props&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h5 id=&quot;1-어노테이션transactional-기반-트랜잭션-매니저-활성화&quot;&gt;1. 어노테이션(@Transactional) 기반 트랜잭션 매니저 활성화&lt;/h5&gt;
-&lt;p&gt;스프링 프레임워크에서 제공하는 어노테이션 기반 트랜잭션 매니저를 활성화합니다. @Transactional이 붙은 클래스, 메소드에 트랜잭션을 적용해줍니다.&lt;/p&gt;
-
-&lt;h5 id=&quot;2-애플리케이션에서-사용되는-컴포넌트-스캔-패키지-설정&quot;&gt;2. 애플리케이션에서 사용되는 컴포넌트 스캔 패키지 설정&lt;/h5&gt;
-&lt;p&gt;보통 @Controller는 Web MVC영역 설정으로 잡히도록 하기 때문에 @Controller를 제외하고 스캔하도록 설정&lt;/p&gt;
-
-&lt;h5 id=&quot;3-데이터소스커넥션풀-설정---hikari커넥션-풀-이용&quot;&gt;3. 데이터소스(커넥션풀) 설정 - Hikari커넥션 풀 이용&lt;/h5&gt;
-&lt;p&gt;커넥션 풀 설정입니다. 이 포스트에서는 HikariCP를 이용했으며 다른 커넥션풀을 이용해도 무방합니다.&lt;/p&gt;
-
-&lt;h5 id=&quot;4-트랜잭션-매니저-설정&quot;&gt;4. 트랜잭션 매니저 설정&lt;/h5&gt;
-&lt;p&gt;그동안 MyBatis 등 프레임워크을 사용할 땐 DataSourceTransactionManager를 많이 사용해왔는데, JPA를 이용할 때엔 JpaTransactionManager를 설정해줘야한다고 합니다.&lt;br /&gt;
-JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하기 때문에 JPA가 아닌 타 프레임워크(MyBatis, JdbcTemplate 등) 과도 사용이 가능합니다.&lt;/p&gt;
-
-&lt;h5 id=&quot;5-jpa-예외-추상화-aop-설정&quot;&gt;5. JPA 예외 추상화 AOP 설정&lt;/h5&gt;
-&lt;p&gt;JPA에서 발생한 예외 (JPA예외)를 스프링에서 추상화한 예외로 변환하는 역할을 하는 AOP를 적용합니다.&lt;/p&gt;
-
-&lt;h5 id=&quot;6-엔티티매니저팩토리-설정&quot;&gt;6. 엔티티매니저팩토리 설정&lt;/h5&gt;
-&lt;p&gt;엔티티매니저팩토리 설정은 직관적으로 이해할 수 있습니다. &lt;br /&gt;
-다만 Java SE 환경에서는 META-INF/persistence.xml 파일을 자동인식하여 엔티티매니저팩토리를 설정했지만  스프링 프레임워크에서는 이와같이 스프링다운 방식대로 엔티티매니저팩토리를 하나의 빈으로 설정하여 persistence.xml없이 사용할 수 있습니다.&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>2019-10-16</pubDate>
-        <link>http://localhost:4000/articles/2018-10/spring-orm-hibernate-settings</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2018-10/spring-orm-hibernate-settings</guid>
-        
-        <category>JPA</category>
-        
-        <category>Hibernate</category>
-        
-        <category>Spring ORM</category>
-        
-        
-        <category>JPA</category>
-        
-      </item>
-    
-      <item>
-        <title>JSON 샘플 데이터 제공 사이트 소개</title>
-        <description>&lt;p&gt;개발하다보면 JSON 샘플 데이터가 필요한 경우가 자주 있습니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;https://jsonplaceholder.typicode.com&quot;&gt;JSONPlaceholder&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;위 사이트에서는 게시글, 댓글, 사진 등 다양한 컨셉의 샘플 데이터를 제공하며 사진의 경우 image 주소까지 제공하여 편리하게 사용할 수 있습니다.
-&lt;!--more--&gt;
-사용방법은 다음과 같이 아주 간단합니다.
-—&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;nx&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'https://jsonplaceholder.typicode.com/comments'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;콘솔에 comments(댓글) API로 제공되는 500개의 샘플 데이터가 출력되는 것을 확인할 수 있습니다.&lt;br /&gt;
-백엔드가 구축되어있지 않은 상태에서 프론트엔드 개발 시 유용하게 사용할 수 있을 것 같습니다.&lt;/p&gt;
-</description>
-        <pubDate>2019-10-16</pubDate>
-        <link>http://localhost:4000/articles/2018-10/json-sample-online</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2018-10/json-sample-online</guid>
-        
-        <category>FrontEnd</category>
-        
-        <category>JSON</category>
-        
-        
-        <category>etc.</category>
         
       </item>
     

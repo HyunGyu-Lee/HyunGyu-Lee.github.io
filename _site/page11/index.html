@@ -24,7 +24,7 @@
 
   <!-- Open Graph Tags -->
   <meta property="og:type" content="blog">
-  <meta property="og:url" content="http://localhost:4000/page6/">
+  <meta property="og:url" content="http://localhost:4000/page11/">
   <meta property="og:title" content="Gyu&#39;s IT">
   <meta property="og:description" content="A Blog sharing knowledge and technology.">
   
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://localhost:4000/css/main.css">
 
-  <link rel="canonical" href="http://localhost:4000/page6/">
+  <link rel="canonical" href="http://localhost:4000/page11/">
   <link rel="alternate" type="application/rss+xml" title="Gyu&#39;s IT" href="http://localhost:4000/feed.xml" />
 
   <!-- Icons -->
@@ -140,18 +140,18 @@
   <header class="post-header">
     <p class="post-meta">
       <span class="post-date">
-        7 OCT 2018
+        23 NOV 2016
       </span>
       
       •
       
-        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
+        <a class="post-cat" href="http://localhost:4000/categories/#Java">Java</a>
         
       
       
     </p>
     <h4>
-      <a href="http://localhost:4000/articles/2018-10/jpa-basic-setting" class="post-title" title="기본적인 JPA 설정방법">기본적인 JPA 설정방법</a>
+      <a href="http://localhost:4000/articles/2016-11/java-dynamic-proxy" class="post-title" title="Java Dynamic Proxy">Java Dynamic Proxy</a>
       
     </h4>
 
@@ -160,15 +160,11 @@
     </header>
 
     
-    <div class="post-description go-post" url="http://localhost:4000/articles/2018-10/jpa-basic-setting">
+    <div class="post-description go-post" url="http://localhost:4000/articles/2016-11/java-dynamic-proxy">
       <p>
-        <p>JPA 구현체로 Hibernate를 사용하기 위해 필요한 핵심 라이브러리가 존재한다.</p>
-
-<ul>
-  <li>hibernate-core : 하이버네이트 라이브러리</li>
-  <li>hibernate-entitymanager : 하이버네이트가 JPA 구현체로 동작하도록 JPA  표준을 구현한 라이브러리</li>
-  <li>hibernate-jpa-2.1-api : JPA 2.1 표준을 모아둔 라이브러리</li>
-</ul>
+        <h5 id="dynamic-proxy란">Dynamic Proxy란</h5>
+<p>메소드 인터셉팅을 통해 부수적인 코드를 삽입할 수 있는 기술, Spring AOP에서도 사용한다.<br />
+원래객체에 부수적인코드가 합쳐진 새로운 객체가 프록시 객체가 된다.</p>
 
 
       </p>
@@ -183,18 +179,18 @@
   <header class="post-header">
     <p class="post-meta">
       <span class="post-date">
-        7 OCT 2018
+        21 NOV 2016
       </span>
       
       •
       
-        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
+        <a class="post-cat" href="http://localhost:4000/categories/#Spring Framework">Spring Framework</a>
         
       
       
     </p>
     <h4>
-      <a href="http://localhost:4000/articles/2018-10/crud-example-with-jpa-app" class="post-title" title="JPA 기본적인 CRUD 해보기">JPA 기본적인 CRUD 해보기</a>
+      <a href="http://localhost:4000/articles/2016-11/about-spring-aop" class="post-title" title="Spring AOP 적용 관련 이야기">Spring AOP 적용 관련 이야기</a>
       
     </h4>
 
@@ -203,130 +199,18 @@
     </header>
 
     
-    <div class="post-description go-post" url="http://localhost:4000/articles/2018-10/crud-example-with-jpa-app">
+    <div class="post-description go-post" url="http://localhost:4000/articles/2016-11/about-spring-aop">
       <p>
-        <p>간단한 애플리케이션을 작성하여 기본적인 JPA CRUD를 수행해본다.</p>
+        <p>스프링 AOP는 <code class="highlighter-rouge">JDK 다이나믹 프록시</code>를 이용한 방법과 <code class="highlighter-rouge">CGLIB</code>을 이용한 프록시를 이용하는 방법 2가지가 있다.<br />
+결국 AOP는 프록시를 통해 구현할 수 있다.<br />
+다이나믹 프록시를 이용한 방법은 치명적인 제약사항이 있다.</p>
 
+<h6 id="1-프록시객체를-만들고자하는-대상이-인터페이스-또는-인터페이스를-implements-하고-있는-클래스여야-한다는-것이다">1. 프록시객체를 만들고자하는 대상이 인터페이스 또는 인터페이스를 implements 하고 있는 클래스여야 한다는 것이다.</h6>
+<p>일반적으로 Spring이 제공하는 AOP기술을 사용할 때 AOP를 적용하려고 하는 클래스에 어떤 인터페이스를 꼭 implements하지 않아도 됐다.<br />
+즉 기본적으로 사용되는 방법은 CGLIB을 이용한 프록시를 활용하는 방법이다. (다이나믹 프록시를 이용하려면 별도의 설정을 함)</p>
 
-      </p>
-    </div>
-    
-
-        
-</section>
-
-<section class="post">
-  <hr>
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        7 OCT 2018
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2018-10/what-is-jpa-orm" class="post-title" title="JPA / ORM 이란?">JPA / ORM 이란?</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2018-10/what-is-jpa-orm">
-      <p>
-        <h4 id="jpa란">JPA란</h4>
-<p>JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다.<br />
-ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미한다.</p>
-
-<p>즉 JPA는 자바의 객체와 관계형 데이터베이스를 매핑하는 표준 기술이다.</p>
-
-
-      </p>
-    </div>
-    
-
-        
-</section>
-
-<section class="post">
-  <hr>
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        7 OCT 2018
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2018-10/difference-of-entity-db-model" class="post-title" title="객체 모델과 관계형 데이터베이스 모델 차이">객체 모델과 관계형 데이터베이스 모델 차이</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2018-10/difference-of-entity-db-model">
-      <p>
-        <h4 id="jpa란">JPA란</h4>
-<p>객체 모델과 관계형 데이터베이스 모델은 지향하는 목적이 다르다. (패러다임의 불일치)<br />
-<code class="highlighter-rouge">-</code> 객체지향 언어의 추상화, 상속, 다형성 등의 개념이 관계형 데이터베이스에는 없다.<br />
-<code class="highlighter-rouge">-</code> 관계형 데이터베이스는 데이터 중심으로 구조화되어 있고, 집합적인 사고를 요구한다.</p>
-
-
-      </p>
-    </div>
-    
-
-        
-</section>
-
-<section class="post">
-  <hr>
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        1 SEP 2018
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#Unix/Linux">Unix/Linux</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2018-09/linux-tar-command" class="post-title" title="리눅스 tar, gz를 이용한 압축">리눅스 tar, gz를 이용한 압축</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2018-09/linux-tar-command">
-      <p>
-        <p>tar 명령어는 굉장히 많은 옵션을 사용할 수 있다.</p>
-
-<p>이 포스트에서는 주로 사용하는 패턴인 tar 압축 / 압축해제, tar.gz 압축 / 압축해제 명령어를 기술한다.</p>
-
+<h6 id="2-특정-메소드에-국한되지-않고-인터페이스의-모든-메소드에-대해-적용된다는-점이다">2. 특정 메소드에 국한되지 않고 인터페이스의 모든 메소드에 대해 적용된다는 점이다.</h6>
+<p>Pointcut으로 메소드를 지정하는 방법은 결국 CGLIB을 이용할 수 밖에 없다는 것이다.</p>
 
       </p>
     </div>
@@ -361,7 +245,7 @@ ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터�
       
     
       
-        <a href="#" class="active">6</a>
+        <a href="/page6/">6</a>
       
     
       
@@ -381,7 +265,7 @@ ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터�
       
     
       
-        <a href="/page11/">11</a>
+        <a href="#" class="active">11</a>
       
     
   </div>

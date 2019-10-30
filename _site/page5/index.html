@@ -83,7 +83,7 @@
       <li class="nav-item">
         <a href="http://localhost:4000/tags/">Tags</a>
       </li>
-                           
+                             
     </ul>
   </nav>
   <script type="text/javascript">
@@ -135,6 +135,127 @@
     <div class="col s12 m9">
       <div class="post-listing">
         
+<section class="post">
+  <hr>
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        12 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/query-dsl-error-on-pom" class="post-title" title="QueryDSL 관련 pom.xml 오류">QueryDSL 관련 pom.xml 오류</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2018-10/query-dsl-error-on-pom">
+      <p>
+        <p>이클립스에서 QueryDSL로 생성한 Q도메인들을 인식하지 못하여 원인을 파악해보니 pom.xml 의 플러그인 설정에 다음과 같은 오류가 나고 있었다.</p>
+
+
+      </p>
+    </div>
+    
+
+        
+</section>
+
+<section class="post">
+  <hr>
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        12 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/description-of-persistence-context-1" class="post-title" title="영속성 컨텍스트 (Persistence Context) 란 (1)">영속성 컨텍스트 (Persistence Context) 란 (1)</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2018-10/description-of-persistence-context-1">
+      <p>
+        <p>우리 말로 표현해보자면 엔티티를 영구 저장하는 환경으로 논리적인 개념에 가깝다.<br />
+엔티티매니저로 엔티티를 저장하거나 조회하면 영속성 컨텍스트에 엔티티를 보관하고 관리한다.<br />
+기본적으로 엔티티매니저가 생성될 때 하나의 영속성 컨텍스트가 만들어지며, 여러 개의 엔티티매니저가 하나의 영속성 컨텍스트에 접근할 수도 있다.<br />
+persist 메소드를 “회원 엔티티를 저장한다”보다 정확히 얘기하면 “엔티티매니저를 사용해서 회원 엔티티를 영속성 컨텍스트에 저장한다”로 말할수있다.</p>
+
+
+      </p>
+    </div>
+    
+
+        
+</section>
+
+<section class="post">
+  <hr>
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        10 OCT 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-10/description-of-persistence-context-2" class="post-title" title="영속성 컨텍스트 (Persistence Context) 란 (2)">영속성 컨텍스트 (Persistence Context) 란 (2)</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2018-10/description-of-persistence-context-2">
+      <p>
+        <p>플러시는 영속성 컨텍스트의 변경 내용을 데이터베이스에 반영한다.</p>
+
+<p>플러시가 호출되면</p>
+
+<ol>
+  <li>변경감지가 동작해서 영속성 컨텍스트 내 모든 엔티티들을 대상으로 스냅샷과 비교해 변경사항을 찾고, 수정된 엔티티들은 UPDATE문을 생성하여 SQL저장소에 등록한다.</li>
+  <li>SQL저장소의 쿼리를 데이터베이스에 전송한다. (등록, 수정, 삭제 쿼리)</li>
+</ol>
+
+
+      </p>
+    </div>
+    
+
+        
+</section>
+
 <section class="post">
   <hr>
   <header class="post-header">
@@ -214,127 +335,6 @@ META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 �
         
 </section>
 
-<section class="post">
-  <hr>
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        7 OCT 2018
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2018-10/jpa-basic-setting" class="post-title" title="기본적인 JPA 설정방법">기본적인 JPA 설정방법</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2018-10/jpa-basic-setting">
-      <p>
-        <p>JPA 구현체로 Hibernate를 사용하기 위해 필요한 핵심 라이브러리가 존재한다.</p>
-
-<ul>
-  <li>hibernate-core : 하이버네이트 라이브러리</li>
-  <li>hibernate-entitymanager : 하이버네이트가 JPA 구현체로 동작하도록 JPA  표준을 구현한 라이브러리</li>
-  <li>hibernate-jpa-2.1-api : JPA 2.1 표준을 모아둔 라이브러리</li>
-</ul>
-
-
-      </p>
-    </div>
-    
-
-        
-</section>
-
-<section class="post">
-  <hr>
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        7 OCT 2018
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2018-10/crud-example-with-jpa-app" class="post-title" title="JPA 기본적인 CRUD 해보기">JPA 기본적인 CRUD 해보기</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2018-10/crud-example-with-jpa-app">
-      <p>
-        <p>간단한 애플리케이션을 작성하여 기본적인 JPA CRUD를 수행해본다.</p>
-
-
-      </p>
-    </div>
-    
-
-        
-</section>
-
-<section class="post">
-  <hr>
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        7 OCT 2018
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#JPA">JPA</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2018-10/what-is-jpa-orm" class="post-title" title="JPA / ORM 이란?">JPA / ORM 이란?</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2018-10/what-is-jpa-orm">
-      <p>
-        <h4 id="jpa란">JPA란</h4>
-<p>JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다.<br />
-ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미한다.</p>
-
-<p>즉 JPA는 자바의 객체와 관계형 데이터베이스를 매핑하는 표준 기술이다.</p>
-
-
-      </p>
-    </div>
-    
-
-        
-</section>
-
 
 <!-- Pagination links -->
 <div class="pagination-wrap">
@@ -380,6 +380,10 @@ ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터�
         <a href="/page10/">10</a>
       
     
+      
+        <a href="/page11/">11</a>
+      
+    
   </div>
 </div>
 
@@ -390,6 +394,13 @@ ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터�
       </div>
     </div>
   </div>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-9001641802424066",
+          enable_page_level_ads: true
+     });
+</script>
   <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
 
@@ -403,15 +414,6 @@ ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터�
   ga('send', 'pageview');
 </script>
 
-
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-9001641802424066",
-          enable_page_level_ads: true
-     });
-</script>
 
 </body>
 </html>

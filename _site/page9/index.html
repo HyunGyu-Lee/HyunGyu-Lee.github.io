@@ -83,7 +83,7 @@
       <li class="nav-item">
         <a href="http://localhost:4000/tags/">Tags</a>
       </li>
-                           
+                             
     </ul>
   </nav>
   <script type="text/javascript">
@@ -135,6 +135,136 @@
     <div class="col s12 m9">
       <div class="post-listing">
         
+<section class="post">
+  <hr>
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        14 JUL 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Spring Framework">Spring Framework</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-07/apache-configuration-on-spring" class="post-title" title="Spring Framework 환경에서 Apache Commons Configuration 사용">Spring Framework 환경에서 Apache Commons Configuration 사용</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2018-07/apache-configuration-on-spring">
+      <p>
+        <p>Spring Framework 환경에서 Apache Commons의 Configuration 라이브러리를 사용하는 방법을 정리합니다.</p>
+
+
+      </p>
+    </div>
+    
+
+        
+</section>
+
+<section class="post">
+  <hr>
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        22 APR 2017
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Spring Framework">Spring Framework</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2017-04/reference-for-web-app-ctx" class="post-title" title="Spring Framework WebApplicationContext 수동으로 참조하는 방법">Spring Framework WebApplicationContext 수동으로 참조하는 방법</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2017-04/reference-for-web-app-ctx">
+      <p>
+        <p>Spring Framework 환경에서 개발하는 도중 WebApplicationContext를 코드상에서 활용해야하는 상황이 생겼다.<br />
+보통 Spring Bean의 경우 <code class="highlighter-rouge">ApplicationContext</code> 인터페이스를 통해 주입받아 쉽게 사용할 수 있는데,<br />
+나는 이런 기능이 지원되지 않는 상황에서 WebApplicationContext를 사용해야하는 상황이 생겼고, ServletContext를 통해 획득하는 방법을 정리한다.</p>
+
+<h6 id="1-root-applicationcontext">1. Root ApplicationContext</h6>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">WebApplicationContextUtils</span><span class="o">.</span><span class="na">getWebApplicationContext</span><span class="o">(</span><span class="err">서블릿컨텍스트객체</span><span class="o">);</span></code></pre></figure>
+
+<h6 id="2-dispatcherservlet에-설정한-applicationcontext">2. DispatcherServlet에 설정한 ApplicationContext</h6>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">WebApplicationContextUtils</span><span class="o">.</span><span class="na">getWebApplicationContext</span><span class="o">(</span><span class="err">서블릿컨텍스트객체</span><span class="o">,</span> <span class="n">FrameworkServlet</span><span class="o">.</span><span class="na">SERVLET_CONTEXT_PREFIX</span> <span class="o">+</span> <span class="s">"설정한 서블릿 이름"</span><span class="o">);</span></code></pre></figure>
+
+
+      </p>
+    </div>
+    
+
+        
+</section>
+
+<section class="post">
+  <hr>
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        7 MAR 2017
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Java">Java</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2017-03/simple-project-without-ide" class="post-title" title="IDE없이 기본 프로젝트 환경 구성">IDE없이 기본 프로젝트 환경 구성</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description go-post" url="http://localhost:4000/articles/2017-03/simple-project-without-ide">
+      <p>
+        <h6 id="1-프로젝트-디렉토리-생성">1. 프로젝트 디렉토리 생성</h6>
+<ol>
+  <li>소스파일(.java)은 src 디렉토리에 저장</li>
+  <li>컴파일된 클래스파일(.class)은 class 디렉토리에 저장</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir sample-project
+<span class="nb">cd </span>sample-project
+mkdir src
+mkdir class</code></pre></figure>
+
+
+      </p>
+    </div>
+    
+
+        
+</section>
+
 <section class="post">
   <hr>
   <header class="post-header">
@@ -211,132 +341,6 @@
         
 </section>
 
-<section class="post">
-  <hr>
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        22 DEC 2016
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#Spring Framework">Spring Framework</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2016-12/mybatis-escaping" class="post-title" title="MyBatis 사용 시 부등호 등 이스케이프(escape) 처리">MyBatis 사용 시 부등호 등 이스케이프(escape) 처리</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2016-12/mybatis-escaping">
-      <p>
-        <p>XML에서 쿼리를 작성할 때 &lt;, &gt;와 같은 비교 연산자를 사용하면</p>
-
-<blockquote>
-  <p>The content of elements must consist of well-formed character data or markup.</p>
-</blockquote>
-
-<p>이런 오류메세지가 나타날 수 있다. <br />
-MyBatis에선 XML파일을 통해 쿼리를 작성하는 기능을 지원하는 때 이때 위와같은 문제가 발생할 수 있다.<br />
-XML에서 &lt;, &gt; 를 비교연산자로 판단하지 않고 <code class="highlighter-rouge">&lt;select&gt;</code> 등 태그의 시작과 끝으로 인식되어 생기는 일이다.<br />
-해결하기 위해서는 비교연산 사용하는 부분에을 &lt;![CDATA[ ]]&gt; 로 감싸주면 된다.</p>
-
-
-      </p>
-    </div>
-    
-
-        
-</section>
-
-<section class="post">
-  <hr>
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        20 DEC 2016
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#Spring Framework">Spring Framework</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2016-12/spring-path-variable-issue" class="post-title" title="Spring Path variable 사용 시 확장자 문제">Spring Path variable 사용 시 확장자 문제</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2016-12/spring-path-variable-issue">
-      <p>
-        
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/temp/{filename}"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[]&gt;</span> <span class="nf">tempView</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="n">String</span> <span class="n">filename</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-        <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Return Temp image data"</span><span class="o">);</span>
-        <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">filename</span><span class="o">);</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-<span class="o">}</span></code></pre></figure>
-
-
-      </p>
-    </div>
-    
-
-        
-</section>
-
-<section class="post">
-  <hr>
-  <header class="post-header">
-    <p class="post-meta">
-      <span class="post-date">
-        20 DEC 2016
-      </span>
-      
-      •
-      
-        <a class="post-cat" href="http://localhost:4000/categories/#jQuery">jQuery</a>
-        
-      
-      
-    </p>
-    <h4>
-      <a href="http://localhost:4000/articles/2016-12/get-started-summernote" class="post-title" title="웹 기반 WYSIWYG 에디터 Summernote 사용하기">웹 기반 WYSIWYG 에디터 Summernote 사용하기</a>
-      
-    </h4>
-
-    
-
-    </header>
-
-    
-    <div class="post-description go-post" url="http://localhost:4000/articles/2016-12/get-started-summernote">
-      <p>
-        <p>WYSIWYG 에디터 Summernote 사용방법을 정리합니다.</p>
-
-
-      </p>
-    </div>
-    
-
-        
-</section>
-
 
 <!-- Pagination links -->
 <div class="pagination-wrap">
@@ -382,6 +386,10 @@ XML에서 &lt;, &gt; 를 비교연산자로 판단하지 않고 <code class="hig
         <a href="/page10/">10</a>
       
     
+      
+        <a href="/page11/">11</a>
+      
+    
   </div>
 </div>
 
@@ -392,6 +400,13 @@ XML에서 &lt;, &gt; 를 비교연산자로 판단하지 않고 <code class="hig
       </div>
     </div>
   </div>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-9001641802424066",
+          enable_page_level_ads: true
+     });
+</script>
   <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
 
@@ -405,15 +420,6 @@ XML에서 &lt;, &gt; 를 비교연산자로 판단하지 않고 <code class="hig
   ga('send', 'pageview');
 </script>
 
-
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-9001641802424066",
-          enable_page_level_ads: true
-     });
-</script>
 
 </body>
 </html>
