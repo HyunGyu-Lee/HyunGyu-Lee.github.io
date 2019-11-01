@@ -18,7 +18,6 @@ comments: true
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!-- 1. 어노테이션(@Transactional) 기반 트랜잭션 매니저 활성화 -->
     <tx:annotation-driven/>
-
     <!-- 2. 애플리케이션에서 사용되는 컴포넌트 스캔 패키지 설정 -->
     <context:component-scan base-package="my.webservice.biz">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>

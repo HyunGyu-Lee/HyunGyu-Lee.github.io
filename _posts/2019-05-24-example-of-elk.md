@@ -33,7 +33,7 @@ Elasticsearch -> Kibana: 시각화
 * 설치 : https://www.elastic.co/kr/downloads/logstash
 
 ##### 디렉토리 구성
-![Image1]({{ "/assets/image/post-images/2019-05-24-example-of-elk/1.png" | absolute_url }})
+![Image1]({{ "/assets/images/post-images/2019-05-24-example-of-elk/1.png" | absolute_url }})
 
 테스트를 위해 표준 입출력 (터미널 입력, 출력)으로 설정하고 실행
 
@@ -52,7 +52,7 @@ output {
 cd 설치경로/bin
 logstash ../config/logstash-example.conf
 ```
-![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/2.png" | absolute_url }})
+![Image1]({{ "/assets/images/post-images/2019-05-24-example-of-elk/2.png" | absolute_url }})
 
 ##### Spring Boot와 연동
 1) logstash Input 설정에 아래와 같이 설정
@@ -94,7 +94,7 @@ output {
 
 4) logstash, Spring Boot 각각 실행
 아래와 같이 Spring Boot 실행 로그가 ELK 포맷에 맞는 JSON형태로 변환되어 표준출력으로 출력됨
-![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/3.png" | absolute_url }})
+![Image1]({{ "/assets/images/post-images/2019-05-24-example-of-elk/3.png" | absolute_url }})
 
 ##### 출력 Elasticsearch 와 연동 (input을 Elasticsearch로 적재)
 1) logstash Input/Output 설정에 아래와 같이 설정
@@ -119,7 +119,7 @@ output {
 * 설치 : https://www.elastic.co/kr/downloads/elasticsearch
 
 ##### 디렉토리 구성
-![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/4.png" | absolute_url }})
+![Image1]({{ "/assets/images/post-images/2019-05-24-example-of-elk/4.png" | absolute_url }})
 
 ##### 실행
 ```bash
@@ -134,7 +134,7 @@ elasticsearch
 * 설치 : https://www.elastic.co/kr/downloads/kibana
 
 ##### 디렉토리 구성
-![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/5.png" | absolute_url }})
+![Image1]({{ "/assets/images/post-images/2019-05-24-example-of-elk/5.png" | absolute_url }})
 
 ##### 실행
 ```bash
@@ -146,11 +146,11 @@ kibana
 ##### Elasticsearch 연동
 1. http://localhost:5601 접속 후 "Create index pattern" 클릭
 2. Kibana에서 모니터링/분석할 Index의 패턴을 입력 (logstash에서 index패턴을 **"logstash-날짜"** 로 했기 때문에 아래와 같이 지정)
-![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/6.png" | absolute_url }})
+![Image1]({{ "/assets/images/post-images/2019-05-24-example-of-elk/6.png" | absolute_url }})
 3. 로그 시간으로 사용할 필드 지정 (여기서는 logback logstash appender가 자동으로 생성해준 timestamp값 사용)
-![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/7.png" | absolute_url }})
+![Image1]({{ "/assets/images/post-images/2019-05-24-example-of-elk/7.png" | absolute_url }})
 4. Spring Boot 어플리케이션의 로그가 잘 적재되었는지 확인
-![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/8.png" | absolute_url }})
+![Image1]({{ "/assets/images/post-images/2019-05-24-example-of-elk/8.png" | absolute_url }})
 
 ## 참고
 * [Elastic Stack 공식 홈페이지](https://www.elastic.co/kr/products/)

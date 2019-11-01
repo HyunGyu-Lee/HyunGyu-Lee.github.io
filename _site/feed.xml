@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>@deveely</title>
+    <description>Software Engineer</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>2019-11-01</pubDate>
+    <lastBuildDate>Fri, 01 Nov 2019 15:54:49 +0900</lastBuildDate>
+    <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Reflection Type을 활용해 JPA 공통 AttributeConverter 구현</title>
+        <description>&lt;p&gt;얼마전에 JPA에서 사용할 공통 AttributeConverter 를 구현하면서 고민했던 점들을 정리한다.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;공통-attributeconverter-의-필요성&quot;&gt;공통 AttributeConverter 의 필요성&lt;/h2&gt;
+&lt;p&gt;Entity와 테이블을 매핑하다보면 String, Integer, Long, LocalDateTime 외에 Json값이 저장되어있는 컬럼이나 코드값이 저장되어있는 컬럼의 경우 AttributeConverter 를 통해 Json 모델, Enum 과 매핑을 시킨다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Entity&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Entity&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserEntity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Converter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;converter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserStatusAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Status&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Converter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;converter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserOptionAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 사용할 Enum 타입 매핑 Converter&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserStatusAttributeConverter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Status&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convertToDatabaseColumn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Status&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Status&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convertToEntityAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Status&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 사용할 Json 타입 매핑 Converter&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserOptionAttributeConverter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convertToDatabaseColumn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JsonUtils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toJson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convertToEntityAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JsonUtils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fromJson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;간단하게 위 예시코드처럼 필요할 때마다 Converter 를 작성하다보면 파일 갯수는 하염없이 증가한고, 중복코드도 수없이 생기게 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;convertToDatabaseColumn&lt;/code&gt; 메소드와 &lt;code class=&quot;highlighter-rouge&quot;&gt;convertToEntityAttribute&lt;/code&gt; 메소드를 잘보면 처리대상이되는 Enum 타입이나 Json 모델 타입만 다르지, 매핑해주는 로직은 달라지지 않는다.&lt;/p&gt;
+
+&lt;h2 id=&quot;공통-attributeconverter-구현&quot;&gt;공통 AttributeConverter 구현&lt;/h2&gt;
+&lt;p&gt;Generic을 활용하면 위에서 말한 중복코드 발생문제를 해결해 줄 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 공통 Json Attribute Converter&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JsonAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;c1&quot;&gt;// 처리할 Json 모델의 타입토큰&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attributeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+ 
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;JsonAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attributeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;attributeType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attributeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convertToDatabaseColumn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JsonUtils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toJson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convertToEntityAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JsonUtils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fromJson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attributeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 공통 컨버터 확장하여 사용&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserOptionAttributeConverter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JsonAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;UserOptionAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// 클래스 리터럴 전달&lt;/span&gt;
+		&lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;위 처럼 Json 모델의 타입 토큰을 전달받아 &lt;strong&gt;Json 파싱&lt;/strong&gt;하는 기능을 공통화하여 중복코드를 없앨수 있다.
+다만 여전히 필요한 컨버터만큼 만들어줘야하는 점은 달라지지않는데, Inner 클래스를 활용해 파일수를 줄여줄 수 있겠다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserOption&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;option&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserOptionConverter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JsonAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;UserOptionConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위 예시처럼 클래스 리터럴을 전달하여 알려주는 방법도 있고, Reflection Type을 이용해 리터럴을 전달받지 않고 타입을 획득하는 방법으로 처리할 수도 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JsonAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;c1&quot;&gt;// 처리할 Json 모델의 타입토큰&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attributeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+ 
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;JsonAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attributeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;attributeType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;detectAttributeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;detectAttributeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;ParameterizedType&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ParameterizedType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getGenericSuperclass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getActualTypeArguments&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convertToDatabaseColumn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JsonUtils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toJson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convertToEntityAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JsonUtils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fromJson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attributeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserOption&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;option&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserOptionConverter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JsonAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>2019-11-01</pubDate>
+        <link>http://localhost:4000/articles/2019-10/java-generic-type</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/java-generic-type</guid>
+        
+        <category>Java</category>
+        
+        <category>JPA</category>
+        
+        
+        <category>Java</category>
+        
+        <category>JPA</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring AOP 동작 방식, 원리</title>
+        <description>&lt;p&gt;스프링은 기본적으로 프록시 기반 AOP 를 제공한다.
+스프링에서는 Java Dynamic Proxy를 사용하거나 Cglib을 사용하여 프록시 기반 AOP를 구현했다.&lt;/p&gt;
+
+&lt;p&gt;이 글에서는 어떻게 Spring 에서 AOP를 사용할 수 있는 방식의 차이와 프레임워크가 AOP를 지원하기 위해 어떤 처리를 해주는지 개인적으로 분석한 내용을 정리한다.
+&lt;!--more--&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;AopProxy 라는 Delegator 인터페이스로 표현되며 Dynamic Proxy 기반은 JdkDynamicAopProxy 클래스, Cglib 기반은 CglibAopProxy 클래스이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Dynamic Proxy 기반과 Cglib 차이는 어떻게 프록시 객체를 생성하는지 방식 차이이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Dynamic Proxy 는 프록시 객체 생성을 위해 인터페이스를 필수로 구현해야하며, Cglib 은 인터페이스를 구현하지 않은 일반 클래스에 런타임 시 코드 조작으로 프록시 객체를 생성해준다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;DefaultAopProxyFactory 클래스의 createAopProxy 메소드를 통해 AopProxy 의 실 구현체가 생성된다.&lt;/p&gt;
+
+    &lt;p&gt;4.1. AOP 적용 대상이 인터페이스거나 인터페이스를 구현(implement)하고 있으면 JdkDynamicAopProxy 가 생성된다.&lt;/p&gt;
+
+    &lt;p&gt;4.2. 위 경우가 아니면 ObjenesisCglibAopProxy 기반 실 객체가 생성된다.&lt;/p&gt;
+
+    &lt;p&gt;4.3. Objenesis 는 과거 Cglib 의 몇 가지 단점을 해결해주는 라이브러리&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Transaction 대상의 경우 기본이 Cglib 으로 생성하게 설정되어있다.&lt;/p&gt;
+
+    &lt;p&gt;5.1. 성능상 Cglib 이 이점이 많고, 예외발생 확률도 적다고 한다.&lt;/p&gt;
+
+    &lt;p&gt;5.2. Cglib 이 가지고 있던 몇 가지 문제점들을 Objenesis 라이브러리를 통해 해결했다. (생성자 중복 호출, default 생성자 필요 문제 등)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;기본 Spring AOP 이외에 스프링에서 사용할 수 있는 방법으로는 AspectJ 가 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Spring AOP 가 제공하는 프록시 기반 방식은 런타임 위빙 (RTW) 이라는 방식으로 프로그램 구동중에 위빙이 일어난다. 반면 AspectJ 는 컴파일 단계 또는 로드타임에 코드를 삽입하여(위빙) RTW 보다 성능면에서 우세하다. (CTW : 컴파일 타임 위빙, LTW : 로드 타임 위빙). 또한 AspectJ 는 기본 Spring AOP 보다 보다 다양한 포인트컷을 지원한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;일반적인 경우 Spring AOP 에서 지원하는 방식으로 요구사항들이 충분히 해결되는 경우가 많고, 성능 또한 @AspectJ 갯수에 따라 달라지는데 일반적인 경우에서는 크게 체감하기 힘들다는 평이 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;AspectJ 를 사용하기 위해서는 AJC 등 별도의 컴파일러 설정 등 추가 설정이 필요한데, Spring AOP 는 그렇지 않다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>2019-11-01</pubDate>
+        <link>http://localhost:4000/articles/2019-10/how-spring-aop-works</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/how-spring-aop-works</guid>
+        
+        <category>Java</category>
+        
+        <category>Spring Framework</category>
+        
+        <category>AOP</category>
+        
+        
+        <category>Spring Framework</category>
+        
+      </item>
+    
+      <item>
+        <title>개인적인 IT 서적 추천</title>
+        <description>&lt;p&gt;읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h4 id=&quot;도서-목록&quot;&gt;도서 목록&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/18249021?scode=018&quot;&gt;객체지향의 사실과 오해&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 조영호&lt;/li&gt;
+      &lt;li&gt;소개 : 『객체지향의 사실과 오해』는 객체지향이란 무엇인가라는 원론적면서도 다소 위험한 질문에 답하기 위해 쓰여진 책이다. 안타깝게도 많은 사람들이 객체지향의 본질을 오해하고 있다. 가장 널리 퍼져있는 오해는 클래스가 객체지향 프로그래밍의 중심이라는 것이다. 객체지향으로 향하는 첫 걸음은 클래스가 아니라 객체를 바라보는 것에서부터 시작한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/29241448&quot;&gt;클린 코더&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 로버트 C. 마틴&lt;/li&gt;
+      &lt;li&gt;소개 : 세계적으로 유명한 프로그래머 ‘밥 아저씨’ 로버트 마틴이 쓴 책으로, 프로 개발자가 되는 길을 알려준다. 수십 년의 경험을 바탕으로 장인 정신, 실천 기법, 도구뿐만 아니라 프로가 가져야 할 마음가짐과 태도를 알려준다. 빡빡한 일정으로 인한 압박을 견디고 비이성적인 사람들과 대화하고 진창에 빠져 오도가도 못하는 상황을 피하는 법 등 다양한 지혜가 책에 담겨 있다. 위대한 소프트웨어를 만드는 장인 정신을 보여주고 프로만이 가지는 자부심과 충만감을 얻게 해 준다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/11681152&quot;&gt;클린 코드&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 로버트 C. 마틴&lt;/li&gt;
+      &lt;li&gt;소개 : 애자일 소프트웨어의 혁명적인 패러다임을 제시하는 책이다. 저자 로버트 마틴은 오브젝트 멘토(Object Mentor)의 동료들과 힘을 모아 ‘개발하며’ 클린 코드를 만드는 최상의 애자일 기법을 정제하여『Clean Code 클린 코드』에 담았다. 아주 많은 코드를 읽고 그 코드의 무엇이 옳은지, 그른지 생각하며 전문가로서 자신이 지니는 가치를 돌아보기 위해 꾸준히 노력한다면, 이 책을 통해 여러분의 프로그래밍 실력은 한층 더 높아질 것이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/65551284&quot;&gt;이펙티브 자바&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 조슈아 블로치&lt;/li&gt;
+      &lt;li&gt;소개 : 효율적이고 잘 설계된 자바 프로그램을 작성할 수 있는 실전적인 지침을 제공하는 책이다. 이 책의 각 장은 여러 개의 ‘항목’으로 구성되어 있으며, 각 항목은 자바 플랫폼을 파헤치는 조언과 실전적인 코드 예를 제공하면서 간결하고 독립적인 설명을 하는 형태로 되어 있다.
+각 항목에 대한 설명을 통해서 해야 할 것과 하지 말아야 할 것, 그리고 왜 그래야 하는지를 명확하게 알 수 있다. 이 책에는 필수 불가결한 프로그래머의 산 경험이 78개의 항목으로 녹아있어 우리가 매일 접하는 자바 프로그래밍의 과제들에 대해 실전적인 최적의 솔루션을 제공한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/27750871?scode=033&quot;&gt;DDD Start!&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : 최범균&lt;/li&gt;
+      &lt;li&gt;소개 : 이 책은 DDD(도메인 주도 설계)를 처음 접하는 개발자를 위한 책이다. DDD를 실제 업무에 적용할 수 있도록 기본적인 이론을 설명하고 이를 구현한 코드를 바탕으로 입문자가 헤매지 않고 DDD를 학습할 수 있도록 했다. 애그리거트, 엔티티, 리포지토리 등 DDD의 핵심 패턴을 이용해서 도메인 모델을 구현하는 방법을 설명한다. 도메인 모델의 트랜잭션 충돌을 처리하는 기법(선점 잠금, 비선점 잠금)을 살펴보고, 도메인 이벤트를 이용해서 도메인 영역 간의 의존을 낮추는 방법과 명령 모델과 조회 모델을 나누는 기법에 대해서도 배운다. 스프링과 JPA를 이용해서 실제 동작하는 코드를 함께 제공하고 있으므로 DDD를 학습하고 싶은 개발자에게 좋은 길잡이가 될 것이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/322365&quot;&gt;소프트웨어 장인 정신&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;저자 : Pete McBreen&lt;/li&gt;
+      &lt;li&gt;소개 : 이 책은 소프트웨어 개발자 여러분에게 소프트웨어를 어떻게 개발하느냐는 중요하지 않다고 말한다. 소프트웨어 개발의 진정한 가치는 숙련된 개발자가 고품질의 코드를 개발하여 고객이 필요로 하는 것을 전달하는 것에 있다고 말한다. 즉 ‘그 자체를 위한 기술’로부터 고객에게 가치를 전달하는 것에 토대를 둔 기술로 방향을 바꾸는 것이 이제 피할 수 없는 명제임을 보여준다.
+소프트웨어 장인정신은 소프트웨어 엔지니어링에 함축된 “제조한다”는 뜻을 벗어나 소프트웨어 개발을 하는 바로 그 사람에게 보다 주의를 기울이게 하기 때문에 중요하다. 장인정신은 그것과 함께 숙련된 개발 실습자가 그들의 장인적 기술을 마스터하려고 한다는 것, 노동의 결실에 대한 자부심, 그리고 책임정신을 내포한다.
+기술의 완성을 위하여 프로그래머들을 육성하는 방법, 작은 개발 팀들에서의 창조적인 협업을 발전시키는 방법, 그리고 고객과의 커뮤니케이션을 향상시키는 방법들을 소개한다. 그리고 궁극적인 결과로서의 숙련된 개발자는 안정된 애플리케이션을 만들고, 확장하고, 개선시킬 수 있는 사람이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>2019-11-01</pubDate>
+        <link>http://localhost:4000/articles/2019-10/my-book-list</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/my-book-list</guid>
+        
+        <category>Book</category>
+        
+        
+        <category>Book</category>
+        
+      </item>
+    
+      <item>
+        <title>JPA의 쿼리 기술 종류</title>
+        <description>&lt;p&gt;JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.&lt;/p&gt;
+
+&lt;p&gt;그동안 JPA 를 사용하면서 사용하는 쿼리 기술이 어느 기술인지도 잘 모르고 사용해온 나 자신을 위해.. 이 글에서 정리해보고자 합니다.&lt;/p&gt;
+
+&lt;p&gt;각 기술에 대한 자세한 설명보다는 각 기술이 어떤 것인지와 특징 등에 중점을 두고 정리하겠습니다.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;jpql&quot;&gt;JPQL&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;공식 홈페이지 : https://cygwin.com/&lt;/li&gt;
+  &lt;li&gt;설치 : https://cygwin.com/install.html&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;criteria&quot;&gt;Criteria&lt;/h2&gt;
+
+&lt;h2 id=&quot;querydsl&quot;&gt;QueryDSL&lt;/h2&gt;
+
+&lt;h2 id=&quot;네이티브-sql&quot;&gt;네이티브 SQL&lt;/h2&gt;
+
+&lt;h2 id=&quot;메소드-네임-쿼리&quot;&gt;메소드 네임 쿼리&lt;/h2&gt;
+</description>
+        <pubDate>2019-11-01</pubDate>
+        <link>http://localhost:4000/articles/2019-10/jpa-query-tech</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/jpa-query-tech</guid>
+        
+        <category>JPA</category>
+        
+        <category>QueryDSL</category>
+        
+        
+        <category>JPA</category>
+        
+      </item>
+    
+      <item>
+        <title>Windows에서 Linux 명령어 사용환경 구성하기</title>
+        <description>&lt;p&gt;개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다.
+다만 직업 특성상 Linux 환경에 노출되는 시간이 많고, 자연스레 Linux 명령어에 익숙해지게 되는데요. 이 때문에 가끔 Windows의 CMD 명령어들이 Linux와 달라 불편함을 종종 느낄때가 있습니다.
+이 때문에 이번에 개인적으로 사용하는 PC (Windows)에 &lt;a href=&quot;https://cygwin.com/&quot;&gt;Cygwin&lt;/a&gt; 을 설치해봤습니다.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;cygwin-이란&quot;&gt;Cygwin 이란&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;공식 홈페이지 : https://cygwin.com/&lt;/li&gt;
+  &lt;li&gt;설치 : https://cygwin.com/install.html&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;POSIX 기반 소프트웨어를 Windows에서 구동 및 개발이 가능하도록 환경을 제공해주는 역할을 합니다.
+가상머신 등을 통해 유닉스용 어셈블리 코드를 에뮬레이션 하여 진짜 유닉스/리눅스 등의 운영체제를 사용하는건 아니고, &lt;code class=&quot;highlighter-rouge&quot;&gt;Cygwin1.dll&lt;/code&gt;이라는 런타임 라이브러리를 통해 Windows에 동적으로 링크하여
+실제 유닉스처럼 동작하도록 해줍니다.&lt;/p&gt;
+
+&lt;h5 id=&quot;설치&quot;&gt;설치&lt;/h5&gt;
+&lt;p&gt;&lt;a href=&quot;https://cygwin.com/install.html&quot;&gt;설치페이지&lt;/a&gt;에 접속하여 32/64 bit에 맞는 setup파일을 받아 쉽게 설치할 수 있습니다.&lt;/p&gt;
+
+&lt;h4 id=&quot;사용&quot;&gt;사용&lt;/h4&gt;
+&lt;p&gt;Cygwin을 실행하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;pwd&lt;/code&gt;를 실행해보면 /home/{자신의 userName} 이 출력됩니다.
+이는 실제 경로는 아니며 Cygwin 설치경로 이하의 경로입니다. 즉 Cygwin 터미널은 자신의 설치경로가 root인데요.
+우리가 원래 사용하고 있던 Windows의 C:, D: 등을 접속하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;/cygdrive/{Drive 볼륨명}&lt;/code&gt; 경로로 이동하면 됩니다.
+다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.&lt;/p&gt;
+</description>
+        <pubDate>2019-11-01</pubDate>
+        <link>http://localhost:4000/articles/2019-09/use-linux-command-on-windows</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-09/use-linux-command-on-windows</guid>
+        
+        <category>Unix</category>
+        
+        <category>Linux</category>
+        
+        
+        <category>Unix/Linux</category>
+        
+      </item>
+    
+      <item>
+        <title>ELK를 활용한 로그 중앙집중 처리</title>
+        <description>&lt;p&gt;어플리케이션 수행 중 발생하는 예외(Exception)를 모니터링 할 수 있는 시스템을 위해 ELK를 로컬환경에 구성한다.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;구성&quot;&gt;구성&lt;/h2&gt;
+&lt;h5 id=&quot;elk&quot;&gt;ELK&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;Logstash : 데이터 수집, 필터링, Elasticsearch에 색인 (ETL 기능)&lt;/li&gt;
+  &lt;li&gt;Elasticsearch : 데이터 저장소 + 검색엔진&lt;/li&gt;
+  &lt;li&gt;Kibana : 수집 데이터 시각화&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;적용&quot;&gt;적용&lt;/h5&gt;
+&lt;p&gt;Logback Logstash용 Appender를 활용하여 WARN 이상 레벨의 로그를 Logstash에 적재 (https://jsonobject.tistory.com/243), Logstash에서 Elasticsearch로 색인
+    * &lt;code class=&quot;highlighter-rouge&quot;&gt;LogstashEncoder&lt;/code&gt;는 스프링앱에서 발생하는 로그를 ELK스택에서 사용되는 JSON형태로 변환
+    * &lt;code class=&quot;highlighter-rouge&quot;&gt;LogstashSocketAppender&lt;/code&gt;는 Logstash 서버에 로그 전송&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-uml&quot;&gt;WAS -&amp;gt; Logstash: 수집
+Logstash -&amp;gt; Elasticsearch: 색인
+Elasticsearch -&amp;gt; Kibana: 시각화
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;logstash&quot;&gt;Logstash&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;공식 홈페이지 : https://www.elastic.co/kr/products/logstash&lt;/li&gt;
+  &lt;li&gt;설치 : https://www.elastic.co/kr/downloads/logstash&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;디렉토리-구성&quot;&gt;디렉토리 구성&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/1.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;테스트를 위해 표준 입출력 (터미널 입력, 출력)으로 설정하고 실행&lt;/p&gt;
+
+&lt;h5 id=&quot;테스트-진행&quot;&gt;테스트 진행&lt;/h5&gt;
+&lt;p&gt;1) 설치경로/config/logstash-example.conf 파일 생성하고 아래와 같이 입력&lt;/p&gt;
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; {
+    &lt;span class=&quot;n&quot;&gt;stdin&lt;/span&gt; {}    // 표준 입력
+}
+&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt; {
+    &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt; {}   // 표준 출력
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;2) 실행&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;설치경로/bin
+logstash ../config/logstash-example.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/2.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;spring-boot와-연동&quot;&gt;Spring Boot와 연동&lt;/h5&gt;
+&lt;p&gt;1) logstash Input 설정에 아래와 같이 설정&lt;/p&gt;
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 입력은 TCP 4560포트로, 출력은 표준 출력 사용
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; {
+    &lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt; {
+        &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt; =&amp;gt; &lt;span class=&quot;m&quot;&gt;4560&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;codec&lt;/span&gt; =&amp;gt; &lt;span class=&quot;n&quot;&gt;json_lines&lt;/span&gt;
+    }
+}
+&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt; {
+    &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt; {}   // 표준 출력
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;2) Spring Boot pom.xml에 logstash appender 디펜던시 추가&lt;/p&gt;
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;net.logstash.logback&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;logstash-logback-encoder&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.11&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;3) logback.xml에 Logstash Appender 추가&lt;/p&gt;
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- logstash 4560포트 설정에 맞춰 설정 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;appender&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LOGSTASH&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;net.logstash.logback.appender.LogstashTcpSocketAppender&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;destination&amp;gt;&lt;/span&gt;127.0.0.1:4560&lt;span class=&quot;nt&quot;&gt;&amp;lt;/destination&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;encoder&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;net.logstash.logback.encoder.LogstashEncoder&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/encoder&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/appender&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;root&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;level&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;INFO&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;appender-ref&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LOGSTASH&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/root&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;4) logstash, Spring Boot 각각 실행
+아래와 같이 Spring Boot 실행 로그가 ELK 포맷에 맞는 JSON형태로 변환되어 표준출력으로 출력됨
+&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;출력-elasticsearch-와-연동-input을-elasticsearch로-적재&quot;&gt;출력 Elasticsearch 와 연동 (input을 Elasticsearch로 적재)&lt;/h5&gt;
+&lt;p&gt;1) logstash Input/Output 설정에 아래와 같이 설정&lt;/p&gt;
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 입력은 TCP 4560포트로, 출력은 표준 출력 사용
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; {
+    &lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt; {
+        &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt; =&amp;gt; &lt;span class=&quot;m&quot;&gt;4560&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;codec&lt;/span&gt; =&amp;gt; &lt;span class=&quot;n&quot;&gt;json_lines&lt;/span&gt;
+    }
+}
+&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt; {
+    &lt;span class=&quot;n&quot;&gt;elasticsearch&lt;/span&gt; {
+        &lt;span class=&quot;n&quot;&gt;hosts&lt;/span&gt; =&amp;gt; [&lt;span class=&quot;s2&quot;&gt;&quot;localhost:9200&quot;&lt;/span&gt;]    
+        &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; =&amp;gt; &lt;span class=&quot;s2&quot;&gt;&quot;logstash-%{+YYYY.MM.dd}&quot;&lt;/span&gt;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;elasticsearch&quot;&gt;Elasticsearch&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;공식 홈페이지 : https://www.elastic.co/kr/products/elasticsearch&lt;/li&gt;
+  &lt;li&gt;설치 : https://www.elastic.co/kr/downloads/elasticsearch&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;디렉토리-구성-1&quot;&gt;디렉토리 구성&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/4.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;실행&quot;&gt;실행&lt;/h5&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;설치경로/bin
+elasticsearch
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이후 http://localhost:9200 로 접속해봤을 때 페이지가 정상적으로 뜨는지 확인&lt;/p&gt;
+
+&lt;h2 id=&quot;kibana&quot;&gt;Kibana&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;공식 홈페이지 : https://www.elastic.co/kr/products/kibana&lt;/li&gt;
+  &lt;li&gt;설치 : https://www.elastic.co/kr/downloads/kibana&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;디렉토리-구성-2&quot;&gt;디렉토리 구성&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/5.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;실행-1&quot;&gt;실행&lt;/h5&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;설치경로/bin
+kibana
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;이후 http://localhost:5601 로 접속해봤을 때 페이지가 정상적으로 뜨는지 확인&lt;/p&gt;
+
+&lt;h5 id=&quot;elasticsearch-연동&quot;&gt;Elasticsearch 연동&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;http://localhost:5601 접속 후 “Create index pattern” 클릭&lt;/li&gt;
+  &lt;li&gt;Kibana에서 모니터링/분석할 Index의 패턴을 입력 (logstash에서 index패턴을 &lt;strong&gt;“logstash-날짜”&lt;/strong&gt; 로 했기 때문에 아래와 같이 지정)
+&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/6.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;로그 시간으로 사용할 필드 지정 (여기서는 logback logstash appender가 자동으로 생성해준 timestamp값 사용)
+&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/7.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Boot 어플리케이션의 로그가 잘 적재되었는지 확인
+&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/8.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;참고&quot;&gt;참고&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.elastic.co/kr/products/&quot;&gt;Elastic Stack 공식 홈페이지&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://d2.naver.com/helloworld/9878588&quot;&gt;Elastic Stack과 Lambda를 활용한 데이터 모니터링 시스템 구축&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dev-t-blog.tistory.com/30&quot;&gt;Spring + Logstash + Elasticsearch + Kibana 기본 셋팅&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://heowc.tistory.com/49&quot;&gt;ELK Stack 개념정리&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>2019-11-01</pubDate>
+        <link>http://localhost:4000/articles/2019-05/example-of-elk</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-05/example-of-elk</guid>
+        
+        <category>Spring Boot</category>
+        
+        <category>Spring Framework</category>
+        
+        <category>Java</category>
+        
+        
+        <category>Spring Framework</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Boot 설정파일</title>
+        <description>&lt;p&gt;Spring Boot의 큰 장점 중 하나는 기존 Spring을 이용하면서 해야했던 설정들 (XML방신이던, Java방식이던)을 자동으로 진행해주는 것이라 생각합니다. (AutoConfiguration)&lt;/p&gt;
+
+&lt;p&gt;이를 통해 개발자는 설정파일 (application.property, yml 파일 등)에 간단한 설정정보들만 입력해주는 수준으로도 Spring의 다양한 기능들을 쉽게 이용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;이렇게 설정할 수 있는 설정의 종류는 굉장히 다양하며 예를들어 Datasource 설정의 경우에만도 아래와 같이 굉장히 많은 옵션들을 설정할 수 있습니다.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# DATASOURCE (DataSourceAutoConfiguration &amp;amp; DataSourceProperties)
+&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;spring.datasource.continue-on-error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;false # Whether to stop if an error occurs while initializing the database.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Data (DML) script resource references.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.data-username= # Username of the database to execute DML scripts (if different).&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.data-password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Password of the database to execute DML scripts (if different).
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.dbcp2.*= # Commons DBCP2 specific settings&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.driver-class-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Fully qualified name of the JDBC driver. Auto-detected based on the URL by default.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.generate-unique-name=false # Whether to generate a random datasource name.&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;spring.datasource.hikari.*=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Hikari specific settings
+&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;spring.datasource.initialization-mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;embedded # Initialize the datasource with available DDL and DML scripts.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.jmx-enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;false # Whether to enable JMX support (if provided by the underlying pool).&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.jndi-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# JNDI location of the datasource. Class, url, username &amp;amp; password are ignored when set.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.name= # Name of the datasource. Default to &quot;testdb&quot; when using an embedded database.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Login password of the database.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.platform=all # Platform to use in the DDL or DML scripts (such as schema-${platform}.sql or data-${platform}.sql).&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.schema&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Schema (DDL) script resource references.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.schema-username= # Username of the database to execute DDL scripts (if different).&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.schema-password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Password of the database to execute DDL scripts (if different).
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.separator=; # Statement separator in SQL initialization scripts.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.sql-script-encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# SQL scripts encoding.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.tomcat.*= # Tomcat datasource specific settings&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Fully qualified name of the connection pool implementation to use. By default, it is auto-detected from the classpath.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.url= # JDBC URL of the database.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Login username of the database.
+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;spring.datasource.xa.data-source-class-name= # XA datasource fully qualified name.&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.datasource.xa.properties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Properties to pass to the XA data source.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.spring.io&quot;&gt;Spring 공식 홈페이지&lt;/a&gt;에서 다양한 설정들을 가이드로 제공하고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;위 가이드 설정파일에 주석으로도 적혀있고 당연한 얘기지만 위 설정파일의 전체내용을 복사하지 말라고 명시되어있습니다.&lt;/p&gt;
+
+&lt;p&gt;본인이 사용하는 기술에 대해 필요한 설정 위주로 찾아서 추가해주면 보다 더 좋은 설정을 진행할 수 있을 것 같습니다.&lt;/p&gt;
+</description>
+        <pubDate>2019-11-01</pubDate>
+        <link>http://localhost:4000/articles/2019-01/spring-boot-configurations</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-01/spring-boot-configurations</guid>
+        
+        <category>Spring Boot</category>
+        
+        <category>Spring Framework</category>
+        
+        <category>Java</category>
+        
+        
+        <category>Spring Framework</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Boot Build 시 MyBatis Type Alias 미적용 문제</title>
+        <description>&lt;p&gt;MyBatis를 이용하여 개발하면 주로 resultType에 적어줄 타입에 alias를 적용하여 사용한다.&lt;/p&gt;
+
+&lt;p&gt;보통 다음과 같이 SqlSessionFactoryBean을 정의할 때 setTypeAliasesPackage 메소드를 이용하여 정의한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTypeAliasesPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;packages for alias&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;!--more--&gt;
+&lt;p&gt;헌데 위와같은 방식으로 alias를 적용한 후 IDE를 통해 실행시키면 문제없이 잘 실행되는데&lt;/p&gt;
+
+&lt;p&gt;배포를 위해 jar로 빌드한 후 실행하자  ClassNotFoundException 이 발생하며 alias된 타입들을 못찾는 문제가 발생했다.&lt;/p&gt;
+
+&lt;p&gt;​때문에 Mybatis에서 Alias 처리하는 부분을 분석해보니&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;resolveAlias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toLowerCase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ENGLISH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TYPE_ALIASES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;containsKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TYPE_ALIASES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Resources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;classForName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ClassNotFoundException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;TypeException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Could not resolve type alias '&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;'.  Cause: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;TYPE_ALIASES (HashMap&amp;lt;String, Class&amp;lt;?» ) 에 등록되어 있으면 해당 Class를 반환하고 그렇지 않으면 클래스로더를 통해 클래스를 로딩한도록 되어있는데, 오류 로그를 통해 확인되는 부분은 일단 IDE에서는 잘만 찾아지는 alias들이 TYPE_ALIASES에 등록이 안되어 있다는 점이었다.&lt;/p&gt;
+
+&lt;p&gt;때문에 이번엔 alias를 등록하는 부분을 살펴봤다..&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ResolverUtil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Test&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;packageName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getPackagePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;packageName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;children&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VFS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;child&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;children&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.class&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;addIfMatching&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ioe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Could not read package: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;packageName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ioe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;파라미터로 전달된 패키지 이하 디렉토리의 모든 리소스를 대상으로 확장자가 class인 파일 중 특정 조건에 부합하는 클래스들을 alias로 등록하도록 구현되어있다. (특정 조건은 지정된 슈퍼타입에 대해 isAssignableFrom로 체크, 지정되어있지 않으면 Object클래스가 슈퍼타입)&lt;/p&gt;
+
+&lt;p&gt;그리고, 리소스에 접근할 때 VFS라는 클래스를 통해 특정 경로의 리소스 목록을 얻어오도록 되어있다..&lt;/p&gt;
+
+&lt;p&gt;​VFS는 Virtual File System의 약자로 실제 파일 시스템 위, 응용 프로그램 계층에 추상화된 가상 파일시스템을 의미하는 용어인 것 같은데 위 소스코드 문맥상 Mybatis에서 파일 등 시스템 리소스에 접근할 때 이용하는 클래스 인 것 같았다. (조금 더 자세히 조사해볼 필요있음..)&lt;/p&gt;
+
+&lt;p&gt;​여튼 위 클래스에 대한 구현체가 아무런 지정을 하지 않으면 DefaultVFS라는 구현체가 사용되는데 IDE 위에서 구동될 때는 target 디렉토리 이하 classes 파일들에 문제없이 접근할 수 있으나 Spring Boot프로젝트 배포한 jar에서는 형태가 달라 classes에 접근이 안되어 alias들이 등록되지 않았던 것이다.&lt;/p&gt;
+
+&lt;p&gt;이렇게 원인을 찾은 후 검색을 해보니 역시나…….&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setVfs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SpringBootVFS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Spring Boot 전용 VFS 사용하도록 지정&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTypeAliasesPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;packages for alias&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;위처럼 Spring Boot 용 VFS 구현체를 지정해주는 아주 간단한 방법으로 해결할 수 있었다.&lt;/p&gt;
+</description>
+        <pubDate>2019-11-01</pubDate>
+        <link>http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</guid>
+        
+        <category>Spring Boot</category>
+        
+        <category>MyBatis</category>
+        
+        <category>VFS</category>
+        
+        
+        <category>Spring Framework</category>
+        
+      </item>
+    
+      <item>
+        <title>Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결</title>
+        <description>&lt;p&gt;Lombok 버전 : 1.16.22&lt;/p&gt;
+
+&lt;p&gt;스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.&lt;/p&gt;
+
+&lt;p&gt;구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지금은 fix된듯 하다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/rzwitserloot/lombok/issues/1703&quot;&gt;Github에 등록된 Lombok 이슈 확인&lt;/a&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@NoArgsConstructor&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Data&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SomeDomain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</description>
+        <pubDate>2019-11-01</pubDate>
+        <link>http://localhost:4000/articles/2018-11/problems-with-lombok</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-11/problems-with-lombok</guid>
+        
+        <category>Lombok</category>
+        
+        
+        <category>Java</category>
+        
+      </item>
+    
+      <item>
+        <title>이클립스 클래스 다이어그램 플러그인 ObjectAid 설치</title>
+        <description>&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Help &amp;gt; Install New Software로 Install 팝업창 진입&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Add 버튼 클릭하여 Name : ObjectAid UML Explorer, Location :  &lt;a href=&quot;https://github.com/rzwitserloot/lombok/issues/1703&quot;&gt;http://www.objectaid.com/update/current&lt;/a&gt; 입력
+&lt;!--more--&gt;
+&lt;img src=&quot;http://localhost:4000/img/post-images/2018-11-06-install-object-aid-plugin/1.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pending이 완료되면 체크 박스 선택 후 Next 버튼으로 설치하면 설치 완료&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;File &amp;gt; New &amp;gt; Other 에서 ObjectAid Class Diagram 검색 후 클릭
+&lt;img src=&quot;http://localhost:4000/img/post-images/2018-11-06-install-object-aid-plugin/2.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Folder는 Browse 버튼을 클릭하여 다이어그램을 만들 프로젝트 생성, Name은 다이어그램 파일명 입력후 Finish 버튼 클릭하면 Name으로 빈 다이어그램이 생성됨.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;프로젝트 탐색기의 Java 클래스 파일을 다이어그램에 Drag하여 놓으면 자동으로 다이어그램이 생성된다.
+&lt;img src=&quot;http://localhost:4000/img/post-images/2018-11-06-install-object-aid-plugin/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>2019-11-01</pubDate>
+        <link>http://localhost:4000/articles/2018-11/install-object-aid-plugin</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-11/install-object-aid-plugin</guid>
+        
+        <category>Eclipse</category>
+        
+        <category>ObjectAid</category>
+        
+        
+        <category>Java</category>
+        
+      </item>
+    
+  </channel>
+</rss>
