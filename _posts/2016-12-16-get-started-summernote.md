@@ -62,7 +62,7 @@ $(document).ready(function(){
 
 toolbar 변수는 에디터 상단에 어떤 버튼들을 보여줄지 설정하는 것이다.  
 
-![Image1]({{ "/img/post-images/2016-12-16-get-started-summernote/1.png" | absolute_url }})
+![Image1]({{ "/assets/images/post-images/2016-12-16-get-started-summernote/1.png" | absolute_url }})
 
 ###### 4. 에디터에 작성한 내용 HTML코드로 가져오기
 {% highlight javascript %}
