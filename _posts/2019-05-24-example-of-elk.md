@@ -33,7 +33,7 @@ Elasticsearch -> Kibana: 시각화
 * 설치 : https://www.elastic.co/kr/downloads/logstash
 
 ##### 디렉토리 구성
-![Image1]({{ "/img/post-images/2019-05-24-example-of-elk/1.png" | absolute_url }})
+![Image1]({{ "/assets/image/post-images/2019-05-24-example-of-elk/1.png" | absolute_url }})
 
 테스트를 위해 표준 입출력 (터미널 입력, 출력)으로 설정하고 실행
 
