@@ -470,17 +470,29 @@
 
 <h2 id="jpql">JPQL</h2>
 <ul>
-  <li>공식 홈페이지 : https://cygwin.com/</li>
-  <li>설치 : https://cygwin.com/install.html</li>
+  <li>Java Persistence Query Language의 약자</li>
+  <li>SQL이 데이터베이스 테이블을 대상으로 쿼리하는 거라면 JPQL은 Entity 객체를 대상으로 쿼리</li>
+  <li>JPQL은 쿼리문장이 특정 DBMS에 종속되지 않도록 쿼리를 SQL을 추상화</li>
+  <li>작성한 JPQL은 프레임워크에 의해 애플리케이션이 사용하는 데이터베이스의 적합한 SQL로 변환되어 실행</li>
+  <li>JPA 표준</li>
 </ul>
 
-<h2 id="criteria">Criteria</h2>
+<h2 id="jpa-criteria-query">JPA Criteria Query</h2>
+<ul>
+  <li>JPQL을 programmatically하게, 즉 자바코드로 작성할 수 있게 도와주는 빌더</li>
+  <li>문자열로 작성하는 JPQL과 달리 자바코드로 쿼리를 작성하기 때문에 컴파일 단계에서 오류파악이 가능</li>
+  <li>쿼리가 복잡하고, 길어지는 경우 JPQL 보다 직관적</li>
+  <li>자바코드로 작성하기 때문에 쿼리문을 동적으로 작성 가능</li>
+  <li>JPA 표준</li>
+</ul>
 
 <h2 id="querydsl">QueryDSL</h2>
-
-<h2 id="네이티브-sql">네이티브 SQL</h2>
-
-<h2 id="메소드-네임-쿼리">메소드 네임 쿼리</h2>
+<ul>
+  <li>Criteria Query 와 마찬가지로 JPQL을 쉽게 작성할 수 있도록 도와주는 빌더</li>
+  <li>비표준</li>
+  <li>Entity를 파싱하여 QEntity를 생성하고, 이를 쿼리작성에 이용</li>
+  <li>Criteria의 동적인 특징과 JPQL의 표현력을 타입에 안전한 방법으로 제공</li>
+</ul>
 
 
       
@@ -624,7 +636,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">포스트</span>
               </a>
             </div>
@@ -735,7 +747,7 @@
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#jpql"> <span class="nav-number">1</span> <span class="nav-text">JPQL</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#criteria"> <span class="nav-number">2</span> <span class="nav-text">Criteria</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#querydsl"> <span class="nav-number">3</span> <span class="nav-text">QueryDSL</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#네이티브-sql"> <span class="nav-number">4</span> <span class="nav-text">네이티브 SQL</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#메소드-네임-쿼리"> <span class="nav-number">5</span> <span class="nav-text">메소드 네임 쿼리</span> </a> </li>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#jpql"> <span class="nav-number">1</span> <span class="nav-text">JPQL</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#jpa-criteria-query"> <span class="nav-number">2</span> <span class="nav-text">JPA Criteria Query</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#querydsl"> <span class="nav-number">3</span> <span class="nav-text">QueryDSL</span> </a> </li>
     </ol>
   </div>
             
