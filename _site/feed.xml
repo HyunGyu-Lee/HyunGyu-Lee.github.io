@@ -5,9 +5,52 @@
     <description>Software Engineer</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-11-04</pubDate>
-    <lastBuildDate>Mon, 04 Nov 2019 18:18:50 +0900</lastBuildDate>
+    <pubDate>2019-11-06</pubDate>
+    <lastBuildDate>Wed, 06 Nov 2019 11:36:05 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Netlify를 사용하여 정적 사이트 배포하기</title>
+        <description>&lt;p&gt;근래의 웹개발은 주로 백엔드와 프론트엔드 영역을 나누어 개발하는 것이 주류가 되었습니다.
+개인적으로 과거 JSP, jQuery 기반으로 개발된 웹사이트들은.. 두 번 다시는 겪고 싶지 않을 정도로 프론트엔드를 개발하는 기술들이 눈부시게 발전했고, 지금도 진행중입니다.
+이런 추세때문인지 자연스레 정적 웹사이트를 쉽게 배포할 수 있는 서비스가 인기를 얻고있는데, 그 중 하나인 Netlify 를 소개합니다.&lt;/p&gt;
+
+&lt;!--more--&gt;
+&lt;h2 id=&quot;개요&quot;&gt;개요&lt;/h2&gt;
+&lt;p&gt;Netlify는 JAMstack 혹은 SPA 형태로 개발된 프론트엔드 애플리케이션을 배포하는 것에 최적화된 서비스입니다.
+Gatsby와 같은 블로그를 배포하는 용도로 쓰이는 것으로 유명한데요. 이외에 Vue, React 등 많은 형태의 정적 애플리케이션을 배포할 수 있습니다.
+(참고로 Gatsby는 React 기반)&lt;/p&gt;
+
+&lt;h2 id=&quot;netlify-사용방법-및--주요-특징&quot;&gt;Netlify 사용방법 및  주요 특징&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;가입하고 사이트를 생성하면 접속가능한 URL이 생성된다. (호스팅)&lt;/li&gt;
+  &lt;li&gt;Github, Gitlab, Bitbucket 등 소스 저장소와 연동한다.&lt;/li&gt;
+  &lt;li&gt;애플리케이션을 개발하고, 소스를 저장소에 업로드한다.(git push)&lt;/li&gt;
+  &lt;li&gt;저장소에 변경이 일어나면 Netlify 에서는 업로드된 소스를 빌드하고 배포한다.&lt;/li&gt;
+  &lt;li&gt;Netlify 에서 제공하는 사이트로 접속하여 결과를 확인한다.&lt;/li&gt;
+  &lt;li&gt;Build 커맨드 지정, deploy 경로 설정, Build Hook 지정 등 다양한 빌드/배포 관련 기능을 제공한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Netlify와 여타 몇가지 기술을 보면서, 프론트엔드 기술은 정말 그 발전 속도가 상당하다는 생각을 하게됐습니다.&lt;/p&gt;
+
+&lt;p&gt;다음에는 Vue + Firebase + Netlify 의 조합으로 간단한 애플리케이션을 제작하여 배포하는 포스트를 작성할 계획입니다.&lt;/p&gt;
+</description>
+        <pubDate>2019-11-06</pubDate>
+        <link>http://localhost:4000/articles/2019-11/netlify-with-vue</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-11/netlify-with-vue</guid>
+        
+        <category>FE</category>
+        
+        <category>Netlify</category>
+        
+        <category>Vue</category>
+        
+        
+        <category>Frontend</category>
+        
+        <category>Vue</category>
+        
+      </item>
     
       <item>
         <title>Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)</title>
@@ -296,7 +339,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2019-11-04</pubDate>
+        <pubDate>2019-11-06</pubDate>
         <link>http://localhost:4000/articles/2019-11/jpa-orm-querydsl</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-11/jpa-orm-querydsl</guid>
         
@@ -455,7 +498,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2019-11-04</pubDate>
+        <pubDate>2019-11-06</pubDate>
         <link>http://localhost:4000/articles/2019-10/java-generic-type</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-10/java-generic-type</guid>
         
@@ -518,7 +561,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;/ol&gt;
 
 </description>
-        <pubDate>2019-11-04</pubDate>
+        <pubDate>2019-11-06</pubDate>
         <link>http://localhost:4000/articles/2019-10/how-spring-aop-works</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-10/how-spring-aop-works</guid>
         
@@ -582,7 +625,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
   &lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>2019-11-04</pubDate>
+        <pubDate>2019-11-06</pubDate>
         <link>http://localhost:4000/articles/2019-10/my-book-list</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-10/my-book-list</guid>
         
@@ -629,7 +672,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
   &lt;li&gt;Criteria의 동적인 특징과 JPQL의 표현력을 타입에 안전한 방법으로 제공&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2019-11-04</pubDate>
+        <pubDate>2019-11-06</pubDate>
         <link>http://localhost:4000/articles/2019-10/jpa-query-tech</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-10/jpa-query-tech</guid>
         
@@ -669,7 +712,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 우리가 원래 사용하고 있던 Windows의 C:, D: 등을 접속하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;/cygdrive/{Drive 볼륨명}&lt;/code&gt; 경로로 이동하면 됩니다.
 다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-11-04</pubDate>
+        <pubDate>2019-11-06</pubDate>
         <link>http://localhost:4000/articles/2019-09/use-linux-command-on-windows</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-09/use-linux-command-on-windows</guid>
         
@@ -838,7 +881,7 @@ kibana
   &lt;li&gt;&lt;a href=&quot;https://heowc.tistory.com/49&quot;&gt;ELK Stack 개념정리&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2019-11-04</pubDate>
+        <pubDate>2019-11-06</pubDate>
         <link>http://localhost:4000/articles/2019-05/example-of-elk</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-05/example-of-elk</guid>
         
@@ -897,7 +940,7 @@ kibana
 
 &lt;p&gt;본인이 사용하는 기술에 대해 필요한 설정 위주로 찾아서 추가해주면 보다 더 좋은 설정을 진행할 수 있을 것 같습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-11-04</pubDate>
+        <pubDate>2019-11-06</pubDate>
         <link>http://localhost:4000/articles/2019-01/spring-boot-configurations</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-01/spring-boot-configurations</guid>
         
@@ -983,7 +1026,7 @@ kibana
 
 &lt;p&gt;위처럼 Spring Boot 용 VFS 구현체를 지정해주는 아주 간단한 방법으로 해결할 수 있었다.&lt;/p&gt;
 </description>
-        <pubDate>2019-11-04</pubDate>
+        <pubDate>2019-11-06</pubDate>
         <link>http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</guid>
         
@@ -995,34 +1038,6 @@ kibana
         
         
         <category>Spring Framework</category>
-        
-      </item>
-    
-      <item>
-        <title>Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결</title>
-        <description>&lt;p&gt;Lombok 버전 : 1.16.22&lt;/p&gt;
-
-&lt;p&gt;스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.&lt;/p&gt;
-
-&lt;p&gt;구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지금은 fix된듯 하다.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/rzwitserloot/lombok/issues/1703&quot;&gt;Github에 등록된 Lombok 이슈 확인&lt;/a&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@NoArgsConstructor&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Data&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SomeDomain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-</description>
-        <pubDate>2019-11-04</pubDate>
-        <link>http://localhost:4000/articles/2018-11/problems-with-lombok</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2018-11/problems-with-lombok</guid>
-        
-        <category>Lombok</category>
-        
-        
-        <category>Java</category>
         
       </item>
     
