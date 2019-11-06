@@ -251,6 +251,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll-paginate (~> 1.1.0)
+  jekyll-sitemap
   tzinfo-data
 
 BUNDLED WITH
