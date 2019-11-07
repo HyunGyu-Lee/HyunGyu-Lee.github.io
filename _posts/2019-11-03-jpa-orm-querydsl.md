@@ -16,6 +16,7 @@ Java ORM 표준인 JPA 에 대해 설명하고 객체지향 쿼리 사용과 장
 - 관계형 데이터베이스는 데이터 중심으로 구조화, 집합적인 사고가 필요하고 추상화, 상속, 다형성 같은 개념이 없음
 - 연관관계를 표현할 때 객체는 타 객체 참조 (reference) 로, 관계형 DB 는 외래키로 표현하는 등 연관관계를 표현 
     - 객체를 테이블에 맞춰 모델링
+
     ```java
     class Member {
         String id;      // MEMBER_ID 컬럼 사용
@@ -30,6 +31,7 @@ Java ORM 표준인 JPA 에 대해 설명하고 객체지향 쿼리 사용과 장
     ```
 
     - 객체지향 모델링 
+    
     ```java
     class Member {
         String id;
@@ -83,6 +85,7 @@ select *
 ```
 
 - JPQL
+
 ```java
 // Entity (자바객체와 데이터베이스 테이블을 매핑)
 @Entity
