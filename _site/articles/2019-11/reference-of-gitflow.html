@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Unix,Linux," />
+  <meta name="keywords" content="git,gitflow," />
 
 
 
@@ -111,17 +111,21 @@
 
 
 
-<meta name="description" content="개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다. 다만 직업 특성상 Linux 환경에 노출되는 시간이 많고, 자연스레 Linux 명령어에 익숙해지게 되는데요. 이 때문에 가끔 Windows의 CMD 명령어들이 Linux와 달라 불편함을 종종 느낄때가 있습니다. 이 때문에 이번에 개인적으로 사용하는 PC (Windows)에 Cygwin 을 설치해봤습니다.">
-<meta name="keywords" content="Unix, Linux">
+<meta name="description" content="Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.">
+<meta name="keywords" content="git, gitflow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows에서 Linux 명령어 사용환경 구성하기">
-<meta property="og:url" content="http://localhost:4000/articles/2019-09/use-linux-command-on-windows">
+<meta property="og:title" content="Git 고급 브랜치 전략과 Gitflow">
+<meta property="og:url" content="http://localhost:4000/articles/2019-11/reference-of-gitflow">
 <meta property="og:site_name" content="@deveely">
-<meta property="og:description" content="개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다. 다만 직업 특성상 Linux 환경에 노출되는 시간이 많고, 자연스레 Linux 명령어에 익숙해지게 되는데요. 이 때문에 가끔 Windows의 CMD 명령어들이 Linux와 달라 불편함을 종종 느낄때가 있습니다. 이 때문에 이번에 개인적으로 사용하는 PC (Windows)에 Cygwin 을 설치해봤습니다.">
+<meta property="og:description" content="Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.">
 <meta property="og:locale" content="ko">
+<meta property="og:image" content="http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/2.png">
+<meta property="og:image" content="http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/1.png">
+<meta property="og:image" content="http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/3.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Windows에서 Linux 명령어 사용환경 구성하기">
-<meta name="twitter:description" content="개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다. 다만 직업 특성상 Linux 환경에 노출되는 시간이 많고, 자연스레 Linux 명령어에 익숙해지게 되는데요. 이 때문에 가끔 Windows의 CMD 명령어들이 Linux와 달라 불편함을 종종 느낄때가 있습니다. 이 때문에 이번에 개인적으로 사용하는 PC (Windows)에 Cygwin 을 설치해봤습니다.">
+<meta name="twitter:title" content="Git 고급 브랜치 전략과 Gitflow">
+<meta name="twitter:description" content="Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.">
+<meta name="twitter:image" content="http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/2.png">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -154,7 +158,7 @@
 
 
 
-  <title>Windows에서 Linux 명령어 사용환경 구성하기 | @deveely</title>
+  <title>Git 고급 브랜치 전략과 Gitflow | @deveely</title>
   
 
 
@@ -347,7 +351,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2019-09/use-linux-command-on-windows">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2019-11/reference-of-gitflow">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -367,7 +371,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            Windows에서 Linux 명령어 사용환경 구성하기
+            Git 고급 브랜치 전략과 Gitflow
           
         </h1>
         
@@ -381,8 +385,8 @@
               
                 <span class="post-meta-item-text">작성일</span>
               
-              <time title="" itemprop="dateCreated datePublished" datetime="2019-09-09T20:12:19+09:00">
-                2019-09-09
+              <time title="" itemprop="dateCreated datePublished" datetime="2019-11-13T22:43:19+09:00">
+                2019-11-13
               </time>
             
 
@@ -405,8 +409,20 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/Unix%2FLinux" itemprop="url" rel="index">
-                    <span itemprop="name">Unix/Linux</span>
+                  <a href="/category/#/etc." itemprop="url" rel="index">
+                    <span itemprop="name">etc.</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/git" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
                   </a>
                 </span>
 
@@ -460,30 +476,118 @@
 
 
 
-  <p>개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다.
-다만 직업 특성상 Linux 환경에 노출되는 시간이 많고, 자연스레 Linux 명령어에 익숙해지게 되는데요. 이 때문에 가끔 Windows의 CMD 명령어들이 Linux와 달라 불편함을 종종 느낄때가 있습니다.
-이 때문에 이번에 개인적으로 사용하는 PC (Windows)에 <a href="https://cygwin.com/">Cygwin</a> 을 설치해봤습니다.</p>
+  <p>Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.
+<!--more--></p>
 
-<!--more-->
+<h2 id="vincent-driessen-의-브랜치-모델">Vincent Driessen 의 브랜치 모델</h2>
+<p><a href="https://nvie.com/posts/a-successful-git-branching-model/">Vincent Driessen가 제안한 고급 브랜치 전략</a>으로 브랜치를 다음과 같이 분류하고 규칙을 정해 버전관리를 합니다.</p>
 
-<h2 id="cygwin-이란">Cygwin 이란</h2>
+<h4 id="main-branch">Main Branch</h4>
+<p><img src="http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/2.png" alt="Image1" /></p>
+
 <ul>
-  <li>공식 홈페이지 : https://cygwin.com/</li>
-  <li>설치 : https://cygwin.com/install.html</li>
+  <li>master
+    <ul>
+      <li>현재 릴리즈되어있는 버전 또는 바로 릴리즈가 가능한 다음 버전</li>
+      <li>master 브랜치에 merge 가 발생하는 것은 곧 신규 릴리즈가 있다는 의미</li>
+      <li>발견된 모든 버그가 해결된, 정상적으로 동작하는 상태여야함</li>
+    </ul>
+  </li>
+  <li>develop
+    <ul>
+      <li>다음 릴리즈를 위해 개발된 모든 기능들이 통합되어 관리되는 브랜치</li>
+      <li>모든 개발자가 함께 관리하는 브랜치, 항상 컴파일이 가능한 상태를 유지</li>
+    </ul>
+  </li>
 </ul>
 
-<p>POSIX 기반 소프트웨어를 Windows에서 구동 및 개발이 가능하도록 환경을 제공해주는 역할을 합니다.
-가상머신 등을 통해 유닉스용 어셈블리 코드를 에뮬레이션 하여 진짜 유닉스/리눅스 등의 운영체제를 사용하는건 아니고, <code class="highlighter-rouge">Cygwin1.dll</code>이라는 런타임 라이브러리를 통해 Windows에 동적으로 링크하여
-실제 유닉스처럼 동작하도록 해줍니다.</p>
+<h4 id="supporting-branch">Supporting branch</h4>
+<ul>
+  <li>feature
+    <ul>
+      <li>특정 기능을 개발하는 브랜치</li>
+      <li>일반적으로 담당 개발자 로컬에만 존재 (한 feature를 위해 여러 개발자와 협업하는 경우 origin 에 push 필요)</li>
+      <li>기능개발 시작 시 develop 으로 부터 분기하고 개발이 완료되면 다시 develop 으로 Merge</li>
+      <li>아주 간단한 수정 (side-effect가 없다고 확신하는 경우)은 별도 feature 브랜치 없이 develop 브랜치에서 바로 수정하는 것을 허용</li>
+    </ul>
+  </li>
+  <li>release
+    <ul>
+      <li>다음 릴리즈를 준비하는 브랜치</li>
+      <li>이 브랜치에서 실제 릴리즈 전 발견되는 버그 수정 등이 이루어짐</li>
+      <li>develop 으로 부터 분기하고 develop (bugfix 한 것들을 머지하기 위함), master(신규 기능 + bugfix) 로 merge</li>
+    </ul>
+  </li>
+  <li>hotfix
+    <ul>
+      <li>운영중에 문제가 발생하는 경우 해당 문제를 수정하는 브랜치</li>
+      <li>master 로 부터 분기하며, 문제를 수정한 후 정상동작이 확인되면 develop과 master로 merge</li>
+    </ul>
+  </li>
+</ul>
 
-<h5 id="설치">설치</h5>
-<p><a href="https://cygwin.com/install.html">설치페이지</a>에 접속하여 32/64 bit에 맞는 setup파일을 받아 쉽게 설치할 수 있습니다.</p>
+<h2 id="gitflow-란">Gitflow 란?</h2>
+<p>위에서 소개한 브랜치 모델을 쉽고 편하게 사용할 수 있도록 지원하는 도구입니다.</p>
 
-<h4 id="사용">사용</h4>
-<p>Cygwin을 실행하여 <code class="highlighter-rouge">pwd</code>를 실행해보면 /home/{자신의 userName} 이 출력됩니다.
-이는 실제 경로는 아니며 Cygwin 설치경로 이하의 경로입니다. 즉 Cygwin 터미널은 자신의 설치경로가 root인데요.
-우리가 원래 사용하고 있던 Windows의 C:, D: 등을 접속하려면 <code class="highlighter-rouge">/cygdrive/{Drive 볼륨명}</code> 경로로 이동하면 됩니다.
-다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.</p>
+<h2 id="설치">설치</h2>
+<p>먼저 gitflow 를 설치합니다.</p>
+
+<p>Mac 에서는 brew를 이용해 간단하게 설치할 수 있습니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5</pre></td><td class="code"><pre class="highlight"><code># OSX
+brew install git-flow-avh
+
+# Linux
+apt-get install git-flow
+</code></pre></td></tr></tbody></table></div></div>
+
+<h2 id="사용하기">사용하기</h2>
+<h4 id="초기화">초기화</h4>
+<p>git repository에 gitflow 를 적용하기 위해 아래 명령어를 입력합니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>git flow init
+</code></pre></td></tr></tbody></table></div></div>
+
+<p><img src="http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/1.png" alt="Image1" /></p>
+
+<p><code class="highlighter-rouge">git flow init</code> 명령을 실행하면 git repository 에 gitflow 브랜치 모델을 적용하기 위한 설정 절차를 진행합니다.</p>
+
+<p>초기화가 완료되면 Main 브랜치인 master 와 develop 브랜치가 생성되어있습니다.</p>
+
+<h4 id="신규-기능-개발">신규 기능 개발</h4>
+<p>신규 기능 개발을 위해 develop 브랜치를 기준으로 분기하는 feature 브랜치를 구성해야합니다.
+Gitflow 는 아래 명령어를 통해 진행할 수 있습니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>git flow feature start name-of-feature
+</code></pre></td></tr></tbody></table></div></div>
+<p>그럼 <code class="highlighter-rouge">feature/name-of-feature</code> 브랜치가 생성되며 기능 개발이 가능합니다.</p>
+
+<p>기능 개발이 완료됐다면 커밋한 후 develop 브랜치에 머지를 해야하는데요.
+Gitflow 는 아래 명령어로 가능합니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>git flow feature finish name-of-feature
+</code></pre></td></tr></tbody></table></div></div>
+
+<p><img src="http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/3.png" alt="Image1" /></p>
+
+<p>그럼 develop 체크아웃 -&gt; feature/name-of-feature 브랜치 develop으로 머지 -&gt;  feature/name-of-feature 제거 작업이 진행됩니다.</p>
+
+<h4 id="release-하기">Release 하기</h4>
+<p>어느정도 기능이 준비되어 다음 릴리즈를 할 수 있는 수준에 도달하면 release 작업을 진행합니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>git flow release start release-name
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>위 명령어는 release/release-name 으로 브랜치를 생성합니다.</p>
+
+<p>이후 운영 배포 전 최종 점검, 발견되는 문제 수정을 진행 후 완전히 배포 준비가 마무리되면, master 에 merge 를 진행하고 develop 에도 Back merge를 해야하는데요.</p>
+
+<p>이것 역시</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>Git flow release finish release-name 
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>명령어로 간단하게 진행할 수 있습니다.ㅍ</p>
 
 
       
@@ -515,10 +619,10 @@
         <div class="post-tags">
           
             
-            <a href="/tag/#/Unix" rel="tag"># Unix</a>
+            <a href="/tag/#/git" rel="tag"># git</a>
           
             
-            <a href="/tag/#/Linux" rel="tag"># Linux</a>
+            <a href="/tag/#/gitflow" rel="tag"># gitflow</a>
           
         </div>
       
@@ -534,18 +638,14 @@
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2019-10/jpa-query-tech" rel="next" title="JPA의 쿼리 기술 종류">
-                <i class="fa fa-chevron-left"></i> JPA의 쿼리 기술 종류
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/articles/2019-05/example-of-elk" rel="prev" title="ELK를 활용한 로그 중앙집중 처리">
-                ELK를 활용한 로그 중앙집중 처리 <i class="fa fa-chevron-right"></i>
+              <a href="/articles/2019-11/netlify-with-vue" rel="prev" title="Netlify를 사용하여 정적 사이트 배포하기">
+                Netlify를 사용하여 정적 사이트 배포하기 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -738,7 +838,7 @@
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#cygwin-이란"> <span class="nav-number">1</span> <span class="nav-text">Cygwin 이란</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#사용"> <span class="nav-number">1.1</span> <span class="nav-text">사용</span> </a> </li> </ol> </li>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#vincent-driessen-의-브랜치-모델"> <span class="nav-number">1</span> <span class="nav-text">Vincent Driessen 의 브랜치 모델</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#main-branch"> <span class="nav-number">1.1</span> <span class="nav-text">Main Branch</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#supporting-branch"> <span class="nav-number">1.2</span> <span class="nav-text">Supporting branch</span> </a> </li> </ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#gitflow-란"> <span class="nav-number">2</span> <span class="nav-text">Gitflow 란?</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#설치"> <span class="nav-number">3</span> <span class="nav-text">설치</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#사용하기"> <span class="nav-number">4</span> <span class="nav-text">사용하기</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#초기화"> <span class="nav-number">4.1</span> <span class="nav-text">초기화</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#신규-기능-개발"> <span class="nav-number">4.2</span> <span class="nav-text">신규 기능 개발</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#release-하기"> <span class="nav-number">4.3</span> <span class="nav-text">Release 하기</span> </a> </li> </ol> </li>
     </ol>
   </div>
             

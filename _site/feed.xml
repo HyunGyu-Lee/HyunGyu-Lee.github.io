@@ -5,9 +5,139 @@
     <description>Software Engineer</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-11-06</pubDate>
-    <lastBuildDate>Wed, 06 Nov 2019 14:14:32 +0900</lastBuildDate>
+    <pubDate>2019-11-14</pubDate>
+    <lastBuildDate>Thu, 14 Nov 2019 14:02:18 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Git 고급 브랜치 전략과 Gitflow</title>
+        <description>&lt;p&gt;Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;vincent-driessen-의-브랜치-모델&quot;&gt;Vincent Driessen 의 브랜치 모델&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://nvie.com/posts/a-successful-git-branching-model/&quot;&gt;Vincent Driessen가 제안한 고급 브랜치 전략&lt;/a&gt;으로 브랜치를 다음과 같이 분류하고 규칙을 정해 버전관리를 합니다.&lt;/p&gt;
+
+&lt;h4 id=&quot;main-branch&quot;&gt;Main Branch&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/2.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;master
+    &lt;ul&gt;
+      &lt;li&gt;현재 릴리즈되어있는 버전 또는 바로 릴리즈가 가능한 다음 버전&lt;/li&gt;
+      &lt;li&gt;master 브랜치에 merge 가 발생하는 것은 곧 신규 릴리즈가 있다는 의미&lt;/li&gt;
+      &lt;li&gt;발견된 모든 버그가 해결된, 정상적으로 동작하는 상태여야함&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;develop
+    &lt;ul&gt;
+      &lt;li&gt;다음 릴리즈를 위해 개발된 모든 기능들이 통합되어 관리되는 브랜치&lt;/li&gt;
+      &lt;li&gt;모든 개발자가 함께 관리하는 브랜치, 항상 컴파일이 가능한 상태를 유지&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;supporting-branch&quot;&gt;Supporting branch&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;feature
+    &lt;ul&gt;
+      &lt;li&gt;특정 기능을 개발하는 브랜치&lt;/li&gt;
+      &lt;li&gt;일반적으로 담당 개발자 로컬에만 존재 (한 feature를 위해 여러 개발자와 협업하는 경우 origin 에 push 필요)&lt;/li&gt;
+      &lt;li&gt;기능개발 시작 시 develop 으로 부터 분기하고 개발이 완료되면 다시 develop 으로 Merge&lt;/li&gt;
+      &lt;li&gt;아주 간단한 수정 (side-effect가 없다고 확신하는 경우)은 별도 feature 브랜치 없이 develop 브랜치에서 바로 수정하는 것을 허용&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;release
+    &lt;ul&gt;
+      &lt;li&gt;다음 릴리즈를 준비하는 브랜치&lt;/li&gt;
+      &lt;li&gt;이 브랜치에서 실제 릴리즈 전 발견되는 버그 수정 등이 이루어짐&lt;/li&gt;
+      &lt;li&gt;develop 으로 부터 분기하고 develop (bugfix 한 것들을 머지하기 위함), master(신규 기능 + bugfix) 로 merge&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;hotfix
+    &lt;ul&gt;
+      &lt;li&gt;운영중에 문제가 발생하는 경우 해당 문제를 수정하는 브랜치&lt;/li&gt;
+      &lt;li&gt;master 로 부터 분기하며, 문제를 수정한 후 정상동작이 확인되면 develop과 master로 merge&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;gitflow-란&quot;&gt;Gitflow 란?&lt;/h2&gt;
+&lt;p&gt;위에서 소개한 브랜치 모델을 쉽고 편하게 사용할 수 있도록 지원하는 도구입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
+&lt;p&gt;먼저 gitflow 를 설치합니다.&lt;/p&gt;
+
+&lt;p&gt;Mac 에서는 brew를 이용해 간단하게 설치할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# OSX
+brew install git-flow-avh
+
+# Linux
+apt-get install git-flow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;사용하기&quot;&gt;사용하기&lt;/h2&gt;
+&lt;h4 id=&quot;초기화&quot;&gt;초기화&lt;/h4&gt;
+&lt;p&gt;git repository에 gitflow 를 적용하기 위해 아래 명령어를 입력합니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git flow init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/1.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git flow init&lt;/code&gt; 명령을 실행하면 git repository 에 gitflow 브랜치 모델을 적용하기 위한 설정 절차를 진행합니다.&lt;/p&gt;
+
+&lt;p&gt;초기화가 완료되면 Main 브랜치인 master 와 develop 브랜치가 생성되어있습니다.&lt;/p&gt;
+
+&lt;h4 id=&quot;신규-기능-개발&quot;&gt;신규 기능 개발&lt;/h4&gt;
+&lt;p&gt;신규 기능 개발을 위해 develop 브랜치를 기준으로 분기하는 feature 브랜치를 구성해야합니다.
+Gitflow 는 아래 명령어를 통해 진행할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git flow feature start name-of-feature
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;그럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;feature/name-of-feature&lt;/code&gt; 브랜치가 생성되며 기능 개발이 가능합니다.&lt;/p&gt;
+
+&lt;p&gt;기능 개발이 완료됐다면 커밋한 후 develop 브랜치에 머지를 해야하는데요.
+Gitflow 는 아래 명령어로 가능합니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git flow feature finish name-of-feature
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그럼 develop 체크아웃 -&amp;gt; feature/name-of-feature 브랜치 develop으로 머지 -&amp;gt;  feature/name-of-feature 제거 작업이 진행됩니다.&lt;/p&gt;
+
+&lt;h4 id=&quot;release-하기&quot;&gt;Release 하기&lt;/h4&gt;
+&lt;p&gt;어느정도 기능이 준비되어 다음 릴리즈를 할 수 있는 수준에 도달하면 release 작업을 진행합니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git flow release start release-name
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위 명령어는 release/release-name 으로 브랜치를 생성합니다.&lt;/p&gt;
+
+&lt;p&gt;이후 운영 배포 전 최종 점검, 발견되는 문제 수정을 진행 후 완전히 배포 준비가 마무리되면, master 에 merge 를 진행하고 develop 에도 Back merge를 해야하는데요.&lt;/p&gt;
+
+&lt;p&gt;이것 역시&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Git flow release finish release-name 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;명령어로 간단하게 진행할 수 있습니다.ㅍ&lt;/p&gt;
+</description>
+        <pubDate>2019-11-14</pubDate>
+        <link>http://localhost:4000/articles/2019-11/reference-of-gitflow</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-11/reference-of-gitflow</guid>
+        
+        <category>git</category>
+        
+        <category>gitflow</category>
+        
+        
+        <category>etc.</category>
+        
+        <category>git</category>
+        
+      </item>
     
       <item>
         <title>Netlify를 사용하여 정적 사이트 배포하기</title>
@@ -35,7 +165,7 @@ Gatsby와 같은 블로그를 배포하는 용도로 쓰이는 것으로 유명�
 
 &lt;p&gt;다음에는 Vue + Firebase + Netlify 의 조합으로 간단한 애플리케이션을 제작하여 배포하는 포스트를 작성할 계획입니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-11-06</pubDate>
+        <pubDate>2019-11-14</pubDate>
         <link>http://localhost:4000/articles/2019-11/netlify-with-vue</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-11/netlify-with-vue</guid>
         
@@ -65,36 +195,39 @@ Gatsby와 같은 블로그를 배포하는 용도로 쓰이는 것으로 유명�
   &lt;li&gt;관계형 데이터베이스는 데이터 중심으로 구조화, 집합적인 사고가 필요하고 추상화, 상속, 다형성 같은 개념이 없음&lt;/li&gt;
   &lt;li&gt;연관관계를 표현할 때 객체는 타 객체 참조 (reference) 로, 관계형 DB 는 외래키로 표현하는 등 연관관계를 표현
     &lt;ul&gt;
-      &lt;li&gt;객체를 테이블에 맞춰 모델링
-  ```java
-  class Member {
-  String id;      // MEMBER_ID 컬럼 사용
-  Long teamId;    // TEAM_ID FK 컬럼 사용
-  String userName;
-  }&lt;/li&gt;
+      &lt;li&gt;객체를 테이블에 맞춰 모델링&lt;/li&gt;
     &lt;/ul&gt;
 
-    &lt;p&gt;class Team {
-      Long id;        // TEAM_ID PK 사용
-      String name;
-  }&lt;/p&gt;
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-  - 객체지향 모델링 
-  ```java
-  class Member {
-      String id;
-      Team team;          // 참조로 연관관계를 맺는다.
-      String username;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Member&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// MEMBER_ID 컬럼 사용&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;teamId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// TEAM_ID FK 컬럼 사용&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
-      Team getTeam() {
-          return team;
-      }
-  }
+  &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Team&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;// TEAM_ID PK 사용&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-  class Team {
-      Long id;
-      String name;
-  }
+    &lt;ul&gt;
+      &lt;li&gt;객체지향 모델링&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Member&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;Team&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;// 참조로 연관관계를 맺는다.&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+      &lt;span class=&quot;n&quot;&gt;Team&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getTeam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;team&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Team&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -144,50 +277,51 @@ Gatsby와 같은 블로그를 배포하는 용도로 쓰이는 것으로 유명�
  &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;member_nm&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;like&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'lee%'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;JPQL
-```java
-// Entity (자바객체와 데이터베이스 테이블을 매핑)
-@Entity
-@Table(name = “MEMBER”)
-public class EntityMember {&lt;/p&gt;
-
-    &lt;p&gt;@Column(“member_nm”)
-  private String memberName;
-  ….
-}&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;JPQL&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;// Repository 
-public interface MemberRepository JpaRepository&amp;lt;Memger, Long&amp;gt; {&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Entity (자바객체와 데이터베이스 테이블을 매핑)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Entity&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;MEMBER&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EntityMember&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 메소드 이름 쿼리
-List&amp;lt;Member&amp;gt; findAllByMemberNameLike(String searchName);
+    &lt;span class=&quot;nd&quot;&gt;@Column&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;member_nm&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memberName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;....&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
-// JPQL 직접 작성
-@Query(&quot; select m from Member m&quot; +
-        &quot; where m.memberName like :searchName&quot;)
-List&amp;lt;Member&amp;gt; findAllByMemberNameLikeDirectJPQL(String searchName); }
+
+&lt;span class=&quot;c1&quot;&gt;// Repository &lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MemberRepository&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JpaRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Memger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// 메소드 이름 쿼리&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findAllByMemberNameLike&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;searchName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// JPQL 직접 작성&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; select m from Member m&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;&quot; where m.memberName like :searchName&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findAllByMemberNameLikeDirectJPQL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;searchName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-위 처럼 개발자는 JPQL 을 작성하면, 프레임워크가 애플리케이션에서 사용하는 DBMS 에 맞는 SQL로 변환하여 실행시켜준다. (DB 벤더에 독립적)
+&lt;p&gt;위 처럼 개발자는 JPQL 을 작성하면, 프레임워크가 애플리케이션에서 사용하는 DBMS 에 맞는 SQL로 변환하여 실행시켜준다. (DB 벤더에 독립적)&lt;/p&gt;
 
-##### JPQL의 단점
-**JPQL**이 SQL에 비해 좋은 부분이 많으나, 결국 문자열로 적는 쿼리로 한계와 단점들이 존재한다.
-
-- 타입 안정성을 보장 받을 수 없음
-- 동적인 쿼리를 작성할 수 없음
-
-이를 위해 **Criteria** 라는 빌더 API 를 지원하여 자바코드로 JPQL 작성을 지원한다.
-
-- JPQL
-```sql
-select m from Member m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h5 id=&quot;jpql의-단점&quot;&gt;JPQL의 단점&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;JPQL&lt;/strong&gt;이 SQL에 비해 좋은 부분이 많으나, 결국 문자열로 적는 쿼리로 한계와 단점들이 존재한다.&lt;/p&gt;
 
 &lt;ul&gt;
+  &lt;li&gt;타입 안정성을 보장 받을 수 없음&lt;/li&gt;
+  &lt;li&gt;동적인 쿼리를 작성할 수 없음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이를 위해 &lt;strong&gt;Criteria&lt;/strong&gt; 라는 빌더 API 를 지원하여 자바코드로 JPQL 작성을 지원한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;JPQL
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
   &lt;li&gt;Criteria 사용
     &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;CriteriaBuilder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;em&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCriteriaBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
@@ -339,7 +473,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2019-11-06</pubDate>
+        <pubDate>2019-11-14</pubDate>
         <link>http://localhost:4000/articles/2019-11/jpa-orm-querydsl</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-11/jpa-orm-querydsl</guid>
         
@@ -498,7 +632,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2019-11-06</pubDate>
+        <pubDate>2019-11-14</pubDate>
         <link>http://localhost:4000/articles/2019-10/java-generic-type</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-10/java-generic-type</guid>
         
@@ -561,7 +695,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;/ol&gt;
 
 </description>
-        <pubDate>2019-11-06</pubDate>
+        <pubDate>2019-11-14</pubDate>
         <link>http://localhost:4000/articles/2019-10/how-spring-aop-works</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-10/how-spring-aop-works</guid>
         
@@ -625,7 +759,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
   &lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>2019-11-06</pubDate>
+        <pubDate>2019-11-14</pubDate>
         <link>http://localhost:4000/articles/2019-10/my-book-list</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-10/my-book-list</guid>
         
@@ -672,7 +806,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
   &lt;li&gt;Criteria의 동적인 특징과 JPQL의 표현력을 타입에 안전한 방법으로 제공&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2019-11-06</pubDate>
+        <pubDate>2019-11-14</pubDate>
         <link>http://localhost:4000/articles/2019-10/jpa-query-tech</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-10/jpa-query-tech</guid>
         
@@ -712,7 +846,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 우리가 원래 사용하고 있던 Windows의 C:, D: 등을 접속하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;/cygdrive/{Drive 볼륨명}&lt;/code&gt; 경로로 이동하면 됩니다.
 다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-11-06</pubDate>
+        <pubDate>2019-11-14</pubDate>
         <link>http://localhost:4000/articles/2019-09/use-linux-command-on-windows</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-09/use-linux-command-on-windows</guid>
         
@@ -881,7 +1015,7 @@ kibana
   &lt;li&gt;&lt;a href=&quot;https://heowc.tistory.com/49&quot;&gt;ELK Stack 개념정리&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2019-11-06</pubDate>
+        <pubDate>2019-11-14</pubDate>
         <link>http://localhost:4000/articles/2019-05/example-of-elk</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-05/example-of-elk</guid>
         
@@ -940,7 +1074,7 @@ kibana
 
 &lt;p&gt;본인이 사용하는 기술에 대해 필요한 설정 위주로 찾아서 추가해주면 보다 더 좋은 설정을 진행할 수 있을 것 같습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-11-06</pubDate>
+        <pubDate>2019-11-14</pubDate>
         <link>http://localhost:4000/articles/2019-01/spring-boot-configurations</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-01/spring-boot-configurations</guid>
         
@@ -949,92 +1083,6 @@ kibana
         <category>Spring Framework</category>
         
         <category>Java</category>
-        
-        
-        <category>Spring Framework</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring Boot Build 시 MyBatis Type Alias 미적용 문제</title>
-        <description>&lt;p&gt;MyBatis를 이용하여 개발하면 주로 resultType에 적어줄 타입에 alias를 적용하여 사용한다.&lt;/p&gt;
-
-&lt;p&gt;보통 다음과 같이 SqlSessionFactoryBean을 정의할 때 setTypeAliasesPackage 메소드를 이용하여 정의한다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTypeAliasesPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;packages for alias&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;!--more--&gt;
-&lt;p&gt;헌데 위와같은 방식으로 alias를 적용한 후 IDE를 통해 실행시키면 문제없이 잘 실행되는데&lt;/p&gt;
-
-&lt;p&gt;배포를 위해 jar로 빌드한 후 실행하자  ClassNotFoundException 이 발생하며 alias된 타입들을 못찾는 문제가 발생했다.&lt;/p&gt;
-
-&lt;p&gt;​때문에 Mybatis에서 Alias 처리하는 부분을 분석해보니&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;resolveAlias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toLowerCase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ENGLISH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TYPE_ALIASES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;containsKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TYPE_ALIASES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Resources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;classForName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ClassNotFoundException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;TypeException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Could not resolve type alias '&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;'.  Cause: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;TYPE_ALIASES (HashMap&amp;lt;String, Class&amp;lt;?» ) 에 등록되어 있으면 해당 Class를 반환하고 그렇지 않으면 클래스로더를 통해 클래스를 로딩한도록 되어있는데, 오류 로그를 통해 확인되는 부분은 일단 IDE에서는 잘만 찾아지는 alias들이 TYPE_ALIASES에 등록이 안되어 있다는 점이었다.&lt;/p&gt;
-
-&lt;p&gt;때문에 이번엔 alias를 등록하는 부분을 살펴봤다..&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ResolverUtil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Test&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;packageName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getPackagePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;packageName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;children&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VFS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;child&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;children&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.class&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;addIfMatching&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ioe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Could not read package: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;packageName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ioe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;파라미터로 전달된 패키지 이하 디렉토리의 모든 리소스를 대상으로 확장자가 class인 파일 중 특정 조건에 부합하는 클래스들을 alias로 등록하도록 구현되어있다. (특정 조건은 지정된 슈퍼타입에 대해 isAssignableFrom로 체크, 지정되어있지 않으면 Object클래스가 슈퍼타입)&lt;/p&gt;
-
-&lt;p&gt;그리고, 리소스에 접근할 때 VFS라는 클래스를 통해 특정 경로의 리소스 목록을 얻어오도록 되어있다..&lt;/p&gt;
-
-&lt;p&gt;​VFS는 Virtual File System의 약자로 실제 파일 시스템 위, 응용 프로그램 계층에 추상화된 가상 파일시스템을 의미하는 용어인 것 같은데 위 소스코드 문맥상 Mybatis에서 파일 등 시스템 리소스에 접근할 때 이용하는 클래스 인 것 같았다. (조금 더 자세히 조사해볼 필요있음..)&lt;/p&gt;
-
-&lt;p&gt;​여튼 위 클래스에 대한 구현체가 아무런 지정을 하지 않으면 DefaultVFS라는 구현체가 사용되는데 IDE 위에서 구동될 때는 target 디렉토리 이하 classes 파일들에 문제없이 접근할 수 있으나 Spring Boot프로젝트 배포한 jar에서는 형태가 달라 classes에 접근이 안되어 alias들이 등록되지 않았던 것이다.&lt;/p&gt;
-
-&lt;p&gt;이렇게 원인을 찾은 후 검색을 해보니 역시나…….&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SqlSessionFactoryBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setVfs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SpringBootVFS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Spring Boot 전용 VFS 사용하도록 지정&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sessionFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTypeAliasesPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;packages for alias&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;위처럼 Spring Boot 용 VFS 구현체를 지정해주는 아주 간단한 방법으로 해결할 수 있었다.&lt;/p&gt;
-</description>
-        <pubDate>2019-11-06</pubDate>
-        <link>http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem</guid>
-        
-        <category>Spring Boot</category>
-        
-        <category>MyBatis</category>
-        
-        <category>VFS</category>
         
         
         <category>Spring Framework</category>
