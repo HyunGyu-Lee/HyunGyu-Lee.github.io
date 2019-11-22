@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,Unix,tar,gz," />
+  <meta name="keywords" content="linux,unix,ssh,mysql," />
 
 
 
@@ -111,17 +111,17 @@
 
 
 
-<meta name="description" content="tar 명령어는 굉장히 많은 옵션을 사용할 수 있다.">
-<meta name="keywords" content="Linux, Unix, tar, gz">
+<meta name="description" content="신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다. 구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 resolve하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다. 장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다. 심각한 상황과 달리 해결방법은 아주 심플하고 간단했습니다.">
+<meta name="keywords" content="linux, unix, ssh, mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="리눅스 tar, gz를 이용한 압축">
-<meta property="og:url" content="http://localhost:4000/articles/2018-09/linux-tar-command">
+<meta property="og:title" content="리눅스 SSH, MySQL 접속 지연 문제">
+<meta property="og:url" content="http://localhost:4000/articles/2019-11/server-connection-delay">
 <meta property="og:site_name" content="@deveely">
-<meta property="og:description" content="tar 명령어는 굉장히 많은 옵션을 사용할 수 있다.">
+<meta property="og:description" content="신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다. 구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 resolve하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다. 장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다. 심각한 상황과 달리 해결방법은 아주 심플하고 간단했습니다.">
 <meta property="og:locale" content="ko">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="리눅스 tar, gz를 이용한 압축">
-<meta name="twitter:description" content="tar 명령어는 굉장히 많은 옵션을 사용할 수 있다.">
+<meta name="twitter:title" content="리눅스 SSH, MySQL 접속 지연 문제">
+<meta name="twitter:description" content="신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다. 구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 resolve하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다. 장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다. 심각한 상황과 달리 해결방법은 아주 심플하고 간단했습니다.">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -154,7 +154,7 @@
 
 
 
-  <title>리눅스 tar, gz를 이용한 압축 | @deveely</title>
+  <title>리눅스 SSH, MySQL 접속 지연 문제 | @deveely</title>
   
 
 
@@ -347,7 +347,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-09/linux-tar-command">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2019-11/server-connection-delay">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -367,7 +367,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            리눅스 tar, gz를 이용한 압축
+            리눅스 SSH, MySQL 접속 지연 문제
           
         </h1>
         
@@ -381,8 +381,8 @@
               
                 <span class="post-meta-item-text">작성일</span>
               
-              <time title="" itemprop="dateCreated datePublished" datetime="2018-09-01T10:32:11+09:00">
-                2018-09-01
+              <time title="" itemprop="dateCreated datePublished" datetime="2019-11-21T22:43:19+09:00">
+                2019-11-21
               </time>
             
 
@@ -402,6 +402,18 @@
               
                 <span class="post-meta-item-text">In</span>
               
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/etc." itemprop="url" rel="index">
+                    <span itemprop="name">etc.</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -460,67 +472,61 @@
 
 
 
-  <p>tar 명령어는 굉장히 많은 옵션을 사용할 수 있다.</p>
+  <p>신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다.
+구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 <code class="highlighter-rouge">resolve</code>하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다.
+장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다.
+<!--more-->
+심각한 상황과 달리 해결방법은 아주 심플하고 간단했습니다.</p>
 
-<p>이 포스트에서는 주로 사용하는 패턴인 tar 압축 / 압축해제, tar.gz 압축 / 압축해제 명령어를 기술한다.
-<!--more--></p>
-<ol>
-  <li>tar 압축 / 해제</li>
-</ol>
+<h2 id="mysql-접속-지연-문제-해결">MySQL 접속 지연 문제 해결</h2>
+<p>my.cnf (주로 /etc/my.cnf 에 위치함) 파일에 클라이언트 IP resolve 과정을 스킵하는 설정을 추가해줍니다.
+바로 <code class="highlighter-rouge">skip-name-resolve</code> 옵션을 mysqld 섹션에 넣어주면 됩니다.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># [압축할 디렉토리]를 [압축파일명.tar]로 압축</span>
-<span class="nb">tar</span> <span class="nt">-cvf</span> <span class="o">[</span>압축파일명.tar] <span class="o">[</span>압축할 디렉토리]
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7</pre></td><td class="code"><pre class="highlight"><code>[mysqld]
+...
 
-<span class="c"># [압축파일명.tar]파일 압축해제</span>
-<span class="nb">tar</span> <span class="nt">-xvf</span> <span class="o">[</span>압축파일명.tar]</code></pre></figure>
+# 추가
+skip-name-resolve
 
-<ol>
-  <li>tar.gz 압축 / 해제</li>
-</ol>
+...
+</code></pre></td></tr></tbody></table></div></div>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># [압축할 디렉토리]를 [압축파일명.tar.gz]로 압축</span>
-<span class="nb">tar</span> <span class="nt">-zcvf</span> <span class="o">[</span>압축파일명.tar.gz] <span class="o">[</span>압축할 디렉토리]
+<p>설정을 추가한 후에 MySQL 서버를 재기동해줍니다.</p>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>service mysql restart
+</code></pre></td></tr></tbody></table></div></div>
 
-<span class="c"># [압축파일명.tar.gz]파일 압축해제</span>
-<span class="nb">tar</span> <span class="nt">-zxvf</span> <span class="o">[</span>압축파일명.tar.gz]</code></pre></figure>
+<p>재기동 완료 후 접속해보니.. 거짓말처럼 딜레이 없이 빠르게 접속되었습니다.</p>
 
-<p>굉장히 간단하다.</p>
+<h2 id="ssh-접속-지연-문제-해결">SSH 접속 지연 문제 해결</h2>
+<p>sshd_config (/etc/ssh/sshd_config) 파일에 마찬가지로 지연을 일으키는 동작을 하지 않도록 설정을 추가해줍니다.</p>
 
-<p>(c)vf / (x)vf =&gt; 압축 / 압축해제
-(z)cvf / (z)xvf =&gt; gzip 옵션 활성</p>
+<p>GSSAPIAutentication 과 UseDNS를 no 로 지정해주면 됩니다.</p>
 
-<p>간략하게나마 옵션들의 의미를 설명하면 다음과 같다.</p>
+<p>제 경우엔 GSSAPIAutentication 설정의 경우 yes 로 되있었고 UseDNS 는 주석처리 되어있었는데요.
+둘 다 명시적으로 no 옵션을 주었습니다.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>옵션</th>
-      <th style="text-align: center">의미</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">-c</code></td>
-      <td style="text-align: center">tar 압축</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-v</code></td>
-      <td style="text-align: center">파일을 묶거나 풀 때 대상 파일 목록을 화면에 출력</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-f</code></td>
-      <td style="text-align: center">파일명 지정</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-x</code></td>
-      <td style="text-align: center">tar 압축해제</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-z</code></td>
-      <td style="text-align: center">gzip 옵션 활성</td>
-    </tr>
-  </tbody>
-</table>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15</pre></td><td class="code"><pre class="highlight"><code>...
+
+# GSSAPI options
+GSSAPIAuthentication no
+#GSSAPIAuthentication yes
+#GSSAPICleanupCredentials yes
+GSSAPICleanupCredentials yes
+#GSSAPIStrictAcceptorCheck yes
+#GSSAPIKeyExchange no
+
+...
+
+UseDNS no
+
+...
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>다음 sshd 서비스를 재기동 해줍니다.</p>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>service sshd restart
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>마찬가지로 로컬에서 ssh 접속 시 발생하던 지연은 없고 아주 빠르게 접속되었습니다.</p>
 
 
       
@@ -552,16 +558,16 @@
         <div class="post-tags">
           
             
-            <a href="/tag/#/Linux" rel="tag"># Linux</a>
+            <a href="/tag/#/linux" rel="tag"># linux</a>
           
             
-            <a href="/tag/#/Unix" rel="tag"># Unix</a>
+            <a href="/tag/#/unix" rel="tag"># unix</a>
           
             
-            <a href="/tag/#/tar" rel="tag"># tar</a>
+            <a href="/tag/#/ssh" rel="tag"># ssh</a>
           
             
-            <a href="/tag/#/gz" rel="tag"># gz</a>
+            <a href="/tag/#/mysql" rel="tag"># mysql</a>
           
         </div>
       
@@ -577,18 +583,14 @@
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2018-10/difference-of-entity-db-model" rel="next" title="객체 모델과 관계형 데이터베이스 모델 차이">
-                <i class="fa fa-chevron-left"></i> 객체 모델과 관계형 데이터베이스 모델 차이
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/articles/2018-09/linux-scheduling-with-crontab" rel="prev" title="리눅스 스케쥴러 crontab 사용">
-                리눅스 스케쥴러 crontab 사용 <i class="fa fa-chevron-right"></i>
+              <a href="/articles/2019-11/reference-of-gitflow" rel="prev" title="Git 고급 브랜치 전략과 Gitflow">
+                Git 고급 브랜치 전략과 Gitflow <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -645,8 +647,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            목차
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            흝어보기
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.jpg"
@@ -752,6 +763,34 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#mysql-접속-지연-문제-해결"> <span class="nav-number">1</span> <span class="nav-text">MySQL 접속 지연 문제 해결</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#ssh-접속-지연-문제-해결"> <span class="nav-number">2</span> <span class="nav-text">SSH 접속 지연 문제 해결</span> </a> </li>
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
