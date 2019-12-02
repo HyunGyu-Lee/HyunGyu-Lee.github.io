@@ -1,4 +1,96 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-22T14:57:30+09:00</updated><id>http://localhost:4000/atom.xml</id><title type="html">@deveely</title><subtitle>Software Engineer</subtitle><author><name>이현규</name></author><entry><title type="html">리눅스 SSH, MySQL 접속 지연 문제</title><link href="http://localhost:4000/articles/2019-11/server-connection-delay" rel="alternate" type="text/html" title="리눅스 SSH, MySQL 접속 지연 문제" /><published>2019-11-21T22:43:19+09:00</published><updated>2019-11-21T22:43:19+09:00</updated><id>http://localhost:4000/articles/2019-11/server-connection-delay</id><content type="html" xml:base="http://localhost:4000/articles/2019-11/server-connection-delay">&lt;p&gt;신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/atom.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-12-03T00:00:16+09:00</updated><id>/atom.xml</id><title type="html">@deveely</title><subtitle>Software Engineer</subtitle><author><name>이현규</name></author><entry><title type="html">NHN FORWARD 2019 후기</title><link href="/articles/2019-12/nhn-forward-review" rel="alternate" type="text/html" title="NHN FORWARD 2019 후기" /><published>2019-12-01T22:43:19+09:00</published><updated>2019-12-01T22:43:19+09:00</updated><id>/articles/2019-12/nhn-forward-review</id><content type="html" xml:base="/articles/2019-12/nhn-forward-review">&lt;p&gt;NHN Forward 2019 컨퍼런스 참여 후기입니다.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;nhn-forward-2019&quot;&gt;NHN Forward 2019&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn1.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+지난 11월 27일 &lt;code class=&quot;highlighter-rouge&quot;&gt;NHN Forward 2019&lt;/code&gt; 컨퍼런스에 참가했습니다.
+회사가 회사다 보니 다양한 컨텐츠들이 준비되어 있었는데요. 
+크게 아래와 같았습니다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;세션
+    &lt;ol&gt;
+      &lt;li&gt;발표세션&lt;/li&gt;
+      &lt;li&gt;스몰 스텝&lt;/li&gt;
+      &lt;li&gt;프런트엔드 상담소&lt;/li&gt;
+      &lt;li&gt;커뮤니티 라운지&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;워크숍&lt;/li&gt;
+  &lt;li&gt;핸즈온 랩&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn2.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;프론트엔드 전문 개발자분들이 직접 고민을 들어주고 대화를 할 수 있는 프런트엔드 상담소나 평소에 궁금했거나 해보고 싶었던 것들을 쉽게 따라해보고 경혐해 볼 수 있었던
+핸즈온 랩 등 준비를 정말 많이 했다는 느낌이 들었습니다.&lt;/p&gt;
+
+&lt;p&gt;특히 발표세션에서는 실무에서 겪을수 있는 문제점들이나 겪었던 문제들을 사례를 많이 공유받을수 있어 유익한 시간이었습니다.&lt;/p&gt;
+
+&lt;p&gt;발표세션은 총 7개 트랙에서 시간대별로 각각 강의가 주로 진행되었는데요. 저는 아래와 같이 세션을 참여했습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;발표세션&quot;&gt;발표세션&lt;/h2&gt;
+&lt;h4 id=&quot;1-깃깔나는-git-워크-플로우-알아보기&quot;&gt;1. ‘깃’깔나는 Git 워크 플로우 알아보기&lt;/h4&gt;
+&lt;p&gt;개발에 필수인 깃을 더 잘 쓰는 방법에 대해 사례를 통해 들을 수 있었습니다.
+특히 전 GitFlow 이외에 깃헙 플로우, 깃랩 플로우가 있는 거는 처음알았습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;깃 플로우: 메인브랜치(master / develop)와 서포팅프랜치 (feature, release, hotfix) 을 활용한 깃 워크플로&lt;/li&gt;
+  &lt;li&gt;깃헙 플로우: 깃 플로우가 대부분의 케이스에서 갖는 복잡함을 해소하고자 master / topic 브랜치를 활용해 간단하지만 강력한 워크플로&lt;/li&gt;
+  &lt;li&gt;깃랩 플로우: 깃 플로우는 너무 복잡하고, 깃헙 플로우는 너무 단순하다. 절충안을 제안&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;2-ddd-litespring&quot;&gt;2. DDD-Lite@Spring&lt;/h4&gt;
+&lt;p&gt;NHN의 서비스 중 Dooray! 의 위키 서비스를 사례로 애플리케이션의 복잡함으로 고통받는 개발자들을 위해 DDD를 소개하고, 어떻게 복잡함을 극복할 수 있는지 소개했습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DDD에서 모델링 시 속성보다는 행위가 우선이다.&lt;/li&gt;
+  &lt;li&gt;속성은 어떤 행위를 할 때 필요하면 그 때 추가한다.&lt;/li&gt;
+  &lt;li&gt;JPA로 생각해보면 바로 양방향 매핑을 하지 않고 우선 단방향 매핑을 하고 필요 시 추가로 양방향 매핑을 한다.&lt;/li&gt;
+  &lt;li&gt;도메인 모델을 풍부하게 만들어준다. (Rich Domain Model)&lt;/li&gt;
+  &lt;li&gt;여러 변 연산을 적용해도 그 결과가 달라지지 않는 성질, 멱등성을 유지하도록 설계한다.&lt;/li&gt;
+  &lt;li&gt;헥사고날 아키텍쳐&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn6.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;3-레거시-웹-서비스-길들이기-서버-개발자의-spa-적용기&quot;&gt;3. 레거시 웹 서비스 길들이기: 서버 개발자의 SPA 적용기&lt;/h4&gt;
+&lt;p&gt;저 또한 Spring 기반 웹 백엔드 애플리케이션을 만드는 개발자 다 보니 이 세션에서 소개해주신 사례들이 하나하나가 공감가는 사례들이었습니다.
+제가 평소에 겪었던 고민들에 대한 해결책을 들을수있어 좋았습니다.&lt;/p&gt;
+
+&lt;p&gt;적용하기전의 고민 / 적용하면서의 고민 / 현재 팀의 상황 / 효율적인 빌드를 위한 프로젝트 구성 / API 호출 방식 with Zuul /상태관리 / 다국어처리 
+
+ &lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn3.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;4-spring-jpa의-사실과-오해&quot;&gt;4. Spring JPA의 사실과 오해&lt;/h4&gt;
+&lt;p&gt;Spring JPA에 평소에 잘 알려지지 않은 사실들과 오해들을 소개해주셨습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;연관관계: 대부분의 경우는 단방향 매핑이 간단, 하지만 영속성 전이를 사용하는 경우 양방향 매핑을 사용하자 (추가 update 쿼리 방지)&lt;/li&gt;
+  &lt;li&gt;JpaRepository에 대한 사실
+    &lt;ul&gt;
+      &lt;li&gt;JpaRepository를 상속하는 것만으로도 대부분의 왠만한 기능을 사용할 수 있다.&lt;/li&gt;
+      &lt;li&gt;JpaRepository로도 JOIN이 가능하다.&lt;/li&gt;
+      &lt;li&gt;JpaRepository로도 다양한 DTO Projection이 가능하다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn5.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;5-paas--api-experience-좋은-api-dx를-제공하기-위한-작은-걸음&quot;&gt;5. Paas &amp;amp; API Experience: 좋은 API DX를 제공하기 위한 작은 걸음&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn7.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+ &lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn8.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+ &lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn9.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;마치며&quot;&gt;마치며&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn4.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+NHN Forward 2019의 심볼인 » 는 리달리디렉션 기호 »를 형상화한 것으로 지식과 경험을 더하고 쌓을 수 있기를 바라는 마음을 담았다고 합니다.&lt;/p&gt;
+
+&lt;p&gt;이런 NHN의 의지만큼 많은 것을 경험하고, 배우고, 즐거웠던 1분 1초가 아깝지 않은 시간이었습니다.&lt;/p&gt;
+
+&lt;p&gt;감사합니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="NHNFORWARD2019" /><summary type="html">NHN Forward 2019 컨퍼런스 참여 후기입니다.</summary></entry><entry><title type="html">리눅스 SSH, MySQL 접속 지연 문제</title><link href="/articles/2019-11/server-connection-delay" rel="alternate" type="text/html" title="리눅스 SSH, MySQL 접속 지연 문제" /><published>2019-11-21T22:43:19+09:00</published><updated>2019-11-21T22:43:19+09:00</updated><id>/articles/2019-11/server-connection-delay</id><content type="html" xml:base="/articles/2019-11/server-connection-delay">&lt;p&gt;신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다.
 구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 &lt;code class=&quot;highlighter-rouge&quot;&gt;resolve&lt;/code&gt;하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다.
 장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다.
 &lt;!--more--&gt;
@@ -52,14 +144,14 @@ UseDNS no
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;service sshd restart
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;마찬가지로 로컬에서 ssh 접속 시 발생하던 지연은 없고 아주 빠르게 접속되었습니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="linux" /><category term="unix" /><category term="ssh" /><category term="mysql" /><summary type="html">신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다. 구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 resolve하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다. 장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다. 심각한 상황과 달리 해결방법은 아주 심플하고 간단했습니다.</summary></entry><entry><title type="html">Git 고급 브랜치 전략과 Gitflow</title><link href="http://localhost:4000/articles/2019-11/reference-of-gitflow" rel="alternate" type="text/html" title="Git 고급 브랜치 전략과 Gitflow" /><published>2019-11-13T22:43:19+09:00</published><updated>2019-11-13T22:43:19+09:00</updated><id>http://localhost:4000/articles/2019-11/reference-of-gitflow</id><content type="html" xml:base="http://localhost:4000/articles/2019-11/reference-of-gitflow">&lt;p&gt;Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.
+&lt;p&gt;마찬가지로 로컬에서 ssh 접속 시 발생하던 지연은 없고 아주 빠르게 접속되었습니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="linux" /><category term="unix" /><category term="ssh" /><category term="mysql" /><summary type="html">신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다. 구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 resolve하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다. 장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다. 심각한 상황과 달리 해결방법은 아주 심플하고 간단했습니다.</summary></entry><entry><title type="html">Git 고급 브랜치 전략과 Gitflow</title><link href="/articles/2019-11/reference-of-gitflow" rel="alternate" type="text/html" title="Git 고급 브랜치 전략과 Gitflow" /><published>2019-11-13T22:43:19+09:00</published><updated>2019-11-13T22:43:19+09:00</updated><id>/articles/2019-11/reference-of-gitflow</id><content type="html" xml:base="/articles/2019-11/reference-of-gitflow">&lt;p&gt;Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;vincent-driessen-의-브랜치-모델&quot;&gt;Vincent Driessen 의 브랜치 모델&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://nvie.com/posts/a-successful-git-branching-model/&quot;&gt;Vincent Driessen가 제안한 고급 브랜치 전략&lt;/a&gt;으로 브랜치를 다음과 같이 분류하고 규칙을 정해 버전관리를 합니다.&lt;/p&gt;
 
 &lt;h4 id=&quot;main-branch&quot;&gt;Main Branch&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/2.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-11-14-reference-of-gitflow/2.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;master
@@ -124,7 +216,7 @@ apt-get install git-flow
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git flow init
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/1.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-11-14-reference-of-gitflow/1.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git flow init&lt;/code&gt; 명령을 실행하면 git repository 에 gitflow 브랜치 모델을 적용하기 위한 설정 절차를 진행합니다.&lt;/p&gt;
 
@@ -144,7 +236,7 @@ Gitflow 는 아래 명령어로 가능합니다.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git flow feature finish name-of-feature
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-11-14-reference-of-gitflow/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;그럼 develop 체크아웃 -&amp;gt; feature/name-of-feature 브랜치 develop으로 머지 -&amp;gt;  feature/name-of-feature 제거 작업이 진행됩니다.&lt;/p&gt;
 
@@ -163,7 +255,7 @@ Gitflow 는 아래 명령어로 가능합니다.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Git flow release finish release-name 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;명령어로 간단하게 진행할 수 있습니다.ㅍ&lt;/p&gt;</content><author><name>이현규</name></author><category term="git" /><category term="gitflow" /><summary type="html">Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.</summary></entry><entry><title type="html">Netlify를 사용하여 정적 사이트 배포하기</title><link href="http://localhost:4000/articles/2019-11/netlify-with-vue" rel="alternate" type="text/html" title="Netlify를 사용하여 정적 사이트 배포하기" /><published>2019-11-05T22:43:19+09:00</published><updated>2019-11-05T22:43:19+09:00</updated><id>http://localhost:4000/articles/2019-11/netlify-with-vue</id><content type="html" xml:base="http://localhost:4000/articles/2019-11/netlify-with-vue">&lt;p&gt;근래의 웹개발은 주로 백엔드와 프론트엔드 영역을 나누어 개발하는 것이 주류가 되었습니다.
+&lt;p&gt;명령어로 간단하게 진행할 수 있습니다.ㅍ&lt;/p&gt;</content><author><name>이현규</name></author><category term="git" /><category term="gitflow" /><summary type="html">Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.</summary></entry><entry><title type="html">Netlify를 사용하여 정적 사이트 배포하기</title><link href="/articles/2019-11/netlify-with-vue" rel="alternate" type="text/html" title="Netlify를 사용하여 정적 사이트 배포하기" /><published>2019-11-05T22:43:19+09:00</published><updated>2019-11-05T22:43:19+09:00</updated><id>/articles/2019-11/netlify-with-vue</id><content type="html" xml:base="/articles/2019-11/netlify-with-vue">&lt;p&gt;근래의 웹개발은 주로 백엔드와 프론트엔드 영역을 나누어 개발하는 것이 주류가 되었습니다.
 개인적으로 과거 JSP, jQuery 기반으로 개발된 웹사이트들은.. 두 번 다시는 겪고 싶지 않을 정도로 프론트엔드를 개발하는 기술들이 눈부시게 발전했고, 지금도 진행중입니다.
 이런 추세때문인지 자연스레 정적 웹사이트를 쉽게 배포할 수 있는 서비스가 인기를 얻고있는데, 그 중 하나인 Netlify 를 소개합니다.&lt;/p&gt;
 
@@ -185,7 +277,7 @@ Gatsby와 같은 블로그를 배포하는 용도로 쓰이는 것으로 유명�
 
 &lt;p&gt;Netlify와 여타 몇가지 기술을 보면서, 프론트엔드 기술은 정말 그 발전 속도가 상당하다는 생각을 하게됐습니다.&lt;/p&gt;
 
-&lt;p&gt;다음에는 Vue + Firebase + Netlify 의 조합으로 간단한 애플리케이션을 제작하여 배포하는 포스트를 작성할 계획입니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="FE" /><category term="Netlify" /><category term="Vue" /><summary type="html">근래의 웹개발은 주로 백엔드와 프론트엔드 영역을 나누어 개발하는 것이 주류가 되었습니다. 개인적으로 과거 JSP, jQuery 기반으로 개발된 웹사이트들은.. 두 번 다시는 겪고 싶지 않을 정도로 프론트엔드를 개발하는 기술들이 눈부시게 발전했고, 지금도 진행중입니다. 이런 추세때문인지 자연스레 정적 웹사이트를 쉽게 배포할 수 있는 서비스가 인기를 얻고있는데, 그 중 하나인 Netlify 를 소개합니다.</summary></entry><entry><title type="html">Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)</title><link href="http://localhost:4000/articles/2019-11/jpa-orm-querydsl" rel="alternate" type="text/html" title="Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)" /><published>2019-11-03T20:43:19+09:00</published><updated>2019-11-03T20:43:19+09:00</updated><id>http://localhost:4000/articles/2019-11/jpa-orm-querydsl</id><content type="html" xml:base="http://localhost:4000/articles/2019-11/jpa-orm-querydsl">&lt;p&gt;Java ORM 표준인 JPA 에 대해 설명하고 객체지향 쿼리 사용과 장단점을 정리했습니다.
+&lt;p&gt;다음에는 Vue + Firebase + Netlify 의 조합으로 간단한 애플리케이션을 제작하여 배포하는 포스트를 작성할 계획입니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="FE" /><category term="Netlify" /><category term="Vue" /><summary type="html">근래의 웹개발은 주로 백엔드와 프론트엔드 영역을 나누어 개발하는 것이 주류가 되었습니다. 개인적으로 과거 JSP, jQuery 기반으로 개발된 웹사이트들은.. 두 번 다시는 겪고 싶지 않을 정도로 프론트엔드를 개발하는 기술들이 눈부시게 발전했고, 지금도 진행중입니다. 이런 추세때문인지 자연스레 정적 웹사이트를 쉽게 배포할 수 있는 서비스가 인기를 얻고있는데, 그 중 하나인 Netlify 를 소개합니다.</summary></entry><entry><title type="html">Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)</title><link href="/articles/2019-11/jpa-orm-querydsl" rel="alternate" type="text/html" title="Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)" /><published>2019-11-03T20:43:19+09:00</published><updated>2019-11-03T20:43:19+09:00</updated><id>/articles/2019-11/jpa-orm-querydsl</id><content type="html" xml:base="/articles/2019-11/jpa-orm-querydsl">&lt;p&gt;Java ORM 표준인 JPA 에 대해 설명하고 객체지향 쿼리 사용과 장단점을 정리했습니다.
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;개요&quot;&gt;개요&lt;/h2&gt;
@@ -472,7 +564,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
     &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
 
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="JPA" /><summary type="html">Java ORM 표준인 JPA 에 대해 설명하고 객체지향 쿼리 사용과 장단점을 정리했습니다.</summary></entry><entry><title type="html">Reflection Type을 활용해 JPA 공통 AttributeConverter 구현</title><link href="http://localhost:4000/articles/2019-10/java-generic-type" rel="alternate" type="text/html" title="Reflection Type을 활용해 JPA 공통 AttributeConverter 구현" /><published>2019-10-30T20:43:19+09:00</published><updated>2019-10-30T20:43:19+09:00</updated><id>http://localhost:4000/articles/2019-10/java-generic-type</id><content type="html" xml:base="http://localhost:4000/articles/2019-10/java-generic-type">&lt;p&gt;얼마전에 JPA에서 사용할 공통 AttributeConverter 를 구현하면서 고민했던 점들을 정리한다.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="JPA" /><summary type="html">Java ORM 표준인 JPA 에 대해 설명하고 객체지향 쿼리 사용과 장단점을 정리했습니다.</summary></entry><entry><title type="html">Reflection Type을 활용해 JPA 공통 AttributeConverter 구현</title><link href="/articles/2019-10/java-generic-type" rel="alternate" type="text/html" title="Reflection Type을 활용해 JPA 공통 AttributeConverter 구현" /><published>2019-10-30T20:43:19+09:00</published><updated>2019-10-30T20:43:19+09:00</updated><id>/articles/2019-10/java-generic-type</id><content type="html" xml:base="/articles/2019-10/java-generic-type">&lt;p&gt;얼마전에 JPA에서 사용할 공통 AttributeConverter 를 구현하면서 고민했던 점들을 정리한다.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -612,7 +704,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 	&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserOptionConverter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JsonAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="JPA" /><summary type="html">얼마전에 JPA에서 사용할 공통 AttributeConverter 를 구현하면서 고민했던 점들을 정리한다.</summary></entry><entry><title type="html">Spring AOP 동작 방식, 원리</title><link href="http://localhost:4000/articles/2019-10/how-spring-aop-works" rel="alternate" type="text/html" title="Spring AOP 동작 방식, 원리" /><published>2019-10-29T22:03:19+09:00</published><updated>2019-10-29T22:03:19+09:00</updated><id>http://localhost:4000/articles/2019-10/how-spring-aop-works</id><content type="html" xml:base="http://localhost:4000/articles/2019-10/how-spring-aop-works">&lt;p&gt;스프링은 기본적으로 프록시 기반 AOP 를 제공한다.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="JPA" /><summary type="html">얼마전에 JPA에서 사용할 공통 AttributeConverter 를 구현하면서 고민했던 점들을 정리한다.</summary></entry><entry><title type="html">Spring AOP 동작 방식, 원리</title><link href="/articles/2019-10/how-spring-aop-works" rel="alternate" type="text/html" title="Spring AOP 동작 방식, 원리" /><published>2019-10-29T22:03:19+09:00</published><updated>2019-10-29T22:03:19+09:00</updated><id>/articles/2019-10/how-spring-aop-works</id><content type="html" xml:base="/articles/2019-10/how-spring-aop-works">&lt;p&gt;스프링은 기본적으로 프록시 기반 AOP 를 제공한다.
 스프링에서는 Java Dynamic Proxy를 사용하거나 Cglib을 사용하여 프록시 기반 AOP를 구현했다.&lt;/p&gt;
 
 &lt;p&gt;이 글에서는 어떻게 Spring 에서 AOP를 사용할 수 있는 방식의 차이와 프레임워크가 AOP를 지원하기 위해 어떤 처리를 해주는지 개인적으로 분석한 내용을 정리한다.
@@ -655,7 +747,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
   &lt;li&gt;
     &lt;p&gt;AspectJ 를 사용하기 위해서는 AJC 등 별도의 컴파일러 설정 등 추가 설정이 필요한데, Spring AOP 는 그렇지 않다.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="Spring Framework" /><category term="AOP" /><summary type="html">스프링은 기본적으로 프록시 기반 AOP 를 제공한다. 스프링에서는 Java Dynamic Proxy를 사용하거나 Cglib을 사용하여 프록시 기반 AOP를 구현했다.</summary></entry><entry><title type="html">개인적인 IT 서적 추천</title><link href="http://localhost:4000/articles/2019-10/my-book-list" rel="alternate" type="text/html" title="개인적인 IT 서적 추천" /><published>2019-10-22T22:03:19+09:00</published><updated>2019-10-22T22:03:19+09:00</updated><id>http://localhost:4000/articles/2019-10/my-book-list</id><content type="html" xml:base="http://localhost:4000/articles/2019-10/my-book-list">&lt;p&gt;읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="Spring Framework" /><category term="AOP" /><summary type="html">스프링은 기본적으로 프록시 기반 AOP 를 제공한다. 스프링에서는 Java Dynamic Proxy를 사용하거나 Cglib을 사용하여 프록시 기반 AOP를 구현했다.</summary></entry><entry><title type="html">개인적인 IT 서적 추천</title><link href="/articles/2019-10/my-book-list" rel="alternate" type="text/html" title="개인적인 IT 서적 추천" /><published>2019-10-22T22:03:19+09:00</published><updated>2019-10-22T22:03:19+09:00</updated><id>/articles/2019-10/my-book-list</id><content type="html" xml:base="/articles/2019-10/my-book-list">&lt;p&gt;읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -700,7 +792,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 기술의 완성을 위하여 프로그래머들을 육성하는 방법, 작은 개발 팀들에서의 창조적인 협업을 발전시키는 방법, 그리고 고객과의 커뮤니케이션을 향상시키는 방법들을 소개한다. 그리고 궁극적인 결과로서의 숙련된 개발자는 안정된 애플리케이션을 만들고, 확장하고, 개선시킬 수 있는 사람이다.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>이현규</name></author><category term="Book" /><summary type="html">읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.</summary></entry><entry><title type="html">JPA의 쿼리 기술 종류</title><link href="http://localhost:4000/articles/2019-10/jpa-query-tech" rel="alternate" type="text/html" title="JPA의 쿼리 기술 종류" /><published>2019-10-15T22:03:19+09:00</published><updated>2019-10-15T22:03:19+09:00</updated><id>http://localhost:4000/articles/2019-10/jpa-query-tech</id><content type="html" xml:base="http://localhost:4000/articles/2019-10/jpa-query-tech">&lt;p&gt;JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>이현규</name></author><category term="Book" /><summary type="html">읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.</summary></entry><entry><title type="html">JPA의 쿼리 기술 종류</title><link href="/articles/2019-10/jpa-query-tech" rel="alternate" type="text/html" title="JPA의 쿼리 기술 종류" /><published>2019-10-15T22:03:19+09:00</published><updated>2019-10-15T22:03:19+09:00</updated><id>/articles/2019-10/jpa-query-tech</id><content type="html" xml:base="/articles/2019-10/jpa-query-tech">&lt;p&gt;JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.&lt;/p&gt;
 
 &lt;p&gt;그동안 JPA 를 사용하면서 사용하는 쿼리 기술이 어느 기술인지도 잘 모르고 사용해온 나 자신을 위해.. 이 글에서 정리해보고자 합니다.&lt;/p&gt;
 
@@ -732,7 +824,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
   &lt;li&gt;비표준&lt;/li&gt;
   &lt;li&gt;Entity를 파싱하여 QEntity를 생성하고, 이를 쿼리작성에 이용&lt;/li&gt;
   &lt;li&gt;Criteria의 동적인 특징과 JPQL의 표현력을 타입에 안전한 방법으로 제공&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>이현규</name></author><category term="JPA" /><category term="QueryDSL" /><summary type="html">JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.</summary></entry><entry><title type="html">Windows에서 Linux 명령어 사용환경 구성하기</title><link href="http://localhost:4000/articles/2019-09/use-linux-command-on-windows" rel="alternate" type="text/html" title="Windows에서 Linux 명령어 사용환경 구성하기" /><published>2019-09-09T20:12:19+09:00</published><updated>2019-09-09T20:12:19+09:00</updated><id>http://localhost:4000/articles/2019-09/use-linux-command-on-windows</id><content type="html" xml:base="http://localhost:4000/articles/2019-09/use-linux-command-on-windows">&lt;p&gt;개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다.
+&lt;/ul&gt;</content><author><name>이현규</name></author><category term="JPA" /><category term="QueryDSL" /><summary type="html">JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.</summary></entry><entry><title type="html">Windows에서 Linux 명령어 사용환경 구성하기</title><link href="/articles/2019-09/use-linux-command-on-windows" rel="alternate" type="text/html" title="Windows에서 Linux 명령어 사용환경 구성하기" /><published>2019-09-09T20:12:19+09:00</published><updated>2019-09-09T20:12:19+09:00</updated><id>/articles/2019-09/use-linux-command-on-windows</id><content type="html" xml:base="/articles/2019-09/use-linux-command-on-windows">&lt;p&gt;개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다.
 다만 직업 특성상 Linux 환경에 노출되는 시간이 많고, 자연스레 Linux 명령어에 익숙해지게 되는데요. 이 때문에 가끔 Windows의 CMD 명령어들이 Linux와 달라 불편함을 종종 느낄때가 있습니다.
 이 때문에 이번에 개인적으로 사용하는 PC (Windows)에 &lt;a href=&quot;https://cygwin.com/&quot;&gt;Cygwin&lt;/a&gt; 을 설치해봤습니다.&lt;/p&gt;
 
@@ -755,156 +847,4 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;p&gt;Cygwin을 실행하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;pwd&lt;/code&gt;를 실행해보면 /home/{자신의 userName} 이 출력됩니다.
 이는 실제 경로는 아니며 Cygwin 설치경로 이하의 경로입니다. 즉 Cygwin 터미널은 자신의 설치경로가 root인데요.
 우리가 원래 사용하고 있던 Windows의 C:, D: 등을 접속하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;/cygdrive/{Drive 볼륨명}&lt;/code&gt; 경로로 이동하면 됩니다.
-다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="Unix" /><category term="Linux" /><summary type="html">개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다. 다만 직업 특성상 Linux 환경에 노출되는 시간이 많고, 자연스레 Linux 명령어에 익숙해지게 되는데요. 이 때문에 가끔 Windows의 CMD 명령어들이 Linux와 달라 불편함을 종종 느낄때가 있습니다. 이 때문에 이번에 개인적으로 사용하는 PC (Windows)에 Cygwin 을 설치해봤습니다.</summary></entry><entry><title type="html">ELK를 활용한 로그 중앙집중 처리</title><link href="http://localhost:4000/articles/2019-05/example-of-elk" rel="alternate" type="text/html" title="ELK를 활용한 로그 중앙집중 처리" /><published>2019-05-24T20:59:19+09:00</published><updated>2019-05-24T20:59:19+09:00</updated><id>http://localhost:4000/articles/2019-05/example-of-elk</id><content type="html" xml:base="http://localhost:4000/articles/2019-05/example-of-elk">&lt;p&gt;어플리케이션 수행 중 발생하는 예외(Exception)를 모니터링 할 수 있는 시스템을 위해 ELK를 로컬환경에 구성한다.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;구성&quot;&gt;구성&lt;/h2&gt;
-&lt;h5 id=&quot;elk&quot;&gt;ELK&lt;/h5&gt;
-&lt;ul&gt;
-  &lt;li&gt;Logstash : 데이터 수집, 필터링, Elasticsearch에 색인 (ETL 기능)&lt;/li&gt;
-  &lt;li&gt;Elasticsearch : 데이터 저장소 + 검색엔진&lt;/li&gt;
-  &lt;li&gt;Kibana : 수집 데이터 시각화&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;적용&quot;&gt;적용&lt;/h5&gt;
-&lt;p&gt;Logback Logstash용 Appender를 활용하여 WARN 이상 레벨의 로그를 Logstash에 적재 (https://jsonobject.tistory.com/243), Logstash에서 Elasticsearch로 색인
-    * &lt;code class=&quot;highlighter-rouge&quot;&gt;LogstashEncoder&lt;/code&gt;는 스프링앱에서 발생하는 로그를 ELK스택에서 사용되는 JSON형태로 변환
-    * &lt;code class=&quot;highlighter-rouge&quot;&gt;LogstashSocketAppender&lt;/code&gt;는 Logstash 서버에 로그 전송&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-uml&quot;&gt;WAS -&amp;gt; Logstash: 수집
-Logstash -&amp;gt; Elasticsearch: 색인
-Elasticsearch -&amp;gt; Kibana: 시각화
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;logstash&quot;&gt;Logstash&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;공식 홈페이지 : https://www.elastic.co/kr/products/logstash&lt;/li&gt;
-  &lt;li&gt;설치 : https://www.elastic.co/kr/downloads/logstash&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;디렉토리-구성&quot;&gt;디렉토리 구성&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/1.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;테스트를 위해 표준 입출력 (터미널 입력, 출력)으로 설정하고 실행&lt;/p&gt;
-
-&lt;h5 id=&quot;테스트-진행&quot;&gt;테스트 진행&lt;/h5&gt;
-&lt;p&gt;1) 설치경로/config/logstash-example.conf 파일 생성하고 아래와 같이 입력&lt;/p&gt;
-&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; {
-    &lt;span class=&quot;n&quot;&gt;stdin&lt;/span&gt; {}    // 표준 입력
-}
-&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt; {
-    &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt; {}   // 표준 출력
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;2) 실행&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;설치경로/bin
-logstash ../config/logstash-example.conf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/2.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;spring-boot와-연동&quot;&gt;Spring Boot와 연동&lt;/h5&gt;
-&lt;p&gt;1) logstash Input 설정에 아래와 같이 설정&lt;/p&gt;
-&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 입력은 TCP 4560포트로, 출력은 표준 출력 사용
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; {
-    &lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt; {
-        &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt; =&amp;gt; &lt;span class=&quot;m&quot;&gt;4560&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;codec&lt;/span&gt; =&amp;gt; &lt;span class=&quot;n&quot;&gt;json_lines&lt;/span&gt;
-    }
-}
-&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt; {
-    &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt; {}   // 표준 출력
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;2) Spring Boot pom.xml에 logstash appender 디펜던시 추가&lt;/p&gt;
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;net.logstash.logback&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;logstash-logback-encoder&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.11&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;3) logback.xml에 Logstash Appender 추가&lt;/p&gt;
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- logstash 4560포트 설정에 맞춰 설정 --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;appender&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LOGSTASH&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;net.logstash.logback.appender.LogstashTcpSocketAppender&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;destination&amp;gt;&lt;/span&gt;127.0.0.1:4560&lt;span class=&quot;nt&quot;&gt;&amp;lt;/destination&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;encoder&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;net.logstash.logback.encoder.LogstashEncoder&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/encoder&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/appender&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;root&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;level&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;INFO&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;appender-ref&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ref=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LOGSTASH&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/root&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;4) logstash, Spring Boot 각각 실행
-아래와 같이 Spring Boot 실행 로그가 ELK 포맷에 맞는 JSON형태로 변환되어 표준출력으로 출력됨
-&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;출력-elasticsearch-와-연동-input을-elasticsearch로-적재&quot;&gt;출력 Elasticsearch 와 연동 (input을 Elasticsearch로 적재)&lt;/h5&gt;
-&lt;p&gt;1) logstash Input/Output 설정에 아래와 같이 설정&lt;/p&gt;
-&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 입력은 TCP 4560포트로, 출력은 표준 출력 사용
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; {
-    &lt;span class=&quot;n&quot;&gt;tcp&lt;/span&gt; {
-        &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt; =&amp;gt; &lt;span class=&quot;m&quot;&gt;4560&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;codec&lt;/span&gt; =&amp;gt; &lt;span class=&quot;n&quot;&gt;json_lines&lt;/span&gt;
-    }
-}
-&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt; {
-    &lt;span class=&quot;n&quot;&gt;elasticsearch&lt;/span&gt; {
-        &lt;span class=&quot;n&quot;&gt;hosts&lt;/span&gt; =&amp;gt; [&lt;span class=&quot;s2&quot;&gt;&quot;localhost:9200&quot;&lt;/span&gt;]    
-        &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; =&amp;gt; &lt;span class=&quot;s2&quot;&gt;&quot;logstash-%{+YYYY.MM.dd}&quot;&lt;/span&gt;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;elasticsearch&quot;&gt;Elasticsearch&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;공식 홈페이지 : https://www.elastic.co/kr/products/elasticsearch&lt;/li&gt;
-  &lt;li&gt;설치 : https://www.elastic.co/kr/downloads/elasticsearch&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;디렉토리-구성-1&quot;&gt;디렉토리 구성&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/4.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;실행&quot;&gt;실행&lt;/h5&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;설치경로/bin
-elasticsearch
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이후 http://localhost:9200 로 접속해봤을 때 페이지가 정상적으로 뜨는지 확인&lt;/p&gt;
-
-&lt;h2 id=&quot;kibana&quot;&gt;Kibana&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;공식 홈페이지 : https://www.elastic.co/kr/products/kibana&lt;/li&gt;
-  &lt;li&gt;설치 : https://www.elastic.co/kr/downloads/kibana&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;디렉토리-구성-2&quot;&gt;디렉토리 구성&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/5.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;실행-1&quot;&gt;실행&lt;/h5&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;설치경로/bin
-kibana
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;이후 http://localhost:5601 로 접속해봤을 때 페이지가 정상적으로 뜨는지 확인&lt;/p&gt;
-
-&lt;h5 id=&quot;elasticsearch-연동&quot;&gt;Elasticsearch 연동&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;http://localhost:5601 접속 후 “Create index pattern” 클릭&lt;/li&gt;
-  &lt;li&gt;Kibana에서 모니터링/분석할 Index의 패턴을 입력 (logstash에서 index패턴을 &lt;strong&gt;“logstash-날짜”&lt;/strong&gt; 로 했기 때문에 아래와 같이 지정)
-&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/6.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;로그 시간으로 사용할 필드 지정 (여기서는 logback logstash appender가 자동으로 생성해준 timestamp값 사용)
-&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/7.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Boot 어플리케이션의 로그가 잘 적재되었는지 확인
-&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/8.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;참고&quot;&gt;참고&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.elastic.co/kr/products/&quot;&gt;Elastic Stack 공식 홈페이지&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://d2.naver.com/helloworld/9878588&quot;&gt;Elastic Stack과 Lambda를 활용한 데이터 모니터링 시스템 구축&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://dev-t-blog.tistory.com/30&quot;&gt;Spring + Logstash + Elasticsearch + Kibana 기본 셋팅&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://heowc.tistory.com/49&quot;&gt;ELK Stack 개념정리&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>이현규</name></author><category term="Spring Boot" /><category term="Spring Framework" /><category term="Java" /><summary type="html">어플리케이션 수행 중 발생하는 예외(Exception)를 모니터링 할 수 있는 시스템을 위해 ELK를 로컬환경에 구성한다.</summary></entry></feed>
+다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="Unix" /><category term="Linux" /><summary type="html">개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다. 다만 직업 특성상 Linux 환경에 노출되는 시간이 많고, 자연스레 Linux 명령어에 익숙해지게 되는데요. 이 때문에 가끔 Windows의 CMD 명령어들이 Linux와 달라 불편함을 종종 느낄때가 있습니다. 이 때문에 이번에 개인적으로 사용하는 PC (Windows)에 Cygwin 을 설치해봤습니다.</summary></entry></feed>
