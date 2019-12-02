@@ -115,7 +115,7 @@
 <meta name="keywords" content="hyungyu.lee,Software,Blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="@deveely">
-<meta property="og:url" content="http://localhost:4000/page3/">
+<meta property="og:url" content="/page3/">
 <meta property="og:site_name" content="@deveely">
 <meta property="og:description" content="Software Engineer">
 <meta property="og:locale" content="ko">
@@ -148,7 +148,7 @@
 
 
 
-  <link rel="canonical" href="http://localhost:4000/"/>
+  <link rel="canonical" href=""/>
 
 
 
@@ -350,7 +350,183 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/entity-table-mapping">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/object-relations-table-relations">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="이현규">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="@deveely">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+                
+                <a class="post-title-link" href="/articles/2018-10/object-relations-table-relations" itemprop="url">
+                객체 연관관계 VS 테이블 연관관계
+              </a>
+            
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">작성일</span>
+              
+              <time title="" itemprop="dateCreated datePublished" datetime="2018-10-17T09:27:22+09:00">
+                2018-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/JPA" itemprop="url" rel="index">
+                    <span itemprop="name">JPA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <p>ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.<br />
+즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.<br />
+<!--more--></p>
+<h3 id="연관관계-핵심-키워드">연관관계 핵심 키워드</h3>
+<h5 id="방향">방향</h5>
+<p>단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&gt; 팀 또는 팀 -&gt; 회원<br />
+이런 식으로 한 쪽으로만 참조하는 것을 단방향 관계라 하고 회원 -&gt; 팀 -&gt; 회원 상호 참조하는 것을 양방향이라 한다.<br />
+방향은 객체에만 존재하며 테이블간 관계는 항상 양방향이다.</p>
+
+
+
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/articles/2018-10/object-relations-table-relations#" rel="contents">
+              더 읽어보기 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+        
+        
+        
+        
+          <div class="post-eof"></div>
+        
+      
+    </footer>
+  </article>
+
+  
+    
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/entity-table-mapping">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -531,7 +707,7 @@ JPA는 다음과 같은 방법들로 이 문제를 해결한다.</p>
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/solution-for-vue-crlf-error">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/solution-for-vue-crlf-error">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -700,7 +876,7 @@ JPA는 다음과 같은 방법들로 이 문제를 해결한다.</p>
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/create-vue-project-with-vue-cli">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/create-vue-project-with-vue-cli">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -873,7 +1049,7 @@ NPM이 설치되어있으면 아래 명령어로 Vue-CLI 를 매우 간단하게
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/install-nodejs-and-npm">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/install-nodejs-and-npm">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1042,7 +1218,7 @@ NPM이 설치되어있으면 아래 명령어로 Vue-CLI 를 매우 간단하게
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/query-dsl-error-on-pom">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/query-dsl-error-on-pom">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1227,7 +1403,7 @@ NPM이 설치되어있으면 아래 명령어로 Vue-CLI 를 매우 간단하게
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/description-of-persistence-context-1">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/description-of-persistence-context-1">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1405,7 +1581,7 @@ persist 메소드를 “회원 엔티티를 저장한다”보다 정확히 얘�
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/description-of-persistence-context-2">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/description-of-persistence-context-2">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1574,7 +1750,7 @@ persist 메소드를 “회원 엔티티를 저장한다”보다 정확히 얘�
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/difference-of-equality-and-identity">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/difference-of-equality-and-identity">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1743,7 +1919,7 @@ persist 메소드를 “회원 엔티티를 저장한다”보다 정확히 얘�
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/entity-manager-factory-and-entity-manager">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/entity-manager-factory-and-entity-manager">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1900,175 +2076,6 @@ META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 �
         
         
         
-          <div class="post-eof"></div>
-        
-      
-    </footer>
-  </article>
-
-  
-    
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/jpa-basic-setting">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="이현규">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="@deveely">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-                
-                <a class="post-title-link" href="/articles/2018-10/jpa-basic-setting" itemprop="url">
-                기본적인 JPA 설정방법
-              </a>
-            
-          
-        </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">작성일</span>
-              
-              <time title="" itemprop="dateCreated datePublished" datetime="2018-10-07T09:26:58+09:00">
-                2018-10-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/JPA" itemprop="url" rel="index">
-                    <span itemprop="name">JPA</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  <p>JPA 구현체로 Hibernate를 사용하기 위해 필요한 핵심 라이브러리가 존재한다.</p>
-
-
-
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/articles/2018-10/jpa-basic-setting#" rel="contents">
-              더 읽어보기 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-        
-        
-        
-        
       
     </footer>
   </article>
@@ -2130,7 +2137,7 @@ META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 �
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">포스트</span>
               </a>
             </div>
@@ -2141,7 +2148,7 @@ META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 �
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">카테고리</span>
               </a>
             </div>
@@ -2152,7 +2159,7 @@ META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 �
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/">
-                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-count">67</span>
                 <span class="site-state-item-name">태그</span>
               </a>
             </div>

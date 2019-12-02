@@ -115,7 +115,7 @@
 <meta name="keywords" content="linux, unix, ssh, mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="리눅스 SSH, MySQL 접속 지연 문제">
-<meta property="og:url" content="http://localhost:4000/articles/2019-11/server-connection-delay">
+<meta property="og:url" content="/articles/2019-11/server-connection-delay">
 <meta property="og:site_name" content="@deveely">
 <meta property="og:description" content="신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다. 구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 resolve하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다. 장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다. 심각한 상황과 달리 해결방법은 아주 심플하고 간단했습니다.">
 <meta property="og:locale" content="ko">
@@ -148,7 +148,7 @@
 
 
 
-  <link rel="canonical" href="http://localhost:4000/"/>
+  <link rel="canonical" href=""/>
 
 
 
@@ -347,7 +347,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2019-11/server-connection-delay">
+    <link itemprop="mainEntityOfPage" href="/articles/2019-11/server-connection-delay">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -583,6 +583,10 @@ UseDNS no
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/articles/2019-12/nhn-forward-review" rel="next" title="NHN FORWARD 2019 후기">
+                <i class="fa fa-chevron-left"></i> NHN FORWARD 2019 후기
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
@@ -672,7 +676,7 @@ UseDNS no
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">포스트</span>
               </a>
             </div>
@@ -683,7 +687,7 @@ UseDNS no
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">카테고리</span>
               </a>
             </div>
@@ -694,7 +698,7 @@ UseDNS no
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/">
-                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-count">67</span>
                 <span class="site-state-item-name">태그</span>
               </a>
             </div>
