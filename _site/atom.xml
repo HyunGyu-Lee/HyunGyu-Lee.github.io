@@ -1,9 +1,112 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/atom.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-12-03T00:00:16+09:00</updated><id>/atom.xml</id><title type="html">@deveely</title><subtitle>Software Engineer</subtitle><author><name>이현규</name></author><entry><title type="html">NHN FORWARD 2019 후기</title><link href="/articles/2019-12/nhn-forward-review" rel="alternate" type="text/html" title="NHN FORWARD 2019 후기" /><published>2019-12-01T22:43:19+09:00</published><updated>2019-12-01T22:43:19+09:00</updated><id>/articles/2019-12/nhn-forward-review</id><content type="html" xml:base="/articles/2019-12/nhn-forward-review">&lt;p&gt;NHN Forward 2019 컨퍼런스 참여 후기입니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-12-14T14:59:55+09:00</updated><id>http://localhost:4000/atom.xml</id><title type="html">@deveely</title><subtitle>Software Engineer</subtitle><author><name>이현규</name></author><entry><title type="html">git commit 날짜, author 변경하기</title><link href="http://localhost:4000/articles/2019-12/git-change-commit" rel="alternate" type="text/html" title="git commit 날짜, author 변경하기" /><published>2019-12-14T10:43:19+09:00</published><updated>2019-12-14T10:43:19+09:00</updated><id>http://localhost:4000/articles/2019-12/git-change-commit</id><content type="html" xml:base="http://localhost:4000/articles/2019-12/git-change-commit">&lt;p&gt;git을 사용하면 거의 대부분 원격 저장소로 github을 많이 이용합니다.
+github엔 저장소에 commit 내역을 시각화하여 보여주는 기능(잔디밭..)이 있는데요. 가끔 실수로 날짜를 못지키거나, author를 잘못지정해 색칠이 안되는 경우가 있습니다.
+잔디밭에 신경을 쓰시는 분이라면 빈 구멍이 굉장히 신경이 쓰이실수 있는데요. 이 때 사용할 수 있는 방법을 공유합니다.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;git-commit-변경&quot;&gt;git commit 변경&lt;/h2&gt;
+&lt;p&gt;꼭 잔디밭이 아니더라도 commit의 날짜를 변경해야하는 경우는 종종 있을것입니다.&lt;/p&gt;
+
+&lt;p&gt;기본적으로 commit 변경은 변경할 commit을 찾는것에서 시작합니다.&lt;/p&gt;
+
+&lt;h4 id=&quot;1-commit-히스토리-확인&quot;&gt;1. commit 히스토리 확인&lt;/h4&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git log
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git log&lt;/code&gt; 명령어를 실행하면 아래와 같이 commit 히스토리를 확인할 수 있습니다.
+아래 내역에서 수정하고싶은 commit의 직전 commit의 해쉬값을 복사합니다.
+이 예시에서 저는 &lt;code class=&quot;highlighter-rouge&quot;&gt;책 목차 추가&lt;/code&gt; 커밋을 수정하기 위해 그 아래 커밋인 &lt;code class=&quot;highlighter-rouge&quot;&gt;65068f594d469e848beab5fd475219f428339436&lt;/code&gt;값을 사용하겠습니다.
+log 명령 결과화면에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;q&lt;/code&gt;를 입력하면 화면이 종료됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;commit 5b52b3874068dfd0b1f77023eac03113f3b6db9a
+Author: HyunGyu-Lee &amp;lt;gusrb0808@naver.com&amp;gt;
+Date:   Mon Dec 9 00:32:41 2019 +0900
+
+    컨텐츠 추가(DDD Start!)
+
+commit 0c6be06e2ede8cac5bc1b78b511620583e159bf5
+Author: HyunGyu-Lee &amp;lt;gusrb0808@naver.com&amp;gt;
+Date:   Fri Nov 8 13:35:32 2019 +0900
+
+    책 목차 추가
+
+commit 65068f594d469e848beab5fd475219f428339436
+Author: HyunGyu-Lee &amp;lt;gusrb0808@naver.com&amp;gt;
+Date:   Tue Nov 5 01:01:48 2019 +0900
+
+    collapse 태그 인식 불가 분제 fix
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;2-날짜author-변경&quot;&gt;2. 날짜/author 변경&lt;/h4&gt;
+&lt;p&gt;해쉬값을 확인한 후 &lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase&lt;/code&gt; 명령을 입력합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git rebase &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; 65068f594d469e848beab5fd475219f428339436
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그럼 아래와 같은 UI가 나오는데요. 변경할 대상 커밋의 커멘드를 &lt;code class=&quot;highlighter-rouge&quot;&gt;edit&lt;/code&gt;으로 변경하고 저장합니다. (vi)&lt;/p&gt;
+
+&lt;p&gt;자세한 커멘드는 아래 주석에 적혀있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;edit 0c6be06 책 목차 추가
+pick 5b52b38 컨텐츠 추가(DDD Start!)
+
+# Rebase 65068f5..d896625 onto 65068f5 (4 commands)
+#
+# Commands:
+# p, pick &amp;lt;commit&amp;gt; = use commit
+# r, reword &amp;lt;commit&amp;gt; = use commit, but edit the commit message
+# e, edit &amp;lt;commit&amp;gt; = use commit, but stop for amending
+# s, squash &amp;lt;commit&amp;gt; = use commit, but meld into previous commit
+# f, fixup &amp;lt;commit&amp;gt; = like &quot;squash&quot;, but discard this commit's log message
+# x, exec &amp;lt;command&amp;gt; = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop &amp;lt;commit&amp;gt; = remove commit
+# l, label &amp;lt;label&amp;gt; = label current HEAD with a name
+# t, reset &amp;lt;label&amp;gt; = reset HEAD to a label
+# m, merge [-C &amp;lt;commit&amp;gt; | -c &amp;lt;commit&amp;gt;] &amp;lt;label&amp;gt; [# &amp;lt;oneline&amp;gt;]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified). Use -c &amp;lt;commit&amp;gt; to reword the commit message.
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그럼 다음과 같이 rebase 모드에 진입하게 되고 해당 커밋으로 이동하게됩니다.
+수정을 하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;git commit --amend&lt;/code&gt;를 수정하지 않고 넘어가려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase --continue&lt;/code&gt;를 입력하면 됩니다.&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; git rebase &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; 65068f594d469e848beab5fd475219f428339436
+Stopped at 0c6be06...  책 목차 추가
+You can amend the commit now, with
+
+  git commit &lt;span class=&quot;nt&quot;&gt;--amend&lt;/span&gt;
+
+Once you are satisfied with your changes, run
+
+  git rebase &lt;span class=&quot;nt&quot;&gt;--continue&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;변경할 커밋에서 amend 를 통해 author 혹은 날짜를 수정하면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 날짜 변경&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;GIT_COMMITTER_DATE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;{날짜}&quot;&lt;/span&gt; git commit &lt;span class=&quot;nt&quot;&gt;--amend&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--no-edit&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--date&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;{날짜}&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# author 변경&lt;/span&gt;
+git commit &lt;span class=&quot;nt&quot;&gt;--amend&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--author&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;username &amp;lt;email&amp;gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그다음 아까 언급한것처럼 수정을 하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;git commit --amend&lt;/code&gt;를 수정하지 않고 넘어가려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase --continue&lt;/code&gt;를
+입력하면 되고, 더 이상 수정할 것이 없으면 rebase 모드가 종료되게 됩니다. 수정을 마치고 push 하여 마무리 해주면 github에도 반영되게 됩니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="git" /><category term="commit" /><summary type="html">git을 사용하면 거의 대부분 원격 저장소로 github을 많이 이용합니다. github엔 저장소에 commit 내역을 시각화하여 보여주는 기능(잔디밭..)이 있는데요. 가끔 실수로 날짜를 못지키거나, author를 잘못지정해 색칠이 안되는 경우가 있습니다. 잔디밭에 신경을 쓰시는 분이라면 빈 구멍이 굉장히 신경이 쓰이실수 있는데요. 이 때 사용할 수 있는 방법을 공유합니다.</summary></entry><entry><title type="html">NHN FORWARD 2019 후기</title><link href="http://localhost:4000/articles/2019-12/nhn-forward-review" rel="alternate" type="text/html" title="NHN FORWARD 2019 후기" /><published>2019-12-01T22:43:19+09:00</published><updated>2019-12-01T22:43:19+09:00</updated><id>http://localhost:4000/articles/2019-12/nhn-forward-review</id><content type="html" xml:base="http://localhost:4000/articles/2019-12/nhn-forward-review">&lt;p&gt;NHN Forward 2019 컨퍼런스 참여 후기입니다.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
 &lt;h2 id=&quot;nhn-forward-2019&quot;&gt;NHN Forward 2019&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn1.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn1.jpeg&quot; alt=&quot;Image1&quot; /&gt;
 지난 11월 27일 &lt;code class=&quot;highlighter-rouge&quot;&gt;NHN Forward 2019&lt;/code&gt; 컨퍼런스에 참가했습니다.
 회사가 회사다 보니 다양한 컨텐츠들이 준비되어 있었는데요. 
 크게 아래와 같았습니다.&lt;/p&gt;
@@ -21,7 +124,7 @@
   &lt;li&gt;핸즈온 랩&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn2.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn2.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;프론트엔드 전문 개발자분들이 직접 고민을 들어주고 대화를 할 수 있는 프런트엔드 상담소나 평소에 궁금했거나 해보고 싶었던 것들을 쉽게 따라해보고 경혐해 볼 수 있었던
 핸즈온 랩 등 준비를 정말 많이 했다는 느낌이 들었습니다.&lt;/p&gt;
@@ -53,7 +156,7 @@
   &lt;li&gt;헥사고날 아키텍쳐&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn6.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn6.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;3-레거시-웹-서비스-길들이기-서버-개발자의-spa-적용기&quot;&gt;3. 레거시 웹 서비스 길들이기: 서버 개발자의 SPA 적용기&lt;/h4&gt;
 &lt;p&gt;저 또한 Spring 기반 웹 백엔드 애플리케이션을 만드는 개발자 다 보니 이 세션에서 소개해주신 사례들이 하나하나가 공감가는 사례들이었습니다.
@@ -61,7 +164,7 @@
 
 &lt;p&gt;적용하기전의 고민 / 적용하면서의 고민 / 현재 팀의 상황 / 효율적인 빌드를 위한 프로젝트 구성 / API 호출 방식 with Zuul /상태관리 / 다국어처리 
 
- &lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn3.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+ &lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn3.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;4-spring-jpa의-사실과-오해&quot;&gt;4. Spring JPA의 사실과 오해&lt;/h4&gt;
 &lt;p&gt;Spring JPA에 평소에 잘 알려지지 않은 사실들과 오해들을 소개해주셨습니다.&lt;/p&gt;
@@ -77,20 +180,20 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn5.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn5.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;5-paas--api-experience-좋은-api-dx를-제공하기-위한-작은-걸음&quot;&gt;5. Paas &amp;amp; API Experience: 좋은 API DX를 제공하기 위한 작은 걸음&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn7.jpeg&quot; alt=&quot;Image1&quot; /&gt;
- &lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn8.jpeg&quot; alt=&quot;Image1&quot; /&gt;
- &lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn9.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn7.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+ &lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn8.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+ &lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn9.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;마치며&quot;&gt;마치며&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn4.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn4.jpeg&quot; alt=&quot;Image1&quot; /&gt;
 NHN Forward 2019의 심볼인 » 는 리달리디렉션 기호 »를 형상화한 것으로 지식과 경험을 더하고 쌓을 수 있기를 바라는 마음을 담았다고 합니다.&lt;/p&gt;
 
 &lt;p&gt;이런 NHN의 의지만큼 많은 것을 경험하고, 배우고, 즐거웠던 1분 1초가 아깝지 않은 시간이었습니다.&lt;/p&gt;
 
-&lt;p&gt;감사합니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="NHNFORWARD2019" /><summary type="html">NHN Forward 2019 컨퍼런스 참여 후기입니다.</summary></entry><entry><title type="html">리눅스 SSH, MySQL 접속 지연 문제</title><link href="/articles/2019-11/server-connection-delay" rel="alternate" type="text/html" title="리눅스 SSH, MySQL 접속 지연 문제" /><published>2019-11-21T22:43:19+09:00</published><updated>2019-11-21T22:43:19+09:00</updated><id>/articles/2019-11/server-connection-delay</id><content type="html" xml:base="/articles/2019-11/server-connection-delay">&lt;p&gt;신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다.
+&lt;p&gt;감사합니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="NHNFORWARD2019" /><summary type="html">NHN Forward 2019 컨퍼런스 참여 후기입니다.</summary></entry><entry><title type="html">리눅스 SSH, MySQL 접속 지연 문제</title><link href="http://localhost:4000/articles/2019-11/server-connection-delay" rel="alternate" type="text/html" title="리눅스 SSH, MySQL 접속 지연 문제" /><published>2019-11-21T22:43:19+09:00</published><updated>2019-11-21T22:43:19+09:00</updated><id>http://localhost:4000/articles/2019-11/server-connection-delay</id><content type="html" xml:base="http://localhost:4000/articles/2019-11/server-connection-delay">&lt;p&gt;신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다.
 구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 &lt;code class=&quot;highlighter-rouge&quot;&gt;resolve&lt;/code&gt;하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다.
 장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다.
 &lt;!--more--&gt;
@@ -144,14 +247,14 @@ UseDNS no
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;service sshd restart
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;마찬가지로 로컬에서 ssh 접속 시 발생하던 지연은 없고 아주 빠르게 접속되었습니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="linux" /><category term="unix" /><category term="ssh" /><category term="mysql" /><summary type="html">신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다. 구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 resolve하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다. 장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다. 심각한 상황과 달리 해결방법은 아주 심플하고 간단했습니다.</summary></entry><entry><title type="html">Git 고급 브랜치 전략과 Gitflow</title><link href="/articles/2019-11/reference-of-gitflow" rel="alternate" type="text/html" title="Git 고급 브랜치 전략과 Gitflow" /><published>2019-11-13T22:43:19+09:00</published><updated>2019-11-13T22:43:19+09:00</updated><id>/articles/2019-11/reference-of-gitflow</id><content type="html" xml:base="/articles/2019-11/reference-of-gitflow">&lt;p&gt;Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.
+&lt;p&gt;마찬가지로 로컬에서 ssh 접속 시 발생하던 지연은 없고 아주 빠르게 접속되었습니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="linux" /><category term="unix" /><category term="ssh" /><category term="mysql" /><summary type="html">신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다. 구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 resolve하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다. 장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다. 심각한 상황과 달리 해결방법은 아주 심플하고 간단했습니다.</summary></entry><entry><title type="html">Git 고급 브랜치 전략과 Gitflow</title><link href="http://localhost:4000/articles/2019-11/reference-of-gitflow" rel="alternate" type="text/html" title="Git 고급 브랜치 전략과 Gitflow" /><published>2019-11-13T22:43:19+09:00</published><updated>2019-11-13T22:43:19+09:00</updated><id>http://localhost:4000/articles/2019-11/reference-of-gitflow</id><content type="html" xml:base="http://localhost:4000/articles/2019-11/reference-of-gitflow">&lt;p&gt;Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;vincent-driessen-의-브랜치-모델&quot;&gt;Vincent Driessen 의 브랜치 모델&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://nvie.com/posts/a-successful-git-branching-model/&quot;&gt;Vincent Driessen가 제안한 고급 브랜치 전략&lt;/a&gt;으로 브랜치를 다음과 같이 분류하고 규칙을 정해 버전관리를 합니다.&lt;/p&gt;
 
 &lt;h4 id=&quot;main-branch&quot;&gt;Main Branch&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-11-14-reference-of-gitflow/2.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/2.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;master
@@ -216,7 +319,7 @@ apt-get install git-flow
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git flow init
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-11-14-reference-of-gitflow/1.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/1.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git flow init&lt;/code&gt; 명령을 실행하면 git repository 에 gitflow 브랜치 모델을 적용하기 위한 설정 절차를 진행합니다.&lt;/p&gt;
 
@@ -236,7 +339,7 @@ Gitflow 는 아래 명령어로 가능합니다.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git flow feature finish name-of-feature
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-11-14-reference-of-gitflow/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;그럼 develop 체크아웃 -&amp;gt; feature/name-of-feature 브랜치 develop으로 머지 -&amp;gt;  feature/name-of-feature 제거 작업이 진행됩니다.&lt;/p&gt;
 
@@ -255,7 +358,7 @@ Gitflow 는 아래 명령어로 가능합니다.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Git flow release finish release-name 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;명령어로 간단하게 진행할 수 있습니다.ㅍ&lt;/p&gt;</content><author><name>이현규</name></author><category term="git" /><category term="gitflow" /><summary type="html">Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.</summary></entry><entry><title type="html">Netlify를 사용하여 정적 사이트 배포하기</title><link href="/articles/2019-11/netlify-with-vue" rel="alternate" type="text/html" title="Netlify를 사용하여 정적 사이트 배포하기" /><published>2019-11-05T22:43:19+09:00</published><updated>2019-11-05T22:43:19+09:00</updated><id>/articles/2019-11/netlify-with-vue</id><content type="html" xml:base="/articles/2019-11/netlify-with-vue">&lt;p&gt;근래의 웹개발은 주로 백엔드와 프론트엔드 영역을 나누어 개발하는 것이 주류가 되었습니다.
+&lt;p&gt;명령어로 간단하게 진행할 수 있습니다.ㅍ&lt;/p&gt;</content><author><name>이현규</name></author><category term="git" /><category term="gitflow" /><summary type="html">Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.</summary></entry><entry><title type="html">Netlify를 사용하여 정적 사이트 배포하기</title><link href="http://localhost:4000/articles/2019-11/netlify-with-vue" rel="alternate" type="text/html" title="Netlify를 사용하여 정적 사이트 배포하기" /><published>2019-11-05T22:43:19+09:00</published><updated>2019-11-05T22:43:19+09:00</updated><id>http://localhost:4000/articles/2019-11/netlify-with-vue</id><content type="html" xml:base="http://localhost:4000/articles/2019-11/netlify-with-vue">&lt;p&gt;근래의 웹개발은 주로 백엔드와 프론트엔드 영역을 나누어 개발하는 것이 주류가 되었습니다.
 개인적으로 과거 JSP, jQuery 기반으로 개발된 웹사이트들은.. 두 번 다시는 겪고 싶지 않을 정도로 프론트엔드를 개발하는 기술들이 눈부시게 발전했고, 지금도 진행중입니다.
 이런 추세때문인지 자연스레 정적 웹사이트를 쉽게 배포할 수 있는 서비스가 인기를 얻고있는데, 그 중 하나인 Netlify 를 소개합니다.&lt;/p&gt;
 
@@ -277,7 +380,7 @@ Gatsby와 같은 블로그를 배포하는 용도로 쓰이는 것으로 유명�
 
 &lt;p&gt;Netlify와 여타 몇가지 기술을 보면서, 프론트엔드 기술은 정말 그 발전 속도가 상당하다는 생각을 하게됐습니다.&lt;/p&gt;
 
-&lt;p&gt;다음에는 Vue + Firebase + Netlify 의 조합으로 간단한 애플리케이션을 제작하여 배포하는 포스트를 작성할 계획입니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="FE" /><category term="Netlify" /><category term="Vue" /><summary type="html">근래의 웹개발은 주로 백엔드와 프론트엔드 영역을 나누어 개발하는 것이 주류가 되었습니다. 개인적으로 과거 JSP, jQuery 기반으로 개발된 웹사이트들은.. 두 번 다시는 겪고 싶지 않을 정도로 프론트엔드를 개발하는 기술들이 눈부시게 발전했고, 지금도 진행중입니다. 이런 추세때문인지 자연스레 정적 웹사이트를 쉽게 배포할 수 있는 서비스가 인기를 얻고있는데, 그 중 하나인 Netlify 를 소개합니다.</summary></entry><entry><title type="html">Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)</title><link href="/articles/2019-11/jpa-orm-querydsl" rel="alternate" type="text/html" title="Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)" /><published>2019-11-03T20:43:19+09:00</published><updated>2019-11-03T20:43:19+09:00</updated><id>/articles/2019-11/jpa-orm-querydsl</id><content type="html" xml:base="/articles/2019-11/jpa-orm-querydsl">&lt;p&gt;Java ORM 표준인 JPA 에 대해 설명하고 객체지향 쿼리 사용과 장단점을 정리했습니다.
+&lt;p&gt;다음에는 Vue + Firebase + Netlify 의 조합으로 간단한 애플리케이션을 제작하여 배포하는 포스트를 작성할 계획입니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="FE" /><category term="Netlify" /><category term="Vue" /><summary type="html">근래의 웹개발은 주로 백엔드와 프론트엔드 영역을 나누어 개발하는 것이 주류가 되었습니다. 개인적으로 과거 JSP, jQuery 기반으로 개발된 웹사이트들은.. 두 번 다시는 겪고 싶지 않을 정도로 프론트엔드를 개발하는 기술들이 눈부시게 발전했고, 지금도 진행중입니다. 이런 추세때문인지 자연스레 정적 웹사이트를 쉽게 배포할 수 있는 서비스가 인기를 얻고있는데, 그 중 하나인 Netlify 를 소개합니다.</summary></entry><entry><title type="html">Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)</title><link href="http://localhost:4000/articles/2019-11/jpa-orm-querydsl" rel="alternate" type="text/html" title="Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)" /><published>2019-11-03T20:43:19+09:00</published><updated>2019-11-03T20:43:19+09:00</updated><id>http://localhost:4000/articles/2019-11/jpa-orm-querydsl</id><content type="html" xml:base="http://localhost:4000/articles/2019-11/jpa-orm-querydsl">&lt;p&gt;Java ORM 표준인 JPA 에 대해 설명하고 객체지향 쿼리 사용과 장단점을 정리했습니다.
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;개요&quot;&gt;개요&lt;/h2&gt;
@@ -564,7 +667,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
     &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
 
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="JPA" /><summary type="html">Java ORM 표준인 JPA 에 대해 설명하고 객체지향 쿼리 사용과 장단점을 정리했습니다.</summary></entry><entry><title type="html">Reflection Type을 활용해 JPA 공통 AttributeConverter 구현</title><link href="/articles/2019-10/java-generic-type" rel="alternate" type="text/html" title="Reflection Type을 활용해 JPA 공통 AttributeConverter 구현" /><published>2019-10-30T20:43:19+09:00</published><updated>2019-10-30T20:43:19+09:00</updated><id>/articles/2019-10/java-generic-type</id><content type="html" xml:base="/articles/2019-10/java-generic-type">&lt;p&gt;얼마전에 JPA에서 사용할 공통 AttributeConverter 를 구현하면서 고민했던 점들을 정리한다.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="JPA" /><summary type="html">Java ORM 표준인 JPA 에 대해 설명하고 객체지향 쿼리 사용과 장단점을 정리했습니다.</summary></entry><entry><title type="html">Reflection Type을 활용해 JPA 공통 AttributeConverter 구현</title><link href="http://localhost:4000/articles/2019-10/java-generic-type" rel="alternate" type="text/html" title="Reflection Type을 활용해 JPA 공통 AttributeConverter 구현" /><published>2019-10-30T20:43:19+09:00</published><updated>2019-10-30T20:43:19+09:00</updated><id>http://localhost:4000/articles/2019-10/java-generic-type</id><content type="html" xml:base="http://localhost:4000/articles/2019-10/java-generic-type">&lt;p&gt;얼마전에 JPA에서 사용할 공통 AttributeConverter 를 구현하면서 고민했던 점들을 정리한다.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -704,7 +807,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 	&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserOptionConverter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JsonAttributeConverter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="JPA" /><summary type="html">얼마전에 JPA에서 사용할 공통 AttributeConverter 를 구현하면서 고민했던 점들을 정리한다.</summary></entry><entry><title type="html">Spring AOP 동작 방식, 원리</title><link href="/articles/2019-10/how-spring-aop-works" rel="alternate" type="text/html" title="Spring AOP 동작 방식, 원리" /><published>2019-10-29T22:03:19+09:00</published><updated>2019-10-29T22:03:19+09:00</updated><id>/articles/2019-10/how-spring-aop-works</id><content type="html" xml:base="/articles/2019-10/how-spring-aop-works">&lt;p&gt;스프링은 기본적으로 프록시 기반 AOP 를 제공한다.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="JPA" /><summary type="html">얼마전에 JPA에서 사용할 공통 AttributeConverter 를 구현하면서 고민했던 점들을 정리한다.</summary></entry><entry><title type="html">Spring AOP 동작 방식, 원리</title><link href="http://localhost:4000/articles/2019-10/how-spring-aop-works" rel="alternate" type="text/html" title="Spring AOP 동작 방식, 원리" /><published>2019-10-29T22:03:19+09:00</published><updated>2019-10-29T22:03:19+09:00</updated><id>http://localhost:4000/articles/2019-10/how-spring-aop-works</id><content type="html" xml:base="http://localhost:4000/articles/2019-10/how-spring-aop-works">&lt;p&gt;스프링은 기본적으로 프록시 기반 AOP 를 제공한다.
 스프링에서는 Java Dynamic Proxy를 사용하거나 Cglib을 사용하여 프록시 기반 AOP를 구현했다.&lt;/p&gt;
 
 &lt;p&gt;이 글에서는 어떻게 Spring 에서 AOP를 사용할 수 있는 방식의 차이와 프레임워크가 AOP를 지원하기 위해 어떤 처리를 해주는지 개인적으로 분석한 내용을 정리한다.
@@ -747,7 +850,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
   &lt;li&gt;
     &lt;p&gt;AspectJ 를 사용하기 위해서는 AJC 등 별도의 컴파일러 설정 등 추가 설정이 필요한데, Spring AOP 는 그렇지 않다.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="Spring Framework" /><category term="AOP" /><summary type="html">스프링은 기본적으로 프록시 기반 AOP 를 제공한다. 스프링에서는 Java Dynamic Proxy를 사용하거나 Cglib을 사용하여 프록시 기반 AOP를 구현했다.</summary></entry><entry><title type="html">개인적인 IT 서적 추천</title><link href="/articles/2019-10/my-book-list" rel="alternate" type="text/html" title="개인적인 IT 서적 추천" /><published>2019-10-22T22:03:19+09:00</published><updated>2019-10-22T22:03:19+09:00</updated><id>/articles/2019-10/my-book-list</id><content type="html" xml:base="/articles/2019-10/my-book-list">&lt;p&gt;읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>이현규</name></author><category term="Java" /><category term="Spring Framework" /><category term="AOP" /><summary type="html">스프링은 기본적으로 프록시 기반 AOP 를 제공한다. 스프링에서는 Java Dynamic Proxy를 사용하거나 Cglib을 사용하여 프록시 기반 AOP를 구현했다.</summary></entry><entry><title type="html">개인적인 IT 서적 추천</title><link href="http://localhost:4000/articles/2019-10/my-book-list" rel="alternate" type="text/html" title="개인적인 IT 서적 추천" /><published>2019-10-22T22:03:19+09:00</published><updated>2019-10-22T22:03:19+09:00</updated><id>http://localhost:4000/articles/2019-10/my-book-list</id><content type="html" xml:base="http://localhost:4000/articles/2019-10/my-book-list">&lt;p&gt;읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -792,7 +895,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 기술의 완성을 위하여 프로그래머들을 육성하는 방법, 작은 개발 팀들에서의 창조적인 협업을 발전시키는 방법, 그리고 고객과의 커뮤니케이션을 향상시키는 방법들을 소개한다. 그리고 궁극적인 결과로서의 숙련된 개발자는 안정된 애플리케이션을 만들고, 확장하고, 개선시킬 수 있는 사람이다.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>이현규</name></author><category term="Book" /><summary type="html">읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.</summary></entry><entry><title type="html">JPA의 쿼리 기술 종류</title><link href="/articles/2019-10/jpa-query-tech" rel="alternate" type="text/html" title="JPA의 쿼리 기술 종류" /><published>2019-10-15T22:03:19+09:00</published><updated>2019-10-15T22:03:19+09:00</updated><id>/articles/2019-10/jpa-query-tech</id><content type="html" xml:base="/articles/2019-10/jpa-query-tech">&lt;p&gt;JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>이현규</name></author><category term="Book" /><summary type="html">읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.</summary></entry><entry><title type="html">JPA의 쿼리 기술 종류</title><link href="http://localhost:4000/articles/2019-10/jpa-query-tech" rel="alternate" type="text/html" title="JPA의 쿼리 기술 종류" /><published>2019-10-15T22:03:19+09:00</published><updated>2019-10-15T22:03:19+09:00</updated><id>http://localhost:4000/articles/2019-10/jpa-query-tech</id><content type="html" xml:base="http://localhost:4000/articles/2019-10/jpa-query-tech">&lt;p&gt;JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.&lt;/p&gt;
 
 &lt;p&gt;그동안 JPA 를 사용하면서 사용하는 쿼리 기술이 어느 기술인지도 잘 모르고 사용해온 나 자신을 위해.. 이 글에서 정리해보고자 합니다.&lt;/p&gt;
 
@@ -824,27 +927,4 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
   &lt;li&gt;비표준&lt;/li&gt;
   &lt;li&gt;Entity를 파싱하여 QEntity를 생성하고, 이를 쿼리작성에 이용&lt;/li&gt;
   &lt;li&gt;Criteria의 동적인 특징과 JPQL의 표현력을 타입에 안전한 방법으로 제공&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>이현규</name></author><category term="JPA" /><category term="QueryDSL" /><summary type="html">JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.</summary></entry><entry><title type="html">Windows에서 Linux 명령어 사용환경 구성하기</title><link href="/articles/2019-09/use-linux-command-on-windows" rel="alternate" type="text/html" title="Windows에서 Linux 명령어 사용환경 구성하기" /><published>2019-09-09T20:12:19+09:00</published><updated>2019-09-09T20:12:19+09:00</updated><id>/articles/2019-09/use-linux-command-on-windows</id><content type="html" xml:base="/articles/2019-09/use-linux-command-on-windows">&lt;p&gt;개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다.
-다만 직업 특성상 Linux 환경에 노출되는 시간이 많고, 자연스레 Linux 명령어에 익숙해지게 되는데요. 이 때문에 가끔 Windows의 CMD 명령어들이 Linux와 달라 불편함을 종종 느낄때가 있습니다.
-이 때문에 이번에 개인적으로 사용하는 PC (Windows)에 &lt;a href=&quot;https://cygwin.com/&quot;&gt;Cygwin&lt;/a&gt; 을 설치해봤습니다.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;cygwin-이란&quot;&gt;Cygwin 이란&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;공식 홈페이지 : https://cygwin.com/&lt;/li&gt;
-  &lt;li&gt;설치 : https://cygwin.com/install.html&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;POSIX 기반 소프트웨어를 Windows에서 구동 및 개발이 가능하도록 환경을 제공해주는 역할을 합니다.
-가상머신 등을 통해 유닉스용 어셈블리 코드를 에뮬레이션 하여 진짜 유닉스/리눅스 등의 운영체제를 사용하는건 아니고, &lt;code class=&quot;highlighter-rouge&quot;&gt;Cygwin1.dll&lt;/code&gt;이라는 런타임 라이브러리를 통해 Windows에 동적으로 링크하여
-실제 유닉스처럼 동작하도록 해줍니다.&lt;/p&gt;
-
-&lt;h5 id=&quot;설치&quot;&gt;설치&lt;/h5&gt;
-&lt;p&gt;&lt;a href=&quot;https://cygwin.com/install.html&quot;&gt;설치페이지&lt;/a&gt;에 접속하여 32/64 bit에 맞는 setup파일을 받아 쉽게 설치할 수 있습니다.&lt;/p&gt;
-
-&lt;h4 id=&quot;사용&quot;&gt;사용&lt;/h4&gt;
-&lt;p&gt;Cygwin을 실행하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;pwd&lt;/code&gt;를 실행해보면 /home/{자신의 userName} 이 출력됩니다.
-이는 실제 경로는 아니며 Cygwin 설치경로 이하의 경로입니다. 즉 Cygwin 터미널은 자신의 설치경로가 root인데요.
-우리가 원래 사용하고 있던 Windows의 C:, D: 등을 접속하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;/cygdrive/{Drive 볼륨명}&lt;/code&gt; 경로로 이동하면 됩니다.
-다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.&lt;/p&gt;</content><author><name>이현규</name></author><category term="Unix" /><category term="Linux" /><summary type="html">개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다. 다만 직업 특성상 Linux 환경에 노출되는 시간이 많고, 자연스레 Linux 명령어에 익숙해지게 되는데요. 이 때문에 가끔 Windows의 CMD 명령어들이 Linux와 달라 불편함을 종종 느낄때가 있습니다. 이 때문에 이번에 개인적으로 사용하는 PC (Windows)에 Cygwin 을 설치해봤습니다.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>이현규</name></author><category term="JPA" /><category term="QueryDSL" /><summary type="html">JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.</summary></entry></feed>

@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JPA,QueryDSL," />
+  <meta name="keywords" content="git,commit," />
 
 
 
@@ -111,17 +111,17 @@
 
 
 
-<meta name="description" content="JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.">
-<meta name="keywords" content="JPA, QueryDSL">
+<meta name="description" content="git을 사용하면 거의 대부분 원격 저장소로 github을 많이 이용합니다. github엔 저장소에 commit 내역을 시각화하여 보여주는 기능(잔디밭..)이 있는데요. 가끔 실수로 날짜를 못지키거나, author를 잘못지정해 색칠이 안되는 경우가 있습니다. 잔디밭에 신경을 쓰시는 분이라면 빈 구멍이 굉장히 신경이 쓰이실수 있는데요. 이 때 사용할 수 있는 방법을 공유합니다.">
+<meta name="keywords" content="git, commit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JPA의 쿼리 기술 종류">
-<meta property="og:url" content="http://localhost:4000/articles/2019-10/jpa-query-tech">
+<meta property="og:title" content="git commit 날짜, author 변경하기">
+<meta property="og:url" content="http://localhost:4000/articles/2019-12/git-change-commit">
 <meta property="og:site_name" content="@deveely">
-<meta property="og:description" content="JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.">
+<meta property="og:description" content="git을 사용하면 거의 대부분 원격 저장소로 github을 많이 이용합니다. github엔 저장소에 commit 내역을 시각화하여 보여주는 기능(잔디밭..)이 있는데요. 가끔 실수로 날짜를 못지키거나, author를 잘못지정해 색칠이 안되는 경우가 있습니다. 잔디밭에 신경을 쓰시는 분이라면 빈 구멍이 굉장히 신경이 쓰이실수 있는데요. 이 때 사용할 수 있는 방법을 공유합니다.">
 <meta property="og:locale" content="ko">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JPA의 쿼리 기술 종류">
-<meta name="twitter:description" content="JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.">
+<meta name="twitter:title" content="git commit 날짜, author 변경하기">
+<meta name="twitter:description" content="git을 사용하면 거의 대부분 원격 저장소로 github을 많이 이용합니다. github엔 저장소에 commit 내역을 시각화하여 보여주는 기능(잔디밭..)이 있는데요. 가끔 실수로 날짜를 못지키거나, author를 잘못지정해 색칠이 안되는 경우가 있습니다. 잔디밭에 신경을 쓰시는 분이라면 빈 구멍이 굉장히 신경이 쓰이실수 있는데요. 이 때 사용할 수 있는 방법을 공유합니다.">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -154,7 +154,7 @@
 
 
 
-  <title>JPA의 쿼리 기술 종류 | @deveely</title>
+  <title>git commit 날짜, author 변경하기 | @deveely</title>
   
 
 
@@ -347,7 +347,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2019-10/jpa-query-tech">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2019-12/git-change-commit">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -367,7 +367,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            JPA의 쿼리 기술 종류
+            git commit 날짜, author 변경하기
           
         </h1>
         
@@ -381,8 +381,8 @@
               
                 <span class="post-meta-item-text">작성일</span>
               
-              <time title="" itemprop="dateCreated datePublished" datetime="2019-10-15T22:03:19+09:00">
-                2019-10-15
+              <time title="" itemprop="dateCreated datePublished" datetime="2019-12-14T10:43:19+09:00">
+                2019-12-14
               </time>
             
 
@@ -405,8 +405,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/JPA" itemprop="url" rel="index">
-                    <span itemprop="name">JPA</span>
+                  <a href="/category/#/git" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
                   </a>
                 </span>
 
@@ -460,39 +460,111 @@
 
 
 
-  <p>JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.</p>
+  <p>git을 사용하면 거의 대부분 원격 저장소로 github을 많이 이용합니다.
+github엔 저장소에 commit 내역을 시각화하여 보여주는 기능(잔디밭..)이 있는데요. 가끔 실수로 날짜를 못지키거나, author를 잘못지정해 색칠이 안되는 경우가 있습니다.
+잔디밭에 신경을 쓰시는 분이라면 빈 구멍이 굉장히 신경이 쓰이실수 있는데요. 이 때 사용할 수 있는 방법을 공유합니다.
+<!--more--></p>
 
-<p>그동안 JPA 를 사용하면서 사용하는 쿼리 기술이 어느 기술인지도 잘 모르고 사용해온 나 자신을 위해.. 이 글에서 정리해보고자 합니다.</p>
+<h2 id="git-commit-변경">git commit 변경</h2>
+<p>꼭 잔디밭이 아니더라도 commit의 날짜를 변경해야하는 경우는 종종 있을것입니다.</p>
 
-<p>각 기술에 대한 자세한 설명보다는 각 기술이 어떤 것인지와 특징 등에 중점을 두고 정리하겠습니다.</p>
+<p>기본적으로 commit 변경은 변경할 commit을 찾는것에서 시작합니다.</p>
 
-<!--more-->
+<h4 id="1-commit-히스토리-확인">1. commit 히스토리 확인</h4>
+<div class="language-sh highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>git log
+</code></pre></td></tr></tbody></table></div></div>
 
-<h2 id="jpql">JPQL</h2>
-<ul>
-  <li>Java Persistence Query Language의 약자</li>
-  <li>SQL이 데이터베이스 테이블을 대상으로 쿼리하는 거라면 JPQL은 Entity 객체를 대상으로 쿼리</li>
-  <li>JPQL은 쿼리문장이 특정 DBMS에 종속되지 않도록 쿼리를 SQL을 추상화</li>
-  <li>작성한 JPQL은 프레임워크에 의해 애플리케이션이 사용하는 데이터베이스의 적합한 SQL로 변환되어 실행</li>
-  <li>JPA 표준</li>
-</ul>
+<p><code class="highlighter-rouge">git log</code> 명령어를 실행하면 아래와 같이 commit 히스토리를 확인할 수 있습니다.
+아래 내역에서 수정하고싶은 commit의 직전 commit의 해쉬값을 복사합니다.
+이 예시에서 저는 <code class="highlighter-rouge">책 목차 추가</code> 커밋을 수정하기 위해 그 아래 커밋인 <code class="highlighter-rouge">65068f594d469e848beab5fd475219f428339436</code>값을 사용하겠습니다.
+log 명령 결과화면에서 <code class="highlighter-rouge">q</code>를 입력하면 화면이 종료됩니다.</p>
 
-<h2 id="jpa-criteria-query">JPA Criteria Query</h2>
-<ul>
-  <li>JPQL을 programmatically하게, 즉 자바코드로 작성할 수 있게 도와주는 빌더</li>
-  <li>문자열로 작성하는 JPQL과 달리 자바코드로 쿼리를 작성하기 때문에 컴파일 단계에서 오류파악이 가능</li>
-  <li>쿼리가 복잡하고, 길어지는 경우 JPQL 보다 직관적</li>
-  <li>자바코드로 작성하기 때문에 쿼리문을 동적으로 작성 가능</li>
-  <li>JPA 표준</li>
-</ul>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18</pre></td><td class="code"><pre class="highlight"><code>commit 5b52b3874068dfd0b1f77023eac03113f3b6db9a
+Author: HyunGyu-Lee &lt;gusrb0808@naver.com&gt;
+Date:   Mon Dec 9 00:32:41 2019 +0900
 
-<h2 id="querydsl">QueryDSL</h2>
-<ul>
-  <li>Criteria Query 와 마찬가지로 JPQL을 쉽게 작성할 수 있도록 도와주는 빌더</li>
-  <li>비표준</li>
-  <li>Entity를 파싱하여 QEntity를 생성하고, 이를 쿼리작성에 이용</li>
-  <li>Criteria의 동적인 특징과 JPQL의 표현력을 타입에 안전한 방법으로 제공</li>
-</ul>
+    컨텐츠 추가(DDD Start!)
+
+commit 0c6be06e2ede8cac5bc1b78b511620583e159bf5
+Author: HyunGyu-Lee &lt;gusrb0808@naver.com&gt;
+Date:   Fri Nov 8 13:35:32 2019 +0900
+
+    책 목차 추가
+
+commit 65068f594d469e848beab5fd475219f428339436
+Author: HyunGyu-Lee &lt;gusrb0808@naver.com&gt;
+Date:   Tue Nov 5 01:01:48 2019 +0900
+
+    collapse 태그 인식 불가 분제 fix
+
+</code></pre></td></tr></tbody></table></div></div>
+
+<h4 id="2-날짜author-변경">2. 날짜/author 변경</h4>
+<p>해쉬값을 확인한 후 <code class="highlighter-rouge">git rebase</code> 명령을 입력합니다.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>git rebase <span class="nt">-i</span> 65068f594d469e848beab5fd475219f428339436
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>그럼 아래와 같은 UI가 나오는데요. 변경할 대상 커밋의 커멘드를 <code class="highlighter-rouge">edit</code>으로 변경하고 저장합니다. (vi)</p>
+
+<p>자세한 커멘드는 아래 주석에 적혀있습니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27<br/>28</pre></td><td class="code"><pre class="highlight"><code>edit 0c6be06 책 목차 추가
+pick 5b52b38 컨텐츠 추가(DDD Start!)
+
+# Rebase 65068f5..d896625 onto 65068f5 (4 commands)
+#
+# Commands:
+# p, pick &lt;commit&gt; = use commit
+# r, reword &lt;commit&gt; = use commit, but edit the commit message
+# e, edit &lt;commit&gt; = use commit, but stop for amending
+# s, squash &lt;commit&gt; = use commit, but meld into previous commit
+# f, fixup &lt;commit&gt; = like "squash", but discard this commit's log message
+# x, exec &lt;command&gt; = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop &lt;commit&gt; = remove commit
+# l, label &lt;label&gt; = label current HEAD with a name
+# t, reset &lt;label&gt; = reset HEAD to a label
+# m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified). Use -c &lt;commit&gt; to reword the commit message.
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>그럼 다음과 같이 rebase 모드에 진입하게 되고 해당 커밋으로 이동하게됩니다.
+수정을 하려면 <code class="highlighter-rouge">git commit --amend</code>를 수정하지 않고 넘어가려면 <code class="highlighter-rouge">git rebase --continue</code>를 입력하면 됩니다.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</pre></td><td class="code"><pre class="highlight"><code><span class="o">&gt;&gt;</span> git rebase <span class="nt">-i</span> 65068f594d469e848beab5fd475219f428339436
+Stopped at 0c6be06...  책 목차 추가
+You can amend the commit now, with
+
+  git commit <span class="nt">--amend</span>
+
+Once you are satisfied with your changes, run
+
+  git rebase <span class="nt">--continue</span>
+<span class="o">&gt;&gt;</span> 
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>변경할 커밋에서 amend 를 통해 author 혹은 날짜를 수정하면 됩니다.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5</pre></td><td class="code"><pre class="highlight"><code><span class="c"># 날짜 변경</span>
+<span class="nv">GIT_COMMITTER_DATE</span><span class="o">=</span><span class="s2">"{날짜}"</span> git commit <span class="nt">--amend</span> <span class="nt">--no-edit</span> <span class="nt">--date</span> <span class="s2">"{날짜}"</span>
+
+<span class="c"># author 변경</span>
+git commit <span class="nt">--amend</span> <span class="nt">--author</span> <span class="s2">"username &lt;email&gt;"</span>
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>그다음 아까 언급한것처럼 수정을 하려면 <code class="highlighter-rouge">git commit --amend</code>를 수정하지 않고 넘어가려면 <code class="highlighter-rouge">git rebase --continue</code>를
+입력하면 되고, 더 이상 수정할 것이 없으면 rebase 모드가 종료되게 됩니다. 수정을 마치고 push 하여 마무리 해주면 github에도 반영되게 됩니다.</p>
+
 
 
       
@@ -524,10 +596,10 @@
         <div class="post-tags">
           
             
-            <a href="/tag/#/JPA" rel="tag"># JPA</a>
+            <a href="/tag/#/git" rel="tag"># git</a>
           
             
-            <a href="/tag/#/QueryDSL" rel="tag"># QueryDSL</a>
+            <a href="/tag/#/commit" rel="tag"># commit</a>
           
         </div>
       
@@ -543,18 +615,14 @@
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2019-10/my-book-list" rel="next" title="개인적인 IT 서적 추천">
-                <i class="fa fa-chevron-left"></i> 개인적인 IT 서적 추천
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/articles/2019-09/use-linux-command-on-windows" rel="prev" title="Windows에서 Linux 명령어 사용환경 구성하기">
-                Windows에서 Linux 명령어 사용환경 구성하기 <i class="fa fa-chevron-right"></i>
+              <a href="/articles/2019-12/nhn-forward-review" rel="prev" title="NHN FORWARD 2019 후기">
+                NHN FORWARD 2019 후기 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -747,7 +815,7 @@
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#jpql"> <span class="nav-number">1</span> <span class="nav-text">JPQL</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#jpa-criteria-query"> <span class="nav-number">2</span> <span class="nav-text">JPA Criteria Query</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#querydsl"> <span class="nav-number">3</span> <span class="nav-text">QueryDSL</span> </a> </li>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#git-commit-변경"> <span class="nav-number">1</span> <span class="nav-text">git commit 변경</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#1-commit-히스토리-확인"> <span class="nav-number">1.1</span> <span class="nav-text">1. commit 히스토리 확인</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#2-날짜author-변경"> <span class="nav-number">1.2</span> <span class="nav-text">2. 날짜/author 변경</span> </a> </li> </ol> </li>
     </ol>
   </div>
             

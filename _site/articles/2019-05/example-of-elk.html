@@ -115,22 +115,22 @@
 <meta name="keywords" content="Spring Boot, Spring Framework, Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ELK를 활용한 로그 중앙집중 처리">
-<meta property="og:url" content="/articles/2019-05/example-of-elk">
+<meta property="og:url" content="http://localhost:4000/articles/2019-05/example-of-elk">
 <meta property="og:site_name" content="@deveely">
 <meta property="og:description" content="어플리케이션 수행 중 발생하는 예외(Exception)를 모니터링 할 수 있는 시스템을 위해 ELK를 로컬환경에 구성한다.">
 <meta property="og:locale" content="ko">
-<meta property="og:image" content="/assets/images/post-images/2019-05-24-example-of-elk/1.png">
-<meta property="og:image" content="/assets/images/post-images/2019-05-24-example-of-elk/2.png">
-<meta property="og:image" content="/assets/images/post-images/2019-05-24-example-of-elk/3.png">
-<meta property="og:image" content="/assets/images/post-images/2019-05-24-example-of-elk/4.png">
-<meta property="og:image" content="/assets/images/post-images/2019-05-24-example-of-elk/5.png">
-<meta property="og:image" content="/assets/images/post-images/2019-05-24-example-of-elk/6.png">
-<meta property="og:image" content="/assets/images/post-images/2019-05-24-example-of-elk/7.png">
-<meta property="og:image" content="/assets/images/post-images/2019-05-24-example-of-elk/8.png">
+<meta property="og:image" content="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/1.png">
+<meta property="og:image" content="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/2.png">
+<meta property="og:image" content="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/3.png">
+<meta property="og:image" content="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/4.png">
+<meta property="og:image" content="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/5.png">
+<meta property="og:image" content="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/6.png">
+<meta property="og:image" content="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/7.png">
+<meta property="og:image" content="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/8.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ELK를 활용한 로그 중앙집중 처리">
 <meta name="twitter:description" content="어플리케이션 수행 중 발생하는 예외(Exception)를 모니터링 할 수 있는 시스템을 위해 ELK를 로컬환경에 구성한다.">
-<meta name="twitter:image" content="/assets/images/post-images/2019-05-24-example-of-elk/1.png">
+<meta name="twitter:image" content="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/1.png">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -157,7 +157,7 @@
 
 
 
-  <link rel="canonical" href=""/>
+  <link rel="canonical" href="http://localhost:4000/"/>
 
 
 
@@ -356,7 +356,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="/articles/2019-05/example-of-elk">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2019-05/example-of-elk">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -498,7 +498,7 @@ Elasticsearch -&gt; Kibana: 시각화
 </ul>
 
 <h5 id="디렉토리-구성">디렉토리 구성</h5>
-<p><img src="/assets/images/post-images/2019-05-24-example-of-elk/1.png" alt="Image1" /></p>
+<p><img src="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/1.png" alt="Image1" /></p>
 
 <p>테스트를 위해 표준 입출력 (터미널 입력, 출력)으로 설정하고 실행</p>
 
@@ -515,7 +515,7 @@ Elasticsearch -&gt; Kibana: 시각화
 <div class="language-bash highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2</pre></td><td class="code"><pre class="highlight"><code><span class="nb">cd </span>설치경로/bin
 logstash ../config/logstash-example.conf
 </code></pre></td></tr></tbody></table></div></div>
-<p><img src="/assets/images/post-images/2019-05-24-example-of-elk/2.png" alt="Image1" /></p>
+<p><img src="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/2.png" alt="Image1" /></p>
 
 <h5 id="spring-boot와-연동">Spring Boot와 연동</h5>
 <p>1) logstash Input 설정에 아래와 같이 설정</p>
@@ -554,7 +554,7 @@ logstash ../config/logstash-example.conf
 
 <p>4) logstash, Spring Boot 각각 실행
 아래와 같이 Spring Boot 실행 로그가 ELK 포맷에 맞는 JSON형태로 변환되어 표준출력으로 출력됨
-<img src="/assets/images/post-images/2019-05-24-example-of-elk/3.png" alt="Image1" /></p>
+<img src="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/3.png" alt="Image1" /></p>
 
 <h5 id="출력-elasticsearch-와-연동-input을-elasticsearch로-적재">출력 Elasticsearch 와 연동 (input을 Elasticsearch로 적재)</h5>
 <p>1) logstash Input/Output 설정에 아래와 같이 설정</p>
@@ -580,7 +580,7 @@ logstash ../config/logstash-example.conf
 </ul>
 
 <h5 id="디렉토리-구성-1">디렉토리 구성</h5>
-<p><img src="/assets/images/post-images/2019-05-24-example-of-elk/4.png" alt="Image1" /></p>
+<p><img src="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/4.png" alt="Image1" /></p>
 
 <h5 id="실행">실행</h5>
 <div class="language-bash highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2</pre></td><td class="code"><pre class="highlight"><code><span class="nb">cd </span>설치경로/bin
@@ -596,7 +596,7 @@ elasticsearch
 </ul>
 
 <h5 id="디렉토리-구성-2">디렉토리 구성</h5>
-<p><img src="/assets/images/post-images/2019-05-24-example-of-elk/5.png" alt="Image1" /></p>
+<p><img src="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/5.png" alt="Image1" /></p>
 
 <h5 id="실행-1">실행</h5>
 <div class="language-bash highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2</pre></td><td class="code"><pre class="highlight"><code><span class="nb">cd </span>설치경로/bin
@@ -608,11 +608,11 @@ kibana
 <ol>
   <li>http://localhost:5601 접속 후 “Create index pattern” 클릭</li>
   <li>Kibana에서 모니터링/분석할 Index의 패턴을 입력 (logstash에서 index패턴을 <strong>“logstash-날짜”</strong> 로 했기 때문에 아래와 같이 지정)
-<img src="/assets/images/post-images/2019-05-24-example-of-elk/6.png" alt="Image1" /></li>
+<img src="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/6.png" alt="Image1" /></li>
   <li>로그 시간으로 사용할 필드 지정 (여기서는 logback logstash appender가 자동으로 생성해준 timestamp값 사용)
-<img src="/assets/images/post-images/2019-05-24-example-of-elk/7.png" alt="Image1" /></li>
+<img src="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/7.png" alt="Image1" /></li>
   <li>Spring Boot 어플리케이션의 로그가 잘 적재되었는지 확인
-<img src="/assets/images/post-images/2019-05-24-example-of-elk/8.png" alt="Image1" /></li>
+<img src="http://localhost:4000/assets/images/post-images/2019-05-24-example-of-elk/8.png" alt="Image1" /></li>
 </ol>
 
 <h2 id="참고">참고</h2>
@@ -768,7 +768,7 @@ kibana
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">포스트</span>
               </a>
             </div>
@@ -790,7 +790,7 @@ kibana
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">태그</span>
               </a>
             </div>
