@@ -1,0 +1,1216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    <entry>
+      <title><![CDATA[Spring Ehcache 사용 간략한 정리]]></title>
+      <url>/articles/2019-12/spring-ehcache</url>
+      <content type="text"><![CDATA[1. Spring Cache Abstractionhttps://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-caching.html#boot-features-caching-provider2.  적용2-1. @EnableCachingSpring Boot Application 설정시 @EnableCaching 어노테이션 추가하여 Application에 캐시 기능 사용하겠다는 것을 알린다@SpringBootApplication@ComponentScan("com.nhnent.gia")@EntityScan(basePackages = {"com.nhnent.gia.model"}, basePackageClasses = {Application.class, Jsr310JpaConverters.class})@EnableCaching public class Application {	public static void main(String[] args) {		SpringApplication.run(Application.class, args);	}}이후 추가적이 설정이 없는 경우 기본 캐시 ConcurrentHasnMap 를 사용하고, 다른 캐시 라이브러리를 추가하면 Spring Boot의 Auto Detect기능에 따라 해당 라이브러리를 자동으로 사용하게 된다.2-2. ehcache.xml 작성https://www.ehcache.org/documentation/2.8/configuration/configuration.html&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"         xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"         updateCheck="true"         moritoring="autodetect"         dynamicConfig="true"         maxBytesLocalHeap="4M"&gt;    	&lt;cache name="recentWinHistory"                eternal="false"                timeToIdleSeconds="0"                timeToLiveSeconds="300"                overflowToDisk="false"                diskPersistent="false"                diskExpiryThreadIntervalSeconds="120"                memoryStoreEvictionPolicy="LRU"&gt;	&lt;/cache&gt;&lt;/ehcache&gt;2-3. application.properties추가캐시 설정파일 ehcache.xml 경로 설정spring.cache.ehcache.config=classpath:ehcache.xml2-4. @Cacheableehcache.xml에서 정의한 캐시를 @Cacheable("{name}") 형태로 적용  기본    @Cacheable("recentWinHistory")List&lt;WinHistory&gt; findAllWinHistory(Integer eventCode, Integer eventNo);        파라미터별로 캐싱하고 싶은 경우캐시가 eventCode값 단위로 캐싱된다    @Cacheable("recentWinHistory", key="#eventCode")List&lt;WinHistory&gt; findAllWinHistory(Integer eventCode, Integer eventNo);      ]]></content>
+      <categories>
+        
+          <category> Spring Framework </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Spring Framework </tag>
+        
+          <tag> Ehcache </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[mac terminal 에서 특정 프로젝트를 vscode 또는 IntelliJ 실행하기]]></title>
+      <url>/articles/2019-12/terminal-open-ide</url>
+      <content type="text"><![CDATA[mac 사용하다 보면 ide에서 Finder UI를 통해 특정 프로젝트를 open 하는 일이 자주 있는데요.저의 경우 vscode와 IntelliJ에서 그런 경우가 자주 있는 편입니다.특정 프로젝트를 vscode로 실행하기vscode 의 경우 아주 간단합니다.터미널에서 프로젝트 경로로 이동한 후 code . 명령어를 입력하면 해당 프로젝트 open으로 vscode가 실행됩니다.cd 프로젝트경로code .특정 프로젝트를 IntelliJ로 실행하기IntelliJ의 경우도 vscode와 유사하지만 1가지 차이점이 있습니다.IntelliJ 실행 시 사용하는 idea 명령어가 있는 경로가 환경변수에 등록되어 있지 않기 때문인데요. 이는 IntelliJ에서 간단히 추가가 가능합니다.IntelliJ를 실행 후 Tools &gt; Create Command-line Launcher... 메뉴를 클릭하면 터미널에서 idea명령어를 바로 사용할 수 있게됩니다.명령어를 환경변수에 추가한 후 실행할 프로젝트로 이동해 아래 명령어를 입력하면 해당 프로젝트 open 으로 IntelliJ가 실행되게 됩니다.아래 예시의 경우 제가 실행할 프로젝트가 maven 프로젝트여서 pom.xml을 대상 파일로 지정했구요. gradle이면 build.gradle 등 다른 타입의 프로젝트는 해당하는 파일을 지정하면 됩니다.cd 프로젝트경로idea pom.xml]]></content>
+      <categories>
+        
+          <category> etc. </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> vscode </tag>
+        
+          <tag> IntelliJ </tag>
+        
+          <tag> mac </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[git commit 날짜, author 변경하기]]></title>
+      <url>/articles/2019-12/git-change-commit</url>
+      <content type="text"><![CDATA[git을 사용하면 거의 대부분 원격 저장소로 github을 많이 이용합니다.github엔 저장소에 commit 내역을 시각화하여 보여주는 기능(잔디밭..)이 있는데요. 가끔 실수로 날짜를 못지키거나, author를 잘못지정해 색칠이 안되는 경우가 있습니다.잔디밭에 신경을 쓰시는 분이라면 빈 구멍이 굉장히 신경이 쓰이실수 있는데요. 이 때 사용할 수 있는 방법을 공유합니다.git commit 변경꼭 잔디밭이 아니더라도 commit의 날짜를 변경해야하는 경우는 종종 있을것입니다.기본적으로 commit 변경은 변경할 commit을 찾는것에서 시작합니다.1. commit 히스토리 확인git loggit log 명령어를 실행하면 아래와 같이 commit 히스토리를 확인할 수 있습니다.아래 내역에서 수정하고싶은 commit의 직전 commit의 해쉬값을 복사합니다.이 예시에서 저는 책 목차 추가 커밋을 수정하기 위해 그 아래 커밋인 65068f594d469e848beab5fd475219f428339436값을 사용하겠습니다.log 명령 결과화면에서 q를 입력하면 화면이 종료됩니다.commit 5b52b3874068dfd0b1f77023eac03113f3b6db9aAuthor: HyunGyu-Lee &lt;gusrb0808@naver.com&gt;Date:   Mon Dec 9 00:32:41 2019 +0900    컨텐츠 추가(DDD Start!)commit 0c6be06e2ede8cac5bc1b78b511620583e159bf5Author: HyunGyu-Lee &lt;gusrb0808@naver.com&gt;Date:   Fri Nov 8 13:35:32 2019 +0900    책 목차 추가commit 65068f594d469e848beab5fd475219f428339436Author: HyunGyu-Lee &lt;gusrb0808@naver.com&gt;Date:   Tue Nov 5 01:01:48 2019 +0900    collapse 태그 인식 불가 분제 fix2. 날짜/author 변경해쉬값을 확인한 후 git rebase 명령을 입력합니다.git rebase -i 65068f594d469e848beab5fd475219f428339436그럼 아래와 같은 UI가 나오는데요. 변경할 대상 커밋의 커멘드를 edit으로 변경하고 저장합니다. (vi)자세한 커멘드는 아래 주석에 적혀있습니다.edit 0c6be06 책 목차 추가pick 5b52b38 컨텐츠 추가(DDD Start!)# Rebase 65068f5..d896625 onto 65068f5 (4 commands)## Commands:# p, pick &lt;commit&gt; = use commit# r, reword &lt;commit&gt; = use commit, but edit the commit message# e, edit &lt;commit&gt; = use commit, but stop for amending# s, squash &lt;commit&gt; = use commit, but meld into previous commit# f, fixup &lt;commit&gt; = like "squash", but discard this commit's log message# x, exec &lt;command&gt; = run command (the rest of the line) using shell# b, break = stop here (continue rebase later with 'git rebase --continue')# d, drop &lt;commit&gt; = remove commit# l, label &lt;label&gt; = label current HEAD with a name# t, reset &lt;label&gt; = reset HEAD to a label# m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]# .       create a merge commit using the original merge commit's# .       message (or the oneline, if no original merge commit was# .       specified). Use -c &lt;commit&gt; to reword the commit message.## These lines can be re-ordered; they are executed from top to bottom.## If you remove a line here THAT COMMIT WILL BE LOST.## However, if you remove everything, the rebase will be aborted.## Note that empty commits are commented out그럼 다음과 같이 rebase 모드에 진입하게 되고 해당 커밋으로 이동하게됩니다.수정을 하려면 git commit --amend를 수정하지 않고 넘어가려면 git rebase --continue를 입력하면 됩니다.&gt;&gt; git rebase -i 65068f594d469e848beab5fd475219f428339436Stopped at 0c6be06...  책 목차 추가You can amend the commit now, with  git commit --amendOnce you are satisfied with your changes, run  git rebase --continue&gt;&gt; 변경할 커밋에서 amend 를 통해 author 혹은 날짜를 수정하면 됩니다.# 날짜 변경GIT_COMMITTER_DATE="{날짜}" git commit --amend --no-edit --date "{날짜}"# author 변경git commit --amend --author "username &lt;email&gt;"그다음 아까 언급한것처럼 수정을 하려면 git commit --amend를 수정하지 않고 넘어가려면 git rebase --continue를입력하면 되고, 더 이상 수정할 것이 없으면 rebase 모드가 종료되게 됩니다. 수정을 마치고 push 하여 마무리 해주면 github에도 반영되게 됩니다.]]></content>
+      <categories>
+        
+          <category> git </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> git </tag>
+        
+          <tag> commit </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[NHN FORWARD 2019 후기]]></title>
+      <url>/articles/2019-12/nhn-forward-review</url>
+      <content type="text"><![CDATA[NHN Forward 2019 컨퍼런스 참여 후기입니다.NHN Forward 2019지난 11월 27일 NHN Forward 2019 컨퍼런스에 참가했습니다.회사가 회사다 보니 다양한 컨텐츠들이 준비되어 있었는데요. 크게 아래와 같았습니다.  세션          발표세션      스몰 스텝      프런트엔드 상담소      커뮤니티 라운지        워크숍  핸즈온 랩프론트엔드 전문 개발자분들이 직접 고민을 들어주고 대화를 할 수 있는 프런트엔드 상담소나 평소에 궁금했거나 해보고 싶었던 것들을 쉽게 따라해보고 경혐해 볼 수 있었던핸즈온 랩 등 준비를 정말 많이 했다는 느낌이 들었습니다.특히 발표세션에서는 실무에서 겪을수 있는 문제점들이나 겪었던 문제들을 사례를 많이 공유받을수 있어 유익한 시간이었습니다.발표세션은 총 7개 트랙에서 시간대별로 각각 강의가 주로 진행되었는데요. 저는 아래와 같이 세션을 참여했습니다.발표세션1. ‘깃’깔나는 Git 워크 플로우 알아보기개발에 필수인 깃을 더 잘 쓰는 방법에 대해 사례를 통해 들을 수 있었습니다.특히 전 GitFlow 이외에 깃헙 플로우, 깃랩 플로우가 있는 거는 처음알았습니다.  깃 플로우: 메인브랜치(master / develop)와 서포팅프랜치 (feature, release, hotfix) 을 활용한 깃 워크플로  깃헙 플로우: 깃 플로우가 대부분의 케이스에서 갖는 복잡함을 해소하고자 master / topic 브랜치를 활용해 간단하지만 강력한 워크플로  깃랩 플로우: 깃 플로우는 너무 복잡하고, 깃헙 플로우는 너무 단순하다. 절충안을 제안2. DDD-Lite@SpringNHN의 서비스 중 Dooray! 의 위키 서비스를 사례로 애플리케이션의 복잡함으로 고통받는 개발자들을 위해 DDD를 소개하고, 어떻게 복잡함을 극복할 수 있는지 소개했습니다.  DDD에서 모델링 시 속성보다는 행위가 우선이다.  속성은 어떤 행위를 할 때 필요하면 그 때 추가한다.  JPA로 생각해보면 바로 양방향 매핑을 하지 않고 우선 단방향 매핑을 하고 필요 시 추가로 양방향 매핑을 한다.  도메인 모델을 풍부하게 만들어준다. (Rich Domain Model)  여러 변 연산을 적용해도 그 결과가 달라지지 않는 성질, 멱등성을 유지하도록 설계한다.  헥사고날 아키텍쳐3. 레거시 웹 서비스 길들이기: 서버 개발자의 SPA 적용기저 또한 Spring 기반 웹 백엔드 애플리케이션을 만드는 개발자 다 보니 이 세션에서 소개해주신 사례들이 하나하나가 공감가는 사례들이었습니다.제가 평소에 겪었던 고민들에 대한 해결책을 들을수있어 좋았습니다.적용하기전의 고민 / 적용하면서의 고민 / 현재 팀의 상황 / 효율적인 빌드를 위한 프로젝트 구성 / API 호출 방식 with Zuul /상태관리 / 다국어처리  4. Spring JPA의 사실과 오해Spring JPA에 평소에 잘 알려지지 않은 사실들과 오해들을 소개해주셨습니다.  연관관계: 대부분의 경우는 단방향 매핑이 간단, 하지만 영속성 전이를 사용하는 경우 양방향 매핑을 사용하자 (추가 update 쿼리 방지)  JpaRepository에 대한 사실          JpaRepository를 상속하는 것만으로도 대부분의 왠만한 기능을 사용할 수 있다.      JpaRepository로도 JOIN이 가능하다.      JpaRepository로도 다양한 DTO Projection이 가능하다.      5. Paas &amp; API Experience: 좋은 API DX를 제공하기 위한 작은 걸음  마치며NHN Forward 2019의 심볼인 » 는 리달리디렉션 기호 »를 형상화한 것으로 지식과 경험을 더하고 쌓을 수 있기를 바라는 마음을 담았다고 합니다.이런 NHN의 의지만큼 많은 것을 경험하고, 배우고, 즐거웠던 1분 1초가 아깝지 않은 시간이었습니다.감사합니다.]]></content>
+      <categories>
+        
+          <category> etc. </category>
+        
+          <category> REVIEW </category>
+        
+          <category> NHN </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> NHNFORWARD2019 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[리눅스 SSH, MySQL 접속 지연 문제]]></title>
+      <url>/articles/2019-11/server-connection-delay</url>
+      <content type="text"><![CDATA[신규로 발급받은 서버에서 SSH, MySQL 접속 시 상당한 시간이 딜레이되는 현상이 있었습니다.구글링 해본 결과 서버 측에서 접속한 클라이언트의 IP를 resolve하는 과정에서 발생하는 DNS lookup 등으로 발생하는 지연이 원인이었습니다.장비, 환경 여러가지에 따라 다르겠지만 제 경우엔 Spring Boot 애플리케이션 구동하는데 DB접속하는 부분에서 20초가량 지연되는 심각한 상황이었습니다.심각한 상황과 달리 해결방법은 아주 심플하고 간단했습니다.MySQL 접속 지연 문제 해결my.cnf (주로 /etc/my.cnf 에 위치함) 파일에 클라이언트 IP resolve 과정을 스킵하는 설정을 추가해줍니다.바로 skip-name-resolve 옵션을 mysqld 섹션에 넣어주면 됩니다.[mysqld]...# 추가skip-name-resolve...설정을 추가한 후에 MySQL 서버를 재기동해줍니다.service mysql restart재기동 완료 후 접속해보니.. 거짓말처럼 딜레이 없이 빠르게 접속되었습니다.SSH 접속 지연 문제 해결sshd_config (/etc/ssh/sshd_config) 파일에 마찬가지로 지연을 일으키는 동작을 하지 않도록 설정을 추가해줍니다.GSSAPIAutentication 과 UseDNS를 no 로 지정해주면 됩니다.제 경우엔 GSSAPIAutentication 설정의 경우 yes 로 되있었고 UseDNS 는 주석처리 되어있었는데요.둘 다 명시적으로 no 옵션을 주었습니다....# GSSAPI optionsGSSAPIAuthentication no#GSSAPIAuthentication yes#GSSAPICleanupCredentials yesGSSAPICleanupCredentials yes#GSSAPIStrictAcceptorCheck yes#GSSAPIKeyExchange no...UseDNS no...다음 sshd 서비스를 재기동 해줍니다.service sshd restart마찬가지로 로컬에서 ssh 접속 시 발생하던 지연은 없고 아주 빠르게 접속되었습니다.]]></content>
+      <categories>
+        
+          <category> etc. </category>
+        
+          <category> Unix/Linux </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> linux </tag>
+        
+          <tag> unix </tag>
+        
+          <tag> ssh </tag>
+        
+          <tag> mysql </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Git 고급 브랜치 전략과 Gitflow]]></title>
+      <url>/articles/2019-11/reference-of-gitflow</url>
+      <content type="text"><![CDATA[Git 고급 브랜치 전략 소개와 Gitflow를 통해 우리 프로젝트에 적용하는 방법에 대해 소개합니다.Vincent Driessen 의 브랜치 모델Vincent Driessen가 제안한 고급 브랜치 전략으로 브랜치를 다음과 같이 분류하고 규칙을 정해 버전관리를 합니다.Main Branch  master          현재 릴리즈되어있는 버전 또는 바로 릴리즈가 가능한 다음 버전      master 브랜치에 merge 가 발생하는 것은 곧 신규 릴리즈가 있다는 의미      발견된 모든 버그가 해결된, 정상적으로 동작하는 상태여야함        develop          다음 릴리즈를 위해 개발된 모든 기능들이 통합되어 관리되는 브랜치      모든 개발자가 함께 관리하는 브랜치, 항상 컴파일이 가능한 상태를 유지      Supporting branch  feature          특정 기능을 개발하는 브랜치      일반적으로 담당 개발자 로컬에만 존재 (한 feature를 위해 여러 개발자와 협업하는 경우 origin 에 push 필요)      기능개발 시작 시 develop 으로 부터 분기하고 개발이 완료되면 다시 develop 으로 Merge      아주 간단한 수정 (side-effect가 없다고 확신하는 경우)은 별도 feature 브랜치 없이 develop 브랜치에서 바로 수정하는 것을 허용        release          다음 릴리즈를 준비하는 브랜치      이 브랜치에서 실제 릴리즈 전 발견되는 버그 수정 등이 이루어짐      develop 으로 부터 분기하고 develop (bugfix 한 것들을 머지하기 위함), master(신규 기능 + bugfix) 로 merge        hotfix          운영중에 문제가 발생하는 경우 해당 문제를 수정하는 브랜치      master 로 부터 분기하며, 문제를 수정한 후 정상동작이 확인되면 develop과 master로 merge      Gitflow 란?위에서 소개한 브랜치 모델을 쉽고 편하게 사용할 수 있도록 지원하는 도구입니다.설치먼저 gitflow 를 설치합니다.Mac 에서는 brew를 이용해 간단하게 설치할 수 있습니다.# OSXbrew install git-flow-avh# Linuxapt-get install git-flow사용하기초기화git repository에 gitflow 를 적용하기 위해 아래 명령어를 입력합니다.git flow initgit flow init 명령을 실행하면 git repository 에 gitflow 브랜치 모델을 적용하기 위한 설정 절차를 진행합니다.초기화가 완료되면 Main 브랜치인 master 와 develop 브랜치가 생성되어있습니다.신규 기능 개발신규 기능 개발을 위해 develop 브랜치를 기준으로 분기하는 feature 브랜치를 구성해야합니다.Gitflow 는 아래 명령어를 통해 진행할 수 있습니다.git flow feature start name-of-feature그럼 feature/name-of-feature 브랜치가 생성되며 기능 개발이 가능합니다.기능 개발이 완료됐다면 커밋한 후 develop 브랜치에 머지를 해야하는데요.Gitflow 는 아래 명령어로 가능합니다.git flow feature finish name-of-feature그럼 develop 체크아웃 -&gt; feature/name-of-feature 브랜치 develop으로 머지 -&gt;  feature/name-of-feature 제거 작업이 진행됩니다.Release 하기어느정도 기능이 준비되어 다음 릴리즈를 할 수 있는 수준에 도달하면 release 작업을 진행합니다.git flow release start release-name위 명령어는 release/release-name 으로 브랜치를 생성합니다.이후 운영 배포 전 최종 점검, 발견되는 문제 수정을 진행 후 완전히 배포 준비가 마무리되면, master 에 merge 를 진행하고 develop 에도 Back merge를 해야하는데요.이것 역시Git flow release finish release-name 명령어로 간단하게 진행할 수 있습니다.ㅍ]]></content>
+      <categories>
+        
+          <category> etc. </category>
+        
+          <category> git </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> git </tag>
+        
+          <tag> gitflow </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Netlify를 사용하여 정적 사이트 배포하기]]></title>
+      <url>/articles/2019-11/netlify-with-vue</url>
+      <content type="text"><![CDATA[근래의 웹개발은 주로 백엔드와 프론트엔드 영역을 나누어 개발하는 것이 주류가 되었습니다.개인적으로 과거 JSP, jQuery 기반으로 개발된 웹사이트들은.. 두 번 다시는 겪고 싶지 않을 정도로 프론트엔드를 개발하는 기술들이 눈부시게 발전했고, 지금도 진행중입니다.이런 추세때문인지 자연스레 정적 웹사이트를 쉽게 배포할 수 있는 서비스가 인기를 얻고있는데, 그 중 하나인 Netlify 를 소개합니다.개요Netlify는 JAMstack 혹은 SPA 형태로 개발된 프론트엔드 애플리케이션을 배포하는 것에 최적화된 서비스입니다.Gatsby와 같은 블로그를 배포하는 용도로 쓰이는 것으로 유명한데요. 이외에 Vue, React 등 많은 형태의 정적 애플리케이션을 배포할 수 있습니다.(참고로 Gatsby는 React 기반)Netlify 사용방법 및  주요 특징  가입하고 사이트를 생성하면 접속가능한 URL이 생성된다. (호스팅)  Github, Gitlab, Bitbucket 등 소스 저장소와 연동한다.  애플리케이션을 개발하고, 소스를 저장소에 업로드한다.(git push)  저장소에 변경이 일어나면 Netlify 에서는 업로드된 소스를 빌드하고 배포한다.  Netlify 에서 제공하는 사이트로 접속하여 결과를 확인한다.  Build 커맨드 지정, deploy 경로 설정, Build Hook 지정 등 다양한 빌드/배포 관련 기능을 제공한다.Netlify와 여타 몇가지 기술을 보면서, 프론트엔드 기술은 정말 그 발전 속도가 상당하다는 생각을 하게됐습니다.다음에는 Vue + Firebase + Netlify 의 조합으로 간단한 애플리케이션을 제작하여 배포하는 포스트를 작성할 계획입니다.]]></content>
+      <categories>
+        
+          <category> Frontend </category>
+        
+          <category> Vue </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> FE </tag>
+        
+          <tag> Netlify </tag>
+        
+          <tag> Vue </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)]]></title>
+      <url>/articles/2019-11/jpa-orm-querydsl</url>
+      <content type="text"><![CDATA[Java ORM 표준인 JPA 에 대해 설명하고 객체지향 쿼리 사용과 장단점을 정리했습니다.개요예전부터 객체지향 언어인 자바와 관계형 데이터베이스간 패러다임의 불일치로 개발자들이 많은 불편함을 겪여왔다.  객체지향 추상화, 캡슐화, 정보은닉, 상속, 다형성 등 시스템의 복잡성 줄여주는 장치들을 제공  관계형 데이터베이스는 데이터 중심으로 구조화, 집합적인 사고가 필요하고 추상화, 상속, 다형성 같은 개념이 없음  연관관계를 표현할 때 객체는 타 객체 참조 (reference) 로, 관계형 DB 는 외래키로 표현하는 등 연관관계를 표현          객체를 테이블에 맞춰 모델링          class Member {      String id;      // MEMBER_ID 컬럼 사용      Long teamId;    // TEAM_ID FK 컬럼 사용      String userName;  }  class Team {      Long id;        // TEAM_ID PK 사용      String name;  }              객체지향 모델링          class Member {      String id;      Team team;          // 참조로 연관관계를 맺는다.      String username;      Team getTeam() {          return team;      }  }  class Team {      Long id;      String name;  }      실제 구현해야할 비즈니스 로직 이외에 패러다임 불일치로 인해 개발자의 불필요한 수고가 많이 발생ORM? JPA? Hibernate?JPA  JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술  자바에서 ORM 기술을 이용하기 위한 표준 API 명세와 인터페이스의 집합ORM  ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미Hibernate  Hibernate는 JPA를 구현한 ORM 프레임워크즉 JPA는 자바의 객체와 관계형 데이터베이스를 매핑하는 표준 기술 이다.Hibernate는 가장 인기있는 자바 ORM 프레임워크이다.왜 사용하는가?  ORM은 객체와 관계형 데이터베이스 패러다임의 불일치를 개발자 대신 해결해준다.          상속, 연관관계, 객체 그래프 탐색, 비교 등 관계형 데이터베이스와의 패러다임 불일치로 어려워지는 문제들을 해결      개발자는 비즈니스 로직에 집중할 수 있게됨        ORM 상에서는 개발자가 직접 SQL문을 작성할 필요가 없다. -&gt; 필요한 SQL을 개발자 대신 해줌으로써 지루하고 반복적인 CRUD용 SQL문을 개발자가 작성하지 않아도 된다.어떻게 사용하는가?JPA 에서는 SQL을 추상화한 JPQL 이라는 객체지향 쿼리언어를 사용한다.SQL이 데이터베이스 테이블을 대상으로 사용하는 질의문이라면 JPQL은 객체를 대상으로 사용하는 질의문이다.  Native SQL    select *from member where member_nm like 'lee%';        JPQL// Entity (자바객체와 데이터베이스 테이블을 매핑)@Entity@Table(name = "MEMBER")public class EntityMember {    @Column("member_nm")    private String memberName;    ....}// Repository public interface MemberRepository JpaRepository&lt;Memger, Long&gt; {    // 메소드 이름 쿼리    List&lt;Member&gt; findAllByMemberNameLike(String searchName);        // JPQL 직접 작성    @Query(" select m from Member m" +            " where m.memberName like :searchName")    List&lt;Member&gt; findAllByMemberNameLikeDirectJPQL(String searchName);}위 처럼 개발자는 JPQL 을 작성하면, 프레임워크가 애플리케이션에서 사용하는 DBMS 에 맞는 SQL로 변환하여 실행시켜준다. (DB 벤더에 독립적)JPQL의 단점JPQL이 SQL에 비해 좋은 부분이 많으나, 결국 문자열로 적는 쿼리로 한계와 단점들이 존재한다.  타입 안정성을 보장 받을 수 없음  동적인 쿼리를 작성할 수 없음이를 위해 Criteria 라는 빌더 API 를 지원하여 자바코드로 JPQL 작성을 지원한다.  JPQL    select m from Member m        Criteria 사용    public List&lt;Member&gt; findAll() {  CriteriaBuilder cb = em.getCriteriaBuilder();  //Criteria 생성, 반환 타입 지정  CriteriaQuery&lt;Member&gt; cq = cb.createQuery(Member.class);  Root&lt;Member&gt; m = cq.from(Member.class); // FROM 절  cq.select(m);   // SELECT 절  TypedQuery&lt;Member&gt; query = em.createQuery(cq);  return query.getResultList();}      Criteria 는 문자열로 작성하는 JPQL의 한계를 일부 극복해주지만, 코드가 너무 복잡하고 직관적이지 못해 가독성이 떨어지고, 어떤 JPQL 문이 생성될 지 예측하기 어렵다.  Native SQL    select a.id_seq,       b.user_id,       ...  from msg_friendly_match_invitation_message a inner join msg_rat b     on a.inviter_user_id = b.user_id  where a.my_user_id = ?    and a.expire_date &gt; ? order by a.id_seq desc        Criteria 사용하여 구현    public List&lt;EntityFriendlyMatchInvitation&gt; findFriendlyMatchInvitations(String sno, LocalDateTime expireTimeLimit) {  CriteriaBuilder builder = entityManager.getCriteriaBuilder();  CriteriaQuery&lt;EntityFriendlyMatchInvitation&gt; query = builder.createQuery(EntityFriendlyMatchInvitation.class);          // FROM 절 (조인)  Root&lt;EntityFriendlyMatchInvitation&gt; invitation = query.from(EntityFriendlyMatchInvitation.class);  invitation.fetch("inviter", JoinType.INNER);  // 조건절  Predicate condition = builder.and(      builder.equal(invitation.get("myUserId"), sno),	      builder.greaterThan(invitation.get("expireDate"), expireTimeLimit)	  );  // SELECT 절  query.select(invitation)        .where(condition)      .orderBy(builder.desc(invitation.get("id")));  TypedQuery&lt;EntityFriendlyMatchInvitation&gt; typedQuery = entityManager.createQuery(query);  return typedQuery.getResultList();}      QueryDSLQueryDSL 은 이런 Criteria 의 단점을 극복해주는 JPQL 빌더 API 이다. Criteria 에 비해 훨씬 간결하고 코드가 JPQL 과 비슷하여 직관적이며 어떤 JPQL이 실행될 지 보다 쉽게 예측 가능하다.// 조회에 사용할 객체 (Q 도메인)private QEntityFriendlyMatchInvitation invitation = QEntityFriendlyMatchInvitation.entityFriendlyMatchInvitation;private QEntityRat member = QEntityRat.entityRat;    public List&lt;EntityFriendlyMatchInvitation&gt; findFriendlyMatchInvitations(String sno, LocalDateTime expireTimeLimit) {    return from(invitation)        .innerJoin(invitation.inviter, member)        .fetchJoin()        .where(invitation.myUserId.eq(sno)          .and(invitation.expireDate.after(expireTimeLimit)))        .orderBy(invitation.id.desc())        .fetch();}Entity 기반으로 자동생성된 Q도메인을 사용하여 기존 문자열로 작성하던 부분을 대체할 수 있고 타입 안정성이 보장된다.Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프로젝트 컴파일 시 생성된다.// Entity 모델 예제@Entity@Table(name = "msg_friendly_match_invitation_message")public class EntityFriendlyMatchInvitation {	@Id	@GeneratedValue(strategy= GenerationType.IDENTITY)	@Column(name = "id_seq")	private Long id;	@Column(name = "my_user_id")	private String myUserId;	@ManyToOne	@JoinColumn(name = "inviter_user_id")	private EntityRat inviter;	@Column(name = "game_type")	private Integer gameType;	@Column(name = "seed_money")	private Long seedMoney;	@Column(name = "room_number")	private Integer roomNumber;	@Column(name = "room_key")	private Long roomKey;	@Column(name = "expire_date")	private LocalDateTime expireDate;	getters, setters...}// 자동 생성된 Q도메인package com.nhnent.msg.entity;import static com.querydsl.core.types.PathMetadataFactory.*;import com.querydsl.core.types.dsl.*;import com.querydsl.core.types.PathMetadata;import javax.annotation.Generated;import com.querydsl.core.types.Path;import com.querydsl.core.types.dsl.PathInits;/** * QEntityFriendlyMatchInvitation is a Querydsl query type for EntityFriendlyMatchInvitation */@Generated("com.querydsl.codegen.EntitySerializer")public class QEntityFriendlyMatchInvitation extends EntityPathBase&lt;EntityFriendlyMatchInvitation&gt; {    private static final long serialVersionUID = 1449367612L;    private static final PathInits INITS = PathInits.DIRECT2;    public static final QEntityFriendlyMatchInvitation entityFriendlyMatchInvitation = new QEntityFriendlyMatchInvitation("entityFriendlyMatchInvitation");    public final DateTimePath&lt;java.time.LocalDateTime&gt; expireDate = createDateTime("expireDate", java.time.LocalDateTime.class);    // Java Entity 의 필드의 타입을 기반으로 자동 생성 되어 쿼리에서 사용 시 Type safe 보장    public final NumberPath&lt;Integer&gt; gameType = createNumber("gameType", Integer.class);    public final NumberPath&lt;Long&gt; id = createNumber("id", Long.class);    public final QEntityRat inviter;    public final StringPath myUserId = createString("myUserId");    public final NumberPath&lt;Long&gt; roomKey = createNumber("roomKey", Long.class);    public final NumberPath&lt;Integer&gt; roomNumber = createNumber("roomNumber", Integer.class);    public final NumberPath&lt;Long&gt; seedMoney = createNumber("seedMoney", Long.class);    ...}]]></content>
+      <categories>
+        
+          <category> Java </category>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Java </tag>
+        
+          <tag> JPA </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Reflection Type을 활용해 JPA 공통 AttributeConverter 구현]]></title>
+      <url>/articles/2019-10/java-generic-type</url>
+      <content type="text"><![CDATA[얼마전에 JPA에서 사용할 공통 AttributeConverter 를 구현하면서 고민했던 점들을 정리한다.공통 AttributeConverter 의 필요성Entity와 테이블을 매핑하다보면 String, Integer, Long, LocalDateTime 외에 Json값이 저장되어있는 컬럼이나 코드값이 저장되어있는 컬럼의 경우 AttributeConverter 를 통해 Json 모델, Enum 과 매핑을 시킨다.// Entity@Entitypublic class UserEntity {	@Converter(converter = UserStatusAttributeConverter.class)	private Status status;	@Converter(converter = UserOptionAttributeConverter.class)	private UserOption userOption;}// 사용할 Enum 타입 매핑 Converterpublic class UserStatusAttributeConverter implements AttributeConverter&lt;Status, Integer&gt; {	@Override	public Integer convertToDatabaseColumn(Status attribute) {		return attribute.getCode();	}	@Override	public Status convertToEntityAttribute(Integer value) {		return Status.get(value);	}}// 사용할 Json 타입 매핑 Converterpublic class UserOptionAttributeConverter implements AttributeConverter&lt;UserOption, String&gt; {	@Override	public String convertToDatabaseColumn(UserOption attribute) {		return JsonUtils.toJson(attribute);	}	@Override	public UserOption convertToEntityAttribute(String value) {		return JsonUtils.fromJson(value, UserOption.class);	}}간단하게 위 예시코드처럼 필요할 때마다 Converter 를 작성하다보면 파일 갯수는 하염없이 증가한고, 중복코드도 수없이 생기게 된다.convertToDatabaseColumn 메소드와 convertToEntityAttribute 메소드를 잘보면 처리대상이되는 Enum 타입이나 Json 모델 타입만 다르지, 매핑해주는 로직은 달라지지 않는다.공통 AttributeConverter 구현Generic을 활용하면 위에서 말한 중복코드 발생문제를 해결해 줄 수 있다.// 공통 Json Attribute Converterpublic abstract class JsonAttributeConverter&lt;T&gt; implements AttributeConverter&lt;T, String&gt; {	// 처리할 Json 모델의 타입토큰	private Class&lt;T&gt; attributeType; 	public JsonAttributeConverter(Class&lt;T&gt; attributeType) {		this.attributeType = attributeType;	}	@Override	public String convertToDatabaseColumn(T attribute) {		return JsonUtils.toJson(attribute);	}	@Override	public T convertToEntityAttribute(String value) {		return JsonUtils.fromJson(value, attributeType);	}}// 공통 컨버터 확장하여 사용public class UserOptionAttributeConverter extends JsonAttributeConverter&lt;UserOption&gt; {	UserOptionAttributeConverter() {		// 클래스 리터럴 전달		super(UserOption.class);	}}위 처럼 Json 모델의 타입 토큰을 전달받아 Json 파싱하는 기능을 공통화하여 중복코드를 없앨수 있다.다만 여전히 필요한 컨버터만큼 만들어줘야하는 점은 달라지지않는데, Inner 클래스를 활용해 파일수를 줄여줄 수 있겠다.public class UserOption {	private String option;	...	static class UserOptionConverter extends JsonAttributeConverter&lt;UserOption&gt; {		UserOptionConverter() {			super(UserOption.class)		}	}}위 예시처럼 클래스 리터럴을 전달하여 알려주는 방법도 있고, Reflection Type을 이용해 리터럴을 전달받지 않고 타입을 획득하는 방법으로 처리할 수도 있다.public abstract class JsonAttributeConverter&lt;T&gt; implements AttributeConverter&lt;T, String&gt; {	// 처리할 Json 모델의 타입토큰	private Class&lt;T&gt; attributeType; 	public JsonAttributeConverter(Class&lt;T&gt; attributeType) {		this.attributeType = detectAttributeType();	}	private Class&lt;T&gt; detectAttributeType() {		ParameterizedType type = (ParameterizedType) getClass().getGenericSuperclass();		return (Class&lt;X&gt;) type.getActualTypeArguments()[0];	}	@Override	public String convertToDatabaseColumn(T attribute) {		return JsonUtils.toJson(attribute);	}	@Override	public T convertToEntityAttribute(String value) {		return JsonUtils.fromJson(value, attributeType);	}}public class UserOption {	private String option;	...	static class UserOptionConverter extends JsonAttributeConverter&lt;UserOption&gt; {	}}]]></content>
+      <categories>
+        
+          <category> Java </category>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Java </tag>
+        
+          <tag> JPA </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Spring AOP 동작 방식, 원리]]></title>
+      <url>/articles/2019-10/how-spring-aop-works</url>
+      <content type="text"><![CDATA[스프링은 기본적으로 프록시 기반 AOP 를 제공한다.스프링에서는 Java Dynamic Proxy를 사용하거나 Cglib을 사용하여 프록시 기반 AOP를 구현했다.이 글에서는 어떻게 Spring 에서 AOP를 사용할 수 있는 방식의 차이와 프레임워크가 AOP를 지원하기 위해 어떤 처리를 해주는지 개인적으로 분석한 내용을 정리한다.      AopProxy 라는 Delegator 인터페이스로 표현되며 Dynamic Proxy 기반은 JdkDynamicAopProxy 클래스, Cglib 기반은 CglibAopProxy 클래스이다.        Dynamic Proxy 기반과 Cglib 차이는 어떻게 프록시 객체를 생성하는지 방식 차이이다.        Dynamic Proxy 는 프록시 객체 생성을 위해 인터페이스를 필수로 구현해야하며, Cglib 은 인터페이스를 구현하지 않은 일반 클래스에 런타임 시 코드 조작으로 프록시 객체를 생성해준다.        DefaultAopProxyFactory 클래스의 createAopProxy 메소드를 통해 AopProxy 의 실 구현체가 생성된다.    4.1. AOP 적용 대상이 인터페이스거나 인터페이스를 구현(implement)하고 있으면 JdkDynamicAopProxy 가 생성된다.    4.2. 위 경우가 아니면 ObjenesisCglibAopProxy 기반 실 객체가 생성된다.    4.3. Objenesis 는 과거 Cglib 의 몇 가지 단점을 해결해주는 라이브러리        Transaction 대상의 경우 기본이 Cglib 으로 생성하게 설정되어있다.    5.1. 성능상 Cglib 이 이점이 많고, 예외발생 확률도 적다고 한다.    5.2. Cglib 이 가지고 있던 몇 가지 문제점들을 Objenesis 라이브러리를 통해 해결했다. (생성자 중복 호출, default 생성자 필요 문제 등)        기본 Spring AOP 이외에 스프링에서 사용할 수 있는 방법으로는 AspectJ 가 있다.        Spring AOP 가 제공하는 프록시 기반 방식은 런타임 위빙 (RTW) 이라는 방식으로 프로그램 구동중에 위빙이 일어난다. 반면 AspectJ 는 컴파일 단계 또는 로드타임에 코드를 삽입하여(위빙) RTW 보다 성능면에서 우세하다. (CTW : 컴파일 타임 위빙, LTW : 로드 타임 위빙). 또한 AspectJ 는 기본 Spring AOP 보다 보다 다양한 포인트컷을 지원한다.        일반적인 경우 Spring AOP 에서 지원하는 방식으로 요구사항들이 충분히 해결되는 경우가 많고, 성능 또한 @AspectJ 갯수에 따라 달라지는데 일반적인 경우에서는 크게 체감하기 힘들다는 평이 있다.        AspectJ 를 사용하기 위해서는 AJC 등 별도의 컴파일러 설정 등 추가 설정이 필요한데, Spring AOP 는 그렇지 않다.  ]]></content>
+      <categories>
+        
+          <category> Spring Framework </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Java </tag>
+        
+          <tag> Spring Framework </tag>
+        
+          <tag> AOP </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[개인적인 IT 서적 추천]]></title>
+      <url>/articles/2019-10/my-book-list</url>
+      <content type="text"><![CDATA[읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.도서 목록  객체지향의 사실과 오해          저자 : 조영호      소개 : 『객체지향의 사실과 오해』는 객체지향이란 무엇인가라는 원론적면서도 다소 위험한 질문에 답하기 위해 쓰여진 책이다. 안타깝게도 많은 사람들이 객체지향의 본질을 오해하고 있다. 가장 널리 퍼져있는 오해는 클래스가 객체지향 프로그래밍의 중심이라는 것이다. 객체지향으로 향하는 첫 걸음은 클래스가 아니라 객체를 바라보는 것에서부터 시작한다.        클린 코더          저자 : 로버트 C. 마틴      소개 : 세계적으로 유명한 프로그래머 ‘밥 아저씨’ 로버트 마틴이 쓴 책으로, 프로 개발자가 되는 길을 알려준다. 수십 년의 경험을 바탕으로 장인 정신, 실천 기법, 도구뿐만 아니라 프로가 가져야 할 마음가짐과 태도를 알려준다. 빡빡한 일정으로 인한 압박을 견디고 비이성적인 사람들과 대화하고 진창에 빠져 오도가도 못하는 상황을 피하는 법 등 다양한 지혜가 책에 담겨 있다. 위대한 소프트웨어를 만드는 장인 정신을 보여주고 프로만이 가지는 자부심과 충만감을 얻게 해 준다.        클린 코드          저자 : 로버트 C. 마틴      소개 : 애자일 소프트웨어의 혁명적인 패러다임을 제시하는 책이다. 저자 로버트 마틴은 오브젝트 멘토(Object Mentor)의 동료들과 힘을 모아 ‘개발하며’ 클린 코드를 만드는 최상의 애자일 기법을 정제하여『Clean Code 클린 코드』에 담았다. 아주 많은 코드를 읽고 그 코드의 무엇이 옳은지, 그른지 생각하며 전문가로서 자신이 지니는 가치를 돌아보기 위해 꾸준히 노력한다면, 이 책을 통해 여러분의 프로그래밍 실력은 한층 더 높아질 것이다.        이펙티브 자바          저자 : 조슈아 블로치      소개 : 효율적이고 잘 설계된 자바 프로그램을 작성할 수 있는 실전적인 지침을 제공하는 책이다. 이 책의 각 장은 여러 개의 ‘항목’으로 구성되어 있으며, 각 항목은 자바 플랫폼을 파헤치는 조언과 실전적인 코드 예를 제공하면서 간결하고 독립적인 설명을 하는 형태로 되어 있다.각 항목에 대한 설명을 통해서 해야 할 것과 하지 말아야 할 것, 그리고 왜 그래야 하는지를 명확하게 알 수 있다. 이 책에는 필수 불가결한 프로그래머의 산 경험이 78개의 항목으로 녹아있어 우리가 매일 접하는 자바 프로그래밍의 과제들에 대해 실전적인 최적의 솔루션을 제공한다.        DDD Start!          저자 : 최범균      소개 : 이 책은 DDD(도메인 주도 설계)를 처음 접하는 개발자를 위한 책이다. DDD를 실제 업무에 적용할 수 있도록 기본적인 이론을 설명하고 이를 구현한 코드를 바탕으로 입문자가 헤매지 않고 DDD를 학습할 수 있도록 했다. 애그리거트, 엔티티, 리포지토리 등 DDD의 핵심 패턴을 이용해서 도메인 모델을 구현하는 방법을 설명한다. 도메인 모델의 트랜잭션 충돌을 처리하는 기법(선점 잠금, 비선점 잠금)을 살펴보고, 도메인 이벤트를 이용해서 도메인 영역 간의 의존을 낮추는 방법과 명령 모델과 조회 모델을 나누는 기법에 대해서도 배운다. 스프링과 JPA를 이용해서 실제 동작하는 코드를 함께 제공하고 있으므로 DDD를 학습하고 싶은 개발자에게 좋은 길잡이가 될 것이다.        소프트웨어 장인 정신          저자 : Pete McBreen      소개 : 이 책은 소프트웨어 개발자 여러분에게 소프트웨어를 어떻게 개발하느냐는 중요하지 않다고 말한다. 소프트웨어 개발의 진정한 가치는 숙련된 개발자가 고품질의 코드를 개발하여 고객이 필요로 하는 것을 전달하는 것에 있다고 말한다. 즉 ‘그 자체를 위한 기술’로부터 고객에게 가치를 전달하는 것에 토대를 둔 기술로 방향을 바꾸는 것이 이제 피할 수 없는 명제임을 보여준다.소프트웨어 장인정신은 소프트웨어 엔지니어링에 함축된 “제조한다”는 뜻을 벗어나 소프트웨어 개발을 하는 바로 그 사람에게 보다 주의를 기울이게 하기 때문에 중요하다. 장인정신은 그것과 함께 숙련된 개발 실습자가 그들의 장인적 기술을 마스터하려고 한다는 것, 노동의 결실에 대한 자부심, 그리고 책임정신을 내포한다.기술의 완성을 위하여 프로그래머들을 육성하는 방법, 작은 개발 팀들에서의 창조적인 협업을 발전시키는 방법, 그리고 고객과의 커뮤니케이션을 향상시키는 방법들을 소개한다. 그리고 궁극적인 결과로서의 숙련된 개발자는 안정된 애플리케이션을 만들고, 확장하고, 개선시킬 수 있는 사람이다.      ]]></content>
+      <categories>
+        
+          <category> Book </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Book </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[JPA의 쿼리 기술 종류]]></title>
+      <url>/articles/2019-10/jpa-query-tech</url>
+      <content type="text"><![CDATA[JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.그동안 JPA 를 사용하면서 사용하는 쿼리 기술이 어느 기술인지도 잘 모르고 사용해온 나 자신을 위해.. 이 글에서 정리해보고자 합니다.각 기술에 대한 자세한 설명보다는 각 기술이 어떤 것인지와 특징 등에 중점을 두고 정리하겠습니다.JPQL  Java Persistence Query Language의 약자  SQL이 데이터베이스 테이블을 대상으로 쿼리하는 거라면 JPQL은 Entity 객체를 대상으로 쿼리  JPQL은 쿼리문장이 특정 DBMS에 종속되지 않도록 쿼리를 SQL을 추상화  작성한 JPQL은 프레임워크에 의해 애플리케이션이 사용하는 데이터베이스의 적합한 SQL로 변환되어 실행  JPA 표준JPA Criteria Query  JPQL을 programmatically하게, 즉 자바코드로 작성할 수 있게 도와주는 빌더  문자열로 작성하는 JPQL과 달리 자바코드로 쿼리를 작성하기 때문에 컴파일 단계에서 오류파악이 가능  쿼리가 복잡하고, 길어지는 경우 JPQL 보다 직관적  자바코드로 작성하기 때문에 쿼리문을 동적으로 작성 가능  JPA 표준QueryDSL  Criteria Query 와 마찬가지로 JPQL을 쉽게 작성할 수 있도록 도와주는 빌더  비표준  Entity를 파싱하여 QEntity를 생성하고, 이를 쿼리작성에 이용  Criteria의 동적인 특징과 JPQL의 표현력을 타입에 안전한 방법으로 제공]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> QueryDSL </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Windows에서 Linux 명령어 사용환경 구성하기]]></title>
+      <url>/articles/2019-09/use-linux-command-on-windows</url>
+      <content type="text"><![CDATA[개발자 특성상 Windows, Linux 등 다양한 환경의 PC를 이용하게 되는데요. 저는 주로 일반 사무, 업무를 볼 때는 Windows, 개발할 땐 Linux 환경을 이용합니다.다만 직업 특성상 Linux 환경에 노출되는 시간이 많고, 자연스레 Linux 명령어에 익숙해지게 되는데요. 이 때문에 가끔 Windows의 CMD 명령어들이 Linux와 달라 불편함을 종종 느낄때가 있습니다.이 때문에 이번에 개인적으로 사용하는 PC (Windows)에 Cygwin 을 설치해봤습니다.Cygwin 이란  공식 홈페이지 : https://cygwin.com/  설치 : https://cygwin.com/install.htmlPOSIX 기반 소프트웨어를 Windows에서 구동 및 개발이 가능하도록 환경을 제공해주는 역할을 합니다.가상머신 등을 통해 유닉스용 어셈블리 코드를 에뮬레이션 하여 진짜 유닉스/리눅스 등의 운영체제를 사용하는건 아니고, Cygwin1.dll이라는 런타임 라이브러리를 통해 Windows에 동적으로 링크하여실제 유닉스처럼 동작하도록 해줍니다.설치설치페이지에 접속하여 32/64 bit에 맞는 setup파일을 받아 쉽게 설치할 수 있습니다.사용Cygwin을 실행하여 pwd를 실행해보면 /home/{자신의 userName} 이 출력됩니다.이는 실제 경로는 아니며 Cygwin 설치경로 이하의 경로입니다. 즉 Cygwin 터미널은 자신의 설치경로가 root인데요.우리가 원래 사용하고 있던 Windows의 C:, D: 등을 접속하려면 /cygdrive/{Drive 볼륨명} 경로로 이동하면 됩니다.다만 매번 위 경로를 통해 접근하려면 귀찮으니 저같은 경우는 링크를 생성하여 사용하고 있습니다.]]></content>
+      <categories>
+        
+          <category> Unix/Linux </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Unix </tag>
+        
+          <tag> Linux </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[ELK를 활용한 로그 중앙집중 처리]]></title>
+      <url>/articles/2019-05/example-of-elk</url>
+      <content type="text"><![CDATA[어플리케이션 수행 중 발생하는 예외(Exception)를 모니터링 할 수 있는 시스템을 위해 ELK를 로컬환경에 구성한다.구성ELK  Logstash : 데이터 수집, 필터링, Elasticsearch에 색인 (ETL 기능)  Elasticsearch : 데이터 저장소 + 검색엔진  Kibana : 수집 데이터 시각화적용Logback Logstash용 Appender를 활용하여 WARN 이상 레벨의 로그를 Logstash에 적재 (https://jsonobject.tistory.com/243), Logstash에서 Elasticsearch로 색인    * LogstashEncoder는 스프링앱에서 발생하는 로그를 ELK스택에서 사용되는 JSON형태로 변환    * LogstashSocketAppender는 Logstash 서버에 로그 전송WAS -&gt; Logstash: 수집Logstash -&gt; Elasticsearch: 색인Elasticsearch -&gt; Kibana: 시각화Logstash  공식 홈페이지 : https://www.elastic.co/kr/products/logstash  설치 : https://www.elastic.co/kr/downloads/logstash디렉토리 구성테스트를 위해 표준 입출력 (터미널 입력, 출력)으로 설정하고 실행테스트 진행1) 설치경로/config/logstash-example.conf 파일 생성하고 아래와 같이 입력input {    stdin {}    // 표준 입력}output {    stdout {}   // 표준 출력}2) 실행cd 설치경로/binlogstash ../config/logstash-example.confSpring Boot와 연동1) logstash Input 설정에 아래와 같이 설정# 입력은 TCP 4560포트로, 출력은 표준 출력 사용input {    tcp {        port =&gt; 4560        codec =&gt; json_lines    }}output {    stdout {}   // 표준 출력}2) Spring Boot pom.xml에 logstash appender 디펜던시 추가&lt;dependency&gt;    &lt;groupId&gt;net.logstash.logback&lt;/groupId&gt;    &lt;artifactId&gt;logstash-logback-encoder&lt;/artifactId&gt;    &lt;version&gt;4.11&lt;/version&gt;&lt;/dependency&gt;3) logback.xml에 Logstash Appender 추가&lt;!-- logstash 4560포트 설정에 맞춰 설정 --&gt;&lt;appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender"&gt;    &lt;destination&gt;127.0.0.1:4560&lt;/destination&gt;    &lt;encoder class="net.logstash.logback.encoder.LogstashEncoder"&gt;&lt;/encoder&gt;&lt;/appender&gt;&lt;root&gt;    &lt;level value="INFO"/&gt;    &lt;appender-ref ref="LOGSTASH"/&gt;&lt;/root&gt;4) logstash, Spring Boot 각각 실행아래와 같이 Spring Boot 실행 로그가 ELK 포맷에 맞는 JSON형태로 변환되어 표준출력으로 출력됨출력 Elasticsearch 와 연동 (input을 Elasticsearch로 적재)1) logstash Input/Output 설정에 아래와 같이 설정# 입력은 TCP 4560포트로, 출력은 표준 출력 사용input {    tcp {        port =&gt; 4560        codec =&gt; json_lines    }}output {    elasticsearch {        hosts =&gt; ["localhost:9200"]            index =&gt; "logstash-%{+YYYY.MM.dd}"    }}Elasticsearch  공식 홈페이지 : https://www.elastic.co/kr/products/elasticsearch  설치 : https://www.elastic.co/kr/downloads/elasticsearch디렉토리 구성실행cd 설치경로/binelasticsearch이후 http://localhost:9200 로 접속해봤을 때 페이지가 정상적으로 뜨는지 확인Kibana  공식 홈페이지 : https://www.elastic.co/kr/products/kibana  설치 : https://www.elastic.co/kr/downloads/kibana디렉토리 구성실행cd 설치경로/binkibana이후 http://localhost:5601 로 접속해봤을 때 페이지가 정상적으로 뜨는지 확인Elasticsearch 연동  http://localhost:5601 접속 후 “Create index pattern” 클릭  Kibana에서 모니터링/분석할 Index의 패턴을 입력 (logstash에서 index패턴을 “logstash-날짜” 로 했기 때문에 아래와 같이 지정)  로그 시간으로 사용할 필드 지정 (여기서는 logback logstash appender가 자동으로 생성해준 timestamp값 사용)  Spring Boot 어플리케이션의 로그가 잘 적재되었는지 확인참고  Elastic Stack 공식 홈페이지  Elastic Stack과 Lambda를 활용한 데이터 모니터링 시스템 구축  Spring + Logstash + Elasticsearch + Kibana 기본 셋팅  ELK Stack 개념정리]]></content>
+      <categories>
+        
+          <category> Spring Framework </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Spring Boot </tag>
+        
+          <tag> Spring Framework </tag>
+        
+          <tag> Java </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Spring Boot 설정파일]]></title>
+      <url>/articles/2019-01/spring-boot-configurations</url>
+      <content type="text"><![CDATA[Spring Boot의 큰 장점 중 하나는 기존 Spring을 이용하면서 해야했던 설정들 (XML방신이던, Java방식이던)을 자동으로 진행해주는 것이라 생각합니다. (AutoConfiguration)이를 통해 개발자는 설정파일 (application.property, yml 파일 등)에 간단한 설정정보들만 입력해주는 수준으로도 Spring의 다양한 기능들을 쉽게 이용할 수 있습니다.이렇게 설정할 수 있는 설정의 종류는 굉장히 다양하며 예를들어 Datasource 설정의 경우에만도 아래와 같이 굉장히 많은 옵션들을 설정할 수 있습니다.# DATASOURCE (DataSourceAutoConfiguration &amp; DataSourceProperties)spring.datasource.continue-on-error=false # Whether to stop if an error occurs while initializing the database.spring.datasource.data= # Data (DML) script resource references.spring.datasource.data-username= # Username of the database to execute DML scripts (if different).spring.datasource.data-password= # Password of the database to execute DML scripts (if different).spring.datasource.dbcp2.*= # Commons DBCP2 specific settingsspring.datasource.driver-class-name= # Fully qualified name of the JDBC driver. Auto-detected based on the URL by default.spring.datasource.generate-unique-name=false # Whether to generate a random datasource name.spring.datasource.hikari.*= # Hikari specific settingsspring.datasource.initialization-mode=embedded # Initialize the datasource with available DDL and DML scripts.spring.datasource.jmx-enabled=false # Whether to enable JMX support (if provided by the underlying pool).spring.datasource.jndi-name= # JNDI location of the datasource. Class, url, username &amp; password are ignored when set.spring.datasource.name= # Name of the datasource. Default to "testdb" when using an embedded database.spring.datasource.password= # Login password of the database.spring.datasource.platform=all # Platform to use in the DDL or DML scripts (such as schema-${platform}.sql or data-${platform}.sql).spring.datasource.schema= # Schema (DDL) script resource references.spring.datasource.schema-username= # Username of the database to execute DDL scripts (if different).spring.datasource.schema-password= # Password of the database to execute DDL scripts (if different).spring.datasource.separator=; # Statement separator in SQL initialization scripts.spring.datasource.sql-script-encoding= # SQL scripts encoding.spring.datasource.tomcat.*= # Tomcat datasource specific settingsspring.datasource.type= # Fully qualified name of the connection pool implementation to use. By default, it is auto-detected from the classpath.spring.datasource.url= # JDBC URL of the database.spring.datasource.username= # Login username of the database.spring.datasource.xa.data-source-class-name= # XA datasource fully qualified name.spring.datasource.xa.properties= # Properties to pass to the XA data source.Spring 공식 홈페이지에서 다양한 설정들을 가이드로 제공하고 있습니다.위 가이드 설정파일에 주석으로도 적혀있고 당연한 얘기지만 위 설정파일의 전체내용을 복사하지 말라고 명시되어있습니다.본인이 사용하는 기술에 대해 필요한 설정 위주로 찾아서 추가해주면 보다 더 좋은 설정을 진행할 수 있을 것 같습니다.]]></content>
+      <categories>
+        
+          <category> Spring Framework </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Spring Boot </tag>
+        
+          <tag> Spring Framework </tag>
+        
+          <tag> Java </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Spring Boot Build 시 MyBatis Type Alias 미적용 문제]]></title>
+      <url>/articles/2018-12/spring-boot-mybatis-problem</url>
+      <content type="text"><![CDATA[MyBatis를 이용하여 개발하면 주로 resultType에 적어줄 타입에 alias를 적용하여 사용한다.보통 다음과 같이 SqlSessionFactoryBean을 정의할 때 setTypeAliasesPackage 메소드를 이용하여 정의한다.SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();sessionFactory.setTypeAliasesPackage("packages for alias");헌데 위와같은 방식으로 alias를 적용한 후 IDE를 통해 실행시키면 문제없이 잘 실행되는데배포를 위해 jar로 빌드한 후 실행하자  ClassNotFoundException 이 발생하며 alias된 타입들을 못찾는 문제가 발생했다.​때문에 Mybatis에서 Alias 처리하는 부분을 분석해보니public &lt;T&gt; Class&lt;T&gt; resolveAlias(String string) {    try {        if (string == null) {            return null;        }        String key = string.toLowerCase(Locale.ENGLISH);        Class&lt;T&gt; value;        if (TYPE_ALIASES.containsKey(key)) {            value = (Class&lt;T&gt;) TYPE_ALIASES.get(key);        } else {            value = (Class&lt;T&gt;) Resources.classForName(string);        }        return value;    } catch (ClassNotFoundException e) {        throw new TypeException("Could not resolve type alias '" + string + "'.  Cause: " + e, e);    }}TYPE_ALIASES (HashMap&lt;String, Class&lt;?» ) 에 등록되어 있으면 해당 Class를 반환하고 그렇지 않으면 클래스로더를 통해 클래스를 로딩한도록 되어있는데, 오류 로그를 통해 확인되는 부분은 일단 IDE에서는 잘만 찾아지는 alias들이 TYPE_ALIASES에 등록이 안되어 있다는 점이었다.때문에 이번엔 alias를 등록하는 부분을 살펴봤다..public ResolverUtil&lt;T&gt; find(Test test, String packageName) {    String path = getPackagePath(packageName);    try {        List&lt;String&gt; children = VFS.getInstance().list(path);        for (String child : children) {            if (child.endsWith(".class")) {                addIfMatching(test, child);            }        }    } catch (IOException ioe) {        log.error("Could not read package: " + packageName, ioe);    }    return this;}파라미터로 전달된 패키지 이하 디렉토리의 모든 리소스를 대상으로 확장자가 class인 파일 중 특정 조건에 부합하는 클래스들을 alias로 등록하도록 구현되어있다. (특정 조건은 지정된 슈퍼타입에 대해 isAssignableFrom로 체크, 지정되어있지 않으면 Object클래스가 슈퍼타입)그리고, 리소스에 접근할 때 VFS라는 클래스를 통해 특정 경로의 리소스 목록을 얻어오도록 되어있다..​VFS는 Virtual File System의 약자로 실제 파일 시스템 위, 응용 프로그램 계층에 추상화된 가상 파일시스템을 의미하는 용어인 것 같은데 위 소스코드 문맥상 Mybatis에서 파일 등 시스템 리소스에 접근할 때 이용하는 클래스 인 것 같았다. (조금 더 자세히 조사해볼 필요있음..)​여튼 위 클래스에 대한 구현체가 아무런 지정을 하지 않으면 DefaultVFS라는 구현체가 사용되는데 IDE 위에서 구동될 때는 target 디렉토리 이하 classes 파일들에 문제없이 접근할 수 있으나 Spring Boot프로젝트 배포한 jar에서는 형태가 달라 classes에 접근이 안되어 alias들이 등록되지 않았던 것이다.이렇게 원인을 찾은 후 검색을 해보니 역시나…….SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();sessionFactory.setVfs(SpringBootVFS.class);  // Spring Boot 전용 VFS 사용하도록 지정sessionFactory.setTypeAliasesPackage("packages for alias");위처럼 Spring Boot 용 VFS 구현체를 지정해주는 아주 간단한 방법으로 해결할 수 있었다.]]></content>
+      <categories>
+        
+          <category> Spring Framework </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Spring Boot </tag>
+        
+          <tag> MyBatis </tag>
+        
+          <tag> VFS </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결]]></title>
+      <url>/articles/2018-11/problems-with-lombok</url>
+      <content type="text"><![CDATA[Lombok 버전 : 1.16.22스프링 Boot 프로젝트 배포를 위해 Maven Build 를 수행하던 중 Lombok 어노테이션을 적용해둔 도메인 클래스에서 컴파일 오류가 발생했다.구글링 해본 결과 @Data와 @NoArgsConstructor를 같이 쓸 때 발생하는 버그로 지금은 fix된듯 하다.Github에 등록된 Lombok 이슈 확인@NoArgsConstructor@Datapublic class SomeDomain {    ....}]]></content>
+      <categories>
+        
+          <category> Java </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Lombok </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[이클립스 클래스 다이어그램 플러그인 ObjectAid 설치]]></title>
+      <url>/articles/2018-11/install-object-aid-plugin</url>
+      <content type="text"><![CDATA[      Help &gt; Install New Software로 Install 팝업창 진입    Add 버튼 클릭하여 Name : ObjectAid UML Explorer, Location :  http://www.objectaid.com/update/current 입력      Pending이 완료되면 체크 박스 선택 후 Next 버튼으로 설치하면 설치 완료    File &gt; New &gt; Other 에서 ObjectAid Class Diagram 검색 후 클릭      Folder는 Browse 버튼을 클릭하여 다이어그램을 만들 프로젝트 생성, Name은 다이어그램 파일명 입력후 Finish 버튼 클릭하면 Name으로 빈 다이어그램이 생성됨.    프로젝트 탐색기의 Java 클래스 파일을 다이어그램에 Drag하여 놓으면 자동으로 다이어그램이 생성된다.]]></content>
+      <categories>
+        
+          <category> Java </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Eclipse </tag>
+        
+          <tag> ObjectAid </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[리눅스 여러 파일 내용 하나로 합치기]]></title>
+      <url>/articles/2018-11/merge-file-in-linux</url>
+      <content type="text"><![CDATA[리눅스 쉘에서 여러 파일을 하나로 합치는 방법을 소개합니다.ls [파일명패턴] | xargs cat &gt; [결과파일명]위 명령어 한 줄로 [파일명패턴]에서 선택되어지는 파일들의 내용을 [결과파일명] 파일로 쓸 수 있습니다.동작 방법을 살펴보면ls [파일명패턴] 을 통해 먼저 대상 파일들을 선택합니다.ls 명령은 디렉토리에 존재하는 요소(파일, 디렉토리)들의 정보(파일명, 권한, 수정시간 등) 목록을 표준출력으로 출력하는 명령어로, 아무 옵션없이 실행하면 파일명들만 출력하게 됩니다.ls 명령을 통해 출력된 파일명 목록을 |(파이프)를 통해 뒤에 나오는 명령어로 전달합니다.|(파이프)는 이전 명령어의 실행 결과를 다음 명령어의 입력으로 사용할 때 활용됩니다.다음은 xargs cat 입니다.xargs는 앞 명령어의 실행결과를 다음 명령어의 인자로 사용할 수 있도록 해줍니다.즉 앞의 ls 명령어 실행결과가 xargs 다음명령어인 cat의 인자로 사용되는 것이지요.만약 ls 명령어의 실행결과가 file1 file2 file3 이렇다면 아래 명령어처럼 수행되는 것입니다.cat file1 file2 file3cat은 인자로 전달된 파일들의 내용을 표준출력으로 출력하는 명령어입니다.이 명령어의 결과를 &gt; (출력 리다이렉션) 으로 결과파일로 써줌으로써 각 파일들의 내용이 합쳐진 하나의 결과파일이 생성되게 됩니다.파이프, 출력 리다이렉션 등 리눅스 명령어의 강력함을 다시한번 느끼게 되는 계기가 되었습니다.]]></content>
+      <categories>
+        
+          <category> Unix/Linux </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Unix/Linux </tag>
+        
+          <tag> bash </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Spring ORM (Hibernate) 설정]]></title>
+      <url>/articles/2018-10/spring-orm-hibernate-settings</url>
+      <content type="text"><![CDATA[보통 스프링 프레임워크로 웹 프로젝트 설정 시 Web MVC 관련 설정과 Service레이어 이하 애플리케이션 관련 설정을 분리하여 설정합니다.이 포스트는 Spring 프레임워크 환경에서 JPA를 사용하기 위한 애플리케이션 관련 필수 설정을 다룹니다.—&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;beans xmlns="http://www.springframework.org/schema/beans"       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"&gt;    &lt;!-- 1. 어노테이션(@Transactional) 기반 트랜잭션 매니저 활성화 --&gt;    &lt;tx:annotation-driven/&gt;    &lt;!-- 2. 애플리케이션에서 사용되는 컴포넌트 스캔 패키지 설정 --&gt;    &lt;context:component-scan base-package="my.webservice.biz"&gt;        &lt;context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/&gt;    &lt;/context:component-scan&gt;    &lt;!-- 3. 데이터소스(커넥션풀) 설정 - Hikari커넥션 풀 이용 --&gt;    &lt;bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"&gt;        &lt;property name="poolName" value="springHikariCP" /&gt;        &lt;property name="connectionTestQuery" value="SELECT 1" /&gt;        &lt;property name="dataSourceClassName" value="${hibernate.dataSourceClassName}" /&gt;        &lt;property name="maximumPoolSize" value="${hibernate.hikari.maximumPoolSize}" /&gt;        &lt;property name="idleTimeout" value="${hibernate.hikari.idleTimeout}" /&gt;        &lt;property name="dataSourceProperties"&gt;            &lt;props&gt;                &lt;prop key="url"&gt;${dataSource.url}&lt;/prop&gt;                &lt;prop key="user"&gt;${dataSource.username}&lt;/prop&gt;                &lt;prop key="password"&gt;${dataSource.password}&lt;/prop&gt;            &lt;/props&gt;        &lt;/property&gt;    &lt;/bean&gt;    &lt;bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close"&gt;        &lt;constructor-arg ref="hikariConfig" /&gt;    &lt;/bean&gt;    &lt;!-- 4. 트랜잭션매니저 설정 --&gt;    &lt;bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"&gt;        &lt;property name="dataSource" ref="dataSource"/&gt;    &lt;/bean&gt;    &lt;!-- 5. JPA 예외 추상화 AOP 설정 --&gt;    &lt;bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/&gt;    &lt;!-- 6. 엔티티매니저팩토리 설정 --&gt;    &lt;bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"&gt;        &lt;property name="dataSource" ref="dataSource"/&gt;        &lt;property name="packagesToScan" value="package.for.entity"/&gt; &lt;!-- @Entity 탐색 시작 위치 --&gt;        &lt;property name="jpaVendorAdapter"&gt;            &lt;!-- 하이버네이트 구현체 사용 --&gt;            &lt;bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/&gt;        &lt;/property&gt;        &lt;property name="jpaProperties"&gt; &lt;!-- 하이버네이트 상세 설정 --&gt;            &lt;props&gt;                &lt;prop key="hibernate.dialect"&gt;org.hibernate.dialect.H2Dialect&lt;/prop&gt; &lt;!-- 방언 --&gt;                &lt;prop key="hibernate.show_sql"&gt;true&lt;/prop&gt;                   &lt;!-- SQL 보기 --&gt;                &lt;prop key="hibernate.format_sql"&gt;true&lt;/prop&gt;                 &lt;!-- SQL 정렬해서 보기 --&gt;                &lt;prop key="hibernate.use_sql_comments"&gt;true&lt;/prop&gt;           &lt;!-- SQL 코멘트 보기 --&gt;                &lt;prop key="hibernate.id.new_generator_mappings"&gt;true&lt;/prop&gt;  &lt;!-- 새 버전의 ID 생성 옵션 --&gt;                &lt;prop key="hibernate.hbm2ddl.auto"&gt;create&lt;/prop&gt;             &lt;!-- DDL 자동 생성 --&gt;            &lt;/props&gt;        &lt;/property&gt;    &lt;/bean&gt;&lt;/beans&gt;1. 어노테이션(@Transactional) 기반 트랜잭션 매니저 활성화스프링 프레임워크에서 제공하는 어노테이션 기반 트랜잭션 매니저를 활성화합니다. @Transactional이 붙은 클래스, 메소드에 트랜잭션을 적용해줍니다.2. 애플리케이션에서 사용되는 컴포넌트 스캔 패키지 설정보통 @Controller는 Web MVC영역 설정으로 잡히도록 하기 때문에 @Controller를 제외하고 스캔하도록 설정3. 데이터소스(커넥션풀) 설정 - Hikari커넥션 풀 이용커넥션 풀 설정입니다. 이 포스트에서는 HikariCP를 이용했으며 다른 커넥션풀을 이용해도 무방합니다.4. 트랜잭션 매니저 설정그동안 MyBatis 등 프레임워크을 사용할 땐 DataSourceTransactionManager를 많이 사용해왔는데, JPA를 이용할 때엔 JpaTransactionManager를 설정해줘야한다고 합니다.JpaTransactionManager는 DataSourceTransactionManager가 하는 일을 수행하기 때문에 JPA가 아닌 타 프레임워크(MyBatis, JdbcTemplate 등) 과도 사용이 가능합니다.5. JPA 예외 추상화 AOP 설정JPA에서 발생한 예외 (JPA예외)를 스프링에서 추상화한 예외로 변환하는 역할을 하는 AOP를 적용합니다.6. 엔티티매니저팩토리 설정엔티티매니저팩토리 설정은 직관적으로 이해할 수 있습니다. 다만 Java SE 환경에서는 META-INF/persistence.xml 파일을 자동인식하여 엔티티매니저팩토리를 설정했지만  스프링 프레임워크에서는 이와같이 스프링다운 방식대로 엔티티매니저팩토리를 하나의 빈으로 설정하여 persistence.xml없이 사용할 수 있습니다.  자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> Hibernate </tag>
+        
+          <tag> Spring ORM </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[JSON 샘플 데이터 제공 사이트 소개]]></title>
+      <url>/articles/2018-10/json-sample-online</url>
+      <content type="text"><![CDATA[개발하다보면 JSON 샘플 데이터가 필요한 경우가 자주 있습니다.  JSONPlaceholder위 사이트에서는 게시글, 댓글, 사진 등 다양한 컨셉의 샘플 데이터를 제공하며 사진의 경우 image 주소까지 제공하여 편리하게 사용할 수 있습니다.사용방법은 다음과 같이 아주 간단합니다.—fetch('https://jsonplaceholder.typicode.com/comments')    .then(response =&gt; response.json())    .then(json =&gt; console.log(json));콘솔에 comments(댓글) API로 제공되는 500개의 샘플 데이터가 출력되는 것을 확인할 수 있습니다.백엔드가 구축되어있지 않은 상태에서 프론트엔드 개발 시 유용하게 사용할 수 있을 것 같습니다.]]></content>
+      <categories>
+        
+          <category> etc. </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> FrontEnd </tag>
+        
+          <tag> JSON </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[VSCode로 Vue개발 시 팁]]></title>
+      <url>/articles/2018-10/tips-of-developing-vue-with-vscode</url>
+      <content type="text"><![CDATA[싱글 파일 컴포넌트를 작성하기 위해 새로은 .vue 파일을 생성한 후scaffold라고 입력한 후 엔터를 치면&lt;template&gt;&lt;/template&gt;&lt;script&gt;export default {}&lt;/script&gt;&lt;style&gt;&lt;/style&gt;위와 같은 코드를 자동완성해준다.]]></content>
+      <categories>
+        
+          <category> Vue </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Vue </tag>
+        
+          <tag> scaffold </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[JPA 객체 연관관계 설정]]></title>
+      <url>/articles/2018-10/jpa-object-relations-setting</url>
+      <content type="text"><![CDATA[@ManyToOne다대일(N:1) 관계 매핑 정보다.* 주요속성| 속성명 | 의미 ||—|:—:|| optional | false로 설정 시 연관된 엔티티가 항상 있어야한다 (기본값 : true) || fetch | 글로벌 Fetch 전략을 설정한다 || cascade | 영속성 전이 기능을 사용한다 || targetEntity | 연관된 엔티티의 타입 정보를 설정한다. (거의 사용안함) |@JoinColumn외래 키를 매핑할 때 사용한다.* 주요속성            속성명      의미                  name      매핑할 외래키 이름 (기본값 : 필드명 + _ + 참조하는 테이블의 기본 키 컬럼명)              referencedColumnName      외래 키가 참조하는 대상 테이블의 컬럼명 (기본값 : 참조하는 테이블의 기본 키 컬럼명)              foreignKey      테이블을 생성할 때만 사용하는 속성으로 외래 키 제약조건을 직접 지정할 수 있다      단방향 관계를 매핑을 할 때 다대일(@ManyToOne) 또는 일대일(@OneToOne) 중 어떤 것을 사용할 지는 반대편 관계에 달려있다.반대 편이 일대다(@OneToMany)면 다대일(@ManyToOne), 반대편이 일대일(@OneToOne)이면 일대일(@OneToOne)엔티티 양방향 매핑 규칙사실 테이블에서는 하나의 외래키를 통해 두 테이블의 연관관계를 관리한다.하지만 객체는 단방향 관계 2개를 사용하여 두 객체간 연관관계를 관리한다.JPA서는 연관관계의 주인을 정함으로써 이 문제를 해결한다.테이블의 외래키를 관리하는 엔티티를 연관관계의 주인이라 하고 외래키를 보유한 테이블이 연관관계의 주인이 되어야한다.주인이 아닌 엔티티는 mappedBy 속성을 이용해 주인을 지정해야한다.연관관계의 주인만이 외래 키에 영향을 줄 수 있다. 때문에 주인이 아닌 엔티티를 통해 add등을 수행해도 INSERT 되지 않는다.오직 연관관계의 주인만이 연관관계 설정에 영향을 줄 수 있다.하지만 순수 객체의 상태에서는 이야기가 다르다.주인이 아닌 측에서 외래키에 영향을 줄 수 없다고 관계를 맺어두지 않으면 DB에는 잘 들어갈 지라도 객체상태에서는 사용이 불가능한 경우가 있다.때문에 양방향 관계가 설정된 엔티티들을 사용할땐 양 쪽 둘다 연관관계를 맺어주자.Team (팀) / Member (회원)Team team = new Team();team.setTeamName("T1");entityManager.persist(team);Member m = new Member();m.setMemberName("M1");m.setTeam(team);	// 회원 -&gt; 팀 연관관계 설정entityManager.persist(m);위 코드에서는 회원 -&gt; 팀으로의 방향으로만 연관관계를 설정했다.하지만Team team = new Team();team.setTeamName("T1");entityManager.persist(team);Member m = new Member();m.setMemberName("M1");m.setTeam(team);          // 회원 -&gt; 팀 연관관계 설정team.getMembers().add(m); // 팀 -&gt; 회원 연관관계 설정 (실제 JPA 수행로직엔 영향 주지않음)entityManager.persist(m);위와 같이 양방향 연관관계를 모두 맺어주어 순수 객체 상태에서도 안전하게 사용가능한 상태로 만들어 주는것이 좋다.그리고 보통 위 처럼 양 쪽 다 신경쓰는 경우 실수로 지정하지 않는 경우가 발생할 수 있다.때문에 연관관계 주인 측에서 완벽하게 맺어주도록 지정하는 것이 좋다.Member classpublic void setTeam(Team team) {    this.team = team;            // 회원 -&gt; 팀    team.getMembers().add(this); // 팀 -&gt; 회원}위 처럼 연관관계 편의 메소드를 작성하여 실수를 방지할 수 있다.하지만 위 코드에도 치명적인 문제가 있다.team의 members는 연관관계의 주인이 아니기 때문에 새 팀이 설정될 때 영속성 컨텍스트가 flush되지 않으면 team의 members 리스트 안에 자신이 남아 있는 문제가 발생한다.public void setTeam(Team team) {    // 현재 소속팀이 있으면 해당 팀의 회원목록에서 자신을 제거    if (this.team != null) {        this.team.getMembers().remove(this);    }    this.team = team;            // 회원 -&gt; 팀    team.getMembers().add(this); // 팀 -&gt; 회원}위 처럼 로직을 추가하여 보다 견고하게 양방향 연관관계를 관리하도록 할 수 있다.정리하면…  단방향 매핑을 통해 테이블 - 객체의 연관관계 매핑은 완료된다.  단방향 매핑을 양방향 매핑으로 만들면 역방향 객체 그래프 탐색 기능이 추가된다.  양방향 연관관계를 매핑하려면 객체에서 양쪽 방향을 모두 관리해야한다.  기본적으로 단방향 매핑을 사용하고 객체 그래프 탐색 기능이 필요할 때 양방향을 사용하도록 코드를 추가해도 무방하다.  자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> ORM </tag>
+        
+          <tag> Hibernate </tag>
+        
+          <tag> 객체연관관계매핑 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[객체 연관관계 VS 테이블 연관관계]]></title>
+      <url>/articles/2018-10/object-relations-table-relations</url>
+      <content type="text"><![CDATA[ORM에서 가장 어려운 부분으로 손꼽히는 것은 객체의 연관관계를 표현하는 것이다.즉 테이블의 연관관계를 엔티티에 매핑하여 표현하는 것을 의미한다.연관관계 핵심 키워드방향단방향, 양방향이 있다. 예를들어 회원과 팀이라는 관계가 있을때 회원 -&gt; 팀 또는 팀 -&gt; 회원이런 식으로 한 쪽으로만 참조하는 것을 단방향 관계라 하고 회원 -&gt; 팀 -&gt; 회원 상호 참조하는 것을 양방향이라 한다.방향은 객체에만 존재하며 테이블간 관계는 항상 양방향이다.다중성[일대다(1:N), 다대일(N:1), 일대일(1:1), 다대다(N:M)]이 있다. 예를들어 팀과 회원의 관계에서한 팀에 여러 회원이 있을수있으니 팀과 회원은 일대다 관계로 볼 수 있다. 반대로 여려 명의 회원이 한 팀에 속하니 회원과 팀은 다대일이다.즉 [팀 1 : N 회원]으로 표현할수있다.연관관계의 주인객체를 양방향 연관관계로 만들면 연관관계의 주인을 정해야한다.객체 연관관계 VS 테이블 연관관계객체 연관관계는 참조(주소)로 연관관계를 맺는다. 테이블 연관관계는 외래 키로 연관관계를 맺는다.객체는 연관된 데이터를 조회할 때 참조를 사용 (object.getRefer()…)한다.테이블은 연관된 데이터를 조회할 때 JOIN을 사용한다.참조를 사용하는 객체의 연관관계는 단방향이다. 외래키를 사용하는 테이블의 연관관계는 양방향이다. (A JOIN B 반대로 B JOIN A 도 가능) 객체를 양방향 참조로 만들려면 단방향 연관관계를 2개 만들어야한다.  자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> ORM </tag>
+        
+          <tag> 연관관계 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[엔티티(Entity) 테이블(Table) 매핑]]></title>
+      <url>/articles/2018-10/entity-table-mapping</url>
+      <content type="text"><![CDATA[엔티티 매핑@Entity : JPA가 관리하는 엔티티임을 알림@Table name : 테이블명        uniqueConstraints : 유니크 제약조건                        @UniqueConstraint(columnNames 유니크 제약 컬럼명, name 제약명) @Column -&gt; 일반 컬럼 매핑 @Enumerate -&gt; Enum 타입 매핑@Temporal -&gt; Date 타입 매핑, default값으로 hibernate의 @UpdateTimestamp를 지정하면 시간이 자동으로 설정된다. @Lob -&gt; CLOB, BLOB 타입 매핑 기본키 매핑Oracle은 시퀀스오브젝트, MySQL은 AUTO_INCREMENT 등 DB마다 기본키 할당 방식은 다르다.JPA는 다음과 같은 방법들로 이 문제를 해결한다.1) 직접 할당기본 키를 애플리케이션에서 직접 할당한다. 즉 엔티티매니저를 통해 엔티티가 persist 되기 전에 설정하는 것을 의미한다.2) 자동 생성대리 키 사용 방식, @Id + @GeneratedValue 사용2-1) IDENTITY기본 키 생성을 데이터베이스에 위임한다. MySQL, PostgreSQL, SQL Server, DB2에서 사용이 가능하다.@GeneratedValue의 strategy를 GenerationType.IDENTITY로 설정한다.2-2) SEQUENCE데이터베이스 시퀀스를 사용해 기본키를 할당한다. PostgreSQL, Oracle, DB2, H2 데이터베이스에서 사용이 가능하다. @GeneratedValue의 strategy를 GenerationType.SEQUENCE로 설정한다.2-3) TABLE키 생성 테이블을 이용한다. @GeneratedValue의 strategy를 GenerationType.TABLE로 설정한다. 주로 사전에 시퀀스를 관리할 테이블을 만들어 둔후 엔티티에 @TableGenerator 를 이용해 시퀀스 관리 테이블을 매핑해주는 식으로 진행한다. @TableGenerator (name : generator명, table : 시퀀스 관리 테이블, pkColumnValue : 시퀀스명, allocationSize : 한번에 증가하는 시퀀스 크기) 이렇게 진행하면 pkColumnValue에 설정한 시퀀스명이 시퀀스 관리 테이블에 값으로 추가되고, @GeneratedValue의 generator에서 사용이 가능하다.2-4) AUTO데이터베이스 방언 (DIALECT)에 따라 자동 선택 되도록 하는 것으로, 데이터베이스 벤더에 의존적이지 않은 장점이있다.스키마 자동 생성 설정을 해둔 경우 전략에 따라 시퀀스, 테이블을 자동으로 생성하며 그렇지 않은 경우 미리 만들어두어야한다.IDENTITY나 SEQUENCE의 경우 데이터베이스에 의존하지만 TABLE의 경우 테이블을 이용하는 방식으로 모든 데이터베이스에서 사용 가능하다.직접 할당은 @Id만 사용하여 할 수 있고 자동 생성은 @GeneratedValue를 추가하여 원하는 키 생성방식을 선택하면 된다.참고로 키 생성 전략을 사용하려면 persistence.xml에 hibernate.id.new_generator_mappings속성이 true로 설정되어있어야한다.권장하는 식별자 선택 전략데이터베이스 기본 키는 다음 3가지 조건을 모두 만족해야한다.1. null값은 허용되지 않는다.2. 유일해야한다.3. 변해선 안 된다.테이블의 기본 키를 선택하는 전략은 크게 2가지가 있다.  자연 키 (natural key) : 비즈니스에 의미가 있는 키 (주민등록번호, 이메일, 전화번호 등)  대리 키 (surrogate key) : 비즈니스와 관련 없는 임의로 만들어진 키, 대체 키라고도 함 (시퀀스, auto_increment 등)자연 키보다는 대리 키를 권장한다.예를 들어 전화번호가 기본 키인 경우 전화번호가 없을 수도 있고 변할 수도 있다.주민등록번호의 경우 변하지 않고 null일 수도 없지만 정책의 변화 등 비즈니스의 변화에 영향을 받을 수 있다.때문에 비즈니스와 관련이 없는, 비즈니스의 변화에 영향을 받지 않는 대리 키 사용을 권장한다.  자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> Entity </tag>
+        
+          <tag> 엔티티 </tag>
+        
+          <tag> 매핑 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Expected linebreaks to be 'LF' but found 'CRLF' 오류 관련]]></title>
+      <url>/articles/2018-10/solution-for-vue-crlf-error</url>
+      <content type="text"><![CDATA[빌드 시 개행문자 관련 경고가 발생했다..eslintrc.js 파일의 rules에 ‘linebreak-style’을 0으로 하는 설정을 추가하는 것으로 해결했다.# .eslintrc.jsmodule.exports = {    ....    rules: {        'linebreak-style': 0,        ....    }}]]></content>
+      <categories>
+        
+          <category> Vue </category>
+        
+      </categories>
+      <tags>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Vue-CLI를 이용한 Vue프로젝트 생성]]></title>
+      <url>/articles/2018-10/create-vue-project-with-vue-cli</url>
+      <content type="text"><![CDATA[먼저 Vue-CLI 를 이용하기 위해서는 Node.js과 NPM이 설치되어있어야 한다.설치가 안된 경우 Node.js 및 NPM 설치 을 참고하여 설치할 수 있다. NPM을 이용하여 Vue-CLI 설치 (3.0.x) NPM이 설치되어있으면 아래 명령어로 Vue-CLI 를 매우 간단하게 설치할 수 있다.Vue-CLI 설치npm i -g @vue/cli버전 확인을 통해 정상설치 확인vue --version-g 옵션은 글로벌 패키지로 설치한다는 옵션으로 해당 PC 개발환경의 모든 프로젝트에서 사용이 가능하도록 하는 것이다.Vue-CLI를 이용하여 프로젝트 생성먼저 CMD창에서 프로젝트를 생성할 경로로 이동한다.만약 C:\work 디렉토리 밑에 생성하고 싶다면 cd C:\work 로 해당 경로로 이동하면 된다.해당 경로에서 다음 명령어를 입력한다.vue create [생성할 프로젝트 명]위 명령어를 입력하면 default 설정을 따를지 물어보는데 이는 생성 이후에도 변경 가능한 부분이므로 default를 선택한다.한창 생성이 진행되고 Successfully created project… 메시지가 보이면 생성이 완료된 것이다.디렉토리를 확인해보면 지정한 프로젝트명으로 디렉토리가 생성되있다.이제 NPM에 내장된 웹팩 개발 서버를 통해 간단히 실행해보자cd [프로젝트 디렉토리명]npm run serve위 명령어를 입력하면 개발서버가 구동되며 http://localhost:8080에 접속하면 generate된 프로젝트를 확인해볼수 있다.]]></content>
+      <categories>
+        
+          <category> Vue </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> NodeJS </tag>
+        
+          <tag> NPM </tag>
+        
+          <tag> VueCLI </tag>
+        
+          <tag> Vue </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Node.js 및 NPM 설치]]></title>
+      <url>/articles/2018-10/install-nodejs-and-npm</url>
+      <content type="text"><![CDATA[Node.js는 Javascript로 서버사이드 개발을 가능하게 해주는 Javascript 런타임으로 공식사이트에서는 다음과 같이 소개하고 있다.  Node.js®는 Chrome V8 JavaScript 엔진으로 빌드된 JavaScript 런타임입니다. Node.js는 이벤트 기반, Non 블로킹 I/O 모델을 사용해 가볍고 효율적입니다. Node.js의 패키지 생태계인 npm은 세계에서 가장 큰 오픈 소스 라이브러리 생태계이기도 합니다.NPM은 Node Package Manager 혹은 Node Package Modules의 약자로 Node.js 기반의 모듈을 모아둔 집합 저장소이다.Node.js / NPM 설치 (윈도우 기준)  https://nodejs.org/en/download/ 접속  LTS 탭에서 Windows Installer로 다운로드  다운받은 msi 파일 실행별도로 환경변수로 PATH를 잡아주거나 할 필요없이 msi 파일을 통해 한번에 설치가 가능하다.설치 확인을 위해 CMD창에서 다음 명령어를 실행해본다.# 설치된 Node.js 버전 확인node -v# 설치된 NPM 버전 확인npm -v]]></content>
+      <categories>
+        
+          <category> Vue </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> NodeJS </tag>
+        
+          <tag> NPM </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[QueryDSL 관련 pom.xml 오류]]></title>
+      <url>/articles/2018-10/query-dsl-error-on-pom</url>
+      <content type="text"><![CDATA[이클립스에서 QueryDSL로 생성한 Q도메인들을 인식하지 못하여 원인을 파악해보니 pom.xml 의 플러그인 설정에 다음과 같은 오류가 나고 있었다.&lt;plugin&gt;		&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;		&lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;		&lt;version&gt;2.4&lt;/version&gt;		&lt;executions&gt;				&lt;execution&gt;						&lt;id&gt;copy-dependencies&lt;/id&gt;						&lt;phase&gt;package&lt;/phase&gt;						&lt;goals&gt;								&lt;goal&gt;copy-dependencies&lt;/goal&gt;						&lt;/goals&gt;				&lt;/execution&gt;		&lt;/executions&gt;&lt;/plugin&gt;You need to run build with JDK or have tools.jar on the classpath.If this occures during eclipse build make sure you run eclipse under JDK as well ……구글링해보니 여러 해결방법이 보이는데 난 이클립스의 설정파일에 JVM경로를 명시해주는 것으로 해결했다.이클립스 설치경로에 eclipse.ini 파일에 아래 2줄을 추가했다. 주의할 점은 -vmargs 설정 전에 해줘야한다.-g 옵션은 글로벌 패키지로 설치한다는 옵션으로 해당 PC 개발환경의 모든 프로젝트에서 사용이 가능하도록 하는 것이다.-vmC:/Program Files/Java/jdk1.8.0_171/bin/javaw.exe경로는 본인의 Java 설치 경로에 맞게 지정하면 되며 설정 후 이클립스를 다시 시작한 후 프로젝트에서 Maven &gt; Update Project를 수행하니 오류가 없어지고 Q도메인이 인식됐다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> QueryDSL </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[영속성 컨텍스트 (Persistence Context) 란 (1)]]></title>
+      <url>/articles/2018-10/description-of-persistence-context-1</url>
+      <content type="text"><![CDATA[우리 말로 표현해보자면 엔티티를 영구 저장하는 환경으로 논리적인 개념에 가깝다.엔티티매니저로 엔티티를 저장하거나 조회하면 영속성 컨텍스트에 엔티티를 보관하고 관리한다.기본적으로 엔티티매니저가 생성될 때 하나의 영속성 컨텍스트가 만들어지며, 여러 개의 엔티티매니저가 하나의 영속성 컨텍스트에 접근할 수도 있다.persist 메소드를 “회원 엔티티를 저장한다”보다 정확히 얘기하면 “엔티티매니저를 사용해서 회원 엔티티를 영속성 컨텍스트에 저장한다”로 말할수있다.엔티티의 생명주기비영속 (new/transient) : 영속성 컨텍스트와 전혀 관계가 없는 순수한 객체인 상태영속 (managed) : 영속성 컨텍스트에 저장된 상태, 영속성 컨텍스트에 의해 관리되는 상태준영속 (detached) : 영속성 컨텍스트에 저장되었다가 분리된 상태삭제 (removed) : 삭제된 상태영속성 컨텍스트의 특징      영속성 컨텍스트 및 식별자영속성 컨텍스트는 엔티티를 식별자 값(@Id로 테이블의 기본키와 매핑한 값)으로 구분한다.때문에 영속상태의 엔티티기 식별자 값이 없으면 예외가 발생한다.        영속성 컨텍스트와 데이터베이스 저장엔티티를 저장하면 트랜잭션이 커밋될 때 영속성 컨텍스트의 내용이 데이터베이스에 반영된다. (flush)        1차 캐시엔티티매니저 내부에 존재한 Map으로 em.find로 조회할 때 우선적으로 캐시를 조회하고 없으면DB에서 조회한 후 1차캐시에 저장하여 영속상태로 만든다.        동일성 보장em.find로 같은 식별자의 엔티티를 조회 시 1차 캐시를 거쳐 조회되므로마치 스프링 Bean처럼 엔티티 객체는 동일한 객체임이 보장된다.        트랜잭션을 지원하는 쓰기 지연엔티티매니저를 통해 데이터를 변경하려면 항상 트랜잭션을 취득해야한다.엔티티매니저 내부에 SQL 저장소가 존재한다. persist메소드를 호출하면 우선 1차캐시에 저장되어 영속화되고INSERT문이 SQL저장소에 저장된다. 그리고 현재 트랜잭션이 커밋될 때 SQL저장소에 쌓인 쿼리를 수행하여 DB에 반영한다.트랜잭션이 커밋되면 엔티티매니저는 현재 영속성 컨텍스트를 flush하는데 이는 등록, 수정, 삭제한 엔티티를 DB에 반영하는 작업을 의미한다.즉 SQL저장소에 쌓인 쿼리를 수행하여 DB를 변경한 후 실제 DB 트랜잭션을 커밋한다.        변경 감지영속성 컨텍스트의 1차캐시엔 엔티티가 영속될 때 당시의 최초 상태를 저장되는데 이를 스냅샷이라 한다.그리고 영속성 컨텍스트가 flush될때 현재 엔티티 상태와 스냅샷을 비교하여 상태가 다르면 UPDATE SQL을 생성하여 SQL저장소에 저장한다.이 후 SQL저장소에 쿼리문이 수행될때 실제 DB에 반영된다.  기본적으로 JPA는 모든 필드를 UPDATE하는 전략을 사용하는데 이유는 다음과 같다.      모든 필드를 사용하면 수정 쿼리가 항상 같다. (같은 엔티티 기준, 바인딩되는 데이터는 다름)애플리케이션 로딩 시점에 수정 쿼리를 미리 생성하고 값만 변경하여 사용할 수 있다.        데이터베이스에 동일한 쿼리를 보내면 데이터베이스는 이전에 파싱된 쿼리를 재사용할 수 있다.  물론 필드가 많거나 저장되는 내용이 크면 성능 문제가 있을수 있는데, 하이버네이트의 경우 DinymicUpdate를 사용하여 수정된 필드에 대해서만  동적인 UPDATE문을 수행하도록 할 수도 있다.  자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> Hibernate </tag>
+        
+          <tag> PersistenceContext </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[영속성 컨텍스트 (Persistence Context) 란 (2)]]></title>
+      <url>/articles/2018-10/description-of-persistence-context-2</url>
+      <content type="text"><![CDATA[플러시는 영속성 컨텍스트의 변경 내용을 데이터베이스에 반영한다.플러시가 호출되면  변경감지가 동작해서 영속성 컨텍스트 내 모든 엔티티들을 대상으로 스냅샷과 비교해 변경사항을 찾고, 수정된 엔티티들은 UPDATE문을 생성하여 SQL저장소에 등록한다.      SQL저장소의 쿼리를 데이터베이스에 전송한다. (등록, 수정, 삭제 쿼리)영속성 컨텍스트를 플러시하는 방법은 3가지가 있다.        직접 호출 엔티티매니저의 flush 메소드를 호출하는 것으로 테스트, 다른 프레임워크와 JPA를 함께 사용할 때를 제외하곤 거의 사용하지 않는다.        트랜잭션 커밋 시 데이터베이스에 어떤 변경도 없이 트랜잭션만 커밋해서는 아무것도 바뀌는게 없다. 때문에 항상 데이터베이스 커밋 전엔 영속성 컨텍스트의 내용을 flush하여 변경 내용을 데이터베이스에 반영해야한다. JPA는 트랜잭션 커밋할 때 자동으로 flush메소드를 호출하도록 설계되어있다.    JPQL 쿼리 실행 시JPQL은 SQL로 변환되어 데이터베이스에서 조회하는 기능으로 persist되었어도 데이터베이스에 반영이 안되있으면 조회되지 않는다. 때문에 JPA는 JPQL이 실행되기전 영속성 컨텍스트를 flush하여 이런 문제를 예방한다.FlushModeType을 통해 엔티티매니저의 플러시모드를 변경할 수 있다.// FlushModeType.AUTO   : default로 커밋 또는 JPQL 실행 시 flush 호출// FlushModeType.COMMIT : 커밋할 때만 flush 호출em.setFlushMode(FlushModeType.COMMIT);  자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> Hibernate </tag>
+        
+          <tag> PersistenceContext </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Java 동등성과 동일성의 차이]]></title>
+      <url>/articles/2018-10/difference-of-equality-and-identity</url>
+      <content type="text"><![CDATA[동일성은 인스턴스가 실제로 같은 인스턴스임을 의미하는 바로 == 연산자를 통해 비교한다.동등성은 서로 다른 인스턴스이지만 가지고 있는 값이 같음을 의미하며 equals 메소드로 비교한다.자바에서 equals를 따로 구현하지 않은 경우 Object클래스의 equals메도스가 호출되며, Object메소드의 equals는 아래 코드처럼 동일성을 비교한다.public boolean equals(Object obj) {    return (this == obj);}때문에 동등성 비교를 위해서는 구현하는 클래스에 equals메소드를 Override하여 구현해야한다.핵심은 두 비교대상이 같은 인스턴스인지 아닌지 여부이다.]]></content>
+      <categories>
+        
+          <category> Java </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Java </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[EntityManagerFactory와 EntityManager]]></title>
+      <url>/articles/2018-10/entity-manager-factory-and-entity-manager</url>
+      <content type="text"><![CDATA[EntityManagerFactory (엔티티매니저팩토리)일반적으로 데이터베이스를 하나만 사용하는 애플리케이션은 EntityManagerFactory를 하나만 생성한다.META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 코드로 생성할 수 있다.EntityManagerFactory emf = Persistence.createEntityManagerFactory(설정한이름);EntityManagerFactory는 EntityManager를 생성하는 Factory클래스로 최초 생성 시 커넥션풀 생성을 포함한 여러 작업들을 수행하기때문에 생성비용이 비싸고, 때문에 애플리케이션 전반적으로 하나의 인스턴스를 공유하도록 설계되어있다.EntityManager (엔티티매니저)엔티티를 저장 / 수정 / 삭제 / 조회 하는 등 엔티티 관련된 모든 일을 처리할 때 직접적으로 사용되는 클래스이다.JPA 를 사용하여 개발할 땐 바로 이 EntityManager를 데이터베이스라고 생각하고 처리하면 된다.EntityManager는 EntityManagerFactory를 통해서 다음과 같은 코드로 생성할 수 있다.EntityManager em = emf.createEntityManager();EntityManager는 DB 연결이 필요한 시점에 커넥션풀에서 커넥션을 취득하는데, 이 때문에 스레드간 절대 공유되지 않도록 개발 시 유의해야한다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> Hibernate </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[기본적인 JPA 설정방법]]></title>
+      <url>/articles/2018-10/jpa-basic-setting</url>
+      <content type="text"><![CDATA[JPA 구현체로 Hibernate를 사용하기 위해 필요한 핵심 라이브러리가 존재한다.  hibernate-core : 하이버네이트 라이브러리  hibernate-entitymanager : 하이버네이트가 JPA 구현체로 동작하도록 JPA  표준을 구현한 라이브러리  hibernate-jpa-2.1-api : JPA 2.1 표준을 모아둔 라이브러리먼저 pom.xml에 다음과 같이 추가한다.&lt;!-- JPA, 하이버네이트 --&gt;&lt;dependency&gt;    &lt;groupid&gt;org.hibernate&lt;/groupid&gt;    &lt;artifactid&gt;hibernate-entitymanager&lt;/artifactid&gt;    &lt;version&gt;4.3.10.Final&lt;/version&gt;&lt;/dependency&gt;entitymanager를 dependecy 해주면 관련하여 core와 jpa-2.1-api를 함께 dependency로 잡아준다.다음 persistence.xml을 설정한다.persistence.xml 파일은 JPA 사용에 필요한 설정 정보를 관리하는 파일로 보통 클래스패스의 META-INF 디렉토리 밑에 위치시키면 별도의 설정 없이 JPA가 인식한다.      &lt;!--?xml version="1.0" encoding="UTF-8"?--&gt;&lt;persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1"&gt;    &lt;persistence-unit name="jpabook"&gt;        &lt;properties&gt;            &lt;!-- 데이터베이스 접속정보 --&gt;            &lt;property name="javax.persistence.jdbc.driver" value="org.h2.Driver"&gt;            &lt;property name="javax.persistence.jdbc.user" value="sa"&gt;            &lt;property name="javax.persistence.jdbc.password" value=""&gt;            &lt;property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"&gt;            &lt;property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"&gt;            &lt;!-- 옵션 --&gt;            &lt;property name="hibernate.show_sql" value="true"&gt;            &lt;property name="hibernate.format_sql" value="true"&gt;            &lt;property name="hibernate.use_sql_comments" value="true"&gt;            &lt;property name="hibernate.id.new_generator_mappings" value="true"&gt;            &lt;!--&lt;property name="hibernate.hbm2ddl.auto" value="create" /&gt;--&gt;        &lt;/property&gt;&lt;/property&gt;&lt;/property&gt;&lt;/property&gt;&lt;/property&gt;&lt;/property&gt;&lt;/property&gt;&lt;/property&gt;&lt;/property&gt;&lt;/properties&gt;    &lt;/persistence-unit&gt;&lt;/persistence&gt;DB접속정보 등은 본인의 상황에 맞게 변경하여 사용한다.javax.persistence.jdbc ~ 이하 설정들은 JPA 표준 속성이다.hibernate.dialect는 하이버네이트에서 사용하는 속성이다.즉 javax.persistence 로 시작하는 속성들은 특정 JPA 구현체에 종속되지 않고, hibernate로 시작하는 속성은 하이버네이트에서만 사용가능한 속성이다.hibernate.dialect 속성의 경우 하이버네이트가 어떤 데이터베이스 방언(dialect)를 사용할 것인지 지정해주는 속성으로 본인이 사용하는 DB의 종류를 설정해준다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> Hibernate </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[JPA 기본적인 CRUD 해보기]]></title>
+      <url>/articles/2018-10/crud-example-with-jpa-app</url>
+      <content type="text"><![CDATA[간단한 애플리케이션을 작성하여 기본적인 JPA CRUD를 수행해본다.public static void main(String[] args) {    // EntityManagerFactory 생성    EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");    // EntityManager 생성    EntityManager em = emf.createEntityManager();    // 트랜잭션 취득    EntityTransaction tx = em.getTransaction();    try {        // 트랜잭션 시작        tx.begin();        logic(em);        // 커밋        tx.commit();    } catch (Exception e) {        e.printStackTrace();        // 오류 발생 시 롤백        tx.rollback();    } finally {        // 로직 수행 후 EntityManager 종료        em.close();    }    // 애플리케이션 종료 시 EntityManagerFactory 종료    emf.close();}public static void logic(EmtityManager em) {    String id = "test";    Member member = new Member();    member.setMemberId(id);    member.setMemberName("사용자");    member.setAge(20);    // 등록 (C)    em.persist(member);    // 단 건 조회 (R)    Member findMember = em.find(Member.class, id);    System.out.println("findMember=" + findMember.getMemberName() + ", age=" + findMember.getAge());    // 목록 조회 (R)    List&lt;member&gt; members = em.createQuery("select m from Member m", Member.class).getResultList();    System.out.println("member size=" + members.size());    // 수정 (U)    member.setAge(25);    // 삭제 (D)    em.remove(member);}위 코드에서 핵심은 크게 3가지로 볼 수 있다.  엔티티 매니저 설정  트랜잭션 관리  비즈니스 로직1. 앤티티 매니저 설정1) EntityManagerFactory 생성 및 관리JPA를 사용하기 위해서는 우선 persistance.xml을 통해 설정을 진행한 후 EntityManagerFactory를 생성해야한다.JPA는 클래스패스의 META/INF/persistance.xml파일을 설정파일로 자동인식한다.      EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistance.xml에 설정된 persistence-unit 명);위 코드 한 줄로 손쉽게 EntityManagerFactory를 생성할 수 있다.EntityManagerFactory가 생성될 때 JPA 동작을 위한 기반 객체를 생성하고, JPA 구현체에 따라 DB 커넥션 풀 생성 등 비용이 크다.때문에 EntityManagerFactory는 애플리케이션 전체적으로 1번만 생성되고 공유되어야한다.또한 애플리케이션 자체가 종료될 시 close 해줘야한다.2) EntityManager 생성 및 관리      EntityManager em = emf.createEntityManager();EntityManagerFactory를 통해 EntityManager를 생성한다.JPA에서는 이 EmtityManager를 통해 DB에 등록/수정/삭제/조회하는 작업이 이루어진다.내부에서 DB 커넥션을 유지하고 있기 때문에 Thread간 공유하거나 재사용하면 안되며한 비즈니스 로직에 이용된 후 반드시 close 해줘야한다.2. 트랜잭션 설정JPA에서 등록, 수정, 삭제는 반드시 트랜잭션 내에서 이루어져야한다.EntityManager를 통해 트랜잭션을 취득할 수 있다.3. 비즈니스 로직개발자는 EntityManager를 가상의 데이터베이스로 취급하며 EntityManager에 CRUD를 행할수있다.1) 등록em.persist(entity);JPA는 전달된 entity의 타입(class)를 분석하여 테이블과 매핑정보를 얻은 후적절한 INSERT문을 생성 및 수행한다.2) 수정수정의 경우 좀 특이하다.JPA는 엔티티의 변경을 추적하는 기능이 있다.위 소스에서 처럼 Entity객체의 setter를 통해 값을 변경하면 JPA가 이를 감지해 UPDATE문을 수행한다.em.update 와 같은 update메소드가 따로 없다.3) 삭제em.remove(entity);EntityManager에 삭제할 Entity객체를 넘겨줌으로써 엔티티를 삭제할 수 있다.4) 조회- 단 건 조회em.find(Entity타입(class), ID);EmtityManager의 find메소드를 통해 단 건 조회가 가능하다.- 목록 조회TypedQuery&lt;Entity타입&gt; query = em.createQuery("JPQL", Entity타입(class);query.getResultList();JPA에서 목록 검색을 한다면 DB가 아닌 Entity를 대상으로 수행해야한다.하지만 DB의 모든 데이터를 읽어와 Entity로 변경한 후 검색을 한다는건 사실상 불가능하다.JPA는 JPQL(Java Persistence Query Language)라는 쿼리언어로 이 문제를 해결한다.JPQL은 일반 SQL과 거의 비슷한 문법으로 SELECT, FROM, WHERE, GROUP BY, HAVING, JOIN 등을 사용할 수 있다.JPQL이 Entity 객체를 대상으로 쿼리한다. 즉 클래스 및 클래스의 필드를 대상으로 쿼리한다.SQL은 데이터베이스 테이블을 대상으로 쿼리한다.얼핏보면 JPQL이 일반 데이터베이스에 쿼리하는 것으로 보일수 있으나 JPQL은 데이터베이스 테이블을 전혀 알지 못한다.위 소스에서 “select m from Member m” 이라는 JPQL이 사용됐는데 from Member의 Member는 MEMBER테이블이 아닌 Member 클래스를 의미한다.개발자가 작성한 JPQL을 JPA가 적절한 SQL로 변환하여 수행한다.  자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> Hibernate </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[JPA / ORM 이란?]]></title>
+      <url>/articles/2018-10/what-is-jpa-orm</url>
+      <content type="text"><![CDATA[JPA란JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다.ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미한다.즉 JPA는 자바의 객체와 관계형 데이터베이스를 매핑하는 표준 기술이다.ORM 프레임워크는 객체 / 관계형 데이터베이스 패러다임의 불일치를 개발자 대신 해결해준다.ORM 프레임워크 상에서는 개발자가 어떤 객체를 저장할 때 직접 INSERT문을 작성할 필요가 없다.객체를 자바 컬렉션에 저장하듯이 ORM 프레임워크에 저장하면  프레임워크가 대신 적절한 INSERT문을 생성하여 데이터베이스에 저장해준다.단순히 SQL만 생성해주는 수준에서부터 패러다임 불일치 문제를 전부 해결해주는 수준까지 다양한 ORM 프레임워크가 있으며성숙한 ORM 프레임워크로 대표적으로 Hibernate가 있다.다시 JPA를 이야기해보면 JPA는 ORM 기술 표준이라고 얘기했다.즉 자바에서 ORM 기술을 이용하기 위한 표준 API 명세, 인터페이스의 집합이라 할 수 있다.그리고 Hibernate, EclipseLink, DataNucleus 등은 이 JPA를 구현한 구현체들이다.JPA의 특징      생산성- 기본적으로 객체를 관계형데이터베이스에 저장 / 조회 등을 하는데 필요한 SQL을 개발자 대신 해줌으로써 지루하고 반복적인 CRUD용 SQL문을 개발자가 작성하지 않아도 된다.        유지보수- SQL문을 직접 작성하지 않음으로써 객체의 변화 ( 속성 추가 등) 이 있을때 모든 SQL 을 직접 수정할 필요가 없다. 단지 해당 엔티티에 속성을 수정하면 된다.        패러다임의 불일치 해결- 상속, 연관관계, 객체 그래프 탐색, 비교 등 관계형 데이터베이스와의 패러다임 불일치로 어려워지는 문제들을 해결해준다.        데이터 접근 추상화와 벤더 독립성- 관계형 데이터베이스는 Oracle, MySQL등 그 벤더에 따라 같은 기능이더라도 작성해야할 SQL 문이 다른 경우가 많다. JPA에서는 SQL을 직접작성하지 않으므로 개발자는 이러한 문제는 신경쓰지 않아도 되며 DB 벤더에 의존하지 않는 애플리케이션을 작성할 수 있다.        표준- JPA라는 표준을 구현한 ORM 프레임워크들을 사용하기 때문에 표준을 구현한 다른 프레임워크로 손쉽게 변경할 수 있다.    자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> Hibernate </tag>
+        
+          <tag> ORM </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[객체 모델과 관계형 데이터베이스 모델 차이]]></title>
+      <url>/articles/2018-10/difference-of-entity-db-model</url>
+      <content type="text"><![CDATA[JPA란객체 모델과 관계형 데이터베이스 모델은 지향하는 목적이 다르다. (패러다임의 불일치)- 객체지향 언어의 추상화, 상속, 다형성 등의 개념이 관계형 데이터베이스에는 없다.- 관계형 데이터베이스는 데이터 중심으로 구조화되어 있고, 집합적인 사고를 요구한다.문제는 이 패러다임의 차이를 극복하려고 개발자가 너무 많은 시간과 코드를 소비한다는 점이다.또한 애플리케이션에서 사용하는 객체를 객체지향 중심으로 설계할수록 이 패러다임의 차이는 커진다.때문에 객체 모델링은 힘을 잃고 점점 SQL에 의존적인 개발 데이터 중심(DB, 테이블, ..)의 모델로 변해간다.JPA는 이러한 패러다임의 불일치 문제를 해결해주고 개발자가 객체지향 언어에 맞게 정교한 객체 모델링을 유지할 수 있도록 도와준다.]]></content>
+      <categories>
+        
+          <category> JPA </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JPA </tag>
+        
+          <tag> Hibernate </tag>
+        
+          <tag> ORM </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[리눅스 tar, gz를 이용한 압축]]></title>
+      <url>/articles/2018-09/linux-tar-command</url>
+      <content type="text"><![CDATA[tar 명령어는 굉장히 많은 옵션을 사용할 수 있다.이 포스트에서는 주로 사용하는 패턴인 tar 압축 / 압축해제, tar.gz 압축 / 압축해제 명령어를 기술한다.  tar 압축 / 해제# [압축할 디렉토리]를 [압축파일명.tar]로 압축tar -cvf [압축파일명.tar] [압축할 디렉토리]# [압축파일명.tar]파일 압축해제tar -xvf [압축파일명.tar]  tar.gz 압축 / 해제# [압축할 디렉토리]를 [압축파일명.tar.gz]로 압축tar -zcvf [압축파일명.tar.gz] [압축할 디렉토리]# [압축파일명.tar.gz]파일 압축해제tar -zxvf [압축파일명.tar.gz]굉장히 간단하다.(c)vf / (x)vf =&gt; 압축 / 압축해제(z)cvf / (z)xvf =&gt; gzip 옵션 활성간략하게나마 옵션들의 의미를 설명하면 다음과 같다.            옵션      의미                  -c      tar 압축              -v      파일을 묶거나 풀 때 대상 파일 목록을 화면에 출력              -f      파일명 지정              -x      tar 압축해제              -z      gzip 옵션 활성      ]]></content>
+      <categories>
+        
+          <category> Unix/Linux </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Linux </tag>
+        
+          <tag> Unix </tag>
+        
+          <tag> tar </tag>
+        
+          <tag> gz </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[리눅스 스케쥴러 crontab 사용]]></title>
+      <url>/articles/2018-09/linux-scheduling-with-crontab</url>
+      <content type="text"><![CDATA[크론탭이란 특정 작업을 특정 시기마다 수행하고 싶을때 이용할 수 있는 리눅스 스케줄 기능입니다.크론탭의 기본 사용방법은 다음과 같습니다.기본 사용법# 크론탭 조회, 현재 머신에 등록된 스케줄 목록이 조회됩니다.crontab -l# 크론탭 등록 / 수정, vi편집기 형태로 크론탭 스케줄을 편집(edit)할 수 있습니다.crontab -e# 크론탭 삭제crontab -d스케쥴 작성법크론탭 표현식의 기본적인 형식은 다음과 같습니다.[분(0-59)] [시(0-23)] [일(1-31)] [월(1-12)] [요일(0-7)] [실행할 명령어][실행할 명령어]를 언제 실행할 지 앞의 5자리를 통해 결정하는 형태입니다.# 금요일 오전 1시 30분에 runbatch.sh을 실행30 1 * * 5 /app/script/runbatch.sh# 매 0분, 20분, 40분 마다 runbatch.sh를 실행0,20,40 * * * * /app/script/runbatch.sh# 매 분 마다 실행* * * * * /app/script/runbatch.sh# 보통 매 분마다 실행은 가독성을 위해 */1로 명시적으로 작성합니다.*/1 * * * * /app/script/runbatch.sh# 매 3분 마다 실행*/3 * * * * /app/script/runbatch.sh크론탭은 반드시 한 줄에 하나의 스케줄이 작성되야합니다. 즉 명령어 또한 한 줄이어야 하고 보통은 쉘 스크립트를 작성한 후 그 스크립트를 등록하는 방식을 이용합니다.로깅출력 리다이렉션을 통해 스케줄 실행 결과를 로그로 남길 수 있습니다.# runbatch.sh 수행로그를 runbatch.log 파일로 남김 (표준 출력만 해당)* * * * * /app/script/runbatch.sh &gt; /app/logs/runbatch.log# runbatch.sh 수행로그를 runbatch.log 파일로 남김 (표준 에러 출력을 표준 출력으로 리다이렉트)* * * * * /app/script/runbatch.sh &gt; /app/logs/runbatch.log 2&gt;&amp;1리눅스에서 1은 표준출력, 2는 표준에러출력을 의미하고 &gt; 를 통해 출력을 내보낼 수 있습니다. &gt;&gt; 를 하면 append하게됩니다.“2&gt;&amp;1” 의 의미는 “2(표준에러출력)을 1(표준출력)으로 내보낸다” 라는 의미를 갖습니다.]]></content>
+      <categories>
+        
+          <category> Unix/Linux </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Linux </tag>
+        
+          <tag> Unix </tag>
+        
+          <tag> crontab </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[HTTP 쿠키(Cookie) 란?]]></title>
+      <url>/articles/2018-08/desc-of-http-cookie</url>
+      <content type="text"><![CDATA[  HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.기본적으로 웹 서버는 다음과 같은 형태로 브라우저에 쿠키를 저장하라고 알릴 수 있다.Set-Cookie: &lt;CookieName&gt;=&lt;CookieValue&gt;HTTP/1.0 200 OKContent-type: text/htmlSet-Cookie: test=testvalueSet-Cookie: mycookie=good[page content]위 HTTP 응답을 받은 브라우저는 다음 해당 서버에 요청할 때 다음과 같이 보낼 것이다.GET /sample_page.html HTTP/1.1Host: www.example.orgCookie: test=testvalue; mycookie=good쿠키에 대한 유효기간은 서버에서 쿠기 송신 시 설정할 수 있고, 설정이 안된 경우는 브라우저를 닫는 순간 사라진다.Set-Cookie: test=testvalue; Expires=Wed, 21 Oct 2018 07:28:00 GMT;]]></content>
+      <categories>
+        
+          <category> IT기본 </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> HTTP </tag>
+        
+          <tag> Cookie </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[이클립스 단축키 모음]]></title>
+      <url>/articles/2018-08/eclipse-shortcuts</url>
+      <content type="text"><![CDATA[이클립스 단축키 잘 정리된 글이 있어 공유합니다. 출처실행Ctrl + F11 : 바로 전에 실행했던 클래스 실행소스 이동 관련Ctrl + 마우스커서(혹은 F3) : 클래스나 메소드 혹은 멤버를 상세하게 검색하고자 할때Alt + Left, Alt + Right : 이후, 이전Ctrl + O : 해당 소스의 메소드 리스트를 확인하려 할때F4 : 클래스명을 선택하고 누르면 해당 클래스의 Hierarchy 를 볼 수 있다.Alt + &lt;-(-&gt;) : 이전(다음) 작업 화면문자열 찾기Ctrl + K : 찾고자 하는 문자열을 블럭으로 설정한 후 키를 누른다.Ctrl + Shift + K : 역으로 찾고자 하는 문자열을 찾아감.Ctrl + J : 입력하면서 찾을 수 있음.Ctrl + Shift + J : 입력하면서 거꾸로 찾아갈 수 있음.Ctrl + F : 기본적으로 찾기소스 편집Ctrl + Space : 입력 보조장치(Content Assistance) 강제 호출 =&gt; 입력하는 도중엔 언제라도 강제 호출 가능하다.F2 : 컴파일 에러의 빨간줄에 커서를 갖져다가 이 키를 누르면 에러의 원인에 대한 힌트를 제공한다.Ctrl + L : 원하는 소스 라인으로 이동(로컬 히스토리 기능을 이용하면 이전에 편집했던 내용으로 변환이 가능하다.)Ctrl + Shift + Space : 메소드의 가로안에 커서를 놓고 이 키를 누르면 파라미터 타입 힌트를 볼 수 있다.Ctrl + D : 한줄 삭제Ctrl + W : 파일 닫기Ctrl + I : 들여쓰기 자동 수정Ctrl + Shift + / : 블록 주석(/* */)Ctrl + Shift + \ : 블록 주석 제거Ctrl + / : 여러줄이 한꺼번에 주석처리됨. 주석 해제하려면 반대로 하면 된다.Alt + Up(Down) : 위(아래)줄과 바꾸기Alt + Shift + 방향키 : 블록 선택하기Ctrl + Shift + Space : 메소드의 파라메터 목록 보기Ctrl + Shift + O : 자동으로 import 하기Ctrl + Shift + F4 : 열린 파일 모두 닫기Ctrl + M : 전체화면 토글Ctrl + Alt + Up(Down) : 한줄(블럭) 복사Ctrl + , or . : 다음 annotation(에러, 워닝, 북마크 가능)으로 점프Ctrl + 1 : 퀵 픽스F3 : 선언된 변수로 이동, 메소드 정의부로 이동Ctrl + T : 하이어라키 팝업창 띄우기(인터페이스 구현 클래스간 이동시 편리)Ctrl + O : 메소드나 필드 이동하기Ctrl + F6 : 창간 전환, UltraEdit 나 Editplus 의 Ctrl + Tab 과 같은 기능템플릿 사용sysout 입력한 후 Ctrl + Space 하면 System.out.println(); 으로 바뀐다.try 입력한 후 Ctrl + Space 하면 try-catch 문이 완성된다.for 입력한 후 Ctrl + Space 하면 여러가지 for 문을 완성할 수 있다.템플릿을 수정하거나 추가하려면 환경설정/자바/편집기/템플릿 에서 할 수 있다.메소드 쉽게 생성하기클래스의 멤버를 일단 먼저 생성한다.override 메소드를 구현하려면, 소스-&gt;메소드대체/구현 에서 해당 메소드를 체크한다.기타 클래스의 멤버가 클래스의 오브젝트라면, 소스-&gt;위임메소드 생성에서 메소드를 선택한다.에디터 변환에디터가 여러 파일을 열어서 작업중일때 Ctrl + F6 키를 누르면 여러파일명이 나오고 F6키를 계속 누르면 아래로 Ctrl + Shift + F6 키를 누르면 위로 커서가 움직인다.Ctrl + F7 : 뷰간 전환Ctrl + F8 : 퍼스펙티브간 전환F12 : 에디터로 포커스 위치기타 유용한 단축키 목록Ctrl + / : 주석 처리 – 한 라인/블록에 대해 주석 처리 (추가 및 제거) Ctrl + L : 특정 라인으로 이동Ctrl + F6 : Editor 창간의 이동Ctrl + F7 : View 이동 메뉴Ctrl + F8 : Prespectives 이동 메뉴Ctrl + D : 한라인 삭제 – 커서가 위치한 라인 전체를 삭제 한다.Ctrl + J : Incremental find 이클립스 하단 상태 표시줄에 Incremental find 라고 표시되어 한 글자자씩 누를 때 마다 코드내의 일치하는 문자열로 이동 , 다시 Ctrl + J 를 누르면 그 문자열과 일치 하는 부분을 위/아래 방향키로 탐색이 가능하다.Ctrl + N : 새로운 파일 / 프로젝트 생성Ctrl + 1 (빠른교정) – 문 맥에 맞게 소스 교정을 도와 준다. 변수를 선언하지 않고 썼을경우 빨간색 에러 표시되는데 이 단축키를 적용하면 변수에 맞는 선언이 추가 되도록 메뉴가 나타난다.Ctrl + 0 : 클래스 구조를 트리로 보기Ctrl + Space :  Cotent Assist – 소스 구문에서 사용 가능한 메소드, 멤버들의 리스트 메뉴를 보여준다.Ctrl + PageUp , Ctrl + PageDown : Edit 창 좌우 이동 – Edit 창이 여러개 띄워져 있을경우 Edit 창간의 이동 한다.Ctrl + Shift + Down : 클래스 내에서 다음 멤버로 이동Ctrl + Shift + M : 해당 객체의 Import 문을 자동 생성 – import 추가 할 객체에 커서를 위치 시키고 단축키를 누르면 자동적으로 import 문이 생성 Ctrl + Shift + O : import 문을 자동 생성 – 전체 소스 구문에서 import 안된 클래스의 import 문을 생성해 준다. Ctrl + Shift + G : 해당 메서드 / 필드를 쓰이는 곳을 표시 – View 영역에 Search 탭에 해당 메서드 / 필드를 사용하는 클래스를 표시 해준다.Alt + Shift + R : Refactoring (이름변경) – Refactoing 으로 전체 소스에서 이름변경에 의한 참조 정보를 변경해 준다.F3 : 선언 위치로 이동F11 : 디버깅 시작F8 : 디버깅 계속F6 : 디버깅 한줄씩 실행(step over)F5 : 디버깅 한줄씩 실행 함수 내부로 들어감 (step into)F12 : Editor 창으로 이동 (Debugging 등 자동적으로 포커스가 이동 됐을경우 편리)Alt + Up , Alt + Down : 줄 바꿈 – 해당 라인을 위 / 아래로 이동 시킨다.Alt + Shift + S : Source Menu – 소스메뉴 (Import 추가 , Comment 추가 , 각종 Generator 메뉴) 가 나타난다.Alt + Shift + Up : 블록설정 – 소스 코드를 블록 단위로 설정해 준다.Alt + Shift + Down : 블록해제 – 소스 코드를 블록 단위로 해제한다.Alt + Shift + J : 주석 생성 – 해당 메서드/클래스에 대한 주석을 템플릿을 생성해 준다.Alt + Shift + Z : Surround With 메뉴 – try / catch 문이나 for , do , while 등을 해당 블록에 감싸주는 메뉴가 나타난다.Ctrl + Shift + F : 코드 포맷팅 – 코드 내용을 문법 템플릿에 맞게 포맷팅(들여쓰기) 해준다.Ctrl + Alt + Down: 한줄 복사후 아래에 복사 넣기 – Copy&amp;Paste 대체하는 단축키. 커서가 위치한 라인을 복사해 밑줄에 생성해 준다.Ctrl + Shift +X : 대문자로 변환Ctrl + Shift + Y : 소문자로 변환Ctrl + Shift + L : 모든 단축키의 내용을 표시해준다.Ctrl + Shift + B : 현재 커서 라인에 Break point 설정Ctrl + Shift + T : 클래스 찾기]]></content>
+      <categories>
+        
+          <category> etc. </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Eclipse </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Java Stream API 소개]]></title>
+      <url>/articles/2018-08/java-stream-api</url>
+      <content type="text"><![CDATA[Stream API의 특징 및 기존 Collection과의 차이점  개발자가 직접 반복문을 작성하는 방식의 컬렉션과 달리 내부 반복(internal iteration)을 통해 작업한다.  재사용이 가능한 컬렉션과 달리 재사용이 불가능하다.  스트림은 원본 데이터를 변경하지 않는다.  스트림의 연산은 filter-map 기반의 API를 사용하여 지연(lazy)연산을 통해 성능을 최적화한다.  스트림은 parallelStream() 메소드를 통해 병렬 처리를 쉽게 할 수 있다.    Stream API 사용 메커니즘    스트림 생성 : 스트림을 생성한다.  중개 연산 : 생성된 스트림을 다른 스트림으로 변환하는 중간 연산으로, 하나 이상의 연산을 지정할 수 있다.  최종 연산 : 중개 연산이 종료된 스트림에서 결과를 어떤 방식으로 산출할 지에 대한 연산을 지정한다.someCollection.스트림생성().중개연산().최종연산();1. 스트림 생성스트림을 생성하는 방법은 정말 다양하다.스트림API는 주로 컬렉션 또는 배열에 담긴 데이터를 처리하는데 사용되며 아래 예시 코드에서는 배열, 컬렉션에서 스트림을 얻는 방법을 소개한다.// 가변인자 배열을 받아 스트림 생성Stream&lt;String&gt; stream = Stream.of("Java", "C", "Javascript");// 컬렉션에서 메소드 호출을 통한 스트림 생성List&lt;String&gt; list = getSomeList();Stream&lt;String&gt; stream = list.stream();2. 중개 연산중개연산 메소드는 함수형 인터페이스로 람다 표현식을 통해 간결하게 작성이 가능하다.아래 예시 코드에서 유용하게 사용하는 중개연산 메소드를 소개한다.// 데이터 필터링Stream&lt;String&gt; filteredStream = stream.filter(e -&gt; e.contains("Java"));// 데이터 변환Stream&lt;String&gt; processedStream = stream.map(e -&gt; e.toUpperCase());// 중복 값 제거 Stream&lt;String&gt; uniqueStream = stream.distinct();// 첫 번째 요소 조회Stream&lt;String&gt; first = stream.findFirst();// 정렬Stream&lt;String&gt; sortedStream = stream.sorted();Stream&lt;String&gt; sortedStream = stream.sorted(Comparator.comparing(String::length));다음과 같이 여러 중개연산을 조합하여 데이터를 손쉽게 처리할 수 있다.// 데이터 필터링 후 첫 번째 요소 조회Stream&lt;String&gt; filteredFirst = stream.filter(조건).findFirst();// 중복 값을 제거한 후 정렬Stream&lt;String&gt; uniqueSorted = stream.distinct().sorted(정렬조건);3. 최종연산 (결과 취합)중개연산을 통해 가공된 스트림을 원하는 결과로 추출하는 방법을 제공한다.// List로 변환List&lt;String&gt; processedList = stream.collect(Collectors.toList());// JoiningString joined = stream.collect(Collectors.joining());String joined = stream.collect(Collectors.joining(","));// 그룹핑 (분류함수에 따라 분류됨)Map&lt;String, List&lt;String&gt;&gt; groups = stream.collect(Collectors.groupingBy(분류함수));// 그룹핑 응용 (분류를 수행한 후 각 그룹별 건수를 집계한 Map으로 변환)Map&lt;String, Long&gt; groups = stream.collect(Collectors.groupingBy(분류함수, Collectors.counting()));이 포스트에서 소개한 방법들은 Stream API에서 제공하는 수많은 연산에 비하면 극히일부분입니다.기존 for, while 등 반복문, if문 등을 통해 각 종 컬렉션을 처리하던 방법에 비해 코드량을 상당량 줄여주고, 간결하게 만들어 줄 수 있는 방법들에 대해 알아봤습니다.하지만 Stream API 또한 개발자의 성향, 습관 등에 따라 오히려 가독성이 떨어질 가능성이 있으며 성능에 대해서도 전통적인 Collection보다 떨어지는 케이스도 존재한다고 합니다.Collection, Stream 각각의 특징에 따라 알맞게 사용하여 두 방식이 제공하는 강점들을 챙길수 있는 코딩을 하는 것이 가장 Best 하다는 생각이 듭니다.]]></content>
+      <categories>
+        
+          <category> Java </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Java8 </tag>
+        
+          <tag> StreamAPI </tag>
+        
+          <tag> Java Collections </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[HTTP Redirection 응답 보내기]]></title>
+      <url>/articles/2018-08/http-response-send-redirect</url>
+      <content type="text"><![CDATA[간단한 웹서버를 제작중인데, 기본적으로 요청한 URI에 해당하는 파일을 내려주는 기능을 하지만 미약하게나마 WAS의 역할을 할 수 있게끔 혼종스러운 느낌으로 간단하게 만들던 중…어플리케이션단에서 redirect응답을 주면 어떻게해야하나? 라는 고민이 생겼다.스프링mvc에서 개발할 땐 viewName앞에 “redirect:”를 붙히면 되고, Servlet에서는 HttpServletRequest의 redirect메소드를 호출하면 되는데.. 그보다 더 로우레벨에서는 어떻게 동작하지..?한 번도 위 기능들이 어떻게 동작하는지 생각해보지 않아 구글링해 본 결과 간단했다.응답코드를 302로 지정한 후 헤더에 “Location: REDIRECT_URL” 을 추가해주면 된다.[예시 HTTP Response]HTTP/1.1 302 Message for 302Location: /main위 HTTP 응답을 받은 브라우저는 알아서 REDIRECT_URL로 요청을 날린다.]]></content>
+      <categories>
+        
+          <category> IT기본 </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> HTTP </tag>
+        
+          <tag> 리다이렉트 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[이클립스 Organize Import 단축키 동작하지 않을때 조치방법]]></title>
+      <url>/articles/2018-08/solution-for-organize-import-not-work</url>
+      <content type="text"><![CDATA[이클립스 “Organize Imports” 기능은 클래스에 불필요한 import구문을 제거해주고, 필요한 구문은 자동으로 추가해주는 기능으로 보통 “Ctrl + Shift + O”를 눌러 실행시킨다.얼마 전 PC를 새로 맞추고 기쁜 마음으로 이클립스도 새로 깔고 코딩 중 Organize Imports 기능이 작동하지 않는 현상이 발생했다.  이클립스 단축키 설정화면으로 이동한다. ( Window &gt; Preferences &gt; General &gt; Keys )  “Organize Imports”를 검색한다.  검색된 단축키 설정의 Binding에 올바른 단축키가 지정되어있는지, When에 “Editing Java Source” 가 잘 지정되어있는지 확인한 후, 잘못설정된 게 있으면 수정 후 적용한다.  3번으로도 해결이 안되면, Binding에 “Ctrl + Shift + O”로 바인딩 된 다른 단축키가 있는지 확인해본 후 사용하지 않는다면 Unbind Command 버튼을 통해 단축키에서 해제한다.보통 여기까지하면 대부분 고쳐지는듯하다. 근데 여기까지 했는데도 안됐다…..그냥 쓰지 말까도 했지만 보통 자주 사용하는 기능이 안되니 너무 답답하여 계속 검색해본 결과관련이슈가 있었다.  Please keep in mind that if you are using an AMD GPU your Radeon Driver could block Ctrl+Shift+O which it uses to toggle an ingame-overlay. It can be changed to other keys as follows: Games-&gt;global settings-&gt;performance monitoring라데온 계열 그래픽카드를 사용하는 경우 Ctrl + Shift + O 에 이미 바인딩된 단축키가 있어 안돼는것이었다….. 라데온 설정에 들어가서 변경하니 아주아주 잘됐다.]]></content>
+      <categories>
+        
+          <category> etc. </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Eclipse </tag>
+        
+          <tag> Radeon </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[리눅스 MySQL 설치]]></title>
+      <url>/articles/2018-07/install-mysql-on-linux</url>
+      <content type="text"><![CDATA[apt-cache search mysql-server위 명령어를 통해 설치 가능한 버전을 확인한 후apt-get install mysql-server-[version]위 명령어를  실행하면 바로 MySQL이 설치된다.설치가 완료되면 MySQL서버는 실행되어있는 상태이며 기본적으로 3306 포트를 사용한다.netstat -anp | grep 3306---------------------------------------------------------------------------------------------tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN      [PID]/mysqld위와 같이 3306포트가 LISTEN상태인 것을 확인할 수 있으며mysql -u root -p를 입력한 후, 설치 시 설정한 root계정의 암호를 입력하면 mysql 서버에 정상적으로 접속된다.]]></content>
+      <categories>
+        
+          <category> Unix/Linux </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Unix </tag>
+        
+          <tag> Linux </tag>
+        
+          <tag> MySQL </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[리눅스 Git 설치 및 원격 Repository clone]]></title>
+      <url>/articles/2018-07/install-git-on-linux</url>
+      <content type="text"><![CDATA[진행 OS버전 : Ubuntu 14.04 LTS 버전apt-get install git위 명령어를 통해 git을 설치한 후git config --global user.name "자신의 계정"git config --global user.email "자신의 이메일"git config --global color.ui "auto"을 통해 글로벌 설정을 진행한다.이후 clone받아 로컬 repository를 구성할 디렉토리를 생성한 후 해당 디렉토리로 이동하여 clone 진행git clone [clone할 git 주소]]]></content>
+      <categories>
+        
+          <category> Unix/Linux </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Unix </tag>
+        
+          <tag> Linux </tag>
+        
+          <tag> Git </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[새 이클립스 설치 후 진행해야할 설정 목록]]></title>
+      <url>/articles/2018-07/settings-for-new-eclipse</url>
+      <content type="text"><![CDATA[1. 자동 Validation Off  Window &gt; Preferences 메뉴에서 Validation 탭 설정 중 Build 시 HTML, JSP, XML 등에 대한 Validation 체크 해제  필요 시 수동 Validation을 위해 Manual은 체크상태 유지2. 스펠링 체크 해제  General &gt; Editors &gt; Text Editors &gt; Spelling 탭에서 Enable spell checking 체크 해제3. Indentation Tab &gt; Space 변경  General &gt; Editors &gt; Text Editors 탭에서 Insert spaces for tabs 체크  Java &gt; Code Style &gt; Formatter 탭에서 New 버튼을 클릭하여 새 프로필 등록 후 Indentation 항목의 Tab policy를 Spaces Only로 변경  Javascript &gt; Code Style &gt; Formatter 탭 또한 2번 과정 동일하게 적용  Web &gt; CSS Files &gt; Editor 탭에서 Indent using spaces 선택 및 Indentation size 4로 변경  Web &gt; HTML Files &gt; Editor, XML &gt; XML Files &gt; Editor 탭에 대해 4번 과정 동일하게 적용4. 검색 대화상자 단순화  Ctrl + H 누르면 나오는 검색상자의 Customize 버튼을 클릭, 사용할 탭만 체크한 후 나머지 제외]]></content>
+      <categories>
+        
+          <category> etc. </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Eclipse </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[이클립스 Maven Local Repository 변경방법]]></title>
+      <url>/articles/2018-07/setting-for-maven-local-repository</url>
+      <content type="text"><![CDATA[maven 설치 디렉토리 (maven home) 내 settings.xml 또는 새로운 settings.xml을 작성한 후  태그 사이에 repository로 이용할 경로를 기술한다.&lt;localRepository&gt;C:\app\platform\repository\.m2\customRepository&lt;/localRepository&gt;이 후 이클립스에서 Window &gt; Preferences 창의 Maven탭에서 Global 또는 User Settings를 위에서 작성한 settings.xml을 지정해준후프로젝트 우클릭 &gt; Maven &gt; Update Project 수행 시 설정에 따라 새 repository가 구축된다.]]></content>
+      <categories>
+        
+          <category> etc. </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Eclipse </tag>
+        
+          <tag> Maven </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Spring Framework 환경에서 Apache Commons Configuration 사용]]></title>
+      <url>/articles/2018-07/apache-configuration-on-spring</url>
+      <content type="text"><![CDATA[Spring Framework 환경에서 Apache Commons의 Configuration 라이브러리를 사용하는 방법을 정리합니다.1. pom.xml에 Dependency 추가&lt;dependency&gt;    &lt;groupId&gt;commons-configuration&lt;/groupId&gt;    &lt;artifactId&gt;commons-configuration&lt;/artifactId&gt;    &lt;version&gt;1.10&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;commons-collections&lt;/groupId&gt;    &lt;artifactId&gt;commons-collections&lt;/artifactId&gt;    &lt;version&gt;3.2.1&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;commons-lang&lt;/groupId&gt;    &lt;artifactId&gt;commons-lang&lt;/artifactId&gt;    &lt;version&gt;2.6&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;    &lt;groupId&gt;org.springmodules&lt;/groupId&gt;    &lt;artifactId&gt;spring-modules-jakarta-commons&lt;/artifactId&gt;    &lt;version&gt;0.8&lt;/version&gt;    &lt;exclusions&gt;        &lt;exclusion&gt;            &lt;artifactId&gt;jstl&lt;/artifactId&gt;            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;        &lt;/exclusion&gt;        &lt;exclusion&gt;            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;            &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;        &lt;/exclusion&gt;                                    &lt;/exclusions&gt;&lt;/dependency&gt;2. 스프링 Bean 으로 등록&lt;!-- XML로 설정된 설정파일들을 SET해준다. --&gt;&lt;beans:bean id="configuration" class="org.apache.commons.configuration.CompositeConfiguration"&gt;    &lt;beans:constructor-arg&gt;        &lt;beans:list&gt;            &lt;beans:bean class="org.apache.commons.configuration.XMLConfiguration"&gt;                &lt;beans:constructor-arg type="java.lang.String" value="config/config-customize.xml" /&gt;            &lt;/beans:bean&gt;            &lt;beans:bean class="org.apache.commons.configuration.XMLConfiguration"&gt;                &lt;beans:constructor-arg type="java.lang.String" value="config/config-default.xml" /&gt;            &lt;/beans:bean&gt;            &lt;beans:bean class="org.apache.commons.configuration.XMLConfiguration"&gt;               &lt;beans:constructor-arg type="java.lang.String" value="config/config-jdbc.xml" /&gt;            &lt;/beans:bean&gt;        &lt;/beans:list&gt;    &lt;/beans:constructor-arg&gt;&lt;/beans:bean&gt;&lt;!-- 다른 설정에서 사용할 수 있도록 Placeholder로 등록한다. --&gt;&lt;beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"&gt;    &lt;beans:property name="properties"&gt;        &lt;beans:bean class="org.springmodules.commons.configuration.CommonsConfigurationFactoryBean"&gt;            &lt;beans:property name="configurations"&gt;                &lt;beans:list&gt;                    &lt;beans:ref bean="configuration"/&gt;                &lt;/beans:list&gt;            &lt;/beans:property&gt;        &lt;/beans:bean&gt;    &lt;/beans:property&gt;&lt;/beans:bean&gt;]]></content>
+      <categories>
+        
+          <category> Spring Framework </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Spring Framework </tag>
+        
+          <tag> Apache Commons Configuration </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Spring Framework WebApplicationContext 수동으로 참조하는 방법]]></title>
+      <url>/articles/2017-04/reference-for-web-app-ctx</url>
+      <content type="text"><![CDATA[Spring Framework 환경에서 개발하는 도중 WebApplicationContext를 코드상에서 활용해야하는 상황이 생겼다.보통 Spring Bean의 경우 ApplicationContext 인터페이스를 통해 주입받아 쉽게 사용할 수 있는데,나는 이런 기능이 지원되지 않는 상황에서 WebApplicationContext를 사용해야하는 상황이 생겼고, ServletContext를 통해 획득하는 방법을 정리한다.1. Root ApplicationContextWebApplicationContextUtils.getWebApplicationContext(서블릿컨텍스트객체);2. DispatcherServlet에 설정한 ApplicationContextWebApplicationContextUtils.getWebApplicationContext(서블릿컨텍스트객체, FrameworkServlet.SERVLET_CONTEXT_PREFIX + "설정한 서블릿 이름");]]></content>
+      <categories>
+        
+          <category> Spring Framework </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Spring Framework </tag>
+        
+          <tag> WebApplicationContext </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[IDE없이 기본 프로젝트 환경 구성]]></title>
+      <url>/articles/2017-03/simple-project-without-ide</url>
+      <content type="text"><![CDATA[1. 프로젝트 디렉토리 생성  소스파일(.java)은 src 디렉토리에 저장  컴파일된 클래스파일(.class)은 class 디렉토리에 저장mkdir sample-projectcd sample-projectmkdir srcmkdir class2. 개발된 소스파일을 src디렉토리에 위치시킨후 컴파일 진행  src디렉토리 이하 모든 자바파일을 컴파일 대상으로 하며, 결과를 bin디렉토리에 저장한다는 의미이다.javac ./src/`*`.java -d ./bin3. javadoc 생성javadoc -version -author -protected -d ./docs4. 실행가능한 jar파일 생성  main메소드가 여러개인 경우 메니페스트파일을 통해 실행될 main클래스를 지정할 수 있다.  프로젝트 디렉토리에 META-INF 디렉토리 생성 후 MANIFEST.MF 파일 작성  메니페스트 파일은 반드시 맨 아래 공백라인 추가해야한다.Main-Class: my.sample.project.DemoMain  이후 jar명령을 이용해 메니페스트 파일을 지정하여 jar 파일을 다음과 같이 생성한다.jar cvfm MyDemo.jar META-INF/MANIFECT.MF -C ./bin]]></content>
+      <categories>
+        
+          <category> Java </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Java </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Bootstrap popover(팝오버) 커스터마이징]]></title>
+      <url>/articles/2017-01/bootstrap-custom-popover</url>
+      <content type="text"><![CDATA[부트스트랩 홈페이지에서 볼 수 있는 예제는 다음과 같다.var options = {  html : true,  container : 'body',  trigger : EVENT(click, hover 등),  content : function() {    return 'popover로 보여질 내용 HTML';  }};$('selector').popover(options);위처럼하면 selector 요소에 trigger에 이벤트 발생 시 팝오버가 보여진다.하지만 trigger를 hover지정 시 content에 지정한 function이 2번 실행하는 문제가 발생했다.구글링 결과 Bootstrap이 popover를 위해 내부적으로 2번 호출되는 메소드가 있어서 그렇다는것도 있고,hover에 mouseenter, mouseover 등 바인딩되는 이벤트가 많아서 그렇다는 말도 있었다.아무튼 그래서 다음과 같이 해결했다.$('selector').on(  mouseenter : function() {    $(this).popover({      /* trigger를 manual로 지정, 다른 옵션은 사용하는 상황에 따라 입력 */      trigger : 'manual'    });    $(this).popover('show');  },  mouseleave : function() {    $(this).popover('destroy');  })]]></content>
+      <categories>
+        
+          <category> jQuery </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> javascript </tag>
+        
+          <tag> jQuery </tag>
+        
+          <tag> Bootstrap </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[스프링 인터셉터(interceptor) 활용]]></title>
+      <url>/articles/2017-01/spring-interceptor</url>
+      <content type="text"><![CDATA[인터셉터의 preHandle, postHandle 메소드에 보면 Object형 handler라는 이름의 인자가 있다.이 인자는 RequestMapping으로 매핑된 하나의 메소드로 스프링 프레임워크에 의해 org.springframework.web.method.HandlerMethod라는 클래스로 바인드 되어 전달되는 인자다.getMethod()를 호출하면 실제 java Reflection의 Method형 객체를 얻을수 있다.Custom Annotation을 사용한다면 Interceptor에서 위 handler 객체를HandlerMethod method = ((HandlerMethod)handler);MyAnnotation anno = method.getMethodAnnotation(MyAnnotation.class);위와같이 자신이 선언해둔 어노테이션을 가져올 수 있다.]]></content>
+      <categories>
+        
+          <category> Spring Framework </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Java </tag>
+        
+          <tag> Spring Framework </tag>
+        
+          <tag> Interceptor </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[MyBatis 사용 시 부등호 등 이스케이프(escape) 처리]]></title>
+      <url>/articles/2016-12/mybatis-escaping</url>
+      <content type="text"><![CDATA[XML에서 쿼리를 작성할 때 &lt;, &gt;와 같은 비교 연산자를 사용하면  The content of elements must consist of well-formed character data or markup.이런 오류메세지가 나타날 수 있다. MyBatis에선 XML파일을 통해 쿼리를 작성하는 기능을 지원하는 때 이때 위와같은 문제가 발생할 수 있다.XML에서 &lt;, &gt; 를 비교연산자로 판단하지 않고 &lt;select&gt; 등 태그의 시작과 끝으로 인식되어 생기는 일이다.해결하기 위해서는 비교연산 사용하는 부분에을 &lt;![CDATA[ ]]&gt; 로 감싸주면 된다.&lt;select id="selectList"&gt;    SELECT *      FROM SOME_TABLE     WHERE &lt;![CDATA[ id &gt; 5 ]]&gt;&lt;/select&gt;]]></content>
+      <categories>
+        
+          <category> Spring Framework </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Java </tag>
+        
+          <tag> Spring Framework </tag>
+        
+          <tag> MyBatis </tag>
+        
+          <tag> XML </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Spring Path variable 사용 시 확장자 문제]]></title>
+      <url>/articles/2016-12/spring-path-variable-issue</url>
+      <content type="text"><![CDATA[@RequestMapping("/temp/{filename}")public ResponseEntity&lt;byte[]&gt; tempView(@PathVariable String filename) throws IOException {        logger.info("Return Temp image data");        logger.info(filename);        return null;}위와같이 매핑한 후localhost:8080/content/temp/testFile.jpg위 주소로 요청을 날렸더니 에러가 발생했다.문제는 로그에 찍힌 filename.jpg는 사라진채 testFile만 들어와지는 것이었다.@RequestMapping("/temp/{filename:.+}")리퀘스트 매핑을 위와같이 바꿔주니 확장자까지 잘 들어옴을 확인할 수 있었다.]]></content>
+      <categories>
+        
+          <category> Spring Framework </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Java </tag>
+        
+          <tag> Spring Framework </tag>
+        
+          <tag> Path Variable </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[웹 기반 WYSIWYG 에디터 Summernote 사용하기]]></title>
+      <url>/articles/2016-12/get-started-summernote</url>
+      <content type="text"><![CDATA[WYSIWYG 에디터 Summernote 사용방법을 정리합니다.1. CDN 추가&lt;link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet"&gt;&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"&gt;&lt;/script&gt;2. 에디터로 사용할 div 영역 생성&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;&lt;html&gt;    &lt;head&gt;        &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;        &lt;%@ include file="/WEB-INF/include/app-header.jspf" %&gt;        &lt;title&gt;Insert title here&lt;/title&gt;    &lt;/head&gt;    &lt;body&gt;        &lt;div id="summernote"&gt;&lt;/div&gt;    &lt;/body&gt;&lt;/html&gt;3. 에디터 생성$(document).ready(function(){    var toolbar = [        ['style', ['bold', 'italic', 'underline', 'clear']],        ['font', ['strikethrough', 'superscript', 'subscript']],        ['fontsize', ['fontsize']],        ['color', ['color']],        ['para', ['ul', 'ol', 'paragraph']],        ['height', ['height']],        ['table', ['table']],        ['insert', ['link', 'picture', 'hr']],        ['view', ['fullscreen', 'codeview']],        ['help', ['help']]    ];    var setting = {        height : 300,        minHeight: null,        maxHeight: null,        focus : true,        lang : 'ko-KR',            toolbar : toolbar    };    $('#summernote').summernote(setting);});간단하다.toolbar 변수는 에디터 상단에 어떤 버튼들을 보여줄지 설정하는 것이다.4. 에디터에 작성한 내용 HTML코드로 가져오기var htmlStr = $('#summernote').summernote('code');기타 더 다양한 설정 및 활용방법은 Summernote 공식 홈페이지에서 확인가능하다.]]></content>
+      <categories>
+        
+          <category> jQuery </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> javascript </tag>
+        
+          <tag> jQuery </tag>
+        
+          <tag> Summernote </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[jQuery each메소드 사용 시 break, continue 제어]]></title>
+      <url>/articles/2016-12/jQuery-for-each-control</url>
+      <content type="text"><![CDATA[jQuery.each(callback) 메소드 사용 시 break, continue 등의 제어를 해야하는 경우가 있다.이 때 false를 return 하면 break, true를 return 하면 continue와 같은 역할을 한다.$('.category-item').each(function(){    if($(this).hasClass('highlight')) {        return false;    // each문을 빠져나간다. break; 와 같음    }});]]></content>
+      <categories>
+        
+          <category> jQuery </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> javascript </tag>
+        
+          <tag> jQuery </tag>
+        
+          <tag> each </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[jQuery를 이용한 input file 이미지 선택 시 미리보기]]></title>
+      <url>/articles/2016-12/jQuery-image-preview</url>
+      <content type="text"><![CDATA[&lt;!-- 미리보기 영역으로 사용할 img 태그 --&gt;&lt;img src="" id="preview"/&gt;&lt;input type="file" id="imgSelector"/&gt;파일 선택 시 발생하는 input file태그 change 이벤트를 이용하는 방법이다. 선택한 파일을 읽어 base64인코드 형식으로 img태그에 지정해준다.$('#imgSelector').change(function(){    setImageFromFile(this, '#preview');});function setImageFromFile(input, expression) {    if (input.files &amp;&amp; input.files[0]) {        var reader = new FileReader();        reader.onload = function (e) {            $(expression).attr('src', e.target.result);        }        reader.readAsDataURL(input.files[0]);    }}]]></content>
+      <categories>
+        
+          <category> jQuery </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> javascript </tag>
+        
+          <tag> jQuery </tag>
+        
+          <tag> input file </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Java Dynamic Proxy]]></title>
+      <url>/articles/2016-11/java-dynamic-proxy</url>
+      <content type="text"><![CDATA[Dynamic Proxy란메소드 인터셉팅을 통해 부수적인 코드를 삽입할 수 있는 기술, Spring AOP에서도 사용한다.원래객체에 부수적인코드가 합쳐진 새로운 객체가 프록시 객체가 된다.1. Proxy로 사용할 클래스에 대한 인터페이스를 작성한다.class interface Computer {    public void boot();    public void prepareGUI();}2. 정의한 인터페이스를 구현class ComputerImpl implements Computer {    @Override    public void boot() {        System.out.println("현재 부팅이 진행중입니다...");    }    @Override    public void prepareGUI() {        System.out.println("현재 GUI를 로딩중입니다...");    }}3. InvocationHandler를 통해 프록시 기능 구현  이 예시에서는 프록시 적용 대상객체의 메소드가 실행될 때 로깅을 수행하는 프록시 기능 구현class MyLogger implements InvocationHandler {    // 실제 프록시가 적용될 대상 객체    private Object realObject;    public MyLogger(Object realObject) {        this.realObject = realObject;    }    @Override    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {        Object result = null;        long start = System.currentTimeMillis();        // 아래 코드 실행 시 실제 대상객체의 메소드가 실행된다.        result = method.invoke(realObject, args);        long end = System.currentTimeMillis();        System.out.println("작업명 : "+method.getName()+", 소요시간 : "+(end-start)+"ms");        return result;    }}4. 프록시 적용  computer는 일반 객체(프록시 적용 대상객체)이고, computerProxy는 computer에 로깅기능이 적용된 프록시 객체이다.public class Application {    public static void main(String[] args) {        Computer computer = new ComputerImpl();    // 프록시가 적용되지 않은 객체        Class&lt;?&gt; type = ComputerImpl.class;        // 프록시가 적용될 객체의 타입        Computer computerProxy = (Computer) Proxy.newProxyInstance(type.getClassLoader(),                                                                   type.getInterfaces(),                                                                   new MyLogger(new ComputerImpl()));        computerProxy.boot();        computerProxy.prepareGUI();    }}위와같이 하면 boot, prepareGUI 메소드 실행 시 MyLogger에 구현한 대로 소요시간이 찍히는 것을 확인할 수 있다.주의할 점은 프록시를 적용할 객체, 즉 ComputerImpl과 같은 realObject 역할의 객체 내부에서자신의 메소드를 호출하는 것은 프록시로 잡히지 않는다.예를들어computerProxy.boot(); =&gt; 프록시 적용computerProxy.prepareGUI(); =&gt; 프록시 적용하지만public void boot() {    System.out.println("현재 부팅이 진행중입니다...");    prepareGUI();    =&gt; 프록시 미적용}이유는 아직까지 모르겠다. 알면 적어야지..]]></content>
+      <categories>
+        
+          <category> Java </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Java </tag>
+        
+          <tag> Dynamic Proxy </tag>
+        
+          <tag> AOP </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Spring AOP 적용 관련 이야기]]></title>
+      <url>/articles/2016-11/about-spring-aop</url>
+      <content type="text"><![CDATA[스프링 AOP는 JDK 다이나믹 프록시를 이용한 방법과 CGLIB을 이용한 프록시를 이용하는 방법 2가지가 있다.결국 AOP는 프록시를 통해 구현할 수 있다.다이나믹 프록시를 이용한 방법은 치명적인 제약사항이 있다.1. 프록시객체를 만들고자하는 대상이 인터페이스 또는 인터페이스를 implements 하고 있는 클래스여야 한다는 것이다.일반적으로 Spring이 제공하는 AOP기술을 사용할 때 AOP를 적용하려고 하는 클래스에 어떤 인터페이스를 꼭 implements하지 않아도 됐다.즉 기본적으로 사용되는 방법은 CGLIB을 이용한 프록시를 활용하는 방법이다. (다이나믹 프록시를 이용하려면 별도의 설정을 함)2. 특정 메소드에 국한되지 않고 인터페이스의 모든 메소드에 대해 적용된다는 점이다.Pointcut으로 메소드를 지정하는 방법은 결국 CGLIB을 이용할 수 밖에 없다는 것이다.]]></content>
+      <categories>
+        
+          <category> Spring Framework </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Java </tag>
+        
+          <tag> Spring Framework </tag>
+        
+          <tag> AOP </tag>
+        
+          <tag> Dynamic Proxy </tag>
+        
+          <tag> CGLIB </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+</search>

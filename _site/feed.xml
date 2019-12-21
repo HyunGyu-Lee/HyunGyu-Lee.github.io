@@ -5,9 +5,128 @@
     <description>Software Engineer</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-12-14</pubDate>
-    <lastBuildDate>Sat, 14 Dec 2019 14:59:55 +0900</lastBuildDate>
+    <pubDate>2019-12-21</pubDate>
+    <lastBuildDate>Sat, 21 Dec 2019 21:29:55 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Spring Ehcache 사용 간략한 정리</title>
+        <description>&lt;h4 id=&quot;1-spring-cache-abstraction&quot;&gt;1. Spring Cache Abstraction&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-caching.html#boot-features-caching-provider&quot;&gt;https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-caching.html#boot-features-caching-provider&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;2--적용&quot;&gt;2.  적용&lt;/h4&gt;
+&lt;h5 id=&quot;2-1-enablecaching&quot;&gt;2-1. @EnableCaching&lt;/h5&gt;
+&lt;p&gt;Spring Boot Application 설정시 &lt;code class=&quot;highlighter-rouge&quot;&gt;@EnableCaching&lt;/code&gt; 어노테이션 추가하여 Application에 캐시 기능 사용하겠다는 것을 알린다&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@ComponentScan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.nhnent.gia&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EntityScan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;basePackages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.nhnent.gia.model&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;basePackageClasses&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Jsr310JpaConverters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableCaching&lt;/span&gt; 
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Application&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이후 추가적이 설정이 없는 경우 기본 캐시 &lt;code class=&quot;highlighter-rouge&quot;&gt;ConcurrentHasnMap&lt;/code&gt; 를 사용하고, 다른 캐시 라이브러리를 추가하면 Spring Boot의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Detect&lt;/code&gt;기능에 따라 해당 라이브러리를 자동으로 사용하게 된다.&lt;/p&gt;
+
+&lt;h5 id=&quot;2-2-ehcachexml-작성&quot;&gt;2-2. ehcache.xml 작성&lt;/h5&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.ehcache.org/documentation/2.8/configuration/configuration.html&quot;&gt;https://www.ehcache.org/documentation/2.8/configuration/configuration.html&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;ehcache&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;xsi:noNamespaceSchemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.ehcache.org/ehcache.xsd&quot;&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;updateCheck=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;moritoring=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;autodetect&quot;&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;dynamicConfig=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;maxBytesLocalHeap=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;4M&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;cache&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;recentWinHistory&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;eternal=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;timeToIdleSeconds=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;timeToLiveSeconds=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;300&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;overflowToDisk=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;diskPersistent=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;diskExpiryThreadIntervalSeconds=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;120&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;memoryStoreEvictionPolicy=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LRU&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/cache&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ehcache&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;2-3-applicationproperties추가&quot;&gt;2-3. application.properties추가&lt;/h5&gt;
+&lt;p&gt;캐시 설정파일 &lt;code class=&quot;highlighter-rouge&quot;&gt;ehcache.xml&lt;/code&gt; 경로 설정&lt;/p&gt;
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;py&quot;&gt;spring.cache.ehcache.config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;classpath:ehcache.xml&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;2-4-cacheable&quot;&gt;2-4. @Cacheable&lt;/h5&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ehcache.xml&lt;/code&gt;에서 정의한 캐시를 &lt;code class=&quot;highlighter-rouge&quot;&gt;@Cacheable(&quot;{name}&quot;)&lt;/code&gt; 형태로 적용&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;기본
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Cacheable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;recentWinHistory&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WinHistory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findAllWinHistory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eventCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eventNo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;파라미터별로 캐싱하고 싶은 경우
+캐시가 eventCode값 단위로 캐싱된다
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Cacheable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;recentWinHistory&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#eventCode&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WinHistory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findAllWinHistory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eventCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eventNo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>2019-12-21</pubDate>
+        <link>http://localhost:4000/articles/2019-12/spring-ehcache</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-12/spring-ehcache</guid>
+        
+        <category>Spring Framework</category>
+        
+        <category>Ehcache</category>
+        
+        
+        <category>Spring Framework</category>
+        
+      </item>
+    
+      <item>
+        <title>mac terminal 에서 특정 프로젝트를 vscode 또는 IntelliJ 실행하기</title>
+        <description>&lt;p&gt;mac 사용하다 보면 ide에서 Finder UI를 통해 특정 프로젝트를 open 하는 일이 자주 있는데요.
+저의 경우 vscode와 IntelliJ에서 그런 경우가 자주 있는 편입니다.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;특정-프로젝트를-vscode로-실행하기&quot;&gt;특정 프로젝트를 vscode로 실행하기&lt;/h2&gt;
+&lt;p&gt;vscode 의 경우 아주 간단합니다.
+터미널에서 프로젝트 경로로 이동한 후 &lt;code class=&quot;highlighter-rouge&quot;&gt;code .&lt;/code&gt; 명령어를 입력하면 해당 프로젝트 open으로 vscode가 실행됩니다.&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;프로젝트경로
+code &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;특정-프로젝트를-intellij로-실행하기&quot;&gt;특정 프로젝트를 IntelliJ로 실행하기&lt;/h2&gt;
+&lt;p&gt;IntelliJ의 경우도 vscode와 유사하지만 1가지 차이점이 있습니다.
+IntelliJ 실행 시 사용하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;idea&lt;/code&gt; 명령어가 있는 경로가 환경변수에 등록되어 있지 않기 때문인데요. 이는 IntelliJ에서 간단히 추가가 가능합니다.
+IntelliJ를 실행 후 &lt;code class=&quot;highlighter-rouge&quot;&gt;Tools &amp;gt; Create Command-line Launcher...&lt;/code&gt; 메뉴를 클릭하면 터미널에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;idea&lt;/code&gt;명령어를 바로 사용할 수 있게됩니다.&lt;/p&gt;
+
+&lt;p&gt;명령어를 환경변수에 추가한 후 실행할 프로젝트로 이동해 아래 명령어를 입력하면 해당 프로젝트 open 으로 IntelliJ가 실행되게 됩니다.
+아래 예시의 경우 제가 실행할 프로젝트가 maven 프로젝트여서 &lt;code class=&quot;highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt;을 대상 파일로 지정했구요. gradle이면 &lt;code class=&quot;highlighter-rouge&quot;&gt;build.gradle&lt;/code&gt; 등 다른 타입의 프로젝트는 
+해당하는 파일을 지정하면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;프로젝트경로
+idea pom.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>2019-12-21</pubDate>
+        <link>http://localhost:4000/articles/2019-12/terminal-open-ide</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-12/terminal-open-ide</guid>
+        
+        <category>vscode</category>
+        
+        <category>IntelliJ</category>
+        
+        <category>mac</category>
+        
+        
+        <category>etc.</category>
+        
+      </item>
     
       <item>
         <title>git commit 날짜, author 변경하기</title>
@@ -117,7 +236,7 @@ git commit &lt;span class=&quot;nt&quot;&gt;--amend&lt;/span&gt; &lt;span class=
 입력하면 되고, 더 이상 수정할 것이 없으면 rebase 모드가 종료되게 됩니다. 수정을 마치고 push 하여 마무리 해주면 github에도 반영되게 됩니다.&lt;/p&gt;
 
 </description>
-        <pubDate>2019-12-14</pubDate>
+        <pubDate>2019-12-21</pubDate>
         <link>http://localhost:4000/articles/2019-12/git-change-commit</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-12/git-change-commit</guid>
         
@@ -226,7 +345,7 @@ NHN Forward 2019의 심볼인 » 는 리달리디렉션 기호 »를 형상화
 
 &lt;p&gt;감사합니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-12-14</pubDate>
+        <pubDate>2019-12-21</pubDate>
         <link>http://localhost:4000/articles/2019-12/nhn-forward-review</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-12/nhn-forward-review</guid>
         
@@ -299,7 +418,7 @@ UseDNS no
 
 &lt;p&gt;마찬가지로 로컬에서 ssh 접속 시 발생하던 지연은 없고 아주 빠르게 접속되었습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-12-14</pubDate>
+        <pubDate>2019-12-21</pubDate>
         <link>http://localhost:4000/articles/2019-11/server-connection-delay</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-11/server-connection-delay</guid>
         
@@ -433,7 +552,7 @@ Gitflow 는 아래 명령어로 가능합니다.&lt;/p&gt;
 
 &lt;p&gt;명령어로 간단하게 진행할 수 있습니다.ㅍ&lt;/p&gt;
 </description>
-        <pubDate>2019-12-14</pubDate>
+        <pubDate>2019-12-21</pubDate>
         <link>http://localhost:4000/articles/2019-11/reference-of-gitflow</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-11/reference-of-gitflow</guid>
         
@@ -474,7 +593,7 @@ Gatsby와 같은 블로그를 배포하는 용도로 쓰이는 것으로 유명�
 
 &lt;p&gt;다음에는 Vue + Firebase + Netlify 의 조합으로 간단한 애플리케이션을 제작하여 배포하는 포스트를 작성할 계획입니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-12-14</pubDate>
+        <pubDate>2019-12-21</pubDate>
         <link>http://localhost:4000/articles/2019-11/netlify-with-vue</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-11/netlify-with-vue</guid>
         
@@ -782,7 +901,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2019-12-14</pubDate>
+        <pubDate>2019-12-21</pubDate>
         <link>http://localhost:4000/articles/2019-11/jpa-orm-querydsl</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-11/jpa-orm-querydsl</guid>
         
@@ -941,7 +1060,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2019-12-14</pubDate>
+        <pubDate>2019-12-21</pubDate>
         <link>http://localhost:4000/articles/2019-10/java-generic-type</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-10/java-generic-type</guid>
         
@@ -1004,7 +1123,7 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;/ol&gt;
 
 </description>
-        <pubDate>2019-12-14</pubDate>
+        <pubDate>2019-12-21</pubDate>
         <link>http://localhost:4000/articles/2019-10/how-spring-aop-works</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2019-10/how-spring-aop-works</guid>
         
@@ -1016,115 +1135,6 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
         
         
         <category>Spring Framework</category>
-        
-      </item>
-    
-      <item>
-        <title>개인적인 IT 서적 추천</title>
-        <description>&lt;p&gt;읽어야할, 읽고싶은, 추천하고 싶은 도서 내역을 정리해보았습니다.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h4 id=&quot;도서-목록&quot;&gt;도서 목록&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/18249021?scode=018&quot;&gt;객체지향의 사실과 오해&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;저자 : 조영호&lt;/li&gt;
-      &lt;li&gt;소개 : 『객체지향의 사실과 오해』는 객체지향이란 무엇인가라는 원론적면서도 다소 위험한 질문에 답하기 위해 쓰여진 책이다. 안타깝게도 많은 사람들이 객체지향의 본질을 오해하고 있다. 가장 널리 퍼져있는 오해는 클래스가 객체지향 프로그래밍의 중심이라는 것이다. 객체지향으로 향하는 첫 걸음은 클래스가 아니라 객체를 바라보는 것에서부터 시작한다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/29241448&quot;&gt;클린 코더&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;저자 : 로버트 C. 마틴&lt;/li&gt;
-      &lt;li&gt;소개 : 세계적으로 유명한 프로그래머 ‘밥 아저씨’ 로버트 마틴이 쓴 책으로, 프로 개발자가 되는 길을 알려준다. 수십 년의 경험을 바탕으로 장인 정신, 실천 기법, 도구뿐만 아니라 프로가 가져야 할 마음가짐과 태도를 알려준다. 빡빡한 일정으로 인한 압박을 견디고 비이성적인 사람들과 대화하고 진창에 빠져 오도가도 못하는 상황을 피하는 법 등 다양한 지혜가 책에 담겨 있다. 위대한 소프트웨어를 만드는 장인 정신을 보여주고 프로만이 가지는 자부심과 충만감을 얻게 해 준다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/11681152&quot;&gt;클린 코드&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;저자 : 로버트 C. 마틴&lt;/li&gt;
-      &lt;li&gt;소개 : 애자일 소프트웨어의 혁명적인 패러다임을 제시하는 책이다. 저자 로버트 마틴은 오브젝트 멘토(Object Mentor)의 동료들과 힘을 모아 ‘개발하며’ 클린 코드를 만드는 최상의 애자일 기법을 정제하여『Clean Code 클린 코드』에 담았다. 아주 많은 코드를 읽고 그 코드의 무엇이 옳은지, 그른지 생각하며 전문가로서 자신이 지니는 가치를 돌아보기 위해 꾸준히 노력한다면, 이 책을 통해 여러분의 프로그래밍 실력은 한층 더 높아질 것이다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/Goods/65551284&quot;&gt;이펙티브 자바&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;저자 : 조슈아 블로치&lt;/li&gt;
-      &lt;li&gt;소개 : 효율적이고 잘 설계된 자바 프로그램을 작성할 수 있는 실전적인 지침을 제공하는 책이다. 이 책의 각 장은 여러 개의 ‘항목’으로 구성되어 있으며, 각 항목은 자바 플랫폼을 파헤치는 조언과 실전적인 코드 예를 제공하면서 간결하고 독립적인 설명을 하는 형태로 되어 있다.
-각 항목에 대한 설명을 통해서 해야 할 것과 하지 말아야 할 것, 그리고 왜 그래야 하는지를 명확하게 알 수 있다. 이 책에는 필수 불가결한 프로그래머의 산 경험이 78개의 항목으로 녹아있어 우리가 매일 접하는 자바 프로그래밍의 과제들에 대해 실전적인 최적의 솔루션을 제공한다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/27750871?scode=033&quot;&gt;DDD Start!&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;저자 : 최범균&lt;/li&gt;
-      &lt;li&gt;소개 : 이 책은 DDD(도메인 주도 설계)를 처음 접하는 개발자를 위한 책이다. DDD를 실제 업무에 적용할 수 있도록 기본적인 이론을 설명하고 이를 구현한 코드를 바탕으로 입문자가 헤매지 않고 DDD를 학습할 수 있도록 했다. 애그리거트, 엔티티, 리포지토리 등 DDD의 핵심 패턴을 이용해서 도메인 모델을 구현하는 방법을 설명한다. 도메인 모델의 트랜잭션 충돌을 처리하는 기법(선점 잠금, 비선점 잠금)을 살펴보고, 도메인 이벤트를 이용해서 도메인 영역 간의 의존을 낮추는 방법과 명령 모델과 조회 모델을 나누는 기법에 대해서도 배운다. 스프링과 JPA를 이용해서 실제 동작하는 코드를 함께 제공하고 있으므로 DDD를 학습하고 싶은 개발자에게 좋은 길잡이가 될 것이다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.yes24.com/Product/goods/322365&quot;&gt;소프트웨어 장인 정신&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;저자 : Pete McBreen&lt;/li&gt;
-      &lt;li&gt;소개 : 이 책은 소프트웨어 개발자 여러분에게 소프트웨어를 어떻게 개발하느냐는 중요하지 않다고 말한다. 소프트웨어 개발의 진정한 가치는 숙련된 개발자가 고품질의 코드를 개발하여 고객이 필요로 하는 것을 전달하는 것에 있다고 말한다. 즉 ‘그 자체를 위한 기술’로부터 고객에게 가치를 전달하는 것에 토대를 둔 기술로 방향을 바꾸는 것이 이제 피할 수 없는 명제임을 보여준다.
-소프트웨어 장인정신은 소프트웨어 엔지니어링에 함축된 “제조한다”는 뜻을 벗어나 소프트웨어 개발을 하는 바로 그 사람에게 보다 주의를 기울이게 하기 때문에 중요하다. 장인정신은 그것과 함께 숙련된 개발 실습자가 그들의 장인적 기술을 마스터하려고 한다는 것, 노동의 결실에 대한 자부심, 그리고 책임정신을 내포한다.
-기술의 완성을 위하여 프로그래머들을 육성하는 방법, 작은 개발 팀들에서의 창조적인 협업을 발전시키는 방법, 그리고 고객과의 커뮤니케이션을 향상시키는 방법들을 소개한다. 그리고 궁극적인 결과로서의 숙련된 개발자는 안정된 애플리케이션을 만들고, 확장하고, 개선시킬 수 있는 사람이다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>2019-12-14</pubDate>
-        <link>http://localhost:4000/articles/2019-10/my-book-list</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/my-book-list</guid>
-        
-        <category>Book</category>
-        
-        
-        <category>Book</category>
-        
-      </item>
-    
-      <item>
-        <title>JPA의 쿼리 기술 종류</title>
-        <description>&lt;p&gt;JPQL, Criteria, Named Query 등등 JPA는 엔티티 객체를 조회하기 위해 다양한 쿼리 기술을 지원합니다.&lt;/p&gt;
-
-&lt;p&gt;그동안 JPA 를 사용하면서 사용하는 쿼리 기술이 어느 기술인지도 잘 모르고 사용해온 나 자신을 위해.. 이 글에서 정리해보고자 합니다.&lt;/p&gt;
-
-&lt;p&gt;각 기술에 대한 자세한 설명보다는 각 기술이 어떤 것인지와 특징 등에 중점을 두고 정리하겠습니다.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;jpql&quot;&gt;JPQL&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Java Persistence Query Language의 약자&lt;/li&gt;
-  &lt;li&gt;SQL이 데이터베이스 테이블을 대상으로 쿼리하는 거라면 JPQL은 Entity 객체를 대상으로 쿼리&lt;/li&gt;
-  &lt;li&gt;JPQL은 쿼리문장이 특정 DBMS에 종속되지 않도록 쿼리를 SQL을 추상화&lt;/li&gt;
-  &lt;li&gt;작성한 JPQL은 프레임워크에 의해 애플리케이션이 사용하는 데이터베이스의 적합한 SQL로 변환되어 실행&lt;/li&gt;
-  &lt;li&gt;JPA 표준&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;jpa-criteria-query&quot;&gt;JPA Criteria Query&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;JPQL을 programmatically하게, 즉 자바코드로 작성할 수 있게 도와주는 빌더&lt;/li&gt;
-  &lt;li&gt;문자열로 작성하는 JPQL과 달리 자바코드로 쿼리를 작성하기 때문에 컴파일 단계에서 오류파악이 가능&lt;/li&gt;
-  &lt;li&gt;쿼리가 복잡하고, 길어지는 경우 JPQL 보다 직관적&lt;/li&gt;
-  &lt;li&gt;자바코드로 작성하기 때문에 쿼리문을 동적으로 작성 가능&lt;/li&gt;
-  &lt;li&gt;JPA 표준&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;querydsl&quot;&gt;QueryDSL&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Criteria Query 와 마찬가지로 JPQL을 쉽게 작성할 수 있도록 도와주는 빌더&lt;/li&gt;
-  &lt;li&gt;비표준&lt;/li&gt;
-  &lt;li&gt;Entity를 파싱하여 QEntity를 생성하고, 이를 쿼리작성에 이용&lt;/li&gt;
-  &lt;li&gt;Criteria의 동적인 특징과 JPQL의 표현력을 타입에 안전한 방법으로 제공&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>2019-12-14</pubDate>
-        <link>http://localhost:4000/articles/2019-10/jpa-query-tech</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/jpa-query-tech</guid>
-        
-        <category>JPA</category>
-        
-        <category>QueryDSL</category>
-        
-        
-        <category>JPA</category>
         
       </item>
     
