@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Unix,Linux,Git," />
+  <meta name="keywords" content="hyungyu.lee,Software,Blog" />
 
 
 
@@ -111,17 +111,17 @@
 
 
 
-<meta name="description" content="진행 OS버전 : Ubuntu 14.04 LTS 버전 apt-get install git">
-<meta name="keywords" content="Unix, Linux, Git">
-<meta property="og:type" content="article">
-<meta property="og:title" content="리눅스 Git 설치 및 원격 Repository clone">
-<meta property="og:url" content="/articles/2018-07/install-git-on-linux">
+<meta name="description" content="Software Engineer">
+<meta name="keywords" content="hyungyu.lee,Software,Blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="@deveely">
+<meta property="og:url" content="/page7/">
 <meta property="og:site_name" content="@deveely">
-<meta property="og:description" content="진행 OS버전 : Ubuntu 14.04 LTS 버전 apt-get install git">
+<meta property="og:description" content="Software Engineer">
 <meta property="og:locale" content="ko">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="리눅스 Git 설치 및 원격 Repository clone">
-<meta name="twitter:description" content="진행 OS버전 : Ubuntu 14.04 LTS 버전 apt-get install git">
+<meta name="twitter:title" content="@deveely">
+<meta name="twitter:description" content="Software Engineer">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -154,7 +154,7 @@
 
 
 
-  <title>리눅스 Git 설치 및 원격 Repository clone | @deveely</title>
+  <title>@deveely</title>
   
 
 
@@ -188,7 +188,7 @@
   
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-home ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -336,9 +336,12 @@
           <div id="content" class="content">
             
 
-<div id="posts" class="posts-expand">
+
+
+<section id="posts" class="posts-expand">
   
-  
+    
+    
 
   
 
@@ -347,7 +350,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="/articles/2018-07/install-git-on-linux">
+    <link itemprop="mainEntityOfPage" href="/articles/2016-11/about-spring-aop">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -367,7 +370,12 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            리눅스 Git 설치 및 원격 Repository clone
+            
+                
+                <a class="post-title-link" href="/articles/2016-11/about-spring-aop" itemprop="url">
+                Spring AOP 적용 관련 이야기
+              </a>
+            
           
         </h1>
         
@@ -381,8 +389,8 @@
               
                 <span class="post-meta-item-text">작성일</span>
               
-              <time title="" itemprop="dateCreated datePublished" datetime="2018-07-16T05:41:05+09:00">
-                2018-07-16
+              <time title="" itemprop="dateCreated datePublished" datetime="2016-11-21T21:26:21+09:00">
+                2016-11-21
               </time>
             
 
@@ -405,8 +413,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/Unix%2FLinux" itemprop="url" rel="index">
-                    <span itemprop="name">Unix/Linux</span>
+                  <a href="/category/#/Spring%20Framework" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Framework</span>
                   </a>
                 </span>
 
@@ -428,12 +436,6 @@
           
 
           
-            
-                <div class="post-description">
-                    
-                </div>
-            
-          
 
         </div>
       </header>
@@ -446,6 +448,7 @@
 
       
         
+          
   
   
 
@@ -460,103 +463,68 @@
 
 
 
-  <h6 id="진행-os버전--ubuntu-1404-lts-버전">진행 OS버전 : Ubuntu 14.04 LTS 버전</h6>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install git</code></pre></figure>
-
-<p>위 명령어를 통해 git을 설치한 후</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git config <span class="nt">--global</span> user.name <span class="s2">"자신의 계정"</span>
-git config <span class="nt">--global</span> user.email <span class="s2">"자신의 이메일"</span>
-git config <span class="nt">--global</span> color.ui <span class="s2">"auto"</span></code></pre></figure>
-
-<!--more-->
-<p>을 통해 글로벌 설정을 진행한다.</p>
-
-<p>이후 clone받아 로컬 repository를 구성할 디렉토리를 생성한 후 해당 디렉토리로 이동하여 clone 진행</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git clone <span class="o">[</span>clone할 git 주소]</code></pre></figure>
+  <p>스프링 AOP는 <code class="highlighter-rouge">JDK 다이나믹 프록시</code>를 이용한 방법과 <code class="highlighter-rouge">CGLIB</code>을 이용한 프록시를 이용하는 방법 2가지가 있다.<br />
+결국 AOP는 프록시를 통해 구현할 수 있다.<br />
+다이나믹 프록시를 이용한 방법은 치명적인 제약사항이 있다.</p>
 
 
 
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/articles/2016-11/about-spring-aop#" rel="contents">
+              더 읽어보기 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
 
     <div>
       
-        
-
-      
     </div>
 
     <div>
       
-        
-
-      
     </div>
 
     <div>
-      
-        
-
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            
-            <a href="/tag/#/Unix" rel="tag"># Unix</a>
-          
-            
-            <a href="/tag/#/Linux" rel="tag"># Linux</a>
-          
-            
-            <a href="/tag/#/Git" rel="tag"># Git</a>
-          
-        </div>
+
       
 
       
-      
-      
-      
-      
 
       
-      
-        <div class="post-nav" id="post-nav-id">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/articles/2018-07/install-mysql-on-linux" rel="next" title="리눅스 MySQL 설치">
-                <i class="fa fa-chevron-left"></i> 리눅스 MySQL 설치
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/articles/2018-07/settings-for-new-eclipse" rel="prev" title="새 이클립스 설치 후 진행해야할 설정 목록">
-                새 이클립스 설치 후 진행해야할 설정 목록 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-      
-
+        
+        
+        
+        
+          <div class="post-eof"></div>
+        
       
     </footer>
   </article>
 
-  <div class="post-spread">
+  
+</section>
+
+
+  <nav class="pagination">
     
-  </div>
-</div>
+    
+    
+
+
+
+    <a class="extend prev" rel="prev" href="/page6"><i class="fa fa-angle-left"></i></a> <a class="page-number" href="/">1</a> <span class="space">&hellip;</span> <a class="page-number" href="/page6">6</a> <span class="page-number current">7</span>
+  </nav>
+
+
 
 
           </div>
@@ -564,10 +532,6 @@ git config <span class="nt">--global</span> color.ui <span class="s2">"auto"</sp
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -585,30 +549,10 @@ git config <span class="nt">--global</span> color.ui <span class="s2">"auto"</sp
     <div class="sidebar-inner">
 
       
-        
-        
-        
-
-
-
-
-
-
 
       
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            목차
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            흝어보기
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.jpg"
@@ -714,34 +658,6 @@ git config <span class="nt">--global</span> color.ui <span class="s2">"auto"</sp
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-
-
-
-
-
-
-
-            
-              <div class="post-toc-content">
-    <ol class=nav>
-      <li class="nav-item nav-level-6"> <a class="nav-link" href="#진행-os버전--ubuntu-1404-lts-버전"> <span class="nav-number">1</span> <span class="nav-text">진행 OS버전 : Ubuntu 14.04 LTS 버전</span> </a> </li>
-    </ol>
-  </div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

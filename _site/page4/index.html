@@ -115,7 +115,7 @@
 <meta name="keywords" content="hyungyu.lee,Software,Blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="@deveely">
-<meta property="og:url" content="http://localhost:4000/page4/">
+<meta property="og:url" content="/page4/">
 <meta property="og:site_name" content="@deveely">
 <meta property="og:description" content="Software Engineer">
 <meta property="og:locale" content="ko">
@@ -148,7 +148,7 @@
 
 
 
-  <link rel="canonical" href="http://localhost:4000/"/>
+  <link rel="canonical" href=""/>
 
 
 
@@ -350,7 +350,185 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/description-of-persistence-context-2">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/description-of-persistence-context-1">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="이현규">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="@deveely">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+                
+                <a class="post-title-link" href="/articles/2018-10/description-of-persistence-context-1" itemprop="url">
+                영속성 컨텍스트 (Persistence Context) 란 (1)
+              </a>
+            
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">작성일</span>
+              
+              <time title="" itemprop="dateCreated datePublished" datetime="2018-10-12T04:41:58+09:00">
+                2018-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/JPA" itemprop="url" rel="index">
+                    <span itemprop="name">JPA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <p>우리 말로 표현해보자면 엔티티를 영구 저장하는 환경으로 논리적인 개념에 가깝다.<br />
+엔티티매니저로 엔티티를 저장하거나 조회하면 영속성 컨텍스트에 엔티티를 보관하고 관리한다.<br />
+기본적으로 엔티티매니저가 생성될 때 하나의 영속성 컨텍스트가 만들어지며, 여러 개의 엔티티매니저가 하나의 영속성 컨텍스트에 접근할 수도 있다.<br />
+persist 메소드를 “회원 엔티티를 저장한다”보다 정확히 얘기하면 “엔티티매니저를 사용해서 회원 엔티티를 영속성 컨텍스트에 저장한다”로 말할수있다.<br />
+<!--more--></p>
+<h5 id="엔티티의-생명주기">엔티티의 생명주기</h5>
+<p>비영속 (new/transient) : 영속성 컨텍스트와 전혀 관계가 없는 순수한 객체인 상태
+영속 (managed) : 영속성 컨텍스트에 저장된 상태, 영속성 컨텍스트에 의해 관리되는 상태
+준영속 (detached) : 영속성 컨텍스트에 저장되었다가 분리된 상태
+삭제 (removed) : 삭제된 상태</p>
+
+
+
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/articles/2018-10/description-of-persistence-context-1#" rel="contents">
+              더 읽어보기 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+        
+        
+        
+        
+          <div class="post-eof"></div>
+        
+      
+    </footer>
+  </article>
+
+  
+    
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/description-of-persistence-context-2">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -519,7 +697,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/difference-of-equality-and-identity">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/difference-of-equality-and-identity">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -688,7 +866,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/entity-manager-factory-and-entity-manager">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/entity-manager-factory-and-entity-manager">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -862,7 +1040,7 @@ META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 �
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/jpa-basic-setting">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/jpa-basic-setting">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1031,7 +1209,7 @@ META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 �
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/crud-example-with-jpa-app">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/crud-example-with-jpa-app">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1205,7 +1383,7 @@ META/INF/persistence.xml 에 설정한 정보를 기반으로 다음과 같은 �
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/what-is-jpa-orm">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/what-is-jpa-orm">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1376,7 +1554,7 @@ ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터�
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-10/difference-of-entity-db-model">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-10/difference-of-entity-db-model">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1550,7 +1728,7 @@ ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터�
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-09/linux-tar-command">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-09/linux-tar-command">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1719,7 +1897,7 @@ ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터�
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-09/linux-scheduling-with-crontab">
+    <link itemprop="mainEntityOfPage" href="/articles/2018-09/linux-scheduling-with-crontab">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -1877,178 +2055,6 @@ crontab <span class="nt">-l</span></code></pre></figure>
         
         
         
-          <div class="post-eof"></div>
-        
-      
-    </footer>
-  </article>
-
-  
-    
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/articles/2018-08/desc-of-http-cookie">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="이현규">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="@deveely">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-                
-                <a class="post-title-link" href="/articles/2018-08/desc-of-http-cookie" itemprop="url">
-                HTTP 쿠키(Cookie) 란?
-              </a>
-            
-          
-        </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">작성일</span>
-              
-              <time title="" itemprop="dateCreated datePublished" datetime="2018-08-26T03:44:21+09:00">
-                2018-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/IT%EA%B8%B0%EB%B3%B8" itemprop="url" rel="index">
-                    <span itemprop="name">IT기본</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  <blockquote>
-  <p>HTTP 쿠키(웹 쿠키, 브라우저 쿠키)는 HTTP 메세지의 헤더에 담겨 서버와 브라우저간 주고받는 작은 데이터 조각이다.
-쿠키를 이용하면 상태가 없는(stateless) HTTP 프로토콜에서 사용자 로그인 상태 유지 등 다양한 상태 기반 정보를 기억할 수 있다.</p>
-</blockquote>
-
-
-
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/articles/2018-08/desc-of-http-cookie#" rel="contents">
-              더 읽어보기 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-        
-        
-        
-        
       
     </footer>
   </article>
@@ -2064,7 +2070,7 @@ crontab <span class="nt">-l</span></code></pre></figure>
 
 
 
-    <a class="extend prev" rel="prev" href="/page3"><i class="fa fa-angle-left"></i></a> <a class="page-number" href="/">1</a> <span class="space">&hellip;</span> <a class="page-number" href="/page3">3</a> <span class="page-number current">4</span> <a class="page-number" href="/page5">5</a> <a class="page-number" href="/page6">6</a> <a class="extend prev" rel="next" href="/page5"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page3"><i class="fa fa-angle-left"></i></a> <a class="page-number" href="/">1</a> <span class="space">&hellip;</span> <a class="page-number" href="/page3">3</a> <span class="page-number current">4</span> <a class="page-number" href="/page5">5</a> <span class="space">&hellip;</span> <a class="page-number" href="/page7">7</a> <a class="extend prev" rel="next" href="/page5"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2110,7 +2116,7 @@ crontab <span class="nt">-l</span></code></pre></figure>
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">61</span>
                 <span class="site-state-item-name">포스트</span>
               </a>
             </div>
@@ -2121,7 +2127,7 @@ crontab <span class="nt">-l</span></code></pre></figure>
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">카테고리</span>
               </a>
             </div>
@@ -2132,7 +2138,7 @@ crontab <span class="nt">-l</span></code></pre></figure>
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/">
-                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">태그</span>
               </a>
             </div>

@@ -115,7 +115,7 @@
 <meta name="keywords" content="hyungyu.lee,Software,Blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Archive">
-<meta property="og:url" content="http://localhost:4000/archive/">
+<meta property="og:url" content="/archive/">
 <meta property="og:site_name" content="@deveely">
 <meta property="og:description" content="{% assign posts_by_year = site.posts | group_by_exp:&quot;post&quot;, &quot;post.date | date: &apos;%Y&apos; &quot; %} {% for group in posts_by_year %} {{ group.name }} {% for post in group.items %} {{ post.date | date: &quot;%b %-d&quot; }} {{ post.title }} {% endfor %} {% endfor %}">
 <meta property="og:locale" content="ko">
@@ -148,7 +148,7 @@
 
 
 
-  <link rel="canonical" href="http://localhost:4000/"/>
+  <link rel="canonical" href=""/>
 
 
 
@@ -360,35 +360,37 @@
 
       <ul>
       
-        <li><div style="width:60px;float:left;">Dec 21</div> <a href="http://localhost:4000/articles/2019-12/spring-ehcache">Spring Ehcache 사용 간략한 정리</a></li>
+        <li><div style="width:60px;float:left;">Dec 28</div> <a href="/articles/2019-12/grpc-1">gRPC Reference - 개요 및 특징</a></li>
       
-        <li><div style="width:60px;float:left;">Dec 14</div> <a href="http://localhost:4000/articles/2019-12/terminal-open-ide">mac terminal 에서 특정 프로젝트를 vscode 또는 IntelliJ 실행하기</a></li>
+        <li><div style="width:60px;float:left;">Dec 21</div> <a href="/articles/2019-12/spring-ehcache">Spring Ehcache 사용 간략한 정리</a></li>
       
-        <li><div style="width:60px;float:left;">Dec 14</div> <a href="http://localhost:4000/articles/2019-12/git-change-commit">git commit 날짜, author 변경하기</a></li>
+        <li><div style="width:60px;float:left;">Dec 14</div> <a href="/articles/2019-12/terminal-open-ide">mac terminal 에서 특정 프로젝트를 vscode 또는 IntelliJ 실행하기</a></li>
       
-        <li><div style="width:60px;float:left;">Dec 1</div> <a href="http://localhost:4000/articles/2019-12/nhn-forward-review">NHN FORWARD 2019 후기</a></li>
+        <li><div style="width:60px;float:left;">Dec 14</div> <a href="/articles/2019-12/git-change-commit">git commit 날짜, author 변경하기</a></li>
       
-        <li><div style="width:60px;float:left;">Nov 21</div> <a href="http://localhost:4000/articles/2019-11/server-connection-delay">리눅스 SSH, MySQL 접속 지연 문제</a></li>
+        <li><div style="width:60px;float:left;">Dec 1</div> <a href="/articles/2019-12/nhn-forward-review">NHN FORWARD 2019 후기</a></li>
       
-        <li><div style="width:60px;float:left;">Nov 13</div> <a href="http://localhost:4000/articles/2019-11/reference-of-gitflow">Git 고급 브랜치 전략과 Gitflow</a></li>
+        <li><div style="width:60px;float:left;">Nov 21</div> <a href="/articles/2019-11/server-connection-delay">리눅스 SSH, MySQL 접속 지연 문제</a></li>
       
-        <li><div style="width:60px;float:left;">Nov 5</div> <a href="http://localhost:4000/articles/2019-11/netlify-with-vue">Netlify를 사용하여 정적 사이트 배포하기</a></li>
+        <li><div style="width:60px;float:left;">Nov 13</div> <a href="/articles/2019-11/reference-of-gitflow">Git 고급 브랜치 전략과 Gitflow</a></li>
       
-        <li><div style="width:60px;float:left;">Nov 3</div> <a href="http://localhost:4000/articles/2019-11/jpa-orm-querydsl">Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)</a></li>
+        <li><div style="width:60px;float:left;">Nov 5</div> <a href="/articles/2019-11/netlify-with-vue">Netlify를 사용하여 정적 사이트 배포하기</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 30</div> <a href="http://localhost:4000/articles/2019-10/java-generic-type">Reflection Type을 활용해 JPA 공통 AttributeConverter 구현</a></li>
+        <li><div style="width:60px;float:left;">Nov 3</div> <a href="/articles/2019-11/jpa-orm-querydsl">Java ORM JPA과 객체지향 쿼리 사용(JPQL, Criteria, QueryDSL)</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 29</div> <a href="http://localhost:4000/articles/2019-10/how-spring-aop-works">Spring AOP 동작 방식, 원리</a></li>
+        <li><div style="width:60px;float:left;">Oct 30</div> <a href="/articles/2019-10/java-generic-type">Reflection Type을 활용해 JPA 공통 AttributeConverter 구현</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 22</div> <a href="http://localhost:4000/articles/2019-10/my-book-list">개인적인 IT 서적 추천</a></li>
+        <li><div style="width:60px;float:left;">Oct 29</div> <a href="/articles/2019-10/how-spring-aop-works">Spring AOP 동작 방식, 원리</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 15</div> <a href="http://localhost:4000/articles/2019-10/jpa-query-tech">JPA의 쿼리 기술 종류</a></li>
+        <li><div style="width:60px;float:left;">Oct 22</div> <a href="/articles/2019-10/my-book-list">개인적인 IT 서적 추천</a></li>
       
-        <li><div style="width:60px;float:left;">Sep 9</div> <a href="http://localhost:4000/articles/2019-09/use-linux-command-on-windows">Windows에서 Linux 명령어 사용환경 구성하기</a></li>
+        <li><div style="width:60px;float:left;">Oct 15</div> <a href="/articles/2019-10/jpa-query-tech">JPA의 쿼리 기술 종류</a></li>
       
-        <li><div style="width:60px;float:left;">May 24</div> <a href="http://localhost:4000/articles/2019-05/example-of-elk">ELK를 활용한 로그 중앙집중 처리</a></li>
+        <li><div style="width:60px;float:left;">Sep 9</div> <a href="/articles/2019-09/use-linux-command-on-windows">Windows에서 Linux 명령어 사용환경 구성하기</a></li>
       
-        <li><div style="width:60px;float:left;">Jan 9</div> <a href="http://localhost:4000/articles/2019-01/spring-boot-configurations">Spring Boot 설정파일</a></li>
+        <li><div style="width:60px;float:left;">May 24</div> <a href="/articles/2019-05/example-of-elk">ELK를 활용한 로그 중앙집중 처리</a></li>
+      
+        <li><div style="width:60px;float:left;">Jan 9</div> <a href="/articles/2019-01/spring-boot-configurations">Spring Boot 설정파일</a></li>
       
       </ul>
 
@@ -399,73 +401,73 @@
 
       <ul>
       
-        <li><div style="width:60px;float:left;">Dec 18</div> <a href="http://localhost:4000/articles/2018-12/spring-boot-mybatis-problem">Spring Boot Build 시 MyBatis Type Alias 미적용 문제</a></li>
+        <li><div style="width:60px;float:left;">Dec 18</div> <a href="/articles/2018-12/spring-boot-mybatis-problem">Spring Boot Build 시 MyBatis Type Alias 미적용 문제</a></li>
       
-        <li><div style="width:60px;float:left;">Nov 18</div> <a href="http://localhost:4000/articles/2018-11/problems-with-lombok">Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결</a></li>
+        <li><div style="width:60px;float:left;">Nov 18</div> <a href="/articles/2018-11/problems-with-lombok">Lombok 사용 중 constructor ... is already defined in class 오류 발생 해결</a></li>
       
-        <li><div style="width:60px;float:left;">Nov 6</div> <a href="http://localhost:4000/articles/2018-11/install-object-aid-plugin">이클립스 클래스 다이어그램 플러그인 ObjectAid 설치</a></li>
+        <li><div style="width:60px;float:left;">Nov 6</div> <a href="/articles/2018-11/install-object-aid-plugin">이클립스 클래스 다이어그램 플러그인 ObjectAid 설치</a></li>
       
-        <li><div style="width:60px;float:left;">Nov 2</div> <a href="http://localhost:4000/articles/2018-11/merge-file-in-linux">리눅스 여러 파일 내용 하나로 합치기</a></li>
+        <li><div style="width:60px;float:left;">Nov 2</div> <a href="/articles/2018-11/merge-file-in-linux">리눅스 여러 파일 내용 하나로 합치기</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 30</div> <a href="http://localhost:4000/articles/2018-10/spring-orm-hibernate-settings">Spring ORM (Hibernate) 설정</a></li>
+        <li><div style="width:60px;float:left;">Oct 30</div> <a href="/articles/2018-10/spring-orm-hibernate-settings">Spring ORM (Hibernate) 설정</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 29</div> <a href="http://localhost:4000/articles/2018-10/json-sample-online">JSON 샘플 데이터 제공 사이트 소개</a></li>
+        <li><div style="width:60px;float:left;">Oct 29</div> <a href="/articles/2018-10/json-sample-online">JSON 샘플 데이터 제공 사이트 소개</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 26</div> <a href="http://localhost:4000/articles/2018-10/tips-of-developing-vue-with-vscode">VSCode로 Vue개발 시 팁</a></li>
+        <li><div style="width:60px;float:left;">Oct 26</div> <a href="/articles/2018-10/tips-of-developing-vue-with-vscode">VSCode로 Vue개발 시 팁</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 23</div> <a href="http://localhost:4000/articles/2018-10/jpa-object-relations-setting">JPA 객체 연관관계 설정</a></li>
+        <li><div style="width:60px;float:left;">Oct 23</div> <a href="/articles/2018-10/jpa-object-relations-setting">JPA 객체 연관관계 설정</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 17</div> <a href="http://localhost:4000/articles/2018-10/object-relations-table-relations">객체 연관관계 VS 테이블 연관관계</a></li>
+        <li><div style="width:60px;float:left;">Oct 17</div> <a href="/articles/2018-10/object-relations-table-relations">객체 연관관계 VS 테이블 연관관계</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 17</div> <a href="http://localhost:4000/articles/2018-10/entity-table-mapping">엔티티(Entity) 테이블(Table) 매핑</a></li>
+        <li><div style="width:60px;float:left;">Oct 17</div> <a href="/articles/2018-10/entity-table-mapping">엔티티(Entity) 테이블(Table) 매핑</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 14</div> <a href="http://localhost:4000/articles/2018-10/solution-for-vue-crlf-error">Expected linebreaks to be 'LF' but found 'CRLF' 오류 관련</a></li>
+        <li><div style="width:60px;float:left;">Oct 14</div> <a href="/articles/2018-10/solution-for-vue-crlf-error">Expected linebreaks to be 'LF' but found 'CRLF' 오류 관련</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 12</div> <a href="http://localhost:4000/articles/2018-10/create-vue-project-with-vue-cli">Vue-CLI를 이용한 Vue프로젝트 생성</a></li>
+        <li><div style="width:60px;float:left;">Oct 12</div> <a href="/articles/2018-10/create-vue-project-with-vue-cli">Vue-CLI를 이용한 Vue프로젝트 생성</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 12</div> <a href="http://localhost:4000/articles/2018-10/install-nodejs-and-npm">Node.js 및 NPM 설치</a></li>
+        <li><div style="width:60px;float:left;">Oct 12</div> <a href="/articles/2018-10/install-nodejs-and-npm">Node.js 및 NPM 설치</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 12</div> <a href="http://localhost:4000/articles/2018-10/query-dsl-error-on-pom">QueryDSL 관련 pom.xml 오류</a></li>
+        <li><div style="width:60px;float:left;">Oct 12</div> <a href="/articles/2018-10/query-dsl-error-on-pom">QueryDSL 관련 pom.xml 오류</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 12</div> <a href="http://localhost:4000/articles/2018-10/description-of-persistence-context-1">영속성 컨텍스트 (Persistence Context) 란 (1)</a></li>
+        <li><div style="width:60px;float:left;">Oct 12</div> <a href="/articles/2018-10/description-of-persistence-context-1">영속성 컨텍스트 (Persistence Context) 란 (1)</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 10</div> <a href="http://localhost:4000/articles/2018-10/description-of-persistence-context-2">영속성 컨텍스트 (Persistence Context) 란 (2)</a></li>
+        <li><div style="width:60px;float:left;">Oct 10</div> <a href="/articles/2018-10/description-of-persistence-context-2">영속성 컨텍스트 (Persistence Context) 란 (2)</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 10</div> <a href="http://localhost:4000/articles/2018-10/difference-of-equality-and-identity">Java 동등성과 동일성의 차이</a></li>
+        <li><div style="width:60px;float:left;">Oct 10</div> <a href="/articles/2018-10/difference-of-equality-and-identity">Java 동등성과 동일성의 차이</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 10</div> <a href="http://localhost:4000/articles/2018-10/entity-manager-factory-and-entity-manager">EntityManagerFactory와 EntityManager</a></li>
+        <li><div style="width:60px;float:left;">Oct 10</div> <a href="/articles/2018-10/entity-manager-factory-and-entity-manager">EntityManagerFactory와 EntityManager</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 7</div> <a href="http://localhost:4000/articles/2018-10/jpa-basic-setting">기본적인 JPA 설정방법</a></li>
+        <li><div style="width:60px;float:left;">Oct 7</div> <a href="/articles/2018-10/jpa-basic-setting">기본적인 JPA 설정방법</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 7</div> <a href="http://localhost:4000/articles/2018-10/crud-example-with-jpa-app">JPA 기본적인 CRUD 해보기</a></li>
+        <li><div style="width:60px;float:left;">Oct 7</div> <a href="/articles/2018-10/crud-example-with-jpa-app">JPA 기본적인 CRUD 해보기</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 7</div> <a href="http://localhost:4000/articles/2018-10/what-is-jpa-orm">JPA / ORM 이란?</a></li>
+        <li><div style="width:60px;float:left;">Oct 7</div> <a href="/articles/2018-10/what-is-jpa-orm">JPA / ORM 이란?</a></li>
       
-        <li><div style="width:60px;float:left;">Oct 7</div> <a href="http://localhost:4000/articles/2018-10/difference-of-entity-db-model">객체 모델과 관계형 데이터베이스 모델 차이</a></li>
+        <li><div style="width:60px;float:left;">Oct 7</div> <a href="/articles/2018-10/difference-of-entity-db-model">객체 모델과 관계형 데이터베이스 모델 차이</a></li>
       
-        <li><div style="width:60px;float:left;">Sep 1</div> <a href="http://localhost:4000/articles/2018-09/linux-tar-command">리눅스 tar, gz를 이용한 압축</a></li>
+        <li><div style="width:60px;float:left;">Sep 1</div> <a href="/articles/2018-09/linux-tar-command">리눅스 tar, gz를 이용한 압축</a></li>
       
-        <li><div style="width:60px;float:left;">Sep 1</div> <a href="http://localhost:4000/articles/2018-09/linux-scheduling-with-crontab">리눅스 스케쥴러 crontab 사용</a></li>
+        <li><div style="width:60px;float:left;">Sep 1</div> <a href="/articles/2018-09/linux-scheduling-with-crontab">리눅스 스케쥴러 crontab 사용</a></li>
       
-        <li><div style="width:60px;float:left;">Aug 26</div> <a href="http://localhost:4000/articles/2018-08/desc-of-http-cookie">HTTP 쿠키(Cookie) 란?</a></li>
+        <li><div style="width:60px;float:left;">Aug 26</div> <a href="/articles/2018-08/desc-of-http-cookie">HTTP 쿠키(Cookie) 란?</a></li>
       
-        <li><div style="width:60px;float:left;">Aug 18</div> <a href="http://localhost:4000/articles/2018-08/eclipse-shortcuts">이클립스 단축키 모음</a></li>
+        <li><div style="width:60px;float:left;">Aug 18</div> <a href="/articles/2018-08/eclipse-shortcuts">이클립스 단축키 모음</a></li>
       
-        <li><div style="width:60px;float:left;">Aug 15</div> <a href="http://localhost:4000/articles/2018-08/java-stream-api">Java Stream API 소개</a></li>
+        <li><div style="width:60px;float:left;">Aug 15</div> <a href="/articles/2018-08/java-stream-api">Java Stream API 소개</a></li>
       
-        <li><div style="width:60px;float:left;">Aug 12</div> <a href="http://localhost:4000/articles/2018-08/http-response-send-redirect">HTTP Redirection 응답 보내기</a></li>
+        <li><div style="width:60px;float:left;">Aug 12</div> <a href="/articles/2018-08/http-response-send-redirect">HTTP Redirection 응답 보내기</a></li>
       
-        <li><div style="width:60px;float:left;">Aug 6</div> <a href="http://localhost:4000/articles/2018-08/solution-for-organize-import-not-work">이클립스 Organize Import 단축키 동작하지 않을때 조치방법</a></li>
+        <li><div style="width:60px;float:left;">Aug 6</div> <a href="/articles/2018-08/solution-for-organize-import-not-work">이클립스 Organize Import 단축키 동작하지 않을때 조치방법</a></li>
       
-        <li><div style="width:60px;float:left;">Jul 17</div> <a href="http://localhost:4000/articles/2018-07/install-mysql-on-linux">리눅스 MySQL 설치</a></li>
+        <li><div style="width:60px;float:left;">Jul 17</div> <a href="/articles/2018-07/install-mysql-on-linux">리눅스 MySQL 설치</a></li>
       
-        <li><div style="width:60px;float:left;">Jul 16</div> <a href="http://localhost:4000/articles/2018-07/install-git-on-linux">리눅스 Git 설치 및 원격 Repository clone</a></li>
+        <li><div style="width:60px;float:left;">Jul 16</div> <a href="/articles/2018-07/install-git-on-linux">리눅스 Git 설치 및 원격 Repository clone</a></li>
       
-        <li><div style="width:60px;float:left;">Jul 14</div> <a href="http://localhost:4000/articles/2018-07/settings-for-new-eclipse">새 이클립스 설치 후 진행해야할 설정 목록</a></li>
+        <li><div style="width:60px;float:left;">Jul 14</div> <a href="/articles/2018-07/settings-for-new-eclipse">새 이클립스 설치 후 진행해야할 설정 목록</a></li>
       
-        <li><div style="width:60px;float:left;">Jul 14</div> <a href="http://localhost:4000/articles/2018-07/setting-for-maven-local-repository">이클립스 Maven Local Repository 변경방법</a></li>
+        <li><div style="width:60px;float:left;">Jul 14</div> <a href="/articles/2018-07/setting-for-maven-local-repository">이클립스 Maven Local Repository 변경방법</a></li>
       
-        <li><div style="width:60px;float:left;">Jul 14</div> <a href="http://localhost:4000/articles/2018-07/apache-configuration-on-spring">Spring Framework 환경에서 Apache Commons Configuration 사용</a></li>
+        <li><div style="width:60px;float:left;">Jul 14</div> <a href="/articles/2018-07/apache-configuration-on-spring">Spring Framework 환경에서 Apache Commons Configuration 사용</a></li>
       
       </ul>
 
@@ -476,13 +478,13 @@
 
       <ul>
       
-        <li><div style="width:60px;float:left;">Apr 22</div> <a href="http://localhost:4000/articles/2017-04/reference-for-web-app-ctx">Spring Framework WebApplicationContext 수동으로 참조하는 방법</a></li>
+        <li><div style="width:60px;float:left;">Apr 22</div> <a href="/articles/2017-04/reference-for-web-app-ctx">Spring Framework WebApplicationContext 수동으로 참조하는 방법</a></li>
       
-        <li><div style="width:60px;float:left;">Mar 7</div> <a href="http://localhost:4000/articles/2017-03/simple-project-without-ide">IDE없이 기본 프로젝트 환경 구성</a></li>
+        <li><div style="width:60px;float:left;">Mar 7</div> <a href="/articles/2017-03/simple-project-without-ide">IDE없이 기본 프로젝트 환경 구성</a></li>
       
-        <li><div style="width:60px;float:left;">Jan 20</div> <a href="http://localhost:4000/articles/2017-01/bootstrap-custom-popover">Bootstrap popover(팝오버) 커스터마이징</a></li>
+        <li><div style="width:60px;float:left;">Jan 20</div> <a href="/articles/2017-01/bootstrap-custom-popover">Bootstrap popover(팝오버) 커스터마이징</a></li>
       
-        <li><div style="width:60px;float:left;">Jan 13</div> <a href="http://localhost:4000/articles/2017-01/spring-interceptor">스프링 인터셉터(interceptor) 활용</a></li>
+        <li><div style="width:60px;float:left;">Jan 13</div> <a href="/articles/2017-01/spring-interceptor">스프링 인터셉터(interceptor) 활용</a></li>
       
       </ul>
 
@@ -493,19 +495,19 @@
 
       <ul>
       
-        <li><div style="width:60px;float:left;">Dec 22</div> <a href="http://localhost:4000/articles/2016-12/mybatis-escaping">MyBatis 사용 시 부등호 등 이스케이프(escape) 처리</a></li>
+        <li><div style="width:60px;float:left;">Dec 22</div> <a href="/articles/2016-12/mybatis-escaping">MyBatis 사용 시 부등호 등 이스케이프(escape) 처리</a></li>
       
-        <li><div style="width:60px;float:left;">Dec 20</div> <a href="http://localhost:4000/articles/2016-12/spring-path-variable-issue">Spring Path variable 사용 시 확장자 문제</a></li>
+        <li><div style="width:60px;float:left;">Dec 20</div> <a href="/articles/2016-12/spring-path-variable-issue">Spring Path variable 사용 시 확장자 문제</a></li>
       
-        <li><div style="width:60px;float:left;">Dec 20</div> <a href="http://localhost:4000/articles/2016-12/get-started-summernote">웹 기반 WYSIWYG 에디터 Summernote 사용하기</a></li>
+        <li><div style="width:60px;float:left;">Dec 20</div> <a href="/articles/2016-12/get-started-summernote">웹 기반 WYSIWYG 에디터 Summernote 사용하기</a></li>
       
-        <li><div style="width:60px;float:left;">Dec 14</div> <a href="http://localhost:4000/articles/2016-12/jQuery-for-each-control">jQuery each메소드 사용 시 break, continue 제어</a></li>
+        <li><div style="width:60px;float:left;">Dec 14</div> <a href="/articles/2016-12/jQuery-for-each-control">jQuery each메소드 사용 시 break, continue 제어</a></li>
       
-        <li><div style="width:60px;float:left;">Dec 5</div> <a href="http://localhost:4000/articles/2016-12/jQuery-image-preview">jQuery를 이용한 input file 이미지 선택 시 미리보기</a></li>
+        <li><div style="width:60px;float:left;">Dec 5</div> <a href="/articles/2016-12/jQuery-image-preview">jQuery를 이용한 input file 이미지 선택 시 미리보기</a></li>
       
-        <li><div style="width:60px;float:left;">Nov 23</div> <a href="http://localhost:4000/articles/2016-11/java-dynamic-proxy">Java Dynamic Proxy</a></li>
+        <li><div style="width:60px;float:left;">Nov 23</div> <a href="/articles/2016-11/java-dynamic-proxy">Java Dynamic Proxy</a></li>
       
-        <li><div style="width:60px;float:left;">Nov 21</div> <a href="http://localhost:4000/articles/2016-11/about-spring-aop">Spring AOP 적용 관련 이야기</a></li>
+        <li><div style="width:60px;float:left;">Nov 21</div> <a href="/articles/2016-11/about-spring-aop">Spring AOP 적용 관련 이야기</a></li>
       
       </ul>
 
@@ -558,7 +560,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">61</span>
                 <span class="site-state-item-name">포스트</span>
               </a>
             </div>
@@ -569,7 +571,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">카테고리</span>
               </a>
             </div>
@@ -580,7 +582,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/">
-                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">태그</span>
               </a>
             </div>

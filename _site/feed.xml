@@ -3,11 +3,192 @@
   <channel>
     <title>@deveely</title>
     <description>Software Engineer</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-12-21</pubDate>
-    <lastBuildDate>Sat, 21 Dec 2019 21:29:55 +0900</lastBuildDate>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>2019-12-29</pubDate>
+    <lastBuildDate>Sun, 29 Dec 2019 16:26:22 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>gRPC Reference - 개요 및 특징</title>
+        <description>&lt;h2 id=&quot;1-grpc-란&quot;&gt;1. gRPC 란&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Protocol Buffer를 IDL (Interface Definition Language)로 사용하는 RPC 프레임워크&lt;/li&gt;
+  &lt;li&gt;구글에서 10년 이상동안 MSA 아키텍쳐 이하 수많은 시스템들, 데이터 센터 간 통신을 위해 사용하던 범용 RPC 프레임워크인 &lt;code class=&quot;highlighter-rouge&quot;&gt;Stubby&lt;/code&gt;를 오픈소스화해 공개한 것
+&lt;!--more--&gt;
+&lt;img src=&quot;/assets/images/post-images/2019-12-28-grpc-1/1.png&quot; alt=&quot;basic.png&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;11-rpc란&quot;&gt;1.1. RPC란?&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;RPC (Remote Procedure Call)은 별도의 원격제어 없이 프로세스간 함수나 프로시저를 호출할 수 있도록 하는 통신 기술&lt;/li&gt;
+  &lt;li&gt;서로 통신하는 양 측의 Request, Response에 대한 인터페이스를 정의 후 양 측 프로그래밍 언어에 맞는 코드로 변환해야함.&lt;/li&gt;
+  &lt;li&gt;이 때 인터페이스를 정의하는 용어는 IDL(Interface Definition Language)라 함&lt;/li&gt;
+  &lt;li&gt;IDL이 컴파일러 등으로 특정 언어의 코드로 변환된 결과를 Skeleton (서버 측), Stub (클라이언트 측) 라 함&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;12-protocol-buffer-protobuf&quot;&gt;1.2. Protocol Buffer (ProtoBuf)&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;구글에서 개발한 데이터 직렬화 오픈소스로 gRPC의 IDL로 사용&lt;/li&gt;
+  &lt;li&gt;직렬화하려는 데이터의 구조를 프로토 파일에 정의 (.proto)&lt;/li&gt;
+  &lt;li&gt;ProtoBuf의 데이터는 message 들로 구성되며 각 message는 field (name, value pair) 로 구성
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;message Person {
+  string name = 1;
+  int32 id = 2;
+  bool has_ponycopter = 3;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;프로토 파일을 protoc(프로토콜 버퍼 컴파일러)로 원하는 언어에서 사용가능한 결과물로 컴파일하여 사용한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;2-grpc-의-특징&quot;&gt;2. gRPC 의 특징&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;높은 생산성과 효율적인 유지보수
+    &lt;ul&gt;
+      &lt;li&gt;서비스와 메시지를 정의하기 위해 오직 ProtoBuf 만을 사용&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;다양한 언어와 플랫폼 지원&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Language&lt;/th&gt;
+      &lt;th&gt;Platform&lt;/th&gt;
+      &lt;th&gt;Compiler&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;C/C++&lt;/td&gt;
+      &lt;td&gt;Linux/Mac&lt;/td&gt;
+      &lt;td&gt;GCC 4.8+, Clang 3.3+&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;C/C++&lt;/td&gt;
+      &lt;td&gt;Windows 7+&lt;/td&gt;
+      &lt;td&gt;Visual Studio 2015+&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;C#&lt;/td&gt;
+      &lt;td&gt;Linux/Mac&lt;/td&gt;
+      &lt;td&gt;.NET Core, Mono 4+&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;C#&lt;/td&gt;
+      &lt;td&gt;Windows 7+&lt;/td&gt;
+      &lt;td&gt;.NET Core, .NET 4.5+&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Dart&lt;/td&gt;
+      &lt;td&gt;Windows/Linux/Mac&lt;/td&gt;
+      &lt;td&gt;Dart 2.0+&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Go&lt;/td&gt;
+      &lt;td&gt;Windows/Linux/Mac&lt;/td&gt;
+      &lt;td&gt;Go 1.6+&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Java&lt;/td&gt;
+      &lt;td&gt;Windows/Linux/Mac&lt;/td&gt;
+      &lt;td&gt;JDK 8 recommended. Gingerbread+ for Android&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Node.js&lt;/td&gt;
+      &lt;td&gt;Windows/Linux/Mac&lt;/td&gt;
+      &lt;td&gt;Node v4+&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Objective-C&lt;/td&gt;
+      &lt;td&gt;Mac OS X 10.11+/iOS 7.0+&lt;/td&gt;
+      &lt;td&gt;Xcode 7.2+&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;PHP (Beta)&lt;/td&gt;
+      &lt;td&gt;Linux/Mac&lt;/td&gt;
+      &lt;td&gt;PHP 5.5+ and PHP 7.0+&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Python&lt;/td&gt;
+      &lt;td&gt;Windows/Linux/Mac&lt;/td&gt;
+      &lt;td&gt;Python 2.7 and Python 3.4+&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ruby&lt;/td&gt;
+      &lt;td&gt;Windows/Linux/Mac&lt;/td&gt;
+      &lt;td&gt;Ruby 2.3+&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;HTTP/2 기반 통신
+    &lt;ul&gt;
+      &lt;li&gt;gRPC 는 HTTP/2 기반 통신으로 기존 HTTP 과는 다르게 서버와 클라이언트가 서로 데이터를 스트리밍으로 주고 받을 수 있음
+        &lt;ul&gt;
+          &lt;li&gt;simple RPC : 클라이언트 요청에 서버가 응답하고 종료&lt;/li&gt;
+          &lt;li&gt;server-side streaming RPC : 클라이언트 요청에 응답을 여러번 보냄&lt;/li&gt;
+          &lt;li&gt;client-side streaming RPC : 클라이언트가 요청을 여러번 보내고, 요청이 끝나면 응답을 보냄&lt;/li&gt;
+          &lt;li&gt;bidirectional streaming RPC : 양방향 독립적으로 요청/응답을 보냄&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;기존 HTTP 보다 높은 헤더 압축률이 보장되고, ProtoBuf의 직렬화에 의해 전송되는 메시지가 획기적으로 줄어듬&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;3-grpc-vs-rest&quot;&gt;3. gRPC vs REST&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Payload 의 차이
+    &lt;ul&gt;
+      &lt;li&gt;gRPC는 Protobuf 형식 자체 직렬화된 데이터&lt;/li&gt;
+      &lt;li&gt;REST 는 JSON 데이터를 주고받음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;HTTP 버전의 차이
+    &lt;ul&gt;
+      &lt;li&gt;gRPC는 HTTP/2 기반 통신&lt;/li&gt;
+      &lt;li&gt;REST는 일반적으로 HTTP/1.1 통신&lt;/li&gt;
+      &lt;li&gt;때문에 gRPC는 스트리밍, 헤더 압축 등 HTTP/2 의 여러 장점을 확보&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;호출방식의 차이
+    &lt;ul&gt;
+      &lt;li&gt;gRPC는 proto파일에 정의한 &lt;code class=&quot;highlighter-rouge&quot;&gt;message&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;service&lt;/code&gt; 를 각 언어에 필요한 형태로 generate됨. 클라이언트에서 service 메소드를 호출하면 그에 해당하는 서버에서 구현한 service가 실행되고, 요청/응답 페이로드는 언어에 맞게 generate 결과를 사용&lt;/li&gt;
+      &lt;li&gt;REST는 endpoint 를 HTTP Method + URI 로 표현하고, 페이로드 처리는 각 서버/클라이언트 측에서 각각 부담&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;4-grpc의-활용&quot;&gt;4. gRPC의 활용&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;gRPC는 단일 인스턴스로 동작하는 CRUD 웹 애플리케이션에서 부터 수십 수백개의 인스턴스가 상호 작용하는 MSA 까지 모든 구조에서 사용 가능&lt;/li&gt;
+  &lt;li&gt;클라이언트 측에 gRPC 스텁을 library 등으로 제공해줘야하는 부분은 존재하는등 몇 가지 한계점도 존재 -&amp;gt; 호출 인터페이스 측면에서 웹 환경에서 사용한다면 REST 방식에 비해 일부제약&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gRPC Gateway&lt;/code&gt; 플러그인을 사용하면 gRPC 서비스에 REST API 인터페이스를 제공할 수 있게 &lt;code class=&quot;highlighter-rouge&quot;&gt;go&lt;/code&gt; 런타임에서 작동하는 프록시 서버와 Swagger 문서를 generate 해준다. (go 이외 다른 언어는 미지원)
+때문에 gRPC 서비스를 이용할 준비가 되지 않은 클라이언트의 경우나 웹 환경에서 사용 가능&lt;/li&gt;
+  &lt;li&gt;https://github.com/wejrowski/grpc-gateway-java-gradle (Spring Boot gRPC + grpc-gateway 예시)&lt;/li&gt;
+  &lt;li&gt;https://grpc-ecosystem.github.io/grpc-gateway/ (grpc-gateway 공식 문서)
+&lt;img src=&quot;/assets/images/post-images/2019-12-28-grpc-1/2.png&quot; alt=&quot;grpc-gateway.png&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>2019-12-29</pubDate>
+        <link>/articles/2019-12/grpc-1</link>
+        <guid isPermaLink="true">/articles/2019-12/grpc-1</guid>
+        
+        <category>gRPC</category>
+        
+        <category>HTTP/2</category>
+        
+        
+        <category>gRPC</category>
+        
+      </item>
     
       <item>
         <title>Spring Ehcache 사용 간략한 정리</title>
@@ -74,9 +255,9 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2019-12-21</pubDate>
-        <link>http://localhost:4000/articles/2019-12/spring-ehcache</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-12/spring-ehcache</guid>
+        <pubDate>2019-12-29</pubDate>
+        <link>/articles/2019-12/spring-ehcache</link>
+        <guid isPermaLink="true">/articles/2019-12/spring-ehcache</guid>
         
         <category>Spring Framework</category>
         
@@ -113,9 +294,9 @@ IntelliJ를 실행 후 &lt;code class=&quot;highlighter-rouge&quot;&gt;Tools &am
 idea pom.xml
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2019-12-21</pubDate>
-        <link>http://localhost:4000/articles/2019-12/terminal-open-ide</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-12/terminal-open-ide</guid>
+        <pubDate>2019-12-29</pubDate>
+        <link>/articles/2019-12/terminal-open-ide</link>
+        <guid isPermaLink="true">/articles/2019-12/terminal-open-ide</guid>
         
         <category>vscode</category>
         
@@ -236,9 +417,9 @@ git commit &lt;span class=&quot;nt&quot;&gt;--amend&lt;/span&gt; &lt;span class=
 입력하면 되고, 더 이상 수정할 것이 없으면 rebase 모드가 종료되게 됩니다. 수정을 마치고 push 하여 마무리 해주면 github에도 반영되게 됩니다.&lt;/p&gt;
 
 </description>
-        <pubDate>2019-12-21</pubDate>
-        <link>http://localhost:4000/articles/2019-12/git-change-commit</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-12/git-change-commit</guid>
+        <pubDate>2019-12-29</pubDate>
+        <link>/articles/2019-12/git-change-commit</link>
+        <guid isPermaLink="true">/articles/2019-12/git-change-commit</guid>
         
         <category>git</category>
         
@@ -256,7 +437,7 @@ git commit &lt;span class=&quot;nt&quot;&gt;--amend&lt;/span&gt; &lt;span class=
 &lt;!--more--&gt;
 
 &lt;h2 id=&quot;nhn-forward-2019&quot;&gt;NHN Forward 2019&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn1.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn1.jpeg&quot; alt=&quot;Image1&quot; /&gt;
 지난 11월 27일 &lt;code class=&quot;highlighter-rouge&quot;&gt;NHN Forward 2019&lt;/code&gt; 컨퍼런스에 참가했습니다.
 회사가 회사다 보니 다양한 컨텐츠들이 준비되어 있었는데요. 
 크게 아래와 같았습니다.&lt;/p&gt;
@@ -274,7 +455,7 @@ git commit &lt;span class=&quot;nt&quot;&gt;--amend&lt;/span&gt; &lt;span class=
   &lt;li&gt;핸즈온 랩&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn2.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn2.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;프론트엔드 전문 개발자분들이 직접 고민을 들어주고 대화를 할 수 있는 프런트엔드 상담소나 평소에 궁금했거나 해보고 싶었던 것들을 쉽게 따라해보고 경혐해 볼 수 있었던
 핸즈온 랩 등 준비를 정말 많이 했다는 느낌이 들었습니다.&lt;/p&gt;
@@ -306,7 +487,7 @@ git commit &lt;span class=&quot;nt&quot;&gt;--amend&lt;/span&gt; &lt;span class=
   &lt;li&gt;헥사고날 아키텍쳐&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn6.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn6.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;3-레거시-웹-서비스-길들이기-서버-개발자의-spa-적용기&quot;&gt;3. 레거시 웹 서비스 길들이기: 서버 개발자의 SPA 적용기&lt;/h4&gt;
 &lt;p&gt;저 또한 Spring 기반 웹 백엔드 애플리케이션을 만드는 개발자 다 보니 이 세션에서 소개해주신 사례들이 하나하나가 공감가는 사례들이었습니다.
@@ -314,7 +495,7 @@ git commit &lt;span class=&quot;nt&quot;&gt;--amend&lt;/span&gt; &lt;span class=
 
 &lt;p&gt;적용하기전의 고민 / 적용하면서의 고민 / 현재 팀의 상황 / 효율적인 빌드를 위한 프로젝트 구성 / API 호출 방식 with Zuul /상태관리 / 다국어처리 
 
- &lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn3.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+ &lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn3.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;4-spring-jpa의-사실과-오해&quot;&gt;4. Spring JPA의 사실과 오해&lt;/h4&gt;
 &lt;p&gt;Spring JPA에 평소에 잘 알려지지 않은 사실들과 오해들을 소개해주셨습니다.&lt;/p&gt;
@@ -330,24 +511,24 @@ git commit &lt;span class=&quot;nt&quot;&gt;--amend&lt;/span&gt; &lt;span class=
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn5.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn5.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;5-paas--api-experience-좋은-api-dx를-제공하기-위한-작은-걸음&quot;&gt;5. Paas &amp;amp; API Experience: 좋은 API DX를 제공하기 위한 작은 걸음&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn7.jpeg&quot; alt=&quot;Image1&quot; /&gt;
- &lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn8.jpeg&quot; alt=&quot;Image1&quot; /&gt;
- &lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn9.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn7.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+ &lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn8.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+ &lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn9.jpeg&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;마치며&quot;&gt;마치며&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-12-01-nhn-forward-review/nhn4.jpeg&quot; alt=&quot;Image1&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-12-01-nhn-forward-review/nhn4.jpeg&quot; alt=&quot;Image1&quot; /&gt;
 NHN Forward 2019의 심볼인 » 는 리달리디렉션 기호 »를 형상화한 것으로 지식과 경험을 더하고 쌓을 수 있기를 바라는 마음을 담았다고 합니다.&lt;/p&gt;
 
 &lt;p&gt;이런 NHN의 의지만큼 많은 것을 경험하고, 배우고, 즐거웠던 1분 1초가 아깝지 않은 시간이었습니다.&lt;/p&gt;
 
 &lt;p&gt;감사합니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-12-21</pubDate>
-        <link>http://localhost:4000/articles/2019-12/nhn-forward-review</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-12/nhn-forward-review</guid>
+        <pubDate>2019-12-29</pubDate>
+        <link>/articles/2019-12/nhn-forward-review</link>
+        <guid isPermaLink="true">/articles/2019-12/nhn-forward-review</guid>
         
         <category>NHNFORWARD2019</category>
         
@@ -418,9 +599,9 @@ UseDNS no
 
 &lt;p&gt;마찬가지로 로컬에서 ssh 접속 시 발생하던 지연은 없고 아주 빠르게 접속되었습니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-12-21</pubDate>
-        <link>http://localhost:4000/articles/2019-11/server-connection-delay</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-11/server-connection-delay</guid>
+        <pubDate>2019-12-29</pubDate>
+        <link>/articles/2019-11/server-connection-delay</link>
+        <guid isPermaLink="true">/articles/2019-11/server-connection-delay</guid>
         
         <category>linux</category>
         
@@ -446,7 +627,7 @@ UseDNS no
 &lt;p&gt;&lt;a href=&quot;https://nvie.com/posts/a-successful-git-branching-model/&quot;&gt;Vincent Driessen가 제안한 고급 브랜치 전략&lt;/a&gt;으로 브랜치를 다음과 같이 분류하고 규칙을 정해 버전관리를 합니다.&lt;/p&gt;
 
 &lt;h4 id=&quot;main-branch&quot;&gt;Main Branch&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/2.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-11-14-reference-of-gitflow/2.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;master
@@ -511,7 +692,7 @@ apt-get install git-flow
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git flow init
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/1.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-11-14-reference-of-gitflow/1.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git flow init&lt;/code&gt; 명령을 실행하면 git repository 에 gitflow 브랜치 모델을 적용하기 위한 설정 절차를 진행합니다.&lt;/p&gt;
 
@@ -531,7 +712,7 @@ Gitflow 는 아래 명령어로 가능합니다.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git flow feature finish name-of-feature
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/post-images/2019-11-14-reference-of-gitflow/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/post-images/2019-11-14-reference-of-gitflow/3.png&quot; alt=&quot;Image1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;그럼 develop 체크아웃 -&amp;gt; feature/name-of-feature 브랜치 develop으로 머지 -&amp;gt;  feature/name-of-feature 제거 작업이 진행됩니다.&lt;/p&gt;
 
@@ -552,9 +733,9 @@ Gitflow 는 아래 명령어로 가능합니다.&lt;/p&gt;
 
 &lt;p&gt;명령어로 간단하게 진행할 수 있습니다.ㅍ&lt;/p&gt;
 </description>
-        <pubDate>2019-12-21</pubDate>
-        <link>http://localhost:4000/articles/2019-11/reference-of-gitflow</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-11/reference-of-gitflow</guid>
+        <pubDate>2019-12-29</pubDate>
+        <link>/articles/2019-11/reference-of-gitflow</link>
+        <guid isPermaLink="true">/articles/2019-11/reference-of-gitflow</guid>
         
         <category>git</category>
         
@@ -593,9 +774,9 @@ Gatsby와 같은 블로그를 배포하는 용도로 쓰이는 것으로 유명�
 
 &lt;p&gt;다음에는 Vue + Firebase + Netlify 의 조합으로 간단한 애플리케이션을 제작하여 배포하는 포스트를 작성할 계획입니다.&lt;/p&gt;
 </description>
-        <pubDate>2019-12-21</pubDate>
-        <link>http://localhost:4000/articles/2019-11/netlify-with-vue</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-11/netlify-with-vue</guid>
+        <pubDate>2019-12-29</pubDate>
+        <link>/articles/2019-11/netlify-with-vue</link>
+        <guid isPermaLink="true">/articles/2019-11/netlify-with-vue</guid>
         
         <category>FE</category>
         
@@ -901,9 +1082,9 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2019-12-21</pubDate>
-        <link>http://localhost:4000/articles/2019-11/jpa-orm-querydsl</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-11/jpa-orm-querydsl</guid>
+        <pubDate>2019-12-29</pubDate>
+        <link>/articles/2019-11/jpa-orm-querydsl</link>
+        <guid isPermaLink="true">/articles/2019-11/jpa-orm-querydsl</guid>
         
         <category>Java</category>
         
@@ -1060,9 +1241,9 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>2019-12-21</pubDate>
-        <link>http://localhost:4000/articles/2019-10/java-generic-type</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/java-generic-type</guid>
+        <pubDate>2019-12-29</pubDate>
+        <link>/articles/2019-10/java-generic-type</link>
+        <guid isPermaLink="true">/articles/2019-10/java-generic-type</guid>
         
         <category>Java</category>
         
@@ -1072,69 +1253,6 @@ Q도메인은 필요한데 별도 컴파일러 플러그인를 등록하면, 프
         <category>Java</category>
         
         <category>JPA</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring AOP 동작 방식, 원리</title>
-        <description>&lt;p&gt;스프링은 기본적으로 프록시 기반 AOP 를 제공한다.
-스프링에서는 Java Dynamic Proxy를 사용하거나 Cglib을 사용하여 프록시 기반 AOP를 구현했다.&lt;/p&gt;
-
-&lt;p&gt;이 글에서는 어떻게 Spring 에서 AOP를 사용할 수 있는 방식의 차이와 프레임워크가 AOP를 지원하기 위해 어떤 처리를 해주는지 개인적으로 분석한 내용을 정리한다.
-&lt;!--more--&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;AopProxy 라는 Delegator 인터페이스로 표현되며 Dynamic Proxy 기반은 JdkDynamicAopProxy 클래스, Cglib 기반은 CglibAopProxy 클래스이다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Dynamic Proxy 기반과 Cglib 차이는 어떻게 프록시 객체를 생성하는지 방식 차이이다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Dynamic Proxy 는 프록시 객체 생성을 위해 인터페이스를 필수로 구현해야하며, Cglib 은 인터페이스를 구현하지 않은 일반 클래스에 런타임 시 코드 조작으로 프록시 객체를 생성해준다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;DefaultAopProxyFactory 클래스의 createAopProxy 메소드를 통해 AopProxy 의 실 구현체가 생성된다.&lt;/p&gt;
-
-    &lt;p&gt;4.1. AOP 적용 대상이 인터페이스거나 인터페이스를 구현(implement)하고 있으면 JdkDynamicAopProxy 가 생성된다.&lt;/p&gt;
-
-    &lt;p&gt;4.2. 위 경우가 아니면 ObjenesisCglibAopProxy 기반 실 객체가 생성된다.&lt;/p&gt;
-
-    &lt;p&gt;4.3. Objenesis 는 과거 Cglib 의 몇 가지 단점을 해결해주는 라이브러리&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Transaction 대상의 경우 기본이 Cglib 으로 생성하게 설정되어있다.&lt;/p&gt;
-
-    &lt;p&gt;5.1. 성능상 Cglib 이 이점이 많고, 예외발생 확률도 적다고 한다.&lt;/p&gt;
-
-    &lt;p&gt;5.2. Cglib 이 가지고 있던 몇 가지 문제점들을 Objenesis 라이브러리를 통해 해결했다. (생성자 중복 호출, default 생성자 필요 문제 등)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;기본 Spring AOP 이외에 스프링에서 사용할 수 있는 방법으로는 AspectJ 가 있다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring AOP 가 제공하는 프록시 기반 방식은 런타임 위빙 (RTW) 이라는 방식으로 프로그램 구동중에 위빙이 일어난다. 반면 AspectJ 는 컴파일 단계 또는 로드타임에 코드를 삽입하여(위빙) RTW 보다 성능면에서 우세하다. (CTW : 컴파일 타임 위빙, LTW : 로드 타임 위빙). 또한 AspectJ 는 기본 Spring AOP 보다 보다 다양한 포인트컷을 지원한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;일반적인 경우 Spring AOP 에서 지원하는 방식으로 요구사항들이 충분히 해결되는 경우가 많고, 성능 또한 @AspectJ 갯수에 따라 달라지는데 일반적인 경우에서는 크게 체감하기 힘들다는 평이 있다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;AspectJ 를 사용하기 위해서는 AJC 등 별도의 컴파일러 설정 등 추가 설정이 필요한데, Spring AOP 는 그렇지 않다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>2019-12-21</pubDate>
-        <link>http://localhost:4000/articles/2019-10/how-spring-aop-works</link>
-        <guid isPermaLink="true">http://localhost:4000/articles/2019-10/how-spring-aop-works</guid>
-        
-        <category>Java</category>
-        
-        <category>Spring Framework</category>
-        
-        <category>AOP</category>
-        
-        
-        <category>Spring Framework</category>
         
       </item>
     
