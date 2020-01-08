@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JPA,Hibernate,ORM," />
+  <meta name="keywords" content="gRPC,HTTP/2," />
 
 
 
@@ -111,17 +111,17 @@
 
 
 
-<meta name="description" content="JPA란 JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다. ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미한다.">
-<meta name="keywords" content="JPA, Hibernate, ORM">
+<meta name="description" content="전 편에서 gRPC에 대한 설명과 특징을 알아보았습니다. 이번 포스트에서는 grpc-java 모듈을 활용한 몇 가지 예제코드를 소개하고, 실제 프로젝트에 적용하는 방안에 대해 소개해보겠습니다.">
+<meta name="keywords" content="gRPC, HTTP/2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JPA / ORM 이란?">
-<meta property="og:url" content="/articles/2018-10/what-is-jpa-orm">
+<meta property="og:title" content="gRPC Reference - 예제">
+<meta property="og:url" content="/articles/2020-01/grpc-2">
 <meta property="og:site_name" content="@deveely">
-<meta property="og:description" content="JPA란 JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다. ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미한다.">
+<meta property="og:description" content="전 편에서 gRPC에 대한 설명과 특징을 알아보았습니다. 이번 포스트에서는 grpc-java 모듈을 활용한 몇 가지 예제코드를 소개하고, 실제 프로젝트에 적용하는 방안에 대해 소개해보겠습니다.">
 <meta property="og:locale" content="ko">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JPA / ORM 이란?">
-<meta name="twitter:description" content="JPA란 JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다. ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미한다.">
+<meta name="twitter:title" content="gRPC Reference - 예제">
+<meta name="twitter:description" content="전 편에서 gRPC에 대한 설명과 특징을 알아보았습니다. 이번 포스트에서는 grpc-java 모듈을 활용한 몇 가지 예제코드를 소개하고, 실제 프로젝트에 적용하는 방안에 대해 소개해보겠습니다.">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -154,7 +154,7 @@
 
 
 
-  <title>JPA / ORM 이란? | @deveely</title>
+  <title>gRPC Reference - 예제 | @deveely</title>
   
 
 
@@ -347,7 +347,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="/articles/2018-10/what-is-jpa-orm">
+    <link itemprop="mainEntityOfPage" href="/articles/2020-01/grpc-2">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="이현규">
@@ -367,7 +367,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            JPA / ORM 이란?
+            gRPC Reference - 예제
           
         </h1>
         
@@ -381,8 +381,8 @@
               
                 <span class="post-meta-item-text">작성일</span>
               
-              <time title="" itemprop="dateCreated datePublished" datetime="2018-10-07T09:22:02+09:00">
-                2018-10-07
+              <time title="" itemprop="dateCreated datePublished" datetime="2020-01-07T21:43:19+09:00">
+                2020-01-07
               </time>
             
 
@@ -405,8 +405,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/JPA" itemprop="url" rel="index">
-                    <span itemprop="name">JPA</span>
+                  <a href="/category/#/gRPC" itemprop="url" rel="index">
+                    <span itemprop="name">gRPC</span>
                   </a>
                 </span>
 
@@ -460,58 +460,331 @@
 
 
 
-  <h4 id="jpa란">JPA란</h4>
-<p>JPA란 Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다.<br />
-ORM이란 Object Relational Mapping의 약자로 객체와 관계형 데이터베이스를 매핑하는 기술을 의미한다.</p>
+  <p>전 편에서 gRPC에 대한 설명과 특징을 알아보았습니다.
+이번 포스트에서는 grpc-java 모듈을 활용한 몇 가지 예제코드를 소개하고, 실제 프로젝트에 적용하는 방안에 대해 소개해보겠습니다.</p>
 
-<p>즉 JPA는 자바의 객체와 관계형 데이터베이스를 매핑하는 표준 기술이다.<br />
+<ul>
+  <li><a href="/articles/2019-12/grpc-1">gRPC Reference - 개요 및 특징</a></li>
+</ul>
+
 <!--more-->
-ORM 프레임워크는 객체 / 관계형 데이터베이스 패러다임의 불일치를 개발자 대신 해결해준다.</p>
 
-<p>ORM 프레임워크 상에서는 개발자가 어떤 객체를 저장할 때 직접 INSERT문을 작성할 필요가 없다.</p>
-
-<p>객체를 자바 컬렉션에 저장하듯이 ORM 프레임워크에 저장하면  프레임워크가 대신 적절한 INSERT문을 생성하여 데이터베이스에 저장해준다.</p>
-
-<p>단순히 SQL만 생성해주는 수준에서부터 패러다임 불일치 문제를 전부 해결해주는 수준까지 다양한 ORM 프레임워크가 있으며</p>
-
-<p>성숙한 ORM 프레임워크로 대표적으로 Hibernate가 있다.</p>
-
-<p>다시 JPA를 이야기해보면 JPA는 ORM 기술 표준이라고 얘기했다.</p>
-
-<p>즉 자바에서 ORM 기술을 이용하기 위한 표준 API 명세, 인터페이스의 집합이라 할 수 있다.</p>
-
-<p>그리고 Hibernate, EclipseLink, DataNucleus 등은 이 JPA를 구현한 구현체들이다.</p>
-
-<h4 id="jpa의-특징">JPA의 특징</h4>
-
+<h2 id="grpc-basic">gRPC Basic</h2>
 <ol>
-  <li>
-    <p>생산성
-<code class="highlighter-rouge">-</code> 기본적으로 객체를 관계형데이터베이스에 저장 / 조회 등을 하는데 필요한 SQL을 개발자 대신 해줌으로써 지루하고 반복적인 CRUD용 SQL문을 개발자가 작성하지 않아도 된다.</p>
+  <li>프로젝트 생성
+    <ul>
+      <li>Java : 1.8</li>
+      <li>gRPC : 1.25.0</li>
+      <li>ProtoBuf : 3.11.0</li>
+    </ul>
   </li>
-  <li>
-    <p>유지보수
-<code class="highlighter-rouge">-</code> SQL문을 직접 작성하지 않음으로써 객체의 변화 ( 속성 추가 등) 이 있을때 모든 SQL 을 직접 수정할 필요가 없다. 단지 해당 엔티티에 속성을 수정하면 된다.</p>
-  </li>
-  <li>
-    <p>패러다임의 불일치 해결
-<code class="highlighter-rouge">-</code> 상속, 연관관계, 객체 그래프 탐색, 비교 등 관계형 데이터베이스와의 패러다임 불일치로 어려워지는 문제들을 해결해준다.</p>
-  </li>
-  <li>
-    <p>데이터 접근 추상화와 벤더 독립성
-<code class="highlighter-rouge">-</code> 관계형 데이터베이스는 Oracle, MySQL등 그 벤더에 따라 같은 기능이더라도 작성해야할 SQL 문이 다른 경우가 많다.<br />
- JPA에서는 SQL을 직접작성하지 않으므로 개발자는 이러한 문제는 신경쓰지 않아도 되며 DB 벤더에 의존하지 않는 애플리케이션을 작성할 수 있다.</p>
-  </li>
-  <li>
-    <p>표준
-<code class="highlighter-rouge">-</code> JPA라는 표준을 구현한 ORM 프레임워크들을 사용하기 때문에 표준을 구현한 다른 프레임워크로 손쉽게 변경할 수 있다.</p>
+  <li>pom.xml 설정
+    <ul>
+      <li>gRPC + Protobuf 의존성 설정</li>
+      <li>스텁 생성을 위해 protoc 플러그인 설정</li>
+    </ul>
+    <ul>
+      <li>proto 컴파일 -&gt; 애플리케이션 컴파일 순으로 진행되도록 설정</li>
+    </ul>
   </li>
 </ol>
 
-<hr />
-<blockquote>
-  <p>자바 ORM 표준 JPA 프로그래밍을 공부하며 정리한 내용입니다.</p>
-</blockquote>
+<div class="language-xml highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27<br/>28<br/>29<br/>30<br/>31<br/>32<br/>33<br/>34<br/>35<br/>36<br/>37<br/>38<br/>39<br/>40<br/>41<br/>42<br/>43<br/>44<br/>45<br/>46<br/>47<br/>48<br/>49<br/>50<br/>51<br/>52<br/>53<br/>54<br/>55<br/>56<br/>57<br/>58<br/>59<br/>60<br/>61<br/>62<br/>63<br/>64<br/>65<br/>66<br/>67<br/>68<br/>69<br/>70<br/>71<br/>72<br/>73<br/>74<br/>75<br/>76<br/>77<br/>78<br/>79</pre></td><td class="code"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span>
+         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+         <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+
+    <span class="nt">&lt;groupId&gt;</span>com.nhn.gia<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>gia-grpc<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+
+    <span class="nt">&lt;properties&gt;</span>
+        <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+        <span class="nt">&lt;grpc.version&gt;</span>1.25.0<span class="nt">&lt;/grpc.version&gt;</span>
+        <span class="nt">&lt;protobuf.version&gt;</span>3.11.0<span class="nt">&lt;/protobuf.version&gt;</span>
+        <span class="nt">&lt;protoc.version&gt;</span>3.11.0<span class="nt">&lt;/protoc.version&gt;</span>
+        <span class="nt">&lt;maven.compiler.source&gt;</span>1.7<span class="nt">&lt;/maven.compiler.source&gt;</span>
+        <span class="nt">&lt;maven.compiler.target&gt;</span>1.7<span class="nt">&lt;/maven.compiler.target&gt;</span>
+    <span class="nt">&lt;/properties&gt;</span>
+
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>io.grpc<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>grpc-netty-shaded<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${grpc.version}<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>io.grpc<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>grpc-protobuf<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${grpc.version}<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>io.grpc<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>grpc-stub<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${grpc.version}<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+
+    <span class="nt">&lt;build&gt;</span>
+        <span class="c">&lt;!-- Maven OS Extension --&gt;</span>
+        <span class="nt">&lt;extensions&gt;</span>
+            <span class="nt">&lt;extension&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>kr.motd.maven<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>os-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>1.6.2<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;/extension&gt;</span>
+        <span class="nt">&lt;/extensions&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+            <span class="c">&lt;!-- proto (IDL) generator plugin --&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.xolstice.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>protobuf-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>0.6.1<span class="nt">&lt;/version&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                    <span class="nt">&lt;protocArtifact&gt;</span>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}<span class="nt">&lt;/protocArtifact&gt;</span>
+                    <span class="nt">&lt;pluginId&gt;</span>grpc-java<span class="nt">&lt;/pluginId&gt;</span>
+                    <span class="nt">&lt;pluginArtifact&gt;</span>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}<span class="nt">&lt;/pluginArtifact&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+                <span class="nt">&lt;executions&gt;</span>
+                    <span class="nt">&lt;execution&gt;</span>
+                        <span class="nt">&lt;goals&gt;</span>
+                            <span class="nt">&lt;goal&gt;</span>compile<span class="nt">&lt;/goal&gt;</span>
+                            <span class="nt">&lt;goal&gt;</span>compile-custom<span class="nt">&lt;/goal&gt;</span>
+                        <span class="nt">&lt;/goals&gt;</span>
+                    <span class="nt">&lt;/execution&gt;</span>
+                <span class="nt">&lt;/executions&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                    <span class="nt">&lt;source&gt;</span>8<span class="nt">&lt;/source&gt;</span>
+                    <span class="nt">&lt;target&gt;</span>8<span class="nt">&lt;/target&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/build&gt;</span>
+
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></td></tr></tbody></table></div></div>
+<ol>
+  <li>proto 파일 작성 (서비스 정의)
+    <ul>
+      <li>proto 파일을 별도로 컴파일할 경우 <code class="highlighter-rouge">mvn protobuf:{goal}</code> 명령어로 컴파일 할 수 있다.</li>
+      <li>컴파일된 결과물은 target(혹은 지정 빌드 디렉토리)/generated-sources/protobuf/java 이하 디렉토리에 생성된다.</li>
+      <li><code class="highlighter-rouge">message</code> 는 서버-클라이언트 간 송수신될 데이터 포맷</li>
+      <li><code class="highlighter-rouge">service</code> 는 서버, 클라이언트에서 원격 호출되는 서비스 메소드</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-protobuf highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18</pre></td><td class="code"><pre class="highlight"><code><span class="na">syntax</span> <span class="o">=</span> <span class="s">"proto3"</span><span class="p">;</span>
+
+<span class="kn">package</span> <span class="nn">proto_test</span><span class="p">;</span>
+
+<span class="k">option</span> <span class="na">java_package</span> <span class="o">=</span> <span class="s">"com.nhn.gia.grpc.proto"</span><span class="p">;</span>
+<span class="k">option</span> <span class="na">java_multiple_files</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="kd">service</span> <span class="n">EchoService</span> <span class="p">{</span>
+    <span class="k">rpc</span> <span class="n">Echo</span> <span class="p">(</span><span class="n">EchoRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">EchoResponse</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">EchoRequest</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="na">msg</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">message</span> <span class="nc">EchoResponse</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="na">msg</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></tbody></table></div></div>
+
+<ol>
+  <li>서버 프로그램 작성
+    <ul>
+      <li>서비스 기능 구현: proto파일에서 작성한 <code class="highlighter-rouge">service</code> 의 RPC 메소드들을 구현해줌</li>
+      <li>아래 예시에서는 정의된 <code class="highlighter-rouge">rpc Echo (EchoRequest) returns (EchoResponse) {}</code> 를 구현</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9</pre></td><td class="code"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EchoServiceImpl</span> <span class="kd">extends</span> <span class="n">EchoServiceGrpc</span><span class="o">.</span><span class="na">EchoServiceImplBase</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">echo</span><span class="o">(</span><span class="n">EchoRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">StreamObserver</span><span class="o">&lt;</span><span class="n">EchoResponse</span><span class="o">&gt;</span> <span class="n">responseObserver</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">EchoResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">EchoResponse</span><span class="o">.</span><span class="na">newBuilder</span><span class="o">().</span><span class="na">setMsg</span><span class="o">(</span><span class="n">request</span><span class="o">.</span><span class="na">getMsg</span><span class="o">()).</span><span class="na">build</span><span class="o">();</span>
+
+        <span class="n">responseObserver</span><span class="o">.</span><span class="na">onNext</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+        <span class="n">responseObserver</span><span class="o">.</span><span class="na">onCompleted</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></tbody></table></div></div>
+
+<ul>
+  <li>작성한 서비스를 사용하는 서버 프로그램 작성
+    <div class="language-java highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15</pre></td><td class="code"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EchoServer</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+      <span class="n">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="n">ServerBuilder</span><span class="o">.</span><span class="na">forPort</span><span class="o">(</span><span class="mi">8000</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">addService</span><span class="o">(</span><span class="k">new</span> <span class="n">EchoServiceImpl</span><span class="o">())</span>
+              <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+      <span class="n">server</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+
+      <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">addShutdownHook</span><span class="o">(</span><span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+          <span class="n">server</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>
+      <span class="o">}));</span>
+
+      <span class="n">server</span><span class="o">.</span><span class="na">awaitTermination</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></tbody></table></div>    </div>
+  </li>
+</ul>
+
+<ol>
+  <li>클라이언트 프로그램 작성</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14</pre></td><td class="code"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EchoClient</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ManagedChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">ManagedChannelBuilder</span>
+                <span class="o">.</span><span class="na">forAddress</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">8000</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">usePlaintext</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+        <span class="n">EchoServiceBlockingStub</span> <span class="n">stub</span> <span class="o">=</span> <span class="n">EchoServiceGrpc</span><span class="o">.</span><span class="na">newBlockingStub</span><span class="o">(</span><span class="n">channel</span><span class="o">);</span>
+        <span class="n">EchoResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">stub</span><span class="o">.</span><span class="na">echo</span><span class="o">(</span><span class="n">EchoRequest</span><span class="o">.</span><span class="na">newBuilder</span><span class="o">().</span><span class="na">setMsg</span><span class="o">(</span><span class="s">"Hello gRPC!!"</span><span class="o">).</span><span class="na">build</span><span class="o">());</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="s">"Echo Client: %s"</span><span class="o">,</span> <span class="n">response</span><span class="o">.</span><span class="na">getMsg</span><span class="o">());</span>
+        <span class="n">channel</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></td></tr></tbody></table></div></div>
+
+<h2 id="grpc-with-springboot">gRPC with SpringBoot</h2>
+<p>스프링 환경에서도 gRPC를 사용할 수 있다. 공식은 아니지만 몇 가지 개인 또는 그룹에서 제작해서 사용하고 있는 Spring boot starter가 있다. 
+(https://github.com/LogNet/grpc-spring-boot-starter)
+(https://github.com/saturnism/spring-boot-starter-grpc)</p>
+
+<p>아래는 별도 Spring Boot Starter 없이 진행한 예제</p>
+
+<ol>
+  <li>프로젝트 생성, pom.xml 에 gRPC 관련 의존성 추가, proto 파일 작성은 기존과 동일
+    <ul>
+      <li>proto
+```protobuf
+syntax = “proto3”;</li>
+    </ul>
+  </li>
+</ol>
+
+<p>option java_package = “com.nhn.gia.proto”;
+option java_multiple_files = true;</p>
+
+<p>service UserService {
+	rpc GetUser(UserSearchRequest) returns (User) {}
+}</p>
+
+<p>message UserSearchRequest {
+	string id = 1;
+}</p>
+
+<p>message User {
+	string _id = 1;
+	int64 index = 2;
+	bool isActive = 3;
+	int32 age = 4;
+	string name = 5;
+	string gender = 6;
+	string email = 7;
+}</p>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27<br/>28<br/>29<br/>30<br/>31<br/>32<br/>33<br/>34<br/>35<br/>36<br/>37</pre></td><td class="code"><pre class="highlight"><code>
+3. 컴포넌트 정의
+- 서비스 작성
+```java
+@Service
+public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public void getUser(UserSearchRequest request, StreamObserver&lt;User&gt; responseObserver) {
+        String requestId = request.getId();
+        logger.info("requestId: {}", requestId);
+        UserEntity entity = userRepository.findOne(requestId);
+
+        responseObserver.onNext(buildUser(entity));
+        responseObserver.onCompleted();
+    }
+
+    private User buildUser(UserEntity entity) {
+        return User.newBuilder()
+                .setId(entity.getId())
+                .setIndex(entity.getIndex())
+                .setIsActive(entity.getIsActive())
+                .setAge(entity.getAge())
+                .setName(entity.getName())
+                .setGender(entity.getGender())
+                .setEmail(entity.getEmail())
+                .build();
+    }
+}
+</code></pre></td></tr></tbody></table></div></div>
+
+<ul>
+  <li>gRPC 서버 설정</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14</pre></td><td class="code"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GrpcServerConfiguration</span> <span class="o">{</span>
+
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${grpc.server.port}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">grpcServerPort</span><span class="o">;</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">Server</span> <span class="nf">grpcServer</span><span class="o">(</span><span class="n">UserServiceImpl</span> <span class="n">userService</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">ServerBuilder</span><span class="o">.</span><span class="na">forPort</span><span class="o">(</span><span class="n">grpcServerPort</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">addService</span><span class="o">(</span><span class="n">userService</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></td></tr></tbody></table></div></div>
+
+<ul>
+  <li>Application 구동 시 gRPC 서버가 실행되도록 처리</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23</pre></td><td class="code"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GrpcServerRunner</span> <span class="kd">implements</span> <span class="n">ApplicationRunner</span><span class="o">,</span> <span class="n">DisposableBean</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">GrpcServerRunner</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">Server</span> <span class="n">grpcServer</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">ApplicationArguments</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">grpcServer</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"GrpcServer listening on port {}"</span><span class="o">,</span> <span class="n">grpcServer</span><span class="o">.</span><span class="na">getPort</span><span class="o">());</span>
+
+        <span class="n">grpcServer</span><span class="o">.</span><span class="na">awaitTermination</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">destroy</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">grpcServer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">grpcServer</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></tbody></table></div></div>
 
 
       
@@ -543,13 +816,10 @@ ORM 프레임워크는 객체 / 관계형 데이터베이스 패러다임의 불
         <div class="post-tags">
           
             
-            <a href="/tag/#/JPA" rel="tag"># JPA</a>
+            <a href="/tag/#/gRPC" rel="tag"># gRPC</a>
           
             
-            <a href="/tag/#/Hibernate" rel="tag"># Hibernate</a>
-          
-            
-            <a href="/tag/#/ORM" rel="tag"># ORM</a>
+            <a href="/tag/#/HTTP%2F2" rel="tag"># HTTP/2</a>
           
         </div>
       
@@ -565,18 +835,14 @@ ORM 프레임워크는 객체 / 관계형 데이터베이스 패러다임의 불
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2018-10/crud-example-with-jpa-app" rel="next" title="JPA 기본적인 CRUD 해보기">
-                <i class="fa fa-chevron-left"></i> JPA 기본적인 CRUD 해보기
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/articles/2018-10/difference-of-entity-db-model" rel="prev" title="객체 모델과 관계형 데이터베이스 모델 차이">
-                객체 모델과 관계형 데이터베이스 모델 차이 <i class="fa fa-chevron-right"></i>
+              <a href="/articles/2019-12/grpc-1" rel="prev" title="gRPC Reference - 개요 및 특징">
+                gRPC Reference - 개요 및 특징 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -769,7 +1035,7 @@ ORM 프레임워크는 객체 / 관계형 데이터베이스 패러다임의 불
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-4"> <a class="nav-link" href="#jpa란"> <span class="nav-number">1</span> <span class="nav-text">JPA란</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#jpa의-특징"> <span class="nav-number">2</span> <span class="nav-text">JPA의 특징</span> </a> </li>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#grpc-basic"> <span class="nav-number">1</span> <span class="nav-text">gRPC Basic</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#grpc-with-springboot"> <span class="nav-number">2</span> <span class="nav-text">gRPC with SpringBoot</span> </a> </li>
     </ol>
   </div>
             
